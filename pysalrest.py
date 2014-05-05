@@ -1,6 +1,7 @@
 from collections import namedtuple
 import inspect
 import json
+import api
 
 Response = namedtuple('response', 'status content')
 
@@ -15,12 +16,11 @@ ConflictResponse = lambda msg: Response('409 Conflict', json.dumps(msg))
 ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg))
 
 def get_handlers(package):
-
     handlers = {}
     for member_name, member in [module for module in inspect.getmembers(package) if inspect.ismodule(module[1])]:
         if [fn for name, fn in inspect.getmembers(member) if name in ('get', 'post', 'put', 'delete')]:
             print("Adding handler %s" % member_name)
-        handlers[member_name]  = member
+            handlers[member_name]  = member
     return handlers
 
 
@@ -31,7 +31,7 @@ def requesthandler(handlers, method, resource, *pathargs, **kwargs):
     if not resource in handlers:
         return NotFoundResponse(handlers)
 
-    if not  hasattr(handlers[resource], method):
+    if not hasattr(handlers[resource], method):
         return UnsupportedResponse('Unsupported method for resource') #Need to add supported method
 
     return getattr(handlers[resource], method)(*pathargs, **kwargs)
