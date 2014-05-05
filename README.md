@@ -9,12 +9,12 @@ GET Request:
 ------------
 
 Listing supported functions
-+++++++++++++++++++++++++++
+____________________________
 
 `0.0.0.0:8080/api/api/`
 
 Generating a W using the canned example
-+++++++++++++++++++++++++++++++++++++++
+________________________________________
 
 `http://localhost:8080/api/api/queen_from_shapefile?args=['columbus.shp']`
 
