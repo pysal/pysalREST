@@ -35,8 +35,16 @@ def get(ref=None, **kwargs):
         return pr.ErrorResponse("Unknown method.  Available methods are: {}".format(available_funcs))
 
     #Parse the args and kwargs
-    strargs = kwargs['args']
-    args = ast.literal_eval(strargs)
+    try:
+        strargs = kwargs['args']
+        args = ast.literal_eval(strargs)
+    except:
+        try:
+            reqargs = inspect.getargspec(method)[0]
+        except:
+            reqargs = inspect.getargspec(method.__init__)[0]
+            reqargs.remove('self')
+        return pr.ErrorResponse('Missing required argument: {}'.format(reqargs))
     try:
         strkwargs = kwargs['kwargs']
         kwargs = ast.literal_eval(strkwargs)
