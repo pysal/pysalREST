@@ -26,7 +26,11 @@ for mn, m in inspect.getmembers(package):
         funcs[mn] = m
 
 
-def wrapper(func, args, kwargs):
+def getwrapper(func, args, **kwargs):
+    return func(args, kwargs)
+
+
+def postwrapper(func, args, kwargs):
     return func(args, kwargs)
 
 
@@ -60,7 +64,7 @@ def get(ref=None, **kwargs):
         return pr.OkResponse('Need to supply a method call.')
 
     #Send the args, kwargs to the wrapper to unpack and call PySAL
-    result = wrapper(method, *args, **kwargs)
+    result = getwrapper(method, *args, **kwargs)
     try:
         json.dumps(result)
         return pr.OkResponse(result)
@@ -96,7 +100,7 @@ def post(**kwargs):
             kwargs = {}
 
         #Call the wrapper to execute the function
-        result = wrapper(method, *args, **kwargs)
+        result = postwrapper(method, *args, **kwargs)
 
         try:
             json.dumps(result)
