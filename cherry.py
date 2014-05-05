@@ -13,7 +13,9 @@ class PySALRest(object):
         method = cherrypy.request.method.lower()
         response = requesthandler(self._handlers, method, resource, *pathargs, **kwargs)
         cherrypy.response.status = response.status
-        return response.content
+        prettyresponse = response.content.replace(',', '<br>')
+
+        return prettyresponse
 
     index.exposed = True
     api.exposed = True

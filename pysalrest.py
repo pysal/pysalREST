@@ -13,7 +13,7 @@ UnauthorizedResponse = lambda msg: Response('401 Unauthorized',json.dumps( msg))
 NotFoundResponse = lambda msg: Response('404 Not found', json.dumps(msg))
 UnsupportedResponse = lambda msg: Response('405 Method Not Allowed', json.dumps(msg))
 ConflictResponse = lambda msg: Response('409 Conflict', json.dumps(msg))
-ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg))
+ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg, indent=4))
 
 def get_handlers(package):
     handlers = {}
