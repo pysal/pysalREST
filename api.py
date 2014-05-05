@@ -4,6 +4,8 @@ import inspect
 import ast
 import types
 
+import numpy as np
+
 """
 URL Format
 with kwargs: http://localhost:8080/api/api/queen_from_shapefile?args=['columbus.shp']&kwargs={'idVariable':'field'}
@@ -23,8 +25,10 @@ for mn, m in inspect.getmembers(package):
     elif isinstance(m, types.FunctionType):
         funcs[mn] = m
 
-def wrapper(func, args, **kwargs):
+
+def wrapper(func, args, kwargs):
     return func(args, kwargs)
+
 
 def get(ref=None, **kwargs):
 
@@ -67,6 +71,35 @@ def test(args, IdVariable=None):
     print args
     print IdVariable
 
-def post(message=None):
-    if message is None:
+
+def post(**kwargs):
+    if len(kwargs.keys()) == 0:
         return pr.MalformedResponse('Need to supply some arguments')
+    else:
+        method = funcs[kwargs['func']]
+        args = ast.literal_eval(kwargs['args'])
+
+        #Hack to get FJ working - it expects an array
+        newargs = []
+        for i, a in enumerate(args):
+            if isinstance(a, list):
+                print a
+                newargs.append(np.array(a))
+            else:
+                newargs.append(a)
+        args = tuple(newargs)
+        #Hack Done
+
+        try:
+            kwargs = ast.literal_eval(kwargs['kwargs'])
+        except:
+            kwargs = {}
+
+        #Call the wrapper to execute the function
+        result = wrapper(method, *args, **kwargs)
+
+        try:
+            json.dumps(result)
+            return pr.OkResponse(result)
+        except:
+            return pr.OkResponse(result.bins)
