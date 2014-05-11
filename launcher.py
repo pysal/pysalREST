@@ -35,11 +35,13 @@ def main():
         engine = importlib.import_module(cfg['server'])
     except ImportError:
         raise ImportError("Could not load server integration implementation: %s" % (cfg['server'],))
-
     try:
         api = importlib.import_module(cfg['api'])
     except ImportError:
         raise ImportError("Could not load API: %s" % (cfg['api'],))
+
+    print "Launching the API contained at: ", api
+
 
     engine.start(api, cfg['host'], cfg['port'])
 

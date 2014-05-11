@@ -14,25 +14,7 @@ w/o kwargs: http://localhost:8080/api/api/queen_from_shapefile?args=['columbus.s
 """
 
 
-def extractmethods(package, funcs):
-    """
-    Naively iterate through a package, access all the modules, and get all the function
-    and class names.
-    """
-    for mn, m in inspect.getmembers(package):
-        if isinstance(m, types.ModuleType):
-            for nested_mn, nested_m in inspect.getmembers(m):
-                if nested_mn == '__builtins__':
-                    continue
-                if isinstance(nested_m, types.FunctionType) or isinstance(nested_m, types.ClassType):
-                    funcs[nested_mn] = nested_m
-        elif isinstance(m, types.FunctionType):
-            funcs[mn] = m
-    return funcs
 
-funcs = {}
-package = ps
-funcs = extractmethods(package, funcs)
 
 
 class CustomJsonEncoder(json.JSONEncoder):
@@ -52,6 +34,22 @@ class CustomJsonEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self,obj)
 
 
+def extractmethods(package, funcs):
+    """
+    Naively iterate through a package, access all the modules, and get all the function
+    and class names.
+    """
+    for mn, m in inspect.getmembers(package):
+        if isinstance(m, types.ModuleType):
+            for nested_mn, nested_m in inspect.getmembers(m):
+                if nested_mn == '__builtins__':
+                    continue
+                if isinstance(nested_m, types.FunctionType) or isinstance(nested_m, types.ClassType):
+                    funcs[nested_mn] = nested_m
+        elif isinstance(m, types.FunctionType):
+            funcs[mn] = m
+    return funcs
+
 def getwrapper(func, args, **kwargs):
     """
     Generic function wrapper for GET requests.
@@ -66,13 +64,19 @@ def postwrapper(func, args, kwargs):
     return func(args, kwargs)
 
 
-def get(ref=None, **kwargs):
+def get(module, method=None, **kwargs):
     """
     Handles HTTP GET requests.
+
+    module: PySAL module level, e.g. weights or spreg
+    method: PySAL sub module level, eg. weights.queen_from_shapefile
     """
 
+
+
+
     try:
-        method = funcs[ref]
+        method = funcs[method]
     except:
         available_funcs = [k for k in funcs.iterkeys()]
         return pr.ErrorResponse("Unknown method.  Available methods are: {}".format(available_funcs))
@@ -95,7 +99,7 @@ def get(ref=None, **kwargs):
         #User has not supplied kwargs
         kwargs = {}
 
-    if ref is None:
+    if method is None:
         return pr.OkResponse('Need to supply a method call.')
 
     #Send the args, kwargs to the wrapper to unpack and call PySAL
@@ -142,4 +146,9 @@ def post(**kwargs):
             return pr.OkResponse(result)
         except:
             return pr.OkResponse(json.dumps(result, cls=CustomJsonEncoder))
+
+
+funcs = {}
+package = ps
+funcs = extractmethods(package, funcs)
 

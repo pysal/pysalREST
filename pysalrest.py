@@ -13,7 +13,7 @@ UnauthorizedResponse = lambda msg: Response('401 Unauthorized',json.dumps( msg))
 NotFoundResponse = lambda msg: Response('404 Not found', json.dumps(msg))
 UnsupportedResponse = lambda msg: Response('405 Method Not Allowed', json.dumps(msg))
 ConflictResponse = lambda msg: Response('409 Conflict', json.dumps(msg))
-ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg, indent=4))
+ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg))
 
 def get_handlers(package):
     handlers = {}
@@ -21,6 +21,7 @@ def get_handlers(package):
         if [fn for name, fn in inspect.getmembers(member) if name in ('get', 'post', 'put', 'delete')]:
             print("Adding handler %s" % member_name)
             handlers[member_name]  = member
+    print "With url handlers extracted from: {}".format(handlers)
     return handlers
 
 
@@ -29,6 +30,7 @@ def requesthandler(handlers, method, resource, *pathargs, **kwargs):
     code to be present after this point"""
 
     if not resource in handlers:
+        print handlers
         return NotFoundResponse(handlers)
 
     if not hasattr(handlers[resource], method):
