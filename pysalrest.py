@@ -3,6 +3,14 @@ import inspect
 import json
 import api
 
+__doc__ = """Welcome to the PySAL API.  Available sub URLS are: <br>
+    weights <br>
+    spreg <br>
+    cg <br>
+    common <br>
+    ...
+    """
+
 Response = namedtuple('response', 'status content')
 
 #Standard HTML Responses

@@ -13,10 +13,6 @@ with kwargs: http://localhost:8080/api/api/queen_from_shapefile?args=['columbus.
 w/o kwargs: http://localhost:8080/api/api/queen_from_shapefile?args=['columbus.shp']
 """
 
-
-
-
-
 class CustomJsonEncoder(json.JSONEncoder):
     """
     Custom JSON Encoder that supports numpy arrays and
@@ -38,16 +34,31 @@ def extractmethods(package, funcs):
     """
     Naively iterate through a package, access all the modules, and get all the function
     and class names.
+
+    Returns a dict of dicts where the top level is the module name.  The value of
+    each module name is another dict containing the available funcs and classes.
     """
+    #Two pass algorithm - this only happens on launch or refresh.
     for mn, m in inspect.getmembers(package):
+        #Parse at the module level first
         if isinstance(m, types.ModuleType):
-            for nested_mn, nested_m in inspect.getmembers(m):
-                if nested_mn == '__builtins__':
-                    continue
-                if isinstance(nested_m, types.FunctionType) or isinstance(nested_m, types.ClassType):
-                    funcs[nested_mn] = nested_m
-        elif isinstance(m, types.FunctionType):
             funcs[mn] = m
+
+    for k, module in funcs.iteritems():
+        funcs[k] = {}
+        for mn, m in inspect.getmembers(module):
+            if m == '__builtins__':
+                continue
+            if isinstance(m, types.FunctionType) or isinstance(m, types.ClassType):
+                funcs[k][mn] = m
+
+            #ESDA has this strange nesting in the module structure.
+            # This is a hacky solution that should be recursive...
+            elif isinstance(m, types.ModuleType):
+                for nestedmn, nestedm in inspect.getmembers(m):
+                    if isinstance(m, types.FunctionType) or isinstance(m, types.ClassType):
+                        funcs[k][nestedmn] = nestedm
+
     return funcs
 
 def getwrapper(func, args, **kwargs):
@@ -72,13 +83,10 @@ def get(module, method=None, **kwargs):
     method: PySAL sub module level, eg. weights.queen_from_shapefile
     """
 
-
-
-
     try:
-        method = funcs[method]
+        method = funcs[module][method]
     except:
-        available_funcs = [k for k in funcs.iterkeys()]
+        available_funcs = [k for k in funcs[module].iterkeys()]
         return pr.ErrorResponse("Unknown method.  Available methods are: {}".format(available_funcs))
 
     #Parse the args and kwargs

@@ -4,11 +4,12 @@ from pysalrest import get_handlers, requesthandler
 class PySALRest(object):
     def __init__(self, api):
         self._api = api
+        print api, api.__doc__
         self._handlers = get_handlers(api)
 
     @cherrypy.expose
     def index(self):
-        return "HTTP access to {} available at <a href='/pysal'>/pysal</a><br/> {}".format(self._api.__name__, self._api.__doc__)
+        return "HTTP access to {} available at <a href='/pysal/api'>/pysal/api</a><br/> {}".format(self._api.__name__, self._api.__doc__)
 
     @cherrypy.expose
     def pysal(self, resource, *pathargs, **kwargs):
@@ -20,7 +21,7 @@ class PySALRest(object):
 
             return prettyresponse
         except:
-            return "HTTP access to {} available at <a href='/pysal'>/pysal</a><br/> {}".format(self._api.__name__, self._api.__doc__)
+            return "HTTP access to {} available at <a href='/pysal/api'>/pysal/api</a><br/> {}".format(self._api.__name__, self._api.__doc__)
 
 
 def start(api, host, port):
