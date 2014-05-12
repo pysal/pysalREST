@@ -8,7 +8,15 @@ __doc__ = """Welcome to the PySAL API.  Available sub URLS are: <br>
     spreg <br>
     cg <br>
     common <br>
-    ...
+    spatial_dynamics <br>
+    core <br>
+    ergodic <br>
+    directional <br>
+    region <br>
+    pysal <br>
+    examples <br>
+    inequality <br>
+    esda
     """
 
 Response = namedtuple('response', 'status content')

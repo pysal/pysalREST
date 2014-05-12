@@ -56,9 +56,8 @@ def extractmethods(package, funcs):
             # This is a hacky solution that should be recursive...
             elif isinstance(m, types.ModuleType):
                 for nestedmn, nestedm in inspect.getmembers(m):
-                    if isinstance(m, types.FunctionType) or isinstance(m, types.ClassType):
+                    if isinstance(nestedm, types.FunctionType) or isinstance(nestedm, types.ClassType):
                         funcs[k][nestedmn] = nestedm
-
     return funcs
 
 def getwrapper(func, args, **kwargs):

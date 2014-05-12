@@ -11,7 +11,7 @@ GET Request:
 Listing supported functions
 ____________________________
 
-`0.0.0.0:8080/api/api/`
+`0.0.0.0:8080/pysal/api/`
 
 Generating a W using the canned example
 ________________________________________

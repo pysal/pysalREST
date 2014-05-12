@@ -4,7 +4,6 @@ from pysalrest import get_handlers, requesthandler
 class PySALRest(object):
     def __init__(self, api):
         self._api = api
-        print api, api.__doc__
         self._handlers = get_handlers(api)
 
     @cherrypy.expose
