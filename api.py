@@ -40,13 +40,16 @@ def extractmethods(package, funcs):
     """
     #Two pass algorithm - this only happens on launch or refresh.
     for mn, m in inspect.getmembers(package):
+        mn = mn.lower()
         #Parse at the module level first
         if isinstance(m, types.ModuleType):
             funcs[mn] = m
 
     for k, module in funcs.iteritems():
+        k = k.lower()
         funcs[k] = {}
         for mn, m in inspect.getmembers(module):
+            mn = mn.lower()
             if m == '__builtins__':
                 continue
             if isinstance(m, types.FunctionType) or isinstance(m, types.ClassType):
@@ -56,11 +59,12 @@ def extractmethods(package, funcs):
             # This is a hacky solution that should be recursive...
             elif isinstance(m, types.ModuleType):
                 for nestedmn, nestedm in inspect.getmembers(m):
+                    nestedmn = nestedmn.lower()
                     if isinstance(nestedm, types.FunctionType) or isinstance(nestedm, types.ClassType):
                         funcs[k][nestedmn] = nestedm
     return funcs
 
-def getwrapper(func, args, **kwargs):
+def getwrapper(func, *args, **kwargs):
     """
     Generic function wrapper for GET requests.
     """
@@ -81,13 +85,13 @@ def get(module, method=None, **kwargs):
     module: PySAL module level, e.g. weights or spreg
     method: PySAL sub module level, eg. weights.queen_from_shapefile
     """
-
+    module = module.lower()
+    method = method.lower()
     try:
         method = funcs[module][method]
     except:
         available_funcs = [k for k in funcs[module].iterkeys()]
         return pr.ErrorResponse("Unknown method.  Available methods are: {}".format(available_funcs))
-
     #Parse the args and kwargs
     try:
         strargs = kwargs['args']
@@ -105,11 +109,10 @@ def get(module, method=None, **kwargs):
     except:
         #User has not supplied kwargs
         kwargs = {}
-
     if method is None:
         return pr.OkResponse('Need to supply a method call.')
-
     #Send the args, kwargs to the wrapper to unpack and call PySAL
+    print func(np.ndarray(args[0]), args[1])
     result = getwrapper(method, *args, **kwargs)
     try:
         json.dumps(result)
@@ -122,24 +125,23 @@ def post(**kwargs):
     """
     Handles HTTP POST requests
     """
-
+    print kwargs, len(kwargs.keys())
     if len(kwargs.keys()) == 0:
         return pr.MalformedResponse('Need to supply some arguments')
     else:
-        method = funcs[kwargs['func']]
-        args = ast.literal_eval(kwargs['args'])
+        module, func = kwargs['func'].split('/')
+        method = funcs[module.lower()][func.lower()]
 
+        args = ast.literal_eval(kwargs['args'])
         #Hack to get FJ working - it expects an array
         newargs = []
         for i, a in enumerate(args):
             if isinstance(a, list):
-                print a
                 newargs.append(np.array(a))
             else:
                 newargs.append(a)
         args = tuple(newargs)
         #Hack Done
-
         try:
             kwargs = ast.literal_eval(kwargs['kwargs'])
         except:

@@ -46,7 +46,6 @@ def requesthandler(handlers, method, resource, *pathargs, **kwargs):
     code to be present after this point"""
 
     if not resource in handlers:
-        print handlers
         return NotFoundResponse(handlers)
 
     if not hasattr(handlers[resource], method):
