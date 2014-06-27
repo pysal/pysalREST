@@ -30,7 +30,6 @@ def _get_config():
 
 def main():
     cfg = _get_config()
-
     try:
         engine = importlib.import_module(cfg['server'])
     except ImportError:
@@ -43,7 +42,7 @@ def main():
     print "Launching the API contained at: ", api
 
 
-    engine.start(api, cfg['host'], cfg['port'])
+    engine.start(cfg['host'], cfg['port'])
 
 
 

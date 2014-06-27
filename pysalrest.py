@@ -31,6 +31,12 @@ UnsupportedResponse = lambda msg: Response('405 Method Not Allowed', json.dumps(
 ConflictResponse = lambda msg: Response('409 Conflict', json.dumps(msg))
 ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg))
 
+funcs = {'ESDA':['Map Classification', 'Spatial Autocorrelation']}
+
+methods = []
+for k, v in funcs.iteritems():
+    methods += v
+
 def get_handlers(package):
     handlers = {}
     for member_name, member in [module for module in inspect.getmembers(package) if inspect.ismodule(module[1])]:
