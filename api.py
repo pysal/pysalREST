@@ -30,6 +30,11 @@ class CustomJsonEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self,obj)
 
 
+def checktypes(call, *args, **kwargs):
+    docs = inspect.getdoc(call)
+    for d in docs.split('\n'):
+        print d
+
 def extractmethods(package, funcs):
     """
     Naively iterate through a package, access all the modules, and get all the function
