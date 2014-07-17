@@ -9,7 +9,6 @@ from pandas.io.json import read_json
 
 
 from flask import Flask, render_template, jsonify, request, g
-from flask.ext.cache import Cache
 
 from werkzeug.utils import secure_filename
 
@@ -18,7 +17,6 @@ from api import checktypes, funcs, CustomJsonEncoder
 #Make the Flask App
 app = Flask(__name__)
 #Setup a cache to store transient python objects
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 #Upload Setup
 #TODO: Add a try/except here - if spatiallite is availabe, use it...
