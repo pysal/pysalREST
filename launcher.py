@@ -9,8 +9,9 @@ def _parse_args():
     parser.add_argument('--cfg', help='Config file (pyrest.cfg)', required=False)
     parser.add_argument('--server', help='App server to use (cherrypy)', required=False)
     parser.add_argument('--host', help='Address to bind to (0.0.0.0)', required=False)
-    parser.add_argument('--port', help='Port to listen on (8080)', required=False)
+    parser.add_argument('--port', type=int, help='Port to listen on (8080)', required=False)
     parser.add_argument('--api', help='Package to serve (None)')
+    parser.add_argument('--db', help='Database (SqLite, PostGreSqL, etc.)')
     return vars(parser.parse_args())
 
 def _parse_file(path):

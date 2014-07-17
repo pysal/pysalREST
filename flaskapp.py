@@ -134,7 +134,6 @@ def post_region(module,method):
 
         #Parse the args
         args = request.json['args']
-        print type(args)
         validargs = []
         for a in args:
             #Literal eval to get the native python type
