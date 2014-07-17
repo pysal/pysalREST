@@ -156,8 +156,6 @@ def post_region(module,method):
         for k, v in funcreturn.iteritems():
             if isinstance(v, np.ndarray):
                 funcreturn[k] = v.tolist()
-            elif isinstance(v, ps.W):
-                print "W OBJ"
 
         response['data'] = funcreturn
 
