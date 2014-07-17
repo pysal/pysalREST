@@ -166,7 +166,6 @@ def post_region(module,method):
 def make_cache_key():
     print "Generating key!"
 
-@cache.cached(timeout=None, key_prefix=make_cache_key)
 def cacheW(w):
     """
     Cache the W object since we need it throughout PySAL
