@@ -1,24 +1,31 @@
+from collections import defaultdict
 import ast
 import inspect
 import os
+import json
 
 import numpy as np
+from pandas.io.json import read_json
+
 
 from flask import Flask, render_template, jsonify, request, g
-from flask.ext.restful import Api, Resource
+from flask.ext.cache import Cache
+
 from werkzeug.utils import secure_filename
 
 from api import checktypes, funcs, CustomJsonEncoder
 
 #Make the Flask App
 app = Flask(__name__)
-api = Api(app)
+#Setup a cache to store transient python objects
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 #Upload Setup
 #TODO: Add a try/except here - if spatiallite is availabe, use it...
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -32,17 +39,19 @@ def allowed_file(filename):
 @app.route('/', methods=['GET'])
 def home():
     response = {'status':'success','data':{}}
-    response['data']['href'] = {'api':'/api/',
-                                'uploaddata':'/upload/'}
+    response['data']['links'] = [{'id':'api', 'href':'/api/'},
+                                 {'id':'listdata', 'href':'/listdata/'},
+                                 {'id':'uploaddata', 'href':'/uploaddata/'}]
     return jsonify(response)
 
 @app.route('/api/<module>/', methods=['GET'])
 def get_modules(module):
     methods = funcs[module].keys()
     response = {'status':'success','data':{}}
-    response['data']['methods'] = []
+    response['data']['links'] = []
     for i in methods:
-        response['data']['methods'].append({i:'/api/{}/{}/'.format(module,i)})
+        response['data']['links'].append({'id':'{}'.format(i),
+                                          'href':'/api/{}/{}/'.format(module,i)})
     return jsonify(response)
 
 @app.route('/api/<module>/<method>/', methods=['GET'])
@@ -80,7 +89,8 @@ def get_method(module, method):
         else:
             response['data']['post_template']['kwargs'][arg] = defaults[diff]
 
-    response['data']['documentation'] = '{}/{}/docs/'.format(module, mname)
+    response['data']['links'] = {'id':'docs',
+                                 'href':'{}/{}/docs/'.format(module, mname)}
     return jsonify(response)
 
 @app.route('/api/<module>/<method>/docs/', methods=['GET'])
@@ -103,6 +113,15 @@ def get_docs(module, method):
 
 @app.route('/api/<module>/<method>/', methods=['POST'])
 def post_region(module,method):
+    """
+    To make a POST using CURL to the flask dev server:
+    Fisher-Jenks using the Hartigan Olympic time example
+    curl -i -H "Content-Type: application/json" -X POST -d '{"args":["[12, 10.8, 11, 10.8, 10.8, 10.6, 10.8, 10.3, 10.3,10.3,10.4,10.5,10.2,10.0,9.9]"], "kwargs":{"k":5}}' http://localhost:5000/ap/esda/fisher_jenks/
+    or
+    Sample Jenks Caspall using the same example - note that sample
+     percentage is not passed.
+    curl -i -H "Content-Type: application/json" -X POST -d '{"args":["[12, 10.8, 11, 10.8, 10.8, 10.6, 10.8, 10.3, 10.3,10.3,10.4,10.5,10.2,10.0,9.9]"], "kwargs":{"k":5}}'  http://localhost:5000/ai/esda/jenks_caspall_sampled/
+    """
     if not request.json:
         response = {'status':'error','data':{}}
         standarderror['data'] = 'Post datatype was not json'
@@ -112,19 +131,62 @@ def post_region(module,method):
 
         #Setup the call, the args and the kwargs
         call = funcs[module][method]
+
+        #Parse the args
         args = request.json['args']
-        kwargs = request.json['kwargs']
+        print type(args)
+        validargs = []
+        for a in args:
+            #Literal eval to get the native python type
+            va = json.loads(a)
+            #va = ast.literal_eval(a)
+            #If it is a list, cast to a numpy ndarray via pandas json io
+            #This should go to a decorator on the PySAL side at some point
+            if isinstance(va, list):
+                va = read_json(a)
+            validargs.append(va.values.ravel())
 
-        func_return = call(args, kwargs)
+        #Check for and parse the kwargs
+        try:
+            kwargs = request.json['kwargs']
+            validkwargs = {}
+            validkwargs = ast.literal_eval(str(kwargs))
+        except:
+            pass
 
-        response['data'] = request.json
+        #Make the call and get the return items
+        funcreturn = vars(call(*validargs, **validkwargs))
+        for k, v in funcreturn.iteritems():
+            if isinstance(v, np.ndarray):
+                funcreturn[k] = v.tolist()
+            elif isinstance(v, ps.W):
+                print "W OBJ"
+
+        response['data'] = funcreturn
 
         return jsonify(response)
 
+def make_cache_key():
+    print "Generating key!"
+
+@cache.cached(timeout=None, key_prefix=make_cache_key)
+def cacheW(w):
+    """
+    Cache the W object since we need it throughout PySAL
+    """
+    return w
+
+
 #This is not API - can I abstract away and have this in the front-end?
-@app.route('/upload/', methods=['POST', 'GET'])
+@app.route('/upload/', methods=['PUT', 'GET'])
 def upload_file():
-    if request.method == 'POST':
+    """
+    GET - An altertive method to list the files on the server
+          and get the PUT parameter format
+
+    PUT - Upload a file to the server (a directory)
+    """
+    if request.method == 'PUT':
         print request.json
         f = request.files['uploadfile']
         if f and allowed_file(f.filename):
@@ -140,7 +202,7 @@ def upload_file():
         #TODO: Maybe key these by name and then have an array of components?
         response = {'status':'success',
                     'data':{
-                            'uploadmethod':'POST',
+                            'uploadmethod':'PUT',
                             'template':{
                                 'uploadfile':'Array of file(s) to upload'},
                         'uploadedfiles':files
@@ -149,21 +211,35 @@ def upload_file():
         return jsonify(response)
 
 
-#Replace with @app.route or swap over to API style - not both.
-class UserAPI(Resource):
-    def get(self):
-        try:
-            toplevel = funcs.keys()
-            response = standardsuccess
-            response['data']['modules'] = []
-            for i in toplevel:
-                response['data']['modules'].append({i:'/api/{}'.format(i)})
-            return jsonify(response)
-        except:
-            response = standarderror
-            response['data'] = 'Unable to load module list'
-            return jsonify(response)
-api.add_resource(UserAPI, '/api/', endpoint='api')
+@app.route('/api/', methods=['GET'])
+def get_api():
+    """
+    The api start page.
+    """
+    response = {'status':'success','data':{}}
+    response['data']['links'] = []
+
+    toplevel = funcs.keys()
+    for i in toplevel:
+        response['data']['links'].append({'id':'{}'.format(i), 'href':'/api/{}'.format( i)})
+    return jsonify(response)
+
+@app.route('/listdata/', methods=['GET'])
+def get_listdata():
+    """
+    List the data that is in the upload directory
+    """
+    response = {'status':'success','data':{}}
+    files = {}
+    for f in os.listdir(UPLOAD_FOLDER):
+        basename = f.split('.')[0]
+        if basename not in files.keys():
+            files[basename] = []
+            files[basename].append(os.path.join(UPLOAD_FOLDER, f))
+        else:
+            files[basename].append(os.path.join(UPLOAD_FOLDER, f))
+    response['data']['files'] = files
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.config.update(DEBUG=True)

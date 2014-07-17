@@ -30,8 +30,10 @@ def _get_config():
 
 def main():
     cfg = _get_config()
+    print cfg
     try:
         engine = importlib.import_module(cfg['server'])
+        print engine
     except ImportError:
         raise ImportError("Could not load server integration implementation: %s" % (cfg['server'],))
     try:

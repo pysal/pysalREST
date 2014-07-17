@@ -3,22 +3,6 @@ import inspect
 import json
 import api
 
-__doc__ = """Welcome to the PySAL API.  Available sub URLS are: <br>
-    weights <br>
-    spreg <br>
-    cg <br>
-    common <br>
-    spatial_dynamics <br>
-    core <br>
-    ergodic <br>
-    directional <br>
-    region <br>
-    pysal <br>
-    examples <br>
-    inequality <br>
-    esda
-    """
-
 Response = namedtuple('response', 'status content')
 
 #Standard HTML Responses
@@ -31,10 +15,9 @@ UnsupportedResponse = lambda msg: Response('405 Method Not Allowed', json.dumps(
 ConflictResponse = lambda msg: Response('409 Conflict', json.dumps(msg))
 ErrorResponse = lambda msg: Response('500 Internal Server Error', json.dumps(msg))
 
-funcs = {'ESDA':['Map Classification', 'Spatial Autocorrelation']}
 
 methods = []
-for k, v in funcs.iteritems():
+for k, v in api.funcs.iteritems():
     methods += v
 
 def get_handlers(package):
