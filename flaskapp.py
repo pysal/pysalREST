@@ -3,6 +3,8 @@ import ast
 import inspect
 import os
 import json
+import subprocess
+import zipfile
 
 import numpy as np
 from pandas.io.json import read_json
@@ -21,7 +23,7 @@ app = Flask(__name__)
 #Upload Setup
 #TODO: Add a try/except here - if spatiallite is availabe, use it...
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj'])
+ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -29,17 +31,26 @@ def allowed_file(filename):
     return '.' in filename and \
             filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
 
-#standardsuccess = {'status':'success','data':{}}
-#standarderror = {'status':'error','data':{}}
-#standardfail = {'status':'fail','data':{}}
-
+def unzip(filename, path):
+    with zipfile.ZipFile(filename) as zf:
+        for m in zf.infolist():
+            words = m.filename.split('/')
+            destination = path
+            for w in words[:-1]:
+                drive, w = os.path.splitdrive(w)
+                head, w = os.path.split(w)
+                if w in (os.curdir, os.pardir, ''):
+                    continue
+                destination = os.path.join(path, w)
+            zf.extract(m, destination)
+    return
 
 @app.route('/', methods=['GET'])
 def home():
     response = {'status':'success','data':{}}
     response['data']['links'] = [{'id':'api', 'href':'/api/'},
                                  {'id':'listdata', 'href':'/listdata/'},
-                                 {'id':'uploaddata', 'href':'/uploaddata/'}]
+                                 {'id':'upload', 'href':'/upload/'}]
     return jsonify(response)
 
 @app.route('/api/<module>/', methods=['GET'])
@@ -161,48 +172,41 @@ def post_region(module,method):
 
         return jsonify(response)
 
-def make_cache_key():
-    print "Generating key!"
-
-def cacheW(w):
-    """
-    Cache the W object since we need it throughout PySAL
-    """
-    return w
-
 
 #This is not API - can I abstract away and have this in the front-end?
-@app.route('/upload/', methods=['PUT', 'GET'])
+@app.route('/upload/', methods=['POST'])
 def upload_file():
     """
-    GET - An altertive method to list the files on the server
-          and get the PUT parameter format
+    POST - Upload a file to the server (a directory)
 
-    PUT - Upload a file to the server (a directory)
+    Examples:
+    curl -X POST -F filename=@NAT.zip http://localhost:8081/upload/
+    curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http:/localhost:8081/upload/
     """
-    if request.method == 'PUT':
-        print request.json
-        f = request.files['uploadfile']
-        if f and allowed_file(f.filename):
-            filename = secure_filename(f.filename)
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return 'success'
-        else:
-            response = {'status':'error','data':{'message':'Either "." not in filename or extensions not in approved list.'}}
-            return jsonify(response)
+    if request.method == 'POST':
+        files = request.files
+        uploaded = []
+        for f in request.files.itervalues():
+            uploaded.append(f)
+            #Discard the keys - are they ever important since the user
+            # has named the file prior to upload?
+            if f and allowed_file(f.filename):
+                filename = secure_filename(f.filename)
+                savepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                f.save(savepath)
+                if filename.split('.')[1] == 'zip':
+                    unzip(savepath, app.config['UPLOAD_FOLDER'])
 
-    elif request.method == 'GET':
-        files = os.listdir(app.config['UPLOAD_FOLDER'])
-        #TODO: Maybe key these by name and then have an array of components?
-        response = {'status':'success',
-                    'data':{
-                            'uploadmethod':'PUT',
-                            'template':{
-                                'uploadfile':'Array of file(s) to upload'},
-                        'uploadedfiles':files
-                            }
-                    }
+        #Ideally we store metadata about the upload, but for now just return
+        response = {'status':'success','data':{}}
+        for u in uploaded:
+            response['data'][u.filename] = '{}/{}'.format(app.config['UPLOAD_FOLDER'], u.filename)
         return jsonify(response)
+
+    else:
+        response = {'status':'error','data':{'message':'Either "." not in filename or extensions not in approved list.'}}
+        return jsonify(response)
+    return jsonify(response)
 
 
 @app.route('/api/', methods=['GET'])
