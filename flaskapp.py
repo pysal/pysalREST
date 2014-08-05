@@ -10,24 +10,27 @@ import zipfile
 import numpy as np
 from pandas.io.json import read_json
 import pysal as ps
-from flask import Flask, jsonify, request, g
+from flask import Flask, jsonify, request, g, render_template
 from werkzeug.utils import secure_filename
 
 import fiona #Yeah - I punked out...
 
-from api import checktypes, funcs, CustomJsonEncoder
+from api import funcs, CustomJsonEncoder
 
 
 
 #Make the Flask App
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 #Setup a cache to store transient python objects
 
 #Upload Setup
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip'])
+ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip', 'amd', 'pmd'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@app.route('/index.html/', methods=['GET', 'POST'])
+def showtest():
+    return render_template('index.html')
 
 def update_file_list(UPLOADED_FOLDER):
     """
@@ -78,6 +81,19 @@ def unzip(filename, path):
                 destination = os.path.join(path, w)
             zf.extract(m, destination)
     return
+
+@app.route('/js/<path>/', methods=['GET'])
+def static_proxy(path):
+    """
+    When using Flask, this server static files
+    """
+    # send_static_file will guess the correct MIME type
+    return app.send_static_file(os.path.join('js', path))
+
+@app.route('/css/<path>/', methods=['GET'])
+def static_css_proxy(path):
+    return app.send_static_file(os.path.join('css', path))
+
 
 @app.route('/', methods=['GET'])
 def home():
@@ -249,7 +265,24 @@ def get_modules(module):
     return jsonify(response)
 
 @app.route('/api/<module>/<method>/', methods=['GET'])
-def get_method(module, method):
+def get_single_depth_method(module, method):
+    if isinstance(funcs[module][method], dict):
+        methods = funcs[module][method].keys()
+        response = {'status':'success','data':{}}
+        response['data']['links'] = []
+        for i in methods:
+            response['data']['links'].append({'id':'{}'.format(i),
+                                            'href':'/api/{}/{}/{}'.format(module,method,i)})
+        return jsonify(response)
+    else:
+        return get_method(module, method)
+
+
+@app.route('/api/<module>/<module2>/<method>/', methods=['GET'])
+def get_nested_method(module, module2, method):
+    return get_method(module, method, module2=module2)
+
+def get_method(module, method, module2 = None):
     """
     Query the API to get the POST parameters.
     """
@@ -258,7 +291,10 @@ def get_method(module, method):
     response['data']['post_template'] = {}
     mname = method
     #Extract the method from the method dict
-    method = funcs[module][method]
+    if module2 == None:
+        method = funcs[module][method]
+    else:
+        method = funcs[module][module2][method]
 
     #Inspect the method to get the arguments
     try:
@@ -288,7 +324,14 @@ def get_method(module, method):
     return jsonify(response)
 
 @app.route('/api/<module>/<method>/docs/', methods=['GET'])
-def get_docs(module, method):
+def get_single_docs(module, method):
+    return get_docs(module, method)
+
+@app.route('/api/<module>/<module2>/<method>/docs/', methods=['GET'])
+def get_nested_docs(module, module2, method):
+    return get_docs(module, method, module2=module2)
+
+def get_docs(module, method, module2=None):
     """
     Query the API to get the doc string of the method
     """
@@ -296,7 +339,10 @@ def get_docs(module, method):
     response['data']['docstring'] = []
 
     #Extract the method from the method dict
-    method = funcs[module][method]
+    if module2 == None:
+        method = funcs[module][method]
+    else:
+        method = funcs[module][module2][method]
 
     #Introspect the docs
     docs = inspect.getdoc(method)
@@ -305,7 +351,14 @@ def get_docs(module, method):
     return jsonify(response)
 
 @app.route('/api/<module>/<method>/', methods=['POST'])
-def post(module,method):
+def single_post(module, method):
+    return post(module, method)
+
+@app.route('/api/<module>/<module2>/<method>/', methods=['POST'])
+def nested_post(module, module2, method):
+    return post(module, method, module2=module2)
+
+def post(module,method, module2=None):
     """
     To make a POST using CURL to the flask dev server:
     Fisher-Jenks using the Hartigan Olympic time example
@@ -330,7 +383,10 @@ def post(module,method):
     else:
         response = {'status':'success','data':{}}
         #Setup the call, the args and the kwargs
-        call = funcs[module][method]
+        if module2 ==None:
+            call = funcs[module][method]
+        else:
+            call = funcs[module][module2][method]
 
         #Parse the args
         keys = request.json.keys()
@@ -339,7 +395,6 @@ def post(module,method):
         #Setup the python arg / kwarg containers
         args = []
         kwargs = {}
-
         if 'args' in keys:
             for a in req['args']:
                 try:
@@ -352,19 +407,24 @@ def post(module,method):
                     kwargs[k] =  ast.literal_eval(v)
                 except:
                     kwargs[k] = v
-
         #Check args / kwargs to see if they are python objects
         for i, a in enumerate(args):
-            if a in UPLOADED_FILES:
-                args[i] = os.path.join(UPLOAD_FOLDER, a)
-            #elif a in db.keys():
-                #args[i] = db[a]
+            try:
+                if a in UPLOADED_FILES:
+                    args[i] = os.path.join(UPLOAD_FOLDER, a)
+            except:
+                pass
 
         for k, v in kwargs.iteritems():
-            if v in UPLOADED_FILES:
-                kwargs[k] = os.path.join(UPLOAD_FOLDER, v)
-            #elif v in db.keys():
-                #kwargs[k] = db[k]
+            try:
+                if v in UPLOADED_FILES:
+                    kwargs[k] = os.path.join(UPLOAD_FOLDER, v)
+            except:
+                pass
+
+        #This is a hack until I get the vector/list checking going on
+        if module2 == 'mapclassify':
+            args[0] = np.array(args[0])
 
         #Make the call and get the return items
         funcreturn = call(*args, **kwargs)
@@ -405,9 +465,13 @@ def upload_file():
     curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http:/localhost:8081/upload/
     """
     if request.method == 'POST':
+        print dir(request)
+        print request.get_data()
         files = request.files
         uploaded = []
-        for f in request.files.itervalues():
+        print files
+        for k, f in request.files.iteritems():
+            print k, f
             uploaded.append(f)
             #Discard the keys - are they ever important since the user
             # has named the file prior to upload?
@@ -417,7 +481,6 @@ def upload_file():
                 f.save(savepath)
                 if filename.split('.')[1] == 'zip':
                     unzip(savepath, app.config['UPLOAD_FOLDER'])
-
         #Update the file list
         UPLOADED_FILES = update_file_list(UPLOAD_FOLDER)
         #Ideally we store metadata about the upload, but for now just return
@@ -451,29 +514,45 @@ def get_listdata():
     List the data that is in the upload directory
     """
     response = {'status':'success','data':{}}
-    files = {}
+    shapefiles = {}
+    pmd = {}
     for f in os.listdir(UPLOAD_FOLDER):
-        basename = f.split('.')[0]
-        if basename not in files.keys():
-            files[basename] = []
-            files[basename].append(os.path.join(UPLOAD_FOLDER, f))
+        basename = f.split('.')
+        if f[0] == '.':
+            continue
+        if basename[1] in ['zip']:
+            continue
+        if basename[1] == 'amd':
+            pmd[basename[0]] = basename[0]
+            continue
+        if basename[0] not in shapefiles.keys():
+            shapefiles[basename[0]] = []
+            shapefiles[basename[0]].append(os.path.join(UPLOAD_FOLDER, f))
         else:
-            files[basename].append(os.path.join(UPLOAD_FOLDER, f))
-    response['data']['files'] = files
+            shapefiles[basename[0]].append(os.path.join(UPLOAD_FOLDER, f))
+    response['data']['shapefiles'] = shapefiles
+    response['data']['pmd'] = pmd
     return jsonify(response)
 
 @app.route('/listdata/<filename>/', methods=['GET'])
 def get_shpinfo(filename):
-    response = {'status':'success','data':{'attributes':{}}}
     #Wrap in a try/except
     files = (os.path.join(UPLOAD_FOLDER, filename))
 
     #Info about the shapefile
-    fhandler = ps.open(files + '.shp', 'r')
-    response['data']['geomheader'] = fhandler.header
-    fhandler = ps.open(files + '.dbf', 'r')
-    response['data']['fields'] = fhandler.header
-    response['data']['fields'] += ['thegeom']
+    try:
+        response = {'status':'success','data':{'attributes':{}}}
+        fhandler = ps.open(files + '.shp', 'r')
+        response['data']['geomheader'] = fhandler.header
+        fhandler = ps.open(files + '.dbf', 'r')
+        response['data']['fields'] = fhandler.header
+        response['data']['fields'] += ['thegeom']
+    except:
+
+        response = {'status':'success','data':{}}
+        jsondata = open(files + '.amd')
+        data = json.load(jsondata)
+        response['data'] = data
 
     return jsonify(response)
 

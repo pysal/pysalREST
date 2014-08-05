@@ -1,0 +1,22 @@
+{
+    "input": {
+        "weights": {
+            "type": "gal",
+            "uri": "http://toae.org/pub/columbus.gal"
+        },
+        "attribute": {
+            "type": "txt",
+            "name": "CRIME",
+            "uri": "http://toae.org/pub/columbus.dbf"
+        }
+    },
+    "analysis_type": {
+        "method": "Moran"
+    },
+    "parameters": {
+        "transform": "O"
+    },
+    "output": {
+        "p_norm": "float"
+    }
+}

@@ -1,3 +1,4 @@
+import sys
 import pysal as ps
 import inspect
 import ast
@@ -37,28 +38,44 @@ def extractmethods(package, funcs):
     each module name is another dict containing the available funcs and classes.
     """
     #Two pass algorithm - this only happens on launch or refresh.
-    for mn, m in inspect.getmembers(package):
-        mn = mn
-        #Parse at the module level first
-        if isinstance(m, types.ModuleType):
+
+    for mn, m in inspect.getmembers(ps):
+        if inspect.ismodule(m):
             funcs[mn] = m
+
     for k, module in funcs.iteritems():
-        k = k
         funcs[k] = {}
         for mn, m in inspect.getmembers(module):
-            mn = mn
-            if m == '__builtins__':
+            if mn[:2] == '__':
                 continue
-            if isinstance(m, types.FunctionType) or isinstance(m, types.ClassType):
+            elif inspect.isclass(m):
                 funcs[k][mn] = m
+            elif inspect.isfunction(m):
+                funcs[k][mn] = m
+                #print "FUNC: ", k, mn, m
+            elif inspect.ismodule(m):
+                funcs[k][mn] = {}
+                for nestedobjname, nestedobj in inspect.getmembers(m):
+                    if nestedobjname[:2] == '__':
+                        continue
+                    elif inspect.isclass(nestedobj):
+                        funcs[k][mn][nestedobjname] = nestedobj
+                        #print "CL: ", k,nestedmodulename, nestedmodule
+                    elif inspect.isfunction(nestedobj):
+                        funcs[k][mn][nestedobjname] = nestedobj
+                        #print "FUNC: ", k, nestedmodulename, nestedmodule
 
+            '''
             #ESDA has this strange nesting in the module structure.
             # This is a hacky solution that should be recursive...
             elif isinstance(m, types.ModuleType):
                 for nestedmn, nestedm in inspect.getmembers(m):
-                    nestedmn = nestedmn.lower()
+                    if nestedm == '__builtins__':
+                        continue
                     if isinstance(nestedm, types.FunctionType) or isinstance(nestedm, types.ClassType):
                         funcs[k][nestedmn] = nestedm
+                        print k, nestedmn, nestedm
+            '''
     return funcs
 
 def extractmethods_init(package, funcs):
@@ -90,106 +107,12 @@ def extractmethods_init(package, funcs):
                             currentdict = funcs[i]
                     for i in line[3:]:
                         currentdict[i] = None
-                    print modules, line[3:]
                 else:
                     line = l.split()
-                    print modules, line
 
 
-def wrapper(func, *args, **kwargs):
-    """
-    Generic function wrapper for GET requests.
-    """
-    return func(args, kwargs)
 
 
-def postwrapper(func, args, kwargs):
-    """
-    Generic function wrapper for POST requests.
-    """
-    return func(args, kwargs)
-
-
-def get(module, method=None, **kwargs):
-    """
-    Handles HTTP GET requests.
-
-    module: PySAL module level, e.g. weights or spreg
-    method: PySAL sub module level, eg. weights.queen_from_shapefile
-    """
-    module = module.lower()
-    method = method.lower()
-    try:
-        method = funcs[module][method]
-    except:
-        available_funcs = [k for k in funcs[module].iterkeys()]
-        return pr.ErrorResponse("Unknown method.  Available methods are: {}".format(available_funcs))
-    #Parse the args and kwargs
-    try:
-        strargs = kwargs['args']
-        args = ast.literal_eval(strargs)
-    except:
-        try:
-            reqargs = inspect.getargspec(method)[0]
-        except:
-            reqargs = inspect.getargspec(method.__init__)[0]
-            reqargs.remove('self')
-        return pr.ErrorResponse('Missing required argument: {}'.format(reqargs))
-    try:
-        strkwargs = kwargs['kwargs']
-        kwargs = ast.literal_eval(strkwargs)
-    except:
-        #User has not supplied kwargs
-        kwargs = {}
-    if method is None:
-        return pr.OkResponse('Need to supply a method call.')
-    #Send the args, kwargs to the wrapper to unpack and call PySAL
-    print func(np.ndarray(args[0]), args[1])
-    result = getwrapper(method, *args, **kwargs)
-    try:
-        json.dumps(result)
-        return pr.OkResponse(result)
-    except:
-        return pr.OkResponse(json.dumps(result, cls=CustomJsonEncoder))
-
-
-def post(**kwargs):
-    """
-    Handles HTTP POST requests
-    """
-    print kwargs, len(kwargs.keys())
-    if len(kwargs.keys()) == 0:
-        return pr.MalformedResponse('Need to supply some arguments')
-    else:
-        module, func = kwargs['func'].split('/')
-        method = funcs[module.lower()][func.lower()]
-
-        args = ast.literal_eval(kwargs['args'])
-        #Hack to get FJ working - it expects an array
-        newargs = []
-        for i, a in enumerate(args):
-            if isinstance(a, list):
-                newargs.append(np.array(a))
-            else:
-                newargs.append(a)
-        args = tuple(newargs)
-        #Hack Done
-        try:
-            kwargs = ast.literal_eval(kwargs['kwargs'])
-        except:
-            kwargs = {}
-
-        #Call the wrapper to execute the function
-        result = postwrapper(method, *args, **kwargs)
-
-        try:
-            json.dumps(result)
-            return pr.OkResponse(result)
-        except:
-            return pr.OkResponse(json.dumps(result, cls=CustomJsonEncoder))
-
-def checktypes():
-    pass
 
 funcs = {}
 package = ps
