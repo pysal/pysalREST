@@ -17,7 +17,6 @@
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="/js/geoviz.js"></script>
 
 <script type="text/javascript" src="/js/jquery-impromptu.min.js"></script>
 <link rel="stylesheet" href="/css/jquery-impromptu.min.css">
@@ -58,7 +57,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Upload Data<b class="caret"></b></a>
               <ul class="dropdown-menu" data-bind="">
-                <li><a href="#upload" data-bind="" data-toggle="tab">Upload Shapefile</a></li>
+                <li><a href="#uploadshp" data-bind="" data-toggle="tab">Upload Shapefile</a></li>
                 <li><a href="#uploadpmd" data-bin="" data-toggle="tab">Upload PMD</a></li>
               </ul>
             </li>
@@ -69,6 +68,7 @@
               <ul class="dropdown-menu" data-bind="">
                 <li><a href="#esda" data-bind="" data-toggle="tab">ESDA: Map Classification</a></li>
                 <li><a href="#spatialauto" data-bind="" data-toggle="tab">ESDA: Spatial Association</a></li>
+                <li><a href="#weights" data-bind="" data-toggle="tab">Spatial Weights</a></li>
                 <li><a href="#spatialregion" data-bind="" data-toggle="tab">Spatial Regionalization</a></li>
               </ul>
             </li>
@@ -90,31 +90,22 @@
       <div class="row">
           <!-- MAP -->
           <div class="col-sm-9 col-md-9" id="map"></div>
-    
+                
           <!-- Right Column -->
           <div class="content col-sm-3 col-md-3">
             <div id="my-tab-content" class="tab-content">
 
               <!--Upload -->
-              <div class="tab-pane active" id='upload'>
-                <div id="dropzone" data-bind="dropUpload: files">
-                    <legend>Drop Files to Upload</legend>
-                    <ul class="highlight" id="dropstyle" data-bind="foreach: files" type="file">
-                        <li data-bind="text: name"></li>
-                    </ul>
-                </div>
-                  
-                <div>
-                    <button class="btn-group btn-group-lg col-sm-6" data-bind="click: onUpload"><span class="glyphicon glyphicon-ok"></span>  Upload</button>
-                    <button class="btn-group btn-group-lg col-sm-6" data-bind="click: onReset"><span class="glyphicon glyphicon-remove"></span> Reset</button>
-                </div>              
+              <div class="tab-pane active" id='uploadshp'>
+                  <div class="row">
+                    <form action="/file-upload" class="dropzone" id="shp-dropzone"></form>
+                  </div>             
               </div>
 
               <!--Upload PMD -->
               <div class="tab-pane" id='uploadpmd'>
                   <div class="row">
-                    <legend>Drop PMD to Upload</legend>
-                    <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
+                    <form action="/file-upload" class="dropzone" id="pmd-dropzone"></form>
                   </div>
                   
                   <div class="row">
@@ -142,9 +133,111 @@
                 
               <!--Spatial Association -->
               <div class="tab-pane" id='spatialauto'>
-                Spatial autocorrelation form goes here
-              </div>  
+                <form class="form-horizontal" id="spatauto-form">
+                    <fieldset>
+                    <!-- Form Name -->
+                    <legend>Measures of Spatial Autocorrelation</legend>
+                    <!-- Select Classifier -->
+                    <div class="form-group">
+                      
+                      <div class="col-sm-10">
+                        <select id="spatauto_metamethod" name="metamethod" class="form-control" data-bind="options:methodfamilies,
+                                                                                                  optionsCaption:'Select a method family...',
+                                                                                                  value:methodfamily,
+                                                                                                  valueAllowUnset:true">
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <select id="spatauto_method" name="method" class="form-control" data-bind="options:methods,
+                                                                                                  optionsCaption:'Select a method...',
+                                                                                                  value:method,
+                                                                                                  valueAllowUnset:true">
+                        </select>
+                      </div>
+                        
+                      <div class= "btn-group btn-group-sm col-sm-2" data-bind="click: showDocumentation">
+                        <button><span class="glyphicon glyphicon-book"></span></button>
+                      </div>
+                    </div>  
+                        
+                    <!-- Select Field -->
+                    <!-- ko stopBinding: true -->
+                    <div id="shpinfo">
+                    <div class="form-group">
+                      <div class="col-sm-10">
+                        <select id="fields" name="y" class="form-control" data-bind="options:fields,
+                                                                                          optionsCaption: 'Select a field...',
+                                                                                          value:field,
+                                                                                          valueAllowUndet:true">
+                        </select>
+                      </div>
+                      <div class= "btn-group btn-group-sm col-sm-2" data-bind="click: showField">
+                        <button><span class="glyphicon glyphicon-info-sign"></span></button>
+                      </div>
+                    </div>
+                      
+                    <!-- W Object -->
+                    <div class="form-group" id="availablewobjs">
+                      <legend>W Object</legend>
+                      <div class="col-sm-10">
+                        <select id="spatauto_method" name="method" class="form-control" data-bind="options:wobjs,
+                                                                      optionsCaption:'Select a W Object...',
+                                                                      optionsText: 'type',
+                                                                      optionsValue: 'id',
+                                                                      value: wobj,
+                                                                      valueAllowUnset:true">
+                        </select>
+                      </div>
+                    </div>
+                    </div>
+                    <!-- /ko -->
+                        
+                    <!-- Dynamic -->
+                    <div class="form-group" id="spatauto_dynamickwargs">
+                    </div>   
+
+                    <!-- Submit-->
+                    <div class="form-group">
+                      <div class="btn-group btn-group-lg col-sm-12" data-bind="click: onSubmit">
+                        <button><span class="glyphicon glyphicon-ok"></span>      Submit</button>
+                      </div>
+                    </div>
+                    </fieldset>
+                  </form>
+              </div> 
                   
+                
+              <!-- Weights -->
+              <div class="tab-pane" id="weights">
+                  <!--Intentionally hardcoded to limit the options to either Q or R -->
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                        <select id="wmethod" name="wmethod" class="form-control" data-bind="options:wmethods,
+                                                                                                  optionsCaption:'Select a weight type...',
+                                                                                                  value:wmethod,
+                                                                                                  valueAllowUnset:true">
+                        </select>
+                      </div>
+                
+                      <!-- Tag to the shapefile view model
+                      <div class=form-group>
+                        <legend>Optional Parameters</legend>
+                        <select id="idvariable" name="idvariable" class="form-control" data-bind="options:idvariables,
+                                                                      optionsCaption:'Select an ID variable',
+                                                                      value:idvariable,
+                                                                      valueAllowUnset:true">
+                        </select>
+                      </div>
+                      -->
+                      <div class="form-group">
+                        <button class="btn-group btn-group-lg col-sm-6" data-bind="click: onExecute"><span class="glyphicon glyphicon-ok"></span>  Generate W</button>
+
+                      </div>
+                  </form>
+              </div>
+                
               <!--ESDA -->
               <div class="tab-pane" id='esda'>
                   <form class="form-horizontal" id="esda-form">
@@ -165,11 +258,12 @@
                       </div>
                     </div>  
                     <!-- Select Field -->
-                    <div class="form-group">
+                    <!-- ko stopBinding: true -->
+                    <div class="form-group" id="shpfields">
                       <div class="col-sm-10">
-                        <select id="fields" name="y" class="form-control" data-bind="options:shapefileFields,
+                        <select id="fields" name="y" class="form-control" data-bind="options:fields,
                                                                                           optionsCaption: 'Select a field...',
-                                                                                          value:selectedField,
+                                                                                          value:field,
                                                                                           valueAllowUndet:true">
                         </select>
                       </div>
@@ -177,6 +271,7 @@
                         <button><span class="glyphicon glyphicon-info-sign"></span></button>
                       </div>
                     </div>
+                    <!-- /ko -->
                     <!-- Dynamic -->
                     <div class="form-group" id="dynamickwargs">
                     </div>   
@@ -196,7 +291,7 @@
                 Spatial regionalization form goes here
               </div> 
                 
-              <!-- Spatial Regionalization -->
+              <!-- PMD History -->
               <div class="tab-pane" id='pmdhistory'>
                 A running text field that outputs the pmd history for each item as a selectable 'row'.  These can then be 'checked' and PMD packaged.
               </div>  
@@ -206,16 +301,244 @@
            </div>
           </div>
         </div>
+        <div class="row" id="wstatus">
+        </div>
       </div>
-          
-   
-      <!--End Right Column -->
+    <!--End Right Column -->
 
     <script type="text/javascript">
         
-        function noopHandler(evt) {
-            evt.preventDefault();
-            return false;
+        //Model View of available shapefiles
+        function ShapefileViewModel() {  
+            var self = this;
+            
+            self.shapefilelistURI = 'http://localhost:5000/listdata/';
+
+            //Array to store available shapefiles and currently selected shapefile
+            self.shapefiles = ko.observableArray();
+            self.shapefile = ko.observable();
+            
+            //Array to store shapefile fields, currently selected shapefile field, and a vector of the field values
+            self.fields = ko.observableArray();
+            self.field = ko.observable();
+            self.currentFieldVector = ko.observableArray()
+            
+            //Array to store available W objects
+            self.wobjs = ko.observableArray()
+            self.wobj = ko.observable()
+            
+            //Helper to make the ajax get call - an this moved to a higher level?
+            self.ajax = function(uri, method, data) {
+                var request = {
+                    url: uri,
+                    type: method,
+                    contentType: "application/json",
+                    accepts: "application/json",
+                    cache: false,
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    error: function(jqXHR) {
+                        console.log("ajax error " + jqXHR.status);
+                    }
+                };
+                return $.ajax(request);
+            }
+        
+            self.ajax(self.shapefilelistURI, 'GET').done(function(response) {
+                for (var key in response.data.shapefiles){
+                    self.shapefiles.push(key);
+                }
+            }); 
+            
+            //Render the shapefile using D3
+            self.drawshapefile = function(shpname){
+                //make API call
+                var shapefileuri = 'http://localhost:5000/listdata/' + shpname + '/thegeom/';
+                var map = renderMap(shapefileuri);
+                self.shapefile(shpname);
+                self.updateWstatus(shpname);
+            }
+            
+            //Check the server to see if the W exists
+            self.updateWstatus = function(shpname){
+                //Check the cached url to see if W objects exist
+                var Wstatus = {"Queen":false,
+                              "Rook": false};
+                self.ajax("http://localhost:5000/cached/", 'GET').done(function(response){
+                    self.wobjs.removeAll()
+                    //Parse the cached list to see which match the current shapefile
+                    var resp = response.data.cacheditems
+                    for (k in resp){
+                        if (resp[k].source === self.shapefile()){
+                            var type = resp[k].type;
+                            Wstatus[type] = true
+                            //Add the W object to an observable array
+                            self.wobjs.push({name:resp[k].source,
+                                            id:resp[k].id,
+                                            type:resp[k].type})
+                        }
+                    }
+                    
+                    //Parse the Wstatus dict and generate the status info in the html
+                    $("#wstatus").empty();                    
+                    for (var k in Wstatus){
+                        if (Wstatus[k] === true){
+                            var input = '<div class="row"><div class="col-md-3 alert alert-success">'+ k + ' adjacency cached server side.</div></div>'
+                            } else {
+                            var input = '<div class="row"><div class="col-md-3 alert alert-info">'+ k + ' adjacency  does not exist server side.</div></div>'
+                            }
+                        $(input).appendTo("#wstatus")
+                    }
+                    
+                });
+            }
+            
+            //Get the available fields in the shapefile
+            self.shapefile.subscribe(function() {
+                shpname = self.shapefile()
+                //Populate a dropdown with available fields in the shapefile
+                self.shapefileinfoURI = 'http://localhost:5000/listdata/' + shpname + '/'
+                self.fields.removeAll()
+                self.ajax(self.shapefileinfoURI, 'GET').done(function(response) {
+                    var fields = response.data.fields;
+                    var fieldlength = fields.length;
+                    for (var i=0; i < fieldlength - 1; i++){
+                        self.fields.push(fields[i])
+                    }
+                    //Alphabetize the fields
+                    self.fields().sort()
+                });  
+            });
+            
+            //When a field is selected, update the field vector to store the data client side
+            self.field.subscribe(function() {
+                var shapefileFieldURI = 'http://localhost:5000/listdata/' + self.shapefile() + '/' + self.field() + '/' 
+                self.ajax(shapefileFieldURI, 'GET').done(function(response){
+                    self.currentFieldVector = response.data[self.field()]
+                }); 
+            });
+            
+            //On click to show a vector of the current field.
+            self.showField = function(){
+                $.prompt(JSON.stringify(self.currentFieldVector, null, 2))    
+            }
+        }
+
+        var shapefileview = new ShapefileViewModel()
+        
+        //Model View of available ESDA autocorrelation measures
+        function SpatAutoViewModel(){
+          var self = this;
+          var SpatAutoBaseURI = 'http://localhost:5000/api/esda/'
+          
+          //Store available and current method family
+          self.methodfamilies = ko.observableArray()
+          self.methodfamily = ko.observable()
+          
+          //Store available and current method
+          self.methods = ko.observableArray()
+          self.method = ko.observable()
+          
+          //Kwarg Array
+          self.kwargarray = ko.observableArray()
+          
+          //Helper to make the ajax get call - an this moved to a higher level?
+            self.ajax = function(uri, method, data) {
+                var request = {
+                    url: uri,
+                    type: method,
+                    contentType: "application/json",
+                    accepts: "application/json",
+                    cache: false,
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    error: function(jqXHR) {
+                        console.log("ajax error " + jqXHR.status);
+                    }
+                };
+                return $.ajax(request);
+            }
+            
+            //Get JSON list of the available method families
+            self.ajax(SpatAutoBaseURI, 'GET').done(function(response){
+                var links = response.data.links;
+                for (var i =0; i < links.length;i++){
+                    if (links[i].id !== 'mapclassify'){
+                        self.methodfamilies.push(links[i].id)
+                    }
+                }
+            });
+
+            //Sub method
+            self.methodfamily.subscribe(function(){
+                var methodsURI = SpatAutoBaseURI + self.methodfamily() + '/'
+                self.ajax(methodsURI, 'GET').done(function(response){
+                    var links = response.data.links;
+                    for (var i=0;i < links.length;i++){
+                        self.methods.push(links[i].id)
+                    }   
+                });
+            });
+            
+            //Kwargs
+            self.method.subscribe(function(){
+                var methodURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() + '/'
+                //Make the ajax call
+                self.ajax(methodURI, 'GET').done(function(response){
+                    var kwargs = response.data.post_template.kwargs;
+                    
+                    //Remove any old entries in the div
+                    $("#spatauto_dynamickwargs").empty();
+                    self.kwargarray.removeAll()
+                    
+                    //Step over the kwargs and add inputs
+                    for (var k in kwargs){
+                        self.kwargarray.push(k)
+                        var input = '<div class="row><label class="col-md-6 control-label" for="k">' + k + '</label><div class="col-md-3"><input id="' + k + '" name="' + k + '" type="text" value="' + kwargs[k] + '" class="form-control input-md"></div></div>'
+                        $(input).appendTo("#spatauto_dynamickwargs")
+                    }
+                });
+            });
+            
+            //POST the call to the method / class
+            self.onSubmit = function(){
+                //Parse the kwargs using the observable array of keys and pack into a JSON object.
+                var kwargstring = {}
+                for (var i=0; i < self.kwargarray().length;i++){
+                    var k = self.kwargarray()[i];
+                    var value = $("#" + k ).val();
+                    kwargstring[k] = value;
+                }
+                
+                //Parse the field into an vector
+                var argarr = shapefileview.currentFieldVector;
+                //Get the W Object ID
+                var wid = shapefileview.wobj();
+                
+                //Pack the POST request
+                var data = {}
+                data['args'] = []
+                data['args'].push(argarr)
+                data['args'].push('cached_' + wid)
+                data['kwargs'] = kwargstring;
+                
+                
+                //Make the post request
+                var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
+                self.ajax(postURI, 'POST', data).done(function(response){    
+                    var rdata = response.data
+                    console.log(rdata)
+                });          
+            } 
+            
+            //Show the documentation for the method / class
+            self.showDocumentation = function(name){
+                var documentationURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() + '/docs/'
+                self.ajax(documentationURI, 'GET').done(function(response){
+                    var docs = response.data.docstring;
+                    $.prompt(JSON.stringify(docs, null, 2));
+                });
+            }
         }
         
         //Model View of available ESDA classifiers
@@ -226,11 +549,6 @@
             //Store the current classifier
             self.classifiers = ko.observableArray();
             self.selectedClassifier = ko.observable();
-            
-            //Store field listing, selected field, and a vector
-            self.currentFieldVector = ko.observable() //The currently selected field as a vector.  Only populated if the vector is viewed.
-            self.shapefileFields = ko.observableArray([])
-            self.selectedField = ko.observable()
             
             //Store the kwargs
             self.kwargarray = ko.observableArray([]);
@@ -264,6 +582,7 @@
                 self.classifiers.sort()
             });
             
+            //Subscribe to the classifier drop down - when it changes, update the kwargs inputs
             self.selectedClassifier.subscribe(function(){
                 //Get the method / class arguments
                 var classifierMethodURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() + '/'
@@ -285,41 +604,16 @@
                 });
             });
             
+            //Show the documentation for the method / class
             self.showDocumentation = function(name){
                 var documentationURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
-                    $.prompt(JSON.stringify(docs, null, 4));
+                    $.prompt(JSON.stringify(docs, null, 2));
                 });
             }
-            
-            self.getFields = function(shpname) {
-                self.selectedShapefile = shpname
-                //Populate a dropdown with available fields in the shapefile
-                self.shapefileinfoURI = 'http://localhost:5000/listdata/' + shpname + '/'
-                self.shapefileFields.removeAll()
-                self.ajax(self.shapefileinfoURI, 'GET').done(function(response) {
-                    var fields = response.data.fields;
-                    var fieldlength = fields.length;
-                    for (var i=0; i < fieldlength - 1; i++){
-                        self.shapefileFields.push(fields[i])
-                    }
-                    //Alphabetize the fields
-                    self.shapefileFields.sort()
-                });  
-            }
-            
-            self.selectedField.subscribe(function(){
-                var shapefileFieldURI = 'http://localhost:5000/listdata/' + self.selectedShapefile + '/' + self.selectedField() + '/' 
-                self.ajax(shapefileFieldURI, 'GET').done(function(response){
-                    self.currentFieldVector = response.data[self.selectedField()]
-                });    
-            });
-            
-            self.showField = function(){
-                $.prompt(JSON.stringify(self.currentFieldVector, null, 2))    
-            }
-            
+               
+            //POST the call to the method / class
             self.onSubmit = function(){
                 //Parse the kwargs using the observable array of keys and pack into a JSON object.
                 var kwargstring = {}
@@ -330,12 +624,12 @@
                 }
                 
                 //Parse the field into an vector
-                argarr = self.currentFieldVector.toString()
+                var argarr = shapefileview.currentFieldVector;
 
                 //Pack the POST request
                 var data = {}
                 data['args'] = []
-                data['args'].push(self.currentFieldVector)
+                data['args'].push(argarr)
                 data['kwargs'] = kwargstring;
                 
                 //console.log($.toJSON(data))
@@ -348,23 +642,18 @@
                     var rdata = response.data
                     console.log(rdata)
                 });          
-            }
-            
+            }   
         }
         
         //Create an instance of the above class to be used below - is this how I should do this?
         var esdaHookup =  new ESDAViewModel()
         
-        //Model View of available shapefiles
-        function ShapefileViewModel() {  
+        var WeightsViewModel = function (){
             var self = this;
             
-            self.shapefilelistURI = 'http://localhost:5000/listdata/';
-
-            //Array to store shapefilename
-            self.shapefiles = ko.observableArray();
-
-            //Helper to make the ajax get call - an this moved to a higher level?
+            self.wmethods = ko.observableArray(['Queen', 'Rook'])
+            self.wmethod = ko.observable() 
+            
             self.ajax = function(uri, method, data) {
                 var request = {
                     url: uri,
@@ -380,92 +669,28 @@
                 };
                 return $.ajax(request);
             }
-        
-            self.ajax(self.shapefilelistURI, 'GET').done(function(response) {
-                for (var key in response.data.shapefiles){
-                    self.shapefiles.push(key);
-                }
-            }); 
             
-            self.drawshapefile = function(shpname){
-                //make API call
-                var shapefileuri = 'http://localhost:5000/listdata/' + shpname + '/thegeom/';
-                var map = renderMap(shapefileuri);
-                esdaHookup.getFields(shpname)
+            self.wmethod_lookup = {'Queen': 'queen_from_shapefile',
+                                  'Rook': 'rook_from_shapefile'}
+        
+            self.onExecute = function(){
+                var posturl = 'http://localhost:5000/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
+                var inputshp = shapefileview.shapefile() + '.shp'
+                
+                var data = {};
+                var args = [inputshp];
+                var kwargs = {};
+                data['args'] = args;
+                data['kwargs'] = kwargs;
+
+                //POST the formData
+                self.ajax(posturl, 'POST', data).done(function(response) {
+                    shapefileview.updateWstatus(shapefileview.shapefile());
+                });   
             }
         }
+        var wvm = new WeightsViewModel();
         
- 
-        ko.bindingHandlers.dropUpload = {
-            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                element.addEventListener('dragenter', noopHandler, false);
-                element.addEventListener('dragover', noopHandler, false);
-
-                element.addEventListener('drop', function (evt) {
-                    evt.preventDefault();
-
-                    var value = valueAccessor();
-                    for (var i = 0; i < evt.dataTransfer.files.length; i++) {
-                        value.push(evt.dataTransfer.files[i]);
-                    }
-                }, false);
-            }
-        };
-
-        var UploadViewModel = function () {
-            var self = this;
-
-            self.files = ko.observableArray();
-
-            self.ajax = function(uri, method, data) {
-                var request = {
-                    url: uri,
-                    type: method,
-                    processData: false,
-                    contentType: false,
-                    data: data,
-                    error: function(jqXHR) {
-                        console.log("ajax error " + jqXHR.status);
-                    }
-                };
-                return $.ajax(request);
-            }
-            
-            self.onUpload = function () {
-                var formData = new FormData();
-                var i = 0;
-                ko.utils.arrayForEach(self.files(), function (file) {
-                    formData.append("files_" + i, file);
-                    i = i + 1;
-                });
-                console.log(formData);
-                //AJAX call to get the data posted
-                self.ajax("http://localhost:5000/upload/", "POST", formData).done(function(response) {
-                    self.files.removeAll();
-                });             
-            }
-
-            self.onReset = function () {
-                self.files.removeAll();
-            }
-        }
-
-        ko.bindingHandlers.pmddropUpload = {
-            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-                element.addEventListener('dragenter', noopHandler, false);
-                element.addEventListener('dragover', noopHandler, false);
-
-                element.addEventListener('drop', function (evt) {
-                    evt.preventDefault();
-
-                    var value = valueAccessor();
-                    for (var i = 0; i < evt.dataTransfer.files.length; i++) {
-                        value.push(evt.dataTransfer.files[i]);
-                    }
-                }, false);
-            }
-        };
-
         var UploadPMDViewModel = function () {
             var self = this;
             
@@ -512,18 +737,18 @@
         
         var uploadpmd = new UploadPMDViewModel()
         
-        Dropzone.options.myAwesomeDropzone = { 
+        Dropzone.options.pmdDropzone = { 
             init: function () {
                 this.on("complete", function (file) {
                   if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
                     uploadpmd.availablepmd.push(file.name)
-                    this.removeFile(file);
-                    
+                    this.removeFile(file);             
                   }
                 });
             },
             
           url: "http://localhost:5000/upload/",
+          dictDefaultMessage: "Drop a .pmd, .amd, or .wmd here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB
           maxFiles: 1, 
@@ -537,19 +762,50 @@
           }
         };
         
-
-
-
-
-        
-        
-        
-        
+        Dropzone.options.shpDropzone = { 
+            init: function () {
+                var uploaded = []
+                this.on("complete", function (file) {
+                  var basename = file.name.split('.')[0]
+                  uploaded.push(basename);
+                    
+                  
+                  shapefileview.shapefiles.push(basename);
+                  
+                  this.removeFile(file);
+                });
+            },
+            
+          url: "http://localhost:5000/upload/",
+          dictDefaultMessage: "Drop shp, shx, dbf or .zip here...",
+          paramName: "file", // The name that will be used to transfer the file
+          maxFilesize: 20, // MB
+          maxFiles: 4, 
+          acceptedFiles: ".shp, .shx, .dbf, .prj, .zip",
+          createImageThumbnails: false,
+            accept: function(file, done) {
+            if (file.name == "justinbieber.jpg") {
+              done("Naha, you don't.");
+            }
+            else { done(); }
+          }
+        };
+      
 //Knockout bindings - I have no idea if this is the canonical approach - I hacked it together
-ko.applyBindings(new ShapefileViewModel(), document.getElementById("shapefilelist"));
+ko.bindingHandlers.stopBinding = {
+    init: function() {
+        return { controlsDescendantBindings: true };
+    }
+};
+ko.virtualElements.allowedBindings.stopBinding = true;
+        
+ko.applyBindings(shapefileview, document.getElementById("shapefilelist"));
+ko.applyBindings(shapefileview, document.getElementById("shpinfo"));
+        ko.applyBindings(shapefileview, document.getElementById("shpfields"));
 ko.applyBindings(esdaHookup, document.getElementById("esda-form"));
-ko.applyBindings(new UploadViewModel(), document.getElementById("upload"));
 ko.applyBindings(uploadpmd, document.getElementById("uploadpmd"));
+ko.applyBindings(wvm, document.getElementById("weights"));
+ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto"));
 </script>
 
 <script>

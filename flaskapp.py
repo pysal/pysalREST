@@ -16,7 +16,7 @@ from werkzeug.utils import secure_filename
 import fiona #Yeah - I punked out...
 
 from api import funcs, CustomJsonEncoder
-
+from pmd import pmdwrapper
 
 
 #Make the Flask App
@@ -148,6 +148,9 @@ def get_cached_entry(cachedid):
             if not a[0].startswith('__'):
                 response['data']['attrs'].append(a[0])
     return jsonify(response)
+
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
 
 @app.route('/cached/<cachedid>/<method>/', methods=['POST'])
 def update_db(cachedid, method):
@@ -378,15 +381,15 @@ def post(module,method, module2=None):
     """
     if not request.json:
         response = {'status':'error','data':{}}
-        standarderror['data'] = 'Post datatype was not json'
-        return jsonify(standarderror), 400
+        response['data'] = 'Post datatype was not json'
+        return jsonify(response), 400
     else:
         response = {'status':'success','data':{}}
         #Setup the call, the args and the kwargs
         if module2 ==None:
-            call = funcs[module][method]
+            call = pmdwrapper(funcs[module][method])
         else:
-            call = funcs[module][module2][method]
+            call = pmdwrapper(funcs[module][module2][method])
 
         #Parse the args
         keys = request.json.keys()
@@ -407,23 +410,47 @@ def post(module,method, module2=None):
                     kwargs[k] =  ast.literal_eval(v)
                 except:
                     kwargs[k] = v
-        #Check args / kwargs to see if they are python objects
+
+        # or if they are uploaded shapefiles
         for i, a in enumerate(args):
             try:
                 if a in UPLOADED_FILES:
-                    args[i] = os.path.join(UPLOAD_FOLDER, a)
-            except:
-                pass
+                    a[i] = os.path.join(UPLOAD_FOLDER, a)
+            except: pass
+
+            try:
+                if a.split('_')[0] == 'cached':
+                    cacheid = a.split('_')[1]
+                    query = "SELECT Obj FROM WObj WHERE ID = {}".format(cacheid)
+                    cur = get_db().cursor().execute(query)
+                    result = cur.fetchone()[0]
+                    obj = cPickle.loads(str(result))
+
+                    args[i] = obj
+                    cur.close()
+            except: pass
 
         for k, v in kwargs.iteritems():
             try:
                 if v in UPLOADED_FILES:
                     kwargs[k] = os.path.join(UPLOAD_FOLDER, v)
-            except:
-                pass
+            except: pass
+
+            try:
+                if v.split('_')[0] == 'cached':
+                    cacheid = v.split('_')[1]
+                    query = "SELECT Obj FROM WObj WHERE ID = {}".format(cacheid)
+                    cur = get_db().cursor().execute(query)
+                    result = cur.fetchone()[0]
+                    obj = cPickle.loads(str(result))
+
+                    kwargs[k] = obj
+                    cur.close()
+            except: pass
+
 
         #This is a hack until I get the vector/list checking going on
-        if module2 == 'mapclassify':
+        if module == 'esda':
             args[0] = np.array(args[0])
 
         #Make the call and get the return items
@@ -434,9 +461,9 @@ def post(module,method, module2=None):
             pdata = cPickle.dumps(funcreturn, cPickle.HIGHEST_PROTOCOL)
             cur = get_db().cursor()
             if method == 'queen_from_shapefile':
-                m = 'Q'
+                m = 'Queen'
             else:
-                m = 'R'
+                m = 'Rook'
             obj = (m, sqlite3.Binary(pdata), funcreturn._shpName)
             cur.execute("INSERT INTO WObj values (NULL, ?, ?, ?)",obj)
             get_db().commit()
@@ -445,14 +472,36 @@ def post(module,method, module2=None):
             response['data'] = {'Shapefile':funcreturn._shpName,
                                 'Weight Type':method}
         else:
-            funcreturn = vars(funcreturn)
-            for k, v in funcreturn.iteritems():
-                if isinstance(v, np.ndarray):
-                    funcreturn[k] = v.tolist()
-
+            funcreturn = recursedict(vars(funcreturn))
             response['data'] = funcreturn
 
         return jsonify(response)
+
+def recursedict(inputdict):
+    """
+    TODO: Make recursive - once I understand the PMD structure
+    """
+    for k, v in inputdict.iteritems():
+        if k == 'meta_data':
+            newpositionalvalues = []
+            oldpositionalvalues = v['positional_values']
+
+            for i in oldpositionalvalues:
+                if isinstance(i, np.ndarray):
+                    newpositionalvalues.append(i.tolist())
+                elif isinstance(i, ps.W):
+                    newpositionalvalues.append(i.__repr__())
+                else:
+                    newpositionalvalues.append(i)
+
+            v['positional_values'] = newpositionalvalues
+
+        elif isinstance(v, np.ndarray):
+            inputdict[k] = v.tolist()
+        elif isinstance(v, ps.W):
+            inputdict[k] = v.__repr__()
+
+    return inputdict
 
 #This is not API - can I abstract away and have this in the front-end?
 @app.route('/upload/', methods=['POST'])
