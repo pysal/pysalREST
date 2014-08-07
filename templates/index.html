@@ -13,11 +13,11 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+    
 <script type="text/javascript" src="/js/jquery-impromptu.min.js"></script>
 <link rel="stylesheet" href="/css/jquery-impromptu.min.css">
     
@@ -26,7 +26,38 @@
     width: 99%;
     height: 100px; 
     background: LightGray;
-}    
+}   
+    
+path:hover{
+    fill-opacity: 0.5;
+}
+body{
+    background-color: white;
+}
+
+div.tooltip {         
+  text-align: left;           
+  width: 300px;                  
+  height: 130px;                 
+  padding: 5px;
+  color:white;             
+  font: 18px sans-serif;     
+  background: black;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
+.q8-9 { fill:rgb(247,251,255); }
+.q7-9 { fill:rgb(222,235,247); }
+.q6-9 { fill:rgb(198,219,239); }
+.q5-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q3-9 { fill:rgb(66,146,198); }
+.q2-9 { fill:rgb(33,113,181); }
+.q1-9 { fill:rgb(8,81,156); }
+.q0-9 { fill:rgb(8,48,107); }
+    
 </style>
     
 </head>
@@ -45,8 +76,8 @@
           <a href="#home" class="navbar-brand" data-toggle="tab" >Sample Application</a>
         </div>    
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav" id="shapefilelist">
-            <li class="dropdown">
+          <ul class="nav navbar-nav" >
+            <li class="dropdown" id="shapefilelist">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Available Shapefiles<b class="caret"></b></a>
               <ul class="dropdown-menu" data-bind="foreach: shapefiles">
                 <li><a data-bind="text: $data, click: $parent.drawshapefile"></a></li>
@@ -75,7 +106,6 @@
                         
             <li><a href="#pmdhistory" data-bind="" data-toggle="tab">History (PMD)</a></li>
 
-
               
             </ul>
 
@@ -100,7 +130,8 @@
                     <form action="/file-upload" class="dropzone" id="shp-dropzone"></form>
                   </div>             
               </div>
-
+                
+                
               <!--Upload PMD -->
               <div class="tab-pane" id='uploadpmd'>
                   <div class="row">
@@ -306,6 +337,8 @@
     <!--End Right Column -->
 
     <script type="text/javascript">
+        
+
         
         //Model View of available shapefiles
         function ShapefileViewModel() {  
@@ -608,7 +641,7 @@
                 var documentationURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
-                    $.prompt(JSON.stringify(docs, null, 2));
+                    $.prompt(JSON.stringify(docs, null, 4));
                 });
             }
                
@@ -635,11 +668,11 @@
                 
                 //Make the post request
                 var postURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() +'/'
-                //console.log(data);
                 self.ajax(postURI, 'POST', data).done(function(response){
-                    
                     var rdata = response.data
                     console.log(rdata)
+                    onUpdate(rdata);
+
                 });          
             }   
         }
@@ -800,26 +833,31 @@ ko.virtualElements.allowedBindings.stopBinding = true;
         
 ko.applyBindings(shapefileview, document.getElementById("shapefilelist"));
 ko.applyBindings(shapefileview, document.getElementById("shpinfo"));
-        ko.applyBindings(shapefileview, document.getElementById("shpfields"));
+ko.applyBindings(shapefileview, document.getElementById("shpfields"));
 ko.applyBindings(esdaHookup, document.getElementById("esda-form"));
 ko.applyBindings(uploadpmd, document.getElementById("uploadpmd"));
 ko.applyBindings(wvm, document.getElementById("weights"));
 ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto"));
-</script>
-
-<script>
+        
     //D3 rendering function  
-    
     //Width and height
+        
+    var geojson;
+    var path;
+    var quantize;
+        
     var width = 750;
-    var height = 400;
+    var height = 600;
 
+    var choro = d3.map();
+        
     //Create SVG element
     var svg = d3.select("#map")
-                .append("svg")
+                .append("svg:svg")
                 .attr("width", width)
                 .attr("height", height);
     
+
     function renderMap(geojsonuri){
         // Clear the SVG incase another map previously existed
         svg.selectAll("*").remove();
@@ -830,12 +868,24 @@ ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto")
             .translate([0, 0]);
         
         // Create a path generator.
-        var path = d3.geo.path()
+        path = d3.geo.path()
             .projection(projection);
+
+        quantize = d3.scale.quantize()
+            .domain([0, 1])
+            .range(d3.range(9).map(function(i) { 
+                return "q" + i + "-9"; 
+            }));
 
         //Load in GeoJSON data
         d3.json(geojsonuri, function(response) {
-            var geojson = response.data.geojson
+            geojson = response.data.geojson
+            
+            //Add a classid attribute to the geojson for visualization
+            for (var i=0;i<geojson.features.length;i++){
+                geojson.features[i].properties.CLASSID = 1
+            }
+            //console.log(geojson);
             
         //Recompute the scaling and translation based on the input geojson
         var b = path.bounds(geojson),
@@ -846,17 +896,59 @@ ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto")
         projection
             .scale(s)
             .translate(t);
-            
+           
+        //update the quantize to color based on id
+        quantize.domain([0,geojson.features.length])
+        
+        //Bind data and create one path per GeoJSON feature
+        svg.append("g")
+            .attr("class", "polys")
+        .selectAll("path")
+           .data(geojson.features)
+           .enter().append("path")
+            .attr("id", function(d){return d.properties.id})
+            .attr("class", function(d) { return quantize(d.id); })
+            .attr("d", path)
+           .on("click", function(d){
+               //console.log(d);
+               $.prompt(JSON.stringify(d.properties, null, 2));
+           });
+        });
+        
+    }
+        
+    function onUpdate (rdata){
+        // Parse the yb vector and update the data on the map.
+        //console.log('ONUPDATE')
+        var classmin = 9
+        var classmax = 0
+        for (var i=0;i<rdata.yb.length;i++){
+            geojson.features[i].properties['CLASSID'] = rdata.yb[i]
+            if (rdata.yb[i] < classmin){
+                classmin = rdata.yb[i]
+            }
+            if (rdata.yb[i] > classmax){
+                classmax = rdata.yb[i]
+            }
+        }
+        
+        var nbins = rdata.bins.length;
+        quantize.domain([classmin, classmax])
+            //.range(colorbrewer.Greens[nbins]);
+          .range(d3.range(nbins).map(function(i) { 
+              return "q" + i + "-9"; 
+          }));
+
         //Bind data and create one path per GeoJSON feature
         svg.selectAll("path")
            .data(geojson.features)
-           .enter()
-           .append("path")
-           .attr("d", path)
-           .style("fill", "steelblue");
-
-        });
+           .attr("class", function(d) { return quantize(d.properties['CLASSID']); })
+           .attr("d", path); 
+        
+    
+         
     }
+        
 </script>
     
 </body>

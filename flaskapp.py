@@ -17,6 +17,7 @@ import fiona #Yeah - I punked out...
 
 from api import funcs, CustomJsonEncoder
 from pmd import pmdwrapper
+from cartodb_driver import gettable
 
 
 #Make the Flask App
@@ -81,6 +82,14 @@ def unzip(filename, path):
                 destination = os.path.join(path, w)
             zf.extract(m, destination)
     return
+
+@app.route('/cartodb/<tablename>')
+def getcartodbtable(tablename):
+    """
+    Get the geojson cartodb table piped through the PySAL API
+    """
+    geosjon = gettable(tablename)
+    print "result"
 
 @app.route('/js/<path>/', methods=['GET'])
 def static_proxy(path):
