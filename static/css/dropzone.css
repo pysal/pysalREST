@@ -155,7 +155,7 @@
 }
 .dropzone {
   border: 1px solid rgba(0,0,0,0.03);
-  min-height: 360px;
+  min-height: 128px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   background: rgba(0,0,0,0.03);
@@ -175,9 +175,9 @@
   background-position: 0 0;
   position: absolute;
   width: 428px;
-  height: 123px;
-  margin-left: -214px;
-  margin-top: -61.5px;
+  height: 128px;
+  margin-left: -65px;
+  margin-top: -65px;
   top: 50%;
   left: 50%;
 }

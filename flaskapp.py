@@ -18,6 +18,7 @@ import fiona #Yeah - I punked out...
 from api import funcs, CustomJsonEncoder
 from pmd import pmdwrapper
 from cartodb_driver import gettable
+import amdparser
 
 
 #Make the Flask App
@@ -82,14 +83,6 @@ def unzip(filename, path):
                 destination = os.path.join(path, w)
             zf.extract(m, destination)
     return
-
-@app.route('/cartodb/<tablename>')
-def getcartodbtable(tablename):
-    """
-    Get the geojson cartodb table piped through the PySAL API
-    """
-    geosjon = gettable(tablename)
-    print "result"
 
 @app.route('/js/<path>/', methods=['GET'])
 def static_proxy(path):
@@ -266,6 +259,37 @@ def get_cached_entry_attr(cachedid, attr):
     response['data'] = {attr : ret}
     return jsonify(response)
 
+@app.route('/amd/', methods=['POST'])
+def executeamd():
+    response = {'status':'success','data':{}}
+
+    amd = request.json
+    wspecs = amd['input']['weights']
+    wobj = amdparser.generateW(wspecs['uri'], wspecs['type'], uploaddir=UPLOAD_FOLDER)
+
+    attribute = amd['input']['attribute']
+    y = amdparser.gety(attribute, uploaddir=UPLOAD_FOLDER)
+
+    kwargs = amd['parameters']
+    args = [y, wobj]
+
+    callpath, call = amdparser.parse_analysis(funcs, amd['analysis_type'])
+
+
+    #Setup the call, the args and the kwargs
+    call = pmdwrapper(call)
+
+    for k, v in kwargs.iteritems():
+        try:
+            kwargs[k] = ast.literal_eval(v)
+        except: pass
+    funcreturn = call(*args, **kwargs)
+    funcreturn = recursedict(vars(funcreturn))
+
+    response['data'] = funcreturn
+
+    return jsonify(response)
+
 @app.route('/api/<module>/', methods=['GET'])
 def get_modules(module):
     methods = funcs[module].keys()
@@ -395,7 +419,7 @@ def post(module,method, module2=None):
     else:
         response = {'status':'success','data':{}}
         #Setup the call, the args and the kwargs
-        if module2 ==None:
+        if module2 == None:
             call = pmdwrapper(funcs[module][method])
         else:
             call = pmdwrapper(funcs[module][module2][method])
@@ -421,12 +445,12 @@ def post(module,method, module2=None):
                     kwargs[k] = v
 
         # or if they are uploaded shapefiles
+        print UPLOADED_FILES
         for i, a in enumerate(args):
             try:
                 if a in UPLOADED_FILES:
-                    a[i] = os.path.join(UPLOAD_FOLDER, a)
+                    args[i] = UPLOAD_FOLDER + '/' +  a
             except: pass
-
             try:
                 if a.split('_')[0] == 'cached':
                     cacheid = a.split('_')[1]
@@ -461,6 +485,7 @@ def post(module,method, module2=None):
         #This is a hack until I get the vector/list checking going on
         if module == 'esda':
             args[0] = np.array(args[0])
+
 
         #Make the call and get the return items
         funcreturn = call(*args, **kwargs)
@@ -523,13 +548,9 @@ def upload_file():
     curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http:/localhost:8081/upload/
     """
     if request.method == 'POST':
-        print dir(request)
-        print request.get_data()
         files = request.files
         uploaded = []
-        print files
         for k, f in request.files.iteritems():
-            print k, f
             uploaded.append(f)
             #Discard the keys - are they ever important since the user
             # has named the file prior to upload?

@@ -14,7 +14,7 @@
         "method": "Moran"
     },
     "parameters": {
-        "transform": "O"
+        "transformation": "O"
     },
     "output": {
         "p_norm": "float"

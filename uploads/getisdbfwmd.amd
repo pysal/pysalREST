@@ -1,0 +1,22 @@
+{
+    "input": {
+        "weights": {
+            "type": "prov",
+            "uri": "http://toae.org/pub/wrook1.wmd"
+        },
+        "attribute": {
+            "type": "txt",
+            "name": "CRIME",
+            "uri": "http://toae.org/pub/columbus.dbf"
+        }
+    },
+    "analysis_type": {
+        "method": "getis"
+    },
+    "parameters": {
+        "permutations": "9999"
+    },
+    "output": {
+        "p_norm": "float"
+    }
+}

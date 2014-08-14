@@ -24,8 +24,9 @@
 <style>
 #dropstyle {
     width: 99%;
-    height: 100px; 
-    background: LightGray;
+    height: 50px; 
+    background: DarkGray;
+    border-style: dashed;
 }   
     
 path:hover{
@@ -149,7 +150,7 @@ div.tooltip {
                   
                   
                   <div class="row">
-                    <legend>Current PMD</legend>
+                    <legend>Current AMD</legend>
                     <form>
                         <div class="form-group">
                             <pre class="col-md-12" data-bind="text: ko.toJSON(renderedpmd, null, 2)"></pre>  
@@ -762,8 +763,11 @@ div.tooltip {
             });
             
             self.onExecute = function(){
-                alert("This will execute the pmd in sequence.");
-                //GET request to execute the current PMD
+                pmdexecuteURI = 'http://localhost:5000/amd/'
+                //POST request to execute the current PMD
+                self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
+                    console.log(response);
+                });  
             }
         }
         
