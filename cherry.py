@@ -1,8 +1,8 @@
 import cherrypy
-from flaskapp import app, setdb
+from flaskapp import app
 from cherrypy import wsgiserver
 
-def start(host, port, db):
+def start(host, port):
     d = wsgiserver.WSGIPathInfoDispatcher({'/':app})
     server = wsgiserver.CherryPyWSGIServer((host, port),d)
     try:

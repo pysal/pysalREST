@@ -3,7 +3,6 @@ import argparse
 import ConfigParser
 import os.path
 import importlib
-from flaskapp import setdb
 
 def _parse_args():
     parser = argparse.ArgumentParser(description='Serve your API RESTful(-ish?)')
@@ -49,7 +48,7 @@ def main():
     except ImportError:
         raise ImportError("Could not load API: %s" % (cfg['api'],))
 
-    engine.start(cfg['host'], cfg['port'], cfg['db'])
+    engine.start(cfg['host'], cfg['port'])
 
 if __name__ == '__main__':
     main()

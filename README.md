@@ -1,5 +1,26 @@
-pysalREST
-=========
+pysalREST Sample Application
+=============================
+The repository contains a Vagrantfile for use with the Vagrant virtual machine management software.  This VM contains all of the necessary software dependencies (GDAL, Python via Anaconda, Fiona, etc.).  Installation takes ~20-30 minutes are the machine image is downloaded and all dependencies are installed.
+
+Launcing the VM
+-----------------
+To launch the VM, simply execute `vagrant up` in the directory where pysalREST has been cloned.
+
+Host-Only-Network
+------------------
+The VM is set up to grab an I.P. address via DHCP and to setup a host-only network to allow the host computer to connect to the web application.  The guest I.P. address is: 192.168.50.2.  This is the I.P. address that you should enter into your web browser to access the sample application.
+
+Launching the Sample Application
+---------------------------------
+The sample application **should** launch automatically when the VM has booted.  If it does not:
+
+* `vagrant ssh` to ssh into the virtual machine
+* `cd pysalREST` into the directory where pysalREST has been cloned.  In the default installation this is `~/pysalREST`
+* `python -m launcher --server=cherry --api=pysalrest --port=8080` 
+
+
+pysalREST API
+================
 PySALREST can be launched in three ways:
 
 1. Using the lightweight flask server (development server):

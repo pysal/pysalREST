@@ -17,7 +17,6 @@ import fiona #Yeah - I punked out...
 
 from api import funcs, CustomJsonEncoder
 from pmd import pmdwrapper
-from cartodb_driver import gettable
 import amdparser
 
 
