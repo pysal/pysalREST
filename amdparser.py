@@ -51,12 +51,13 @@ def parsewmd(jwmd, uploaddir=None):
 def gety(attribute, uploaddir=None):
     uri = attribute['uri']
     name = attribute['name']
-
     url = urlparse(uri)
 
     if url.scheme == 'http':
         basename = url.path.split('/')[-1]
-        response = urllib.urlretrieve(uri, os.path.join(uploaddir, basename))
+        if basename != None:
+            basename = os.path.join(uploaddir, basename)
+        response = urllib.urlretrieve(uri, basename)
 
     elif url.scheme == 'file':
         basename = url.path
@@ -64,7 +65,6 @@ def gety(attribute, uploaddir=None):
 
     db = ps.open(basename, 'r')
     y = np.array(db.by_col(name))
-
     return y
 
 def generateW(uri, wtype, uploaddir=None):

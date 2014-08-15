@@ -261,16 +261,21 @@ def get_cached_entry_attr(cachedid, attr):
 @app.route('/amd/', methods=['POST'])
 def executeamd():
     response = {'status':'success','data':{}}
-
     amd = request.json
+
     wspecs = amd['input']['weights']
     wobj = amdparser.generateW(wspecs['uri'], wspecs['type'], uploaddir=UPLOAD_FOLDER)
 
     attribute = amd['input']['attribute']
     y = amdparser.gety(attribute, uploaddir=UPLOAD_FOLDER)
-
     kwargs = amd['parameters']
     args = [y, wobj]
+
+    #A hack to handle mismatches between the AMD keywords and the PySAL keywords
+    for k, v in kwargs.iteritems():
+        if k == 'transform':
+            kwargs['transformation'] = v
+            kwargs.pop(k, None)
 
     callpath, call = amdparser.parse_analysis(funcs, amd['analysis_type'])
 
@@ -600,7 +605,7 @@ def get_listdata():
             continue
         if basename[1] in ['zip']:
             continue
-        if basename[1] == 'amd':
+        if basename[1] in ['amd', 'pmd', 'wmd']:
             pmd[basename[0]] = basename[0]
             continue
         if basename[0] not in shapefiles.keys():

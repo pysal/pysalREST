@@ -19,6 +19,7 @@ The sample application **should** launch automatically when the VM has booted.  
 * `python -m launcher --server=cherry --api=pysalrest --port=8080` 
 
 
+
 pysalREST API
 ================
 PySALREST can be launched in three ways:
