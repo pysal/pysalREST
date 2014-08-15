@@ -449,7 +449,6 @@ def post(module,method, module2=None):
                     kwargs[k] = v
 
         # or if they are uploaded shapefiles
-        print UPLOADED_FILES
         for i, a in enumerate(args):
             try:
                 if a in UPLOADED_FILES:
