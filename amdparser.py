@@ -55,9 +55,18 @@ def gety(attribute, uploaddir=None):
 
     if url.scheme == 'http':
         basename = url.path.split('/')[-1]
+        ftype = basename.split('.')[-1]
+
+        ftypes = set(['shp', 'shx', 'dbf'])
+        ftypes.add(ftype)
+
         if basename != None:
             basename = os.path.join(uploaddir, basename)
-        response = urllib.urlretrieve(uri, basename)
+
+        for suffix in ftypes:
+            fname = basename.replace(ftype, suffix)
+            dlink = uri.replace(ftype, suffix)
+            response = urllib.urlretrieve(dlink, fname)
 
     elif url.scheme == 'file':
         basename = url.path
@@ -72,6 +81,7 @@ def generateW(uri, wtype, uploaddir=None):
     url = urlparse(uri)
     if url.scheme == 'http':
         basename = url.path.split('/')[-1]
+        ftype = basename.split('.')[-1]
         if uploaddir != None:
             basename = os.path.join(uploaddir, basename)
         response = urllib.urlretrieve(uri, basename)

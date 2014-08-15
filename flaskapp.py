@@ -605,7 +605,9 @@ def get_listdata():
             continue
         if basename[1] in ['zip']:
             continue
-        if basename[1] in ['amd', 'pmd', 'wmd']:
+        if basename[1] in ['wmd']:
+            continue
+        if basename[1] in ['amd', 'pmd']:
             pmd[basename[0]] = basename[0]
             continue
         if basename[0] not in shapefiles.keys():
@@ -620,8 +622,7 @@ def get_listdata():
 @app.route('/listdata/<filename>/', methods=['GET'])
 def get_shpinfo(filename):
     #Wrap in a try/except
-    files = (os.path.join(UPLOAD_FOLDER, filename))
-
+    files = os.path.join(UPLOAD_FOLDER, filename)
     #Info about the shapefile
     try:
         response = {'status':'success','data':{'attributes':{}}}
@@ -631,7 +632,6 @@ def get_shpinfo(filename):
         response['data']['fields'] = fhandler.header
         response['data']['fields'] += ['thegeom']
     except:
-
         response = {'status':'success','data':{}}
         jsondata = open(files + '.amd')
         data = json.load(jsondata)

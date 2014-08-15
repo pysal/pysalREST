@@ -89,7 +89,7 @@ div.tooltip {
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Upload Data<b class="caret"></b></a>
               <ul class="dropdown-menu" data-bind="">
                 <li><a href="#uploadshp" data-bind="" data-toggle="tab">Upload Shapefile</a></li>
-                <li><a href="#uploadpmd" data-bin="" data-toggle="tab">Upload PMD</a></li>
+                <li><a href="#uploadpmd" data-bin="" data-toggle="tab">Upload / Execute AMD</a></li>
               </ul>
             </li>
             
@@ -339,7 +339,109 @@ div.tooltip {
     <!--End Right Column -->
 
     <script type="text/javascript">
+    var d3map = function() {
+        var self = this;
 
+        self.width = 750;
+        self.height = 600
+        self.choro = d3.map();
+
+        //Create SVG element
+        self.svg = d3.select("#map")
+                    .append("svg:svg")
+                    .attr("width", self.width)
+                    .attr("height", self.height);
+
+
+        self.renderMap = function(geojsonuri){
+            // Clear the SVG incase another map previously existed
+            self.svg.selectAll("*").remove();
+
+            // Create a unit projection.
+            var projection = d3.geo.mercator()
+                .scale(1)
+                .translate([0, 0]);
+
+            // Create a path generator.
+            path = d3.geo.path()
+                .projection(projection);
+
+            self.quantize = d3.scale.quantize()
+                .domain([0, 1])
+                .range(d3.range(9).map(function(i) { 
+                    return "q" + i + "-9"; 
+                }));
+
+            //Load in GeoJSON data
+            d3.json(geojsonuri, function(response) {
+                self.geojson = response.data.geojson
+                //Add a classid attribute to the geojson for visualization
+                for (var i=0;i<self.geojson.features.length;i++){
+                    self.geojson.features[i].properties.CLASSID = 1
+                }
+                //console.log(geojson);
+
+            //Recompute the scaling and translation based on the input geojson
+            var b = path.bounds(self.geojson),
+                s = .95 / Math.max((b[1][0] - b[0][0]) / self.width, (b[1][1] - b[0][1]) / self.height),
+                t = [(self.width - s * (b[1][0] + b[0][0])) / 2, (self.height - s * (b[1][1] + b[0][1])) / 2];
+
+            // Update the projection to use computed scale & translate.
+            projection
+                .scale(s)
+                .translate(t);
+
+            //update the quantize to color based on id
+            self.quantize.domain([0,self.geojson.features.length])
+
+            //Bind data and create one path per GeoJSON feature
+            self.svg.append("g")
+                .attr("class", "polys")
+            .selectAll("path")
+               .data(self.geojson.features)
+               .enter().append("path")
+                .attr("id", function(d){return d.properties.id})
+                .attr("class", function(d) { return self.quantize(d.id); })
+                .attr("d", path)
+               .on("click", function(d){
+                   //console.log(d);
+                   $.prompt(JSON.stringify(d.properties, null, 2));
+               });
+            });
+        }
+
+        self.onUpdate = function(rdata){
+            // Parse the yb vector and update the data on the map.
+            //console.log('ONUPDATE')
+            var classmin = 9
+            var classmax = 0
+            for (var i=0;i<rdata.yb.length;i++){
+                self.geojson.features[i].properties['CLASSID'] = rdata.yb[i]
+                if (rdata.yb[i] < classmin){
+                    classmin = rdata.yb[i]
+                }
+                if (rdata.yb[i] > classmax){
+                    classmax = rdata.yb[i]
+                }
+            }
+
+            var nbins = rdata.bins.length;
+            self.quantize.domain([classmin, classmax])
+                //.range(colorbrewer.Greens[nbins]);
+              .range(d3.range(nbins).map(function(i) { 
+                  return "q" + i + "-9"; 
+              }));
+
+            //Bind data and create one path per GeoJSON feature
+            self.svg.selectAll("path")
+               .data(self.geojson.features)
+               .attr("class", function(d) { return self.quantize(d.properties['CLASSID']); })
+               .attr("d", path); 
+    }
+
+}
+        
+        mapvis = new d3map()
         //Model View of available shapefiles
         function ShapefileViewModel() {  
             var self = this;
@@ -376,17 +478,22 @@ div.tooltip {
                 return $.ajax(request);
             }
         
-            self.ajax(self.shapefilelistURI, 'GET').done(function(response) {
-                for (var key in response.data.shapefiles){
-                    self.shapefiles.push(key);
-                }
-            }); 
+            self.updateShapefileList = function() {
+                self.shapefiles.removeAll()
+                self.ajax(self.shapefilelistURI, 'GET').done(function(response) {
+                    for (var key in response.data.shapefiles){
+                        self.shapefiles.push(key);
+                    }
+                }); 
+            }
+            
+            self.updateShapefileList()
             
             //Render the shapefile using D3
             self.drawshapefile = function(shpname){
                 //make API call
                 var shapefileuri = 'http://localhost:8080/listdata/' + shpname + '/thegeom/';
-                var map = renderMap(shapefileuri);
+                var map = mapvis.renderMap(shapefileuri);
                 self.shapefile(shpname);
                 self.updateWstatus(shpname);
             }
@@ -559,7 +666,6 @@ div.tooltip {
                 var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){    
                     var rdata = response.data
-                    console.log(rdata)
                 });          
             } 
             
@@ -670,8 +776,7 @@ div.tooltip {
                 var postURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){
                     var rdata = response.data
-                    console.log(rdata)
-                    onUpdate(rdata);
+                    mapvis.onUpdate(rdata);
 
                 });          
             }   
@@ -728,7 +833,7 @@ div.tooltip {
             
             self.availablepmd = ko.observableArray();
             self.currentpmd = ko.observable();
-            self.renderedpmd = ko.observable("No PMD Selected...");
+            self.renderedpmd = ko.observable("No AMD Selected...");
             
                         //Helper to make the ajax get call - an this moved to a higher level?
             self.ajax = function(uri, method, data) {
@@ -765,9 +870,49 @@ div.tooltip {
                 pmdexecuteURI = 'http://localhost:8080/amd/'
                 //POST request to execute the current PMD
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
-                    console.log(response);
-                });  
+                    //Update the shapefile list with the PMD data
+                    shapefileview.updateShapefileList();
+                    return response;
+                }).then(function(response){
+                    //Get the name of the new shapefile, i.e. what did we just process
+                    var shp = self.renderedpmd()['input']['attribute']['uri']
+                    var fullname = shp.split("/");
+                    var basename = fullname[fullname.length - 1].split('.')[0]
+                    //Update the selected shapefile and visualize it.
+                    shapefileview.drawshapefile(basename)
+                    //Colorize the rendered map based on the analysis performed.
+                }).then(function(){
+                    alert('drawn');
+                    var rdata = response.data
+                    var psim = rdata['p_sim']
+
+                    if (typeof(psim) === 'number'){
+                        //This is a local statistic
+                        //Parse the field into an vector
+                        var argarr = rdata['meta_data']['positional_values'][0]
+                        //Pack the POST request to the classifier
+                        var data = {}
+                        data['args'] = []
+                        data['args'].push(argarr)
+                        data['kwargs'] = {'k':5};
+
+                        //Make the post request
+                        var postURI = 'http://localhost:8080/api/esda/mapclassify/Quantiles/'
+                        self.ajax(postURI, 'POST', data).done(function(response){
+                            var rdata = response.data
+                            mapvis.onUpdate(rdata);
+
+                        });                                  
+                    } else{
+                        //This is a global statistic
+                        
+                    }
+                    
+                                });
+                    
             }
+            
+            
         }
         
         var uploadpmd = new UploadPMDViewModel()
@@ -842,115 +987,10 @@ ko.applyBindings(uploadpmd, document.getElementById("uploadpmd"));
 ko.applyBindings(wvm, document.getElementById("weights"));
 ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto"));
         
-    //D3 rendering function  
-    //Width and height
         
-    var geojson;
-    var path;
-    var quantize;
-        
-    var width = 750;
-    var height = 600;
 
-    var choro = d3.map();
-        
-    //Create SVG element
-    var svg = d3.select("#map")
-                .append("svg:svg")
-                .attr("width", width)
-                .attr("height", height);
-    
-
-    function renderMap(geojsonuri){
-        // Clear the SVG incase another map previously existed
-        svg.selectAll("*").remove();
-        
-        // Create a unit projection.
-        var projection = d3.geo.mercator()
-            .scale(1)
-            .translate([0, 0]);
-        
-        // Create a path generator.
-        path = d3.geo.path()
-            .projection(projection);
-
-        quantize = d3.scale.quantize()
-            .domain([0, 1])
-            .range(d3.range(9).map(function(i) { 
-                return "q" + i + "-9"; 
-            }));
-
-        //Load in GeoJSON data
-        d3.json(geojsonuri, function(response) {
-            geojson = response.data.geojson
-            
-            //Add a classid attribute to the geojson for visualization
-            for (var i=0;i<geojson.features.length;i++){
-                geojson.features[i].properties.CLASSID = 1
-            }
-            //console.log(geojson);
-            
-        //Recompute the scaling and translation based on the input geojson
-        var b = path.bounds(geojson),
-            s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-            t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-
-        // Update the projection to use computed scale & translate.
-        projection
-            .scale(s)
-            .translate(t);
-           
-        //update the quantize to color based on id
-        quantize.domain([0,geojson.features.length])
-        
-        //Bind data and create one path per GeoJSON feature
-        svg.append("g")
-            .attr("class", "polys")
-        .selectAll("path")
-           .data(geojson.features)
-           .enter().append("path")
-            .attr("id", function(d){return d.properties.id})
-            .attr("class", function(d) { return quantize(d.id); })
-            .attr("d", path)
-           .on("click", function(d){
-               //console.log(d);
-               $.prompt(JSON.stringify(d.properties, null, 2));
-           });
-        });
-        
-    }
-        
-    function onUpdate (rdata){
-        // Parse the yb vector and update the data on the map.
-        //console.log('ONUPDATE')
-        var classmin = 9
-        var classmax = 0
-        for (var i=0;i<rdata.yb.length;i++){
-            geojson.features[i].properties['CLASSID'] = rdata.yb[i]
-            if (rdata.yb[i] < classmin){
-                classmin = rdata.yb[i]
-            }
-            if (rdata.yb[i] > classmax){
-                classmax = rdata.yb[i]
-            }
-        }
-        
-        var nbins = rdata.bins.length;
-        quantize.domain([classmin, classmax])
-            //.range(colorbrewer.Greens[nbins]);
-          .range(d3.range(nbins).map(function(i) { 
-              return "q" + i + "-9"; 
-          }));
-
-        //Bind data and create one path per GeoJSON feature
-        svg.selectAll("path")
-           .data(geojson.features)
-           .attr("class", function(d) { return quantize(d.properties['CLASSID']); })
-           .attr("d", path); 
         
     
-         
-    }
         
 </script>
     
