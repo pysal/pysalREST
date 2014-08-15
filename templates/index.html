@@ -408,6 +408,7 @@ div.tooltip {
                    $.prompt(JSON.stringify(d.properties, null, 2));
                });
             });
+            return true;
         }
 
         self.onUpdate = function(rdata){
@@ -872,43 +873,20 @@ div.tooltip {
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
                     //Update the shapefile list with the PMD data
                     shapefileview.updateShapefileList();
-                    return response;
+                    return response
                 }).then(function(response){
+                    console.log(response)
                     //Get the name of the new shapefile, i.e. what did we just process
                     var shp = self.renderedpmd()['input']['attribute']['uri']
                     var fullname = shp.split("/");
                     var basename = fullname[fullname.length - 1].split('.')[0]
                     //Update the selected shapefile and visualize it.
-                    shapefileview.drawshapefile(basename)
-                    //Colorize the rendered map based on the analysis performed.
-                }).then(function(){
-                    alert('drawn');
-                    var rdata = response.data
-                    var psim = rdata['p_sim']
-
-                    if (typeof(psim) === 'number'){
-                        //This is a local statistic
-                        //Parse the field into an vector
-                        var argarr = rdata['meta_data']['positional_values'][0]
-                        //Pack the POST request to the classifier
-                        var data = {}
-                        data['args'] = []
-                        data['args'].push(argarr)
-                        data['kwargs'] = {'k':5};
-
-                        //Make the post request
-                        var postURI = 'http://localhost:8080/api/esda/mapclassify/Quantiles/'
-                        self.ajax(postURI, 'POST', data).done(function(response){
-                            var rdata = response.data
-                            mapvis.onUpdate(rdata);
-
-                        });                                  
-                    } else{
-                        //This is a global statistic
-                        
-                    }
-                    
-                                });
+                    shapefileview.drawshapefile(basename).done(function() {alert('drawn')})
+                    return response 
+                }).done(function(response){
+                    console.log(response);
+                });
+                                
                     
             }
             
