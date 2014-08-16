@@ -151,15 +151,32 @@ div.tooltip {
                   
                   
                   <div class="row">
-                    <legend>Current AMD</legend>
-                    <form>
-                        <div class="form-group">
-                            <pre class="col-md-12" data-bind="text: ko.toJSON(renderedpmd, null, 2)"></pre>  
-                        </div>
-                        <div class="form-group">
-                        <button class="btn-group btn-group-lg col-sm-6" data-bind="click: onExecute"><span class="glyphicon glyphicon-ok"></span>  Execute</button>
-                        </div>
-                    </form>
+                      <!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#home" role="tab" data-toggle="tab">Current AMD</a></li>
+  <li><a href="#profile" role="tab" data-toggle="tab">Result</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+    <legend>Current AMD</legend>
+    <form>
+        <div class="form-group">
+            <pre class="col-md-12" data-bind="text: ko.toJSON(renderedpmd, null, 2)"></pre>  
+        </div>
+        <div class="form-group">
+        <button class="btn-group btn-group-lg col-sm-6" data-bind="click: onExecute"><span class="glyphicon glyphicon-ok"></span>  Execute</button>
+        </div>
+    </form>
+  </div>
+  
+  <div class="tab-pane" id="profile">
+      <pre class="col-md-12" data-bind="text: ko.toJSON(resultpmd, null, 2)"></pre> 
+  </div>
+
+</div>
+
                   </div> 
                 </div>
                 
@@ -674,6 +691,7 @@ div.tooltip {
                 var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){    
                     var rdata = response.data
+                    console.log(data)
                 });          
             } 
             
@@ -842,6 +860,7 @@ div.tooltip {
             self.availablepmd = ko.observableArray();
             self.currentpmd = ko.observable();
             self.renderedpmd = ko.observable("No AMD Selected...");
+            self.resultpmd = ko.observable("No results yet. Execute an AMD.")
             
                         //Helper to make the ajax get call - an this moved to a higher level?
             self.ajax = function(uri, method, data) {
@@ -880,6 +899,7 @@ div.tooltip {
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
                     //Update the shapefile list with the PMD data
                     shapefileview.updateShapefileList();
+                    self.resultpmd(response.data    )
                     return $.when(response)
                 }).then(function(response){
                     //Parse the field into an vector

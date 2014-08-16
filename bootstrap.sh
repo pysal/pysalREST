@@ -19,8 +19,9 @@ conda install --yes flask
 conda install --yes pip
 conda install --yes pandas
 
-pip install cherrypy
+pip install --no-use-wheel cherrypy
 
+pip install cherrypy
 #Install git and clone pysalREST
 sudo apt-get install -y git
 git clone https://github.com/pysal/pysalREST.git
