@@ -352,8 +352,36 @@ div.tooltip {
                     .attr("width", self.width)
                     .attr("height", self.height);
 
+        self.onUpdate = function(rdata){
+            // Parse the yb vector and update the data on the map.
+            //console.log('ONUPDATE')
+            var classmin = 9
+            var classmax = 0
+            for (var i=0;i<rdata.yb.length;i++){
+                self.geojson.features[i].properties['CLASSID'] = rdata.yb[i]
+                if (rdata.yb[i] < classmin){
+                    classmin = rdata.yb[i]
+                }
+                if (rdata.yb[i] > classmax){
+                    classmax = rdata.yb[i]
+                }
+            }
 
-        self.renderMap = function(geojsonuri){
+            var nbins = rdata.bins.length;
+            self.quantize.domain([classmin, classmax])
+                //.range(colorbrewer.Greens[nbins]);
+              .range(d3.range(nbins).map(function(i) { 
+                  return "q" + i + "-9"; 
+              }));
+
+            //Bind data and create one path per GeoJSON feature
+            self.svg.selectAll("path")
+               .data(self.geojson.features)
+               .attr("class", function(d) { return self.quantize(d.properties['CLASSID']); })
+               .attr("d", path); 
+    }
+
+        self.renderMap = function(geojsonuri, rdata){
             // Clear the SVG incase another map previously existed
             self.svg.selectAll("*").remove();
 
@@ -407,38 +435,17 @@ div.tooltip {
                    //console.log(d);
                    $.prompt(JSON.stringify(d.properties, null, 2));
                });
+            
+              if ('yb' in rdata){
+                  self.onUpdate(rdata)
+              }
+            
             });
-            return true;
+
+
         }
 
-        self.onUpdate = function(rdata){
-            // Parse the yb vector and update the data on the map.
-            //console.log('ONUPDATE')
-            var classmin = 9
-            var classmax = 0
-            for (var i=0;i<rdata.yb.length;i++){
-                self.geojson.features[i].properties['CLASSID'] = rdata.yb[i]
-                if (rdata.yb[i] < classmin){
-                    classmin = rdata.yb[i]
-                }
-                if (rdata.yb[i] > classmax){
-                    classmax = rdata.yb[i]
-                }
-            }
 
-            var nbins = rdata.bins.length;
-            self.quantize.domain([classmin, classmax])
-                //.range(colorbrewer.Greens[nbins]);
-              .range(d3.range(nbins).map(function(i) { 
-                  return "q" + i + "-9"; 
-              }));
-
-            //Bind data and create one path per GeoJSON feature
-            self.svg.selectAll("path")
-               .data(self.geojson.features)
-               .attr("class", function(d) { return self.quantize(d.properties['CLASSID']); })
-               .attr("d", path); 
-    }
 
 }
         
@@ -447,7 +454,7 @@ div.tooltip {
         function ShapefileViewModel() {  
             var self = this;
             
-            self.shapefilelistURI = 'http://localhost:8080/listdata/';
+            self.shapefilelistURI = 'http://localhost:8081/listdata/';
 
             //Array to store available shapefiles and currently selected shapefile
             self.shapefiles = ko.observableArray();
@@ -491,10 +498,10 @@ div.tooltip {
             self.updateShapefileList()
             
             //Render the shapefile using D3
-            self.drawshapefile = function(shpname){
+            self.drawshapefile = function(shpname, rdata){
                 //make API call
-                var shapefileuri = 'http://localhost:8080/listdata/' + shpname + '/thegeom/';
-                var map = mapvis.renderMap(shapefileuri);
+                var shapefileuri = 'http://localhost:8081/listdata/' + shpname + '/thegeom/';
+                var map = mapvis.renderMap(shapefileuri, rdata);
                 self.shapefile(shpname);
                 self.updateWstatus(shpname);
             }
@@ -504,7 +511,7 @@ div.tooltip {
                 //Check the cached url to see if W objects exist
                 var Wstatus = {"Queen":false,
                               "Rook": false};
-                self.ajax("http://localhost:8080/cached/", 'GET').done(function(response){
+                self.ajax("http://localhost:8081/cached/", 'GET').done(function(response){
                     self.wobjs.removeAll()
                     //Parse the cached list to see which match the current shapefile
                     var resp = response.data.cacheditems
@@ -537,7 +544,7 @@ div.tooltip {
             self.shapefile.subscribe(function() {
                 shpname = self.shapefile()
                 //Populate a dropdown with available fields in the shapefile
-                self.shapefileinfoURI = 'http://localhost:8080/listdata/' + shpname + '/'
+                self.shapefileinfoURI = 'http://localhost:8081/listdata/' + shpname + '/'
                 self.fields.removeAll()
                 self.ajax(self.shapefileinfoURI, 'GET').done(function(response) {
                     var fields = response.data.fields;
@@ -552,7 +559,7 @@ div.tooltip {
             
             //When a field is selected, update the field vector to store the data client side
             self.field.subscribe(function() {
-                var shapefileFieldURI = 'http://localhost:8080/listdata/' + self.shapefile() + '/' + self.field() + '/' 
+                var shapefileFieldURI = 'http://localhost:8081/listdata/' + self.shapefile() + '/' + self.field() + '/' 
                 self.ajax(shapefileFieldURI, 'GET').done(function(response){
                     self.currentFieldVector = response.data[self.field()]
                 }); 
@@ -569,7 +576,7 @@ div.tooltip {
         //Model View of available ESDA autocorrelation measures
         function SpatAutoViewModel(){
           var self = this;
-          var SpatAutoBaseURI = 'http://localhost:8080/api/esda/'
+          var SpatAutoBaseURI = 'http://localhost:8081/api/esda/'
           
           //Store available and current method family
           self.methodfamilies = ko.observableArray()
@@ -683,7 +690,7 @@ div.tooltip {
         //Model View of available ESDA classifiers
         function ESDAViewModel(){
             var self = this;
-            self.ESDAbaseURI = 'http://localhost:8080/api/esda/mapclassify/'
+            self.ESDAbaseURI = 'http://localhost:8081/api/esda/mapclassify/'
             
             //Store the current classifier
             self.classifiers = ko.observableArray();
@@ -724,7 +731,7 @@ div.tooltip {
             //Subscribe to the classifier drop down - when it changes, update the kwargs inputs
             self.selectedClassifier.subscribe(function(){
                 //Get the method / class arguments
-                var classifierMethodURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() + '/'
+                var classifierMethodURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() + '/'
 
                 //Make the ajax call
                 self.ajax(classifierMethodURI, 'GET').done(function(response){
@@ -745,7 +752,7 @@ div.tooltip {
             
             //Show the documentation for the method / class
             self.showDocumentation = function(name){
-                var documentationURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
+                var documentationURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
                     $.prompt(JSON.stringify(docs, null, 4));
@@ -774,7 +781,7 @@ div.tooltip {
                 //console.log($.toJSON(data))
                 
                 //Make the post request
-                var postURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() +'/'
+                var postURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){
                     var rdata = response.data
                     mapvis.onUpdate(rdata);
@@ -812,7 +819,7 @@ div.tooltip {
                                   'Rook': 'rook_from_shapefile'}
         
             self.onExecute = function(){
-                var posturl = 'http://localhost:8080/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
+                var posturl = 'http://localhost:8081/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
                 var inputshp = shapefileview.shapefile() + '.shp'
                 
                 var data = {};
@@ -854,41 +861,57 @@ div.tooltip {
             }
         
             //List the available PMD when the page loads
-            self.ajax("http://localhost:8080/listdata/", 'GET').done(function(response) {
+            self.ajax("http://localhost:8081/listdata/", 'GET').done(function(response) {
                 for (var key in response.data.pmd){
                     self.availablepmd.push(key);
                 }
             }); 
             
             self.currentpmd.subscribe(function(){
-                var pmdURI = 'http://localhost:8080/listdata/' + self.currentpmd() + '/' 
+                var pmdURI = 'http://localhost:8081/listdata/' + self.currentpmd() + '/' 
                 self.ajax(pmdURI, 'GET').done(function(response){
                     self.renderedpmd(response.data);
                 }); 
             });
             
             self.onExecute = function(){
-                pmdexecuteURI = 'http://localhost:8080/amd/'
+                pmdexecuteURI = 'http://localhost:8081/amd/'
                 //POST request to execute the current PMD
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
                     //Update the shapefile list with the PMD data
                     shapefileview.updateShapefileList();
-                    return response
+                    return $.when(response)
                 }).then(function(response){
-                    console.log(response)
-                    //Get the name of the new shapefile, i.e. what did we just process
-                    var shp = self.renderedpmd()['input']['attribute']['uri']
-                    var fullname = shp.split("/");
-                    var basename = fullname[fullname.length - 1].split('.')[0]
-                    //Update the selected shapefile and visualize it.
-                    shapefileview.drawshapefile(basename).done(function() {alert('drawn')})
-                    return response 
-                }).done(function(response){
-                    console.log(response);
-                });
-                                
+                    //Parse the field into an vector
+                    var argarr = response['data']['meta_data']['positional_values'][0]
+
+                    //Pack the POST request
+                    var data = {}
+                    data['args'] = []
+                    data['args'].push(argarr)
+                    data['kwargs'] = {'k':5}
+
+                    //Make the post request
+                    var postURI = 'http://localhost:8081/api/esda/mapclassify/Quantiles/'
+                    self.ajax(postURI, 'POST', data).done(function(response){
+                        var rdata = response.data  
+                        self.ReClass(rdata)
+                    }); 
                     
+                });
             }
+            
+            self.ReClass = function(rdata){
+                //Get the name of the new shapefile, i.e. what did we just process
+                var shp = self.renderedpmd()['input']['attribute']['uri']
+                var fullname = shp.split("/");
+                var basename = fullname[fullname.length - 1].split('.')[0]
+                //Update the selected shapefile and visualize it.
+                shapefileview.drawshapefile(basename, rdata);
+            }
+
+                    
+            
             
             
         }
@@ -905,7 +928,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8080/upload/",
+          url: "http://localhost:8081/upload/",
           dictDefaultMessage: "Drop a .pmd, .amd, or .wmd here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB
@@ -934,7 +957,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8080/upload/",
+          url: "http://localhost:8081/upload/",
           dictDefaultMessage: "Drop shp, shx, dbf or .zip here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB
