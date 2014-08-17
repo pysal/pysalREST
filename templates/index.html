@@ -105,7 +105,7 @@ div.tooltip {
             </li>
               
                         
-            <li><a href="#pmdhistory" data-bind="" data-toggle="tab">History (PMD)</a></li>
+            <li><a href="#amdhistory" data-bind="" data-toggle="tab">History (AMD)</a></li>
 
               
             </ul>
@@ -341,8 +341,9 @@ div.tooltip {
               </div> 
                 
               <!-- PMD History -->
-              <div class="tab-pane" id='pmdhistory'>
-                A running text field that outputs the pmd history for each item as a selectable 'row'.  These can then be 'checked' and PMD packaged.
+              <div class="tab-pane" id='amdhistory'>
+                  <legend>Current AMD</legend>
+                <pre class="col-md-12" data-bind="text: ko.toJSON(amd, null, 2)"></pre>
               </div>  
                 
                 
@@ -590,6 +591,19 @@ div.tooltip {
 
         var shapefileview = new ShapefileViewModel()
         
+        
+        
+        
+        //Model View of AMD Histroy
+        function AMDHistoryViewModel(){
+            var self = this;
+            self.amd = ko.observable("No AMD history to display...")
+        }
+        var histamd = new AMDHistoryViewModel()
+        
+        
+        
+        
         //Model View of available ESDA autocorrelation measures
         function SpatAutoViewModel(){
           var self = this;
@@ -686,7 +700,6 @@ div.tooltip {
                 data['args'].push('cached_' + wid)
                 data['kwargs'] = kwargstring;
                 
-                
                 //Make the post request
                 var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){    
@@ -711,15 +724,30 @@ div.tooltip {
                     
                     var analysismethod = self.method()
                     var field = shapefileview.field()
+                    var parameters = kwargstring;
+                    var shpname = shapefileview.shapefile()
+                    
+                    var wmd = {'input1':{'data1':{'type':'shp',
+                                                 'uri':shpname,},
+                                        'weight_type':'???',
+                                        'transform':'???'}}
+                    
+                    
                     var amd = {'analysis_type':{"method":analysismethod},
                               'input':{'attribute':{'name':field,
                                                    'type':'txt',
-                                                   'uri':'localhost'},
-                                      'weights':{}},
+                                                   'uri':shpname},
+                                      'weights':{'type':'prov',
+                                                'wmd':wmd}},
                               'output':{},
-                              'parameters':{}}
-                    
-                    console.log(amd);
+                              'parameters':{}
+                              };
+                    //Pack the parameters with the kwargs
+                    for (var k in parameters){
+                        amd['parameters'][k] = kwargstring[k]
+                    }
+                    //Update the history observable
+                    histamd.amd(amd);
                 });          
             } 
             
@@ -1036,12 +1064,8 @@ ko.applyBindings(esdaHookup, document.getElementById("esda-form"));
 ko.applyBindings(uploadpmd, document.getElementById("uploadpmd"));
 ko.applyBindings(wvm, document.getElementById("weights"));
 ko.applyBindings(new SpatAutoViewModel(), document.getElementById("spatialauto"));
-        
-        
+ko.applyBindings(histamd, document.getElementById("amdhistory"));
 
-        
-    
-        
 </script>
     
 </body>
