@@ -8,7 +8,7 @@ To launch the VM, simply execute `vagrant up` in the directory where pysalREST h
 
 Host-Only-Network
 ------------------
-The VM is set up to grab an I.P. address via DHCP and to setup a host-only network to allow the host computer to connect to the web application.  The guest I.P. address is: 192.168.50.2.  This is the I.P. address that you should enter into your web browser to access the sample application.
+The VM sets up a NAT and a host only netowrk.  Port 8080 is forwarded from the guest to the host.  To connect to the server use localhost:8080.  To view the sample application use localhost:8080/index.html/
 
 Launching the Sample Application
 ---------------------------------
@@ -18,7 +18,7 @@ The sample application **should** launch automatically when the VM has booted.  
 * `cd pysalREST` into the directory where pysalREST has been cloned.  In the default installation this is `~/pysalREST`
 * `python -m launcher --server=cherry --api=pysalrest --port=8080` 
 
-
+To connect to the sample application open a web browser on the host OS at localhost:8080/index.html.  Note: It is important to use localhost and not 127.0.0.1 due to some javascript origin issue.
 
 pysalREST API
 ================
