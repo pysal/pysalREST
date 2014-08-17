@@ -453,6 +453,7 @@ def post(module,method, module2=None):
             try:
                 if a in UPLOADED_FILES:
                     args[i] = UPLOAD_FOLDER + '/' +  a
+                    shpname = a.split('.')[0]
             except: pass
             try:
                 if a.split('_')[0] == 'cached':
@@ -501,9 +502,21 @@ def post(module,method, module2=None):
                 m = 'Queen'
             else:
                 m = 'Rook'
-            obj = (m, sqlite3.Binary(pdata), funcreturn._shpName)
-            cur.execute("INSERT INTO WObj values (NULL, ?, ?, ?)",obj)
-            get_db().commit()
+            indb = False
+
+            #Query the db to see if the name / type is in the db
+            query = "SELECT Type, Shapefile FROM WObj"
+            cur = get_db().cursor().execute(query)
+            result = cur.fetchall()
+            for r in result:
+                if r[0] == m and r[1] == shpname:
+                    indb = True
+                    break
+
+            if indb == False:
+                obj = (m, sqlite3.Binary(pdata), funcreturn._shpName)
+                cur.execute("INSERT INTO WObj values (NULL, ?, ?, ?)",obj)
+                get_db().commit()
             cur.close()
 
             response['data'] = {'Shapefile':funcreturn._shpName,

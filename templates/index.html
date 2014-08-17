@@ -471,7 +471,7 @@ div.tooltip {
         function ShapefileViewModel() {  
             var self = this;
             
-            self.shapefilelistURI = 'http://localhost:8081/listdata/';
+            self.shapefilelistURI = 'http://localhost:5000/listdata/';
 
             //Array to store available shapefiles and currently selected shapefile
             self.shapefiles = ko.observableArray();
@@ -517,7 +517,7 @@ div.tooltip {
             //Render the shapefile using D3
             self.drawshapefile = function(shpname, rdata){
                 //make API call
-                var shapefileuri = 'http://localhost:8081/listdata/' + shpname + '/thegeom/';
+                var shapefileuri = 'http://localhost:5000/listdata/' + shpname + '/thegeom/';
                 var map = mapvis.renderMap(shapefileuri, rdata);
                 self.shapefile(shpname);
                 self.updateWstatus(shpname);
@@ -528,7 +528,7 @@ div.tooltip {
                 //Check the cached url to see if W objects exist
                 var Wstatus = {"Queen":false,
                               "Rook": false};
-                self.ajax("http://localhost:8081/cached/", 'GET').done(function(response){
+                self.ajax("http://localhost:5000/cached/", 'GET').done(function(response){
                     self.wobjs.removeAll()
                     //Parse the cached list to see which match the current shapefile
                     var resp = response.data.cacheditems
@@ -561,7 +561,7 @@ div.tooltip {
             self.shapefile.subscribe(function() {
                 shpname = self.shapefile()
                 //Populate a dropdown with available fields in the shapefile
-                self.shapefileinfoURI = 'http://localhost:8081/listdata/' + shpname + '/'
+                self.shapefileinfoURI = 'http://localhost:5000/listdata/' + shpname + '/'
                 self.fields.removeAll()
                 self.ajax(self.shapefileinfoURI, 'GET').done(function(response) {
                     var fields = response.data.fields;
@@ -576,7 +576,7 @@ div.tooltip {
             
             //When a field is selected, update the field vector to store the data client side
             self.field.subscribe(function() {
-                var shapefileFieldURI = 'http://localhost:8081/listdata/' + self.shapefile() + '/' + self.field() + '/' 
+                var shapefileFieldURI = 'http://localhost:5000/listdata/' + self.shapefile() + '/' + self.field() + '/' 
                 self.ajax(shapefileFieldURI, 'GET').done(function(response){
                     self.currentFieldVector = response.data[self.field()]
                 }); 
@@ -593,7 +593,7 @@ div.tooltip {
         //Model View of available ESDA autocorrelation measures
         function SpatAutoViewModel(){
           var self = this;
-          var SpatAutoBaseURI = 'http://localhost:8081/api/esda/'
+          var SpatAutoBaseURI = 'http://localhost:5000/api/esda/'
           
           //Store available and current method family
           self.methodfamilies = ko.observableArray()
@@ -691,7 +691,35 @@ div.tooltip {
                 var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){    
                     var rdata = response.data
-                    console.log(data)
+                    console.log(rdata)
+                    //Step through p_sim and q and locate all statistically significant units
+                    var psim = rdata['p_sim']
+                    var q = rdata['q']
+                    var yb = []
+                    for (var i=0;i<psim.length;i++){
+                        if (psim[i] < 0.05){
+                            yb.push(q[i]);
+                        } else{
+                            yb.push(0);
+                        }
+                    }
+                    //Append a classification vector, yb to the data and pipe to update
+                    rdata['yb'] = yb;
+                    rdata['bins'] = [0,1,2,3,4]
+                    //console.log(rdata);
+                    mapvis.onUpdate(rdata);
+                    
+                    var analysismethod = self.method()
+                    var field = shapefileview.field()
+                    var amd = {'analysis_type':{"method":analysismethod},
+                              'input':{'attribute':{'name':field,
+                                                   'type':'txt',
+                                                   'uri':'localhost'},
+                                      'weights':{}},
+                              'output':{},
+                              'parameters':{}}
+                    
+                    console.log(amd);
                 });          
             } 
             
@@ -708,7 +736,7 @@ div.tooltip {
         //Model View of available ESDA classifiers
         function ESDAViewModel(){
             var self = this;
-            self.ESDAbaseURI = 'http://localhost:8081/api/esda/mapclassify/'
+            self.ESDAbaseURI = 'http://localhost:5000/api/esda/mapclassify/'
             
             //Store the current classifier
             self.classifiers = ko.observableArray();
@@ -749,7 +777,7 @@ div.tooltip {
             //Subscribe to the classifier drop down - when it changes, update the kwargs inputs
             self.selectedClassifier.subscribe(function(){
                 //Get the method / class arguments
-                var classifierMethodURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() + '/'
+                var classifierMethodURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() + '/'
 
                 //Make the ajax call
                 self.ajax(classifierMethodURI, 'GET').done(function(response){
@@ -770,7 +798,7 @@ div.tooltip {
             
             //Show the documentation for the method / class
             self.showDocumentation = function(name){
-                var documentationURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
+                var documentationURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
                     $.prompt(JSON.stringify(docs, null, 4));
@@ -799,7 +827,7 @@ div.tooltip {
                 //console.log($.toJSON(data))
                 
                 //Make the post request
-                var postURI = 'http://localhost:8081/api/esda/mapclassify/' + self.selectedClassifier() +'/'
+                var postURI = 'http://localhost:5000/api/esda/mapclassify/' + self.selectedClassifier() +'/'
                 self.ajax(postURI, 'POST', data).done(function(response){
                     var rdata = response.data
                     mapvis.onUpdate(rdata);
@@ -837,7 +865,7 @@ div.tooltip {
                                   'Rook': 'rook_from_shapefile'}
         
             self.onExecute = function(){
-                var posturl = 'http://localhost:8081/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
+                var posturl = 'http://localhost:5000/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
                 var inputshp = shapefileview.shapefile() + '.shp'
                 
                 var data = {};
@@ -849,6 +877,7 @@ div.tooltip {
                 //POST the formData
                 self.ajax(posturl, 'POST', data).done(function(response) {
                     shapefileview.updateWstatus(shapefileview.shapefile());
+                    console.log(response);
                 });   
             }
         }
@@ -880,21 +909,21 @@ div.tooltip {
             }
         
             //List the available PMD when the page loads
-            self.ajax("http://localhost:8081/listdata/", 'GET').done(function(response) {
+            self.ajax("http://localhost:5000/listdata/", 'GET').done(function(response) {
                 for (var key in response.data.pmd){
                     self.availablepmd.push(key);
                 }
             }); 
             
             self.currentpmd.subscribe(function(){
-                var pmdURI = 'http://localhost:8081/listdata/' + self.currentpmd() + '/' 
+                var pmdURI = 'http://localhost:5000/listdata/' + self.currentpmd() + '/' 
                 self.ajax(pmdURI, 'GET').done(function(response){
                     self.renderedpmd(response.data);
                 }); 
             });
             
             self.onExecute = function(){
-                pmdexecuteURI = 'http://localhost:8081/amd/'
+                pmdexecuteURI = 'http://localhost:5000/amd/'
                 //POST request to execute the current PMD
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
                     //Update the shapefile list with the PMD data
@@ -912,7 +941,7 @@ div.tooltip {
                     data['kwargs'] = {'k':5}
 
                     //Make the post request
-                    var postURI = 'http://localhost:8081/api/esda/mapclassify/Quantiles/'
+                    var postURI = 'http://localhost:5000/api/esda/mapclassify/Quantiles/'
                     self.ajax(postURI, 'POST', data).done(function(response){
                         var rdata = response.data  
                         self.ReClass(rdata)
@@ -948,7 +977,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8081/upload/",
+          url: "http://localhost:5000/upload/",
           dictDefaultMessage: "Drop a .pmd, .amd, or .wmd here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB
@@ -977,7 +1006,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8081/upload/",
+          url: "http://localhost:5000/upload/",
           dictDefaultMessage: "Drop shp, shx, dbf or .zip here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB

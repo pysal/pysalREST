@@ -25,12 +25,3 @@ pip install cherrypy
 #Install git and clone pysalREST
 sudo apt-get install -y git
 git clone https://github.com/pysal/pysalREST.git
-
-#Launch cherrypy as the server
-cd pysalREST
-
-#Launch cherrypy as the server
-python -m launcher --server=cherry --api=pysalrest --port=8080
-
-
-
