@@ -83,6 +83,7 @@ def unzip(filename, path):
             zf.extract(m, destination)
     return
 
+#Three routes for static items.
 @app.route('/js/<path>/', methods=['GET'])
 def static_proxy(path):
     """
@@ -94,6 +95,11 @@ def static_proxy(path):
 @app.route('/css/<path>/', methods=['GET'])
 def static_css_proxy(path):
     return app.send_static_file(os.path.join('css', path))
+
+#Trailing '/' intentionally omitted as these are all enpoint files, i.e. .svg or .tff.
+@app.route('/fonts/<path>', methods=['GET'])
+def static_font_proxy(path):
+    return app.send_static_file(os.path.join('fonts', path))
 
 
 @app.route('/', methods=['GET'])
