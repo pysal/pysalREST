@@ -10,7 +10,6 @@ import pysal as ps
 
 
 def parsewmd(jwmd, uploaddir=None):
-
     #Get the URI
     uri = jwmd['input1']['data1']['uri']
     url = urlparse(uri)
@@ -60,7 +59,7 @@ def gety(attribute, uploaddir=None):
         ftypes = set(['shp', 'shx', 'dbf'])
         ftypes.add(ftype)
 
-        if basename != None:
+        if uploaddir != None:
             basename = os.path.join(uploaddir, basename)
 
         for suffix in ftypes:
@@ -69,8 +68,10 @@ def gety(attribute, uploaddir=None):
             response = urllib.urlretrieve(dlink, fname)
 
     elif url.scheme == 'file':
-        basename = url.path
-        pass
+        #Here I make the assumption that all the pieces of the shp are here.
+        basename = url.netloc
+        if uploaddir != None:
+            basename = os.path.join(uploaddir, basename)
 
     db = ps.open(basename, 'r')
     y = np.array(db.by_col(name))
@@ -86,7 +87,10 @@ def generateW(uri, wtype, uploaddir=None):
             basename = os.path.join(uploaddir, basename)
         response = urllib.urlretrieve(uri, basename)
     elif url.scheme == 'file':
-        pass
+        basename = url.netloc
+        ftype = basename.split('.')[-1]
+        if uploaddir != None:
+            basename = os.path.join(uploaddir, basename)
 
     #Then parse the file type
     if wtype == 'prov':
@@ -95,7 +99,6 @@ def generateW(uri, wtype, uploaddir=None):
             w = parsewmd(jwmd, uploaddir)
     elif wtype == 'gal':
         w = ps.open(basename).read()
-
 
     return w
 

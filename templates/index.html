@@ -449,6 +449,8 @@ div.tooltip {
                 .attr("id", function(d){return d.properties.id})
                 .attr("class", function(d) { return self.quantize(d.id); })
                 .attr("d", path)
+                .style('stroke', 'black')
+                .style('stroke-width', '0.5')
                .on("click", function(d){
                    //console.log(d);
                    $.prompt(JSON.stringify(d.properties, null, 2));
@@ -459,11 +461,7 @@ div.tooltip {
               }
             
             });
-
-
         }
-
-
 
 }
         

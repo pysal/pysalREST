@@ -1,0 +1,22 @@
+{
+    "input": {
+        "weights": {
+            "type": "gal",
+            "uri": "file://columbus.gal"
+        },
+        "attribute": {
+            "type": "txt",
+            "name": "CRIME",
+            "uri": "file://columbus.dbf"
+        }
+    },
+    "analysis_type": {
+        "method": "Moran"
+    },
+    "parameters": {
+        "transformation": "O"
+    },
+    "output": {
+        "p_norm": "float"
+    }
+}
