@@ -101,6 +101,9 @@ def static_css_proxy(path):
 def static_font_proxy(path):
     return app.send_static_file(os.path.join('fonts', path))
 
+@app.route('/images/<path>', methods=['GET'])
+def static_image_proxy(path):
+    return app.send_static_file(os.path.join('images', path))
 
 @app.route('/', methods=['GET'])
 def home():
