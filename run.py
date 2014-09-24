@@ -55,7 +55,7 @@ def main():
             server.stop()
     else:
         #Run the development server
-        app.run(host=config.host, port=config.port, debug=config.DEBUG)
+        app.run(host=config['host'], port=config['port'], debug=config['DEBUG'])
 
 if __name__ =='__main__':
     main()
