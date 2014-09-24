@@ -2,15 +2,23 @@ import ast
 import cPickle
 import glob
 import inspect
-import os
 import json
+import logging
+import os
 import sqlite3
+import subprocess
+import tempfile
 import zipfile
 
+import config
 import numpy as np
 from pandas.io.json import read_json
 import pysal as ps
-from flask import Flask, jsonify, request, g, render_template
+
+from flask import Flask, jsonify, request, g, render_template, session, redirect, url_for, escape
+
+from flask.ext.login import LoginManager
+
 from werkzeug.utils import secure_filename
 
 import fiona #Yeah - I punked out...
@@ -19,13 +27,28 @@ from api import funcs, CustomJsonEncoder
 from pmd import pmdwrapper
 import amdparser
 
+'''
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(config.LOGLEVEL)
+handler.setLevel(logging.DEBUG)
+logger.addHandler(handler)
 
+logger.debug('Starting...')
+'''
 #Make the Flask App
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
+app.config.from_object('config')
+
+#Login items
+lm = LoginManager()
+lm.init_app(app)
+
+
 #Setup a cache to store transient python objects
 
 #Upload Setup
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/var/www/pysalREST/uploads'
 ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip', 'amd', 'pmd'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -48,7 +71,7 @@ UPLOADED_FILES = update_file_list(UPLOAD_FOLDER)
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sqlite3.connect('test.db')
+        db = g._database = sqlite3.connect('/var/www/pysalREST/test.db')
     return db
 
 def allowed_file(filename):
@@ -96,7 +119,6 @@ def static_proxy(path):
 def static_css_proxy(path):
     return app.send_static_file(os.path.join('css', path))
 
-#Trailing '/' intentionally omitted as these are all enpoint files, i.e. .svg or .tff.
 @app.route('/fonts/<path>', methods=['GET'])
 def static_font_proxy(path):
     return app.send_static_file(os.path.join('fonts', path))
@@ -105,8 +127,23 @@ def static_font_proxy(path):
 def static_image_proxy(path):
     return app.send_static_file(os.path.join('images', path))
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+	session['username'] = request.form['username']
+	return redirect(url_for('/'))
+
+    return '''
+    	<form action="" method="post">
+        <p><input type=text name=username>
+        <p><input type=submit value=Login>
+        </form>
+    	   '''
+
 @app.route('/', methods=['GET'])
 def home():
+    if 'username' not in session:
+	return redirct(url_for('login'))
     response = {'status':'success','data':{}}
     response['data']['links'] = [{'id':'api', 'href':'/api/'},
                                  {'id':'listdata', 'href':'/listdata/'},
@@ -574,28 +611,45 @@ def upload_file():
     """
     if request.method == 'POST':
         files = request.files
-        uploaded = []
-        for k, f in request.files.iteritems():
-            uploaded.append(f)
+
+	#Create a temporary directory to store the uploaded data
+	tmpdir = tempfile.mkdtemp()
+	logger.debug(tmpdir)
+
+	for k, f in request.files.iteritems():
             #Discard the keys - are they ever important since the user
             # has named the file prior to upload?
             if f and allowed_file(f.filename):
+		logger.debug(f)
                 filename = secure_filename(f.filename)
-                savepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                savepath = os.path.join(tmpdir, filename)
                 f.save(savepath)
                 if filename.split('.')[1] == 'zip':
-                    unzip(savepath, app.config['UPLOAD_FOLDER'])
-        #Update the file list
-        UPLOADED_FILES = update_file_list(UPLOAD_FOLDER)
-        #Ideally we store metadata about the upload, but for now just return
+                    unzip(savepath, tmpdir)
+
+
+	#Iterate through the tmp directory, glob all the shapefiles, and load into postgreSQL
+	shps = glob.glob(os.path.join(tmpdir, '*.shp'))
+	for shp in shps:
+	    logger.debug(shp)
+	    cmd = ['/usr/bin/ogr2ogr', '-f', 'PostgreSQL', 'PG:host=10.0.23.5 user=pysal password=MmHkcUFL dbname=cybergis']
+	    cmd.append(shp)
+
+	    logger.debug(cmd)
+    	    logger.debug(subprocess.call(cmd))
+	#Ideally we store metadata about the upload, but for now just return
         response = {'status':'success','data':{}}
         for u in uploaded:
-            response['data'][u.filename] = '{}/{}'.format(app.config['UPLOAD_FOLDER'], u.filename)
+            response['data'][u.filename] = '{}/{}'.format(tmpdir, u.filename)
         return jsonify(response)
 
     else:
         response = {'status':'error','data':{'message':'Either "." not in filename or extensions not in approved list.'}}
         return jsonify(response)
+
+    #Clean up the temporary directory
+    #os.removedirs(tmpdir)
+
     return jsonify(response)
 
 
