@@ -53,6 +53,4 @@ def extract(package, pysalfunctions):
         pysalfunctions[modulename] = {}
         if module.__package__ != None and 'pysal' in module.__package__:
             pysalfunctions[modulename] = extractsub(module,pysalfunctions[modulename])
-    print pysalfunctions['esda']['mapclassify']
     return pysalfunctions
-

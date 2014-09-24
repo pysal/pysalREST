@@ -23,11 +23,22 @@ a most nested level of 'function_name':func_object pairs.
 """
 pysalfunctions = extract(ps, {})
 
-'''
+#Error handling routed
 @app.errorhandler(404)
 def not_found(error):
     return "Error 404: Unable to find endpoint."
-'''
+
+#Home
+@app.route('/', methods=['GET'])
+def api_root():
+    response = {'status':'success','data':{}}
+    response['data']['links'] = [{'id':'api', 'href':'/api/'},
+                                 {'id':'listdata', 'href':'/listdata/'},
+                                 {'id':'upload', 'href':'/upload/'},
+                                 {'id':'cached', 'href':'/cached/'}]
+    return jsonify(response)
+
+
 ###Import components use a blue_print handler###
 
 #API

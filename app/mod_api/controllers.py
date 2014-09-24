@@ -5,18 +5,6 @@ from app import db, pysalfunctions
 
 mod_api = Blueprint('mod_api', __name__)
 
-
-"""
-@mod_api.route('/', methods=['GET'])
-def api_root():
-    response = {'status':'success','data':{}}
-    response['data']['links'] = [{'id':'api', 'href':'/api/'},
-                                 {'id':'listdata', 'href':'/listdata/'},
-                                 {'id':'upload', 'href':'/upload/'},
-                                 {'id':'cached', 'href':'/cached/'}]
-    return jsonify(response)
-
-"""
 @mod_api.route('/', methods=['GET'])
 def get_api():
     """
