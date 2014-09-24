@@ -17,11 +17,25 @@ port = 8081
 host = '0.0.0.0'
 
 #Database
-db = '10.0.0.0'
-dbname = 'pysal'
-dbpass = 'TEST'
+"""
+For a local SQLite DB:
+dbtype = 'sqlite:///'
+dbhost = os.path.join(BASE_DIR, 'pysalrest.db')
+dbusername = ''
+dbpass = ''
+dbname = ''
+"""
+
+dbtype = 'postgresql+psycopg2://'
+dbhost = 'localhost:5432'
+dbusername = 'postgres'
+dbpass = 'postgres'
+dbname = 'pysalrest'
+SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
+                                                 dbusername,
+                                                 dbpass,
+                                                 dbhost,
+                                                 dbname)
 
 #Logging
 loglocation = 'logging.log'
-
-
