@@ -28,6 +28,7 @@ lm.login_view = 'mod_user.signin'
 
 #Define the database to  be used by
 db = SQLAlchemy(app)
+#db.metadata.reflect(bind=db.engine)
 
 #Initialize a listing of the PySAL functions
 """

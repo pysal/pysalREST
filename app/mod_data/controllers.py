@@ -115,14 +115,16 @@ def get_dataset(uid, tablename):
         return "You are either not logged in or this is another user's data."
     else:
         response = {'status':'success','data':{}}
-
-        metadata = db.metadata
-        metadata.bind=db.engine
-        table = db.Table(tablename, metadata, autoload=True)
-
-        name = table.name.split('_')[1]
+        if tablename in seen_classes:
+            cls = current_app.class_references[tablename]
+        else:
+            db.metadata.reflect(bind=db.engine)
+            seen_classes.add(tablename)
+            cls = type(str(tablename), (db.Model,), {'__tablename__':tablename})
+            current_app.class_references[tablename] = cls
+        name = tablename.split('_')[1]
         response['data']['name'] = name
-        response['data']['fields'] = [c.name for c in table.columns]
+        response['data']['fields'] = [c.name for c in cls.__table__.columns]
 
         return jsonify(response)
 
@@ -138,8 +140,8 @@ def get_dataset_field(uid, tablename, field):
         if tablename in seen_classes:
             cls = current_app.class_references[tablename]
         else:
+            db.metadata.reflect(bind=engine)
             seen_classes.add(tablename)
-            db.metadata.reflect(bind=db.engine)
             cls = type(str(tablename), (db.Model,), {'__tablename__':tablename})
             current_app.class_references[tablename] = cls
         vector = cls.query.with_entities(getattr(cls, field)).all()
