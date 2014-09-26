@@ -1,9 +1,9 @@
 import os
 
-from flask import Flask, jsonify, request, g, render_template, session, redirect, url_for, escape
+from flask import Flask, jsonify, request, g, render_template, session,\
+        redirect, url_for, escape, current_app
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
-from flask.ext.openid import OpenID
 
 from app.mod_api.extractapi import extract
 import pysal as ps
@@ -12,6 +12,12 @@ import config
 #Create the app
 app = Flask(__name__)
 
+#Add a class_references attribute to the application
+with app.app_context():
+    if getattr(current_app, 'class_references',None) is None:
+        current_app.class_references = {}
+seen_classes = set()  # Geom tables already mapped
+
 #Configure the application from config.py
 app.config.from_object('config')
 
@@ -19,7 +25,6 @@ app.config.from_object('config')
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'mod_user.signin'
-oid = OpenID(app, os.path.join(config.BASE_DIR, 'tmp'))
 
 #Define the database to  be used by
 db = SQLAlchemy(app)
@@ -43,11 +48,12 @@ def not_found(error):
 @app.route('/', methods=['GET'])
 def api_root():
     response = {'status':'success','data':{}}
-    response['data']['links'] = [{'id':'api', 'href':'/api/'},
-                                 {'id':'listdata', 'href':'/listdata/'},
-                                 {'id':'upload', 'href':'/upload/'},
-                                 {'id':'cached', 'href':'/cached/'}]
+    response['data']['links'] = [{'id':'api', 'href':'/api/', 'description':'Access to the PySAL API'},
+                                 {'id':'user', 'href':'/user/', 'description':'Login, Registration, and User management'},
+                                 {'id':'data', 'href':'/data/', 'description':'Data, Upload, and Cached PyObject Items'}]
     return jsonify(response)
+
+
 
 ###Import components use a blue_print handler###
 
@@ -58,6 +64,10 @@ app.register_blueprint(api_module, url_prefix='/api')
 #User Management
 from app.mod_user.controllers import mod_user as user_module
 app.register_blueprint(user_module, url_prefix='/user')
+
+#Uploads
+from app.mod_data.controllers import mod_data as data_module
+app.register_blueprint(data_module, url_prefix='/data')
 
 #Database
 

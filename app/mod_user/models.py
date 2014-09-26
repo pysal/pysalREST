@@ -28,10 +28,12 @@ class User(Base):
     status = db.Column(db.SmallInteger, nullable=False)
 
 
-    def __init__(self, name, email, password):
+    def __init__(self, name, email, password, role=ROLE_USER, status=0):
         self.name = name
         self.email = email
         self.password = password
+        self.role = role
+        self.status = status
 
     def is_authenticated(self):
         return True

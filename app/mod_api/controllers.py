@@ -2,10 +2,12 @@ import inspect
 
 from flask import Blueprint, request, jsonify
 from app import db, pysalfunctions
+from flask.ext.login import login_required
 
 mod_api = Blueprint('mod_api', __name__)
 
 @mod_api.route('/', methods=['GET'])
+@login_required
 def get_api():
     """
     The api homepage.
@@ -20,6 +22,7 @@ def get_api():
     return jsonify(response)
 
 @mod_api.route('/<module>/', methods=['GET'])
+@login_required
 def get_modules(module):
     """
     Modules within the
@@ -33,6 +36,7 @@ def get_modules(module):
     return jsonify(response)
 
 @mod_api.route('/<module>/<method>/', methods=['GET', 'POST'])
+@login_required
 def get_single_depth_method(module, method):
     if request.method == 'GET':
         if isinstance(pysalfunctions[module][method], dict):
@@ -50,6 +54,7 @@ def get_single_depth_method(module, method):
 
 
 @mod_api.route('/<module>/<module2>/<method>/', methods=['GET', 'POST'])
+@login_required
 def get_nested_method(module, module2, method):
     if request.method == 'GET':
         return get_method(module, method, module2=module2)
@@ -99,6 +104,7 @@ def get_method(module, method, module2 = None):
     return jsonify(response)
 
 @mod_api.route('/<module>/<method>/docs/', methods=['GET'])
+@login_required
 def get_single_docs(module, method):
     return get_docs(module, method)
 
