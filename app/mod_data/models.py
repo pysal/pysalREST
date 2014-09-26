@@ -1,5 +1,5 @@
 from app import db
-
+from geoalchemy2 import Geometry
 #Base DB Model - All other tables subclass this class
 class Base(db.Model):
 
@@ -39,3 +39,6 @@ class UserPyObj(Base):
 
     def __repr__(self):
         return '<User: {} has a pyobj.>'.format(userid)
+
+class GeoPoly():
+    wkb_geometry = db.Column(Geometry("POLYGON"))

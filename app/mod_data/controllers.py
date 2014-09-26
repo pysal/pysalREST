@@ -7,10 +7,10 @@ from flask import Blueprint, request, jsonify, g, current_app
 from flask.ext.login import login_required, current_user
 from werkzeug.utils import secure_filename
 
-from geoalchemy2.types import Geometry
+import geoalchemy2.functions as geofuncs
 
 from app import db, seen_classes
-from app.mod_data.models import UserData, UserPyObj
+from app.mod_data.models import UserData, UserPyObj, GeoPoly
 from app.mod_data import upload_helpers as uph
 import config
 
@@ -120,8 +120,10 @@ def get_dataset(uid, tablename):
         else:
             db.metadata.reflect(bind=db.engine)
             seen_classes.add(tablename)
-            cls = type(str(tablename), (db.Model,), {'__tablename__':tablename})
+            cls = type(str(tablename), (GeoPoly, db.Model,), {'__tablename__':tablename,
+                '__table_args__' : {'extend_existing': True}})
             current_app.class_references[tablename] = cls
+
         name = tablename.split('_')[1]
         response['data']['name'] = name
         response['data']['fields'] = [c.name for c in cls.__table__.columns]
@@ -140,10 +142,17 @@ def get_dataset_field(uid, tablename, field):
         if tablename in seen_classes:
             cls = current_app.class_references[tablename]
         else:
-            db.metadata.reflect(bind=engine)
+            db.metadata.reflect(bind=db.engine)
             seen_classes.add(tablename)
-            cls = type(str(tablename), (db.Model,), {'__tablename__':tablename})
+            cls = type(str(tablename), (GeoPoly, db.Model,), {'__tablename__':tablename,
+                '__table_args__' : {'extend_existing': True}})
             current_app.class_references[tablename] = cls
-        vector = cls.query.with_entities(getattr(cls, field)).all()
+
+        if field == 'wkb_geometry':
+            vector = cls.query.with_entities(geofuncs.ST_AsGeoJSON(getattr(cls, field))).all()
+        else:
+            vector = cls.query.with_entities(getattr(cls, field)).all()
+
         response['data'][field] = [v[0] for v in vector]
         return jsonify(response)
+
