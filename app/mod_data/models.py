@@ -32,13 +32,15 @@ class UserPyObj(Base):
 
     userid = db.Column(db.Integer, nullable=False)
     pyobj = db.Column(db.LargeBinary, nullable=False)
+    datahash = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, userid, pyobj):
+    def __init__(self, userid, pyobj, datahash=None):
         self.userid = userid
         self.pyobj = pyobj
+        self.datahash = datahash
 
     def __repr__(self):
-        return '<User: {} has a pyobj.>'.format(userid)
+        return '<User: {} has a pyobj names {}.>'.format(self.userid, self.dataname)
 
 class GeoPoly():
     wkb_geometry = db.Column(Geometry("POLYGON"))

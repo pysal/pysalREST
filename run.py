@@ -38,7 +38,6 @@ def _get_config():
         if not isinstance(val, types.ModuleType):
             configdict[k] = val
     configdict.update(args)
-    print configdict
     return configdict
 
 def main():

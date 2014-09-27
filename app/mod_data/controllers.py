@@ -73,7 +73,6 @@ def upload():
             f.save(savepath)
 
             basename, ext = filename.split('.')
-            print basename, ext
             if ext == 'zip':
                 uph.unzip(savepath, tmpdir)
 
@@ -106,7 +105,36 @@ def upload():
 @mod_data.route('/cached/', methods=['GET'])
 @login_required
 def cached():
-    return "CACHED"
+    """
+    List the cached python objects for a given user.
+    """
+    cuid = current_user.id
+    response = {'status':'success','data':{}}
+    availabledata = UserPyObj.query.filter_by(userid = cuid).all()
+    for a in availabledata:
+        dataname = a.datahash.split('_')
+        entry = {'dataname':dataname[1],
+                'href':'/data/{}/{}'.format(cuid, a.datahash),
+                'datecreated': a.date_created,
+                'datemodified': a.date_modified}
+        response['data'][a.id] = entry
+    return jsonify(response)
+
+@mod_data.route('/cached/<uid>/<objhash>', methods=['GET'])
+@login_required
+def get_cached_entry(uid, objhash):
+    cuid = current_user.id
+    if int(uid) != cuid:
+        return "You are either not logged in or this is another user's data."
+    else:
+        response = {'status':'success','data':{}}
+        row = UserPyObj.query.filter_by(datahash = objhash).first()
+        response['data']['date_created'] = None
+        response['data']['date_last_modified'] = None
+        response['data']['provenance'] = {}
+        print row
+    return response
+
 
 @mod_data.route('/<uid>/<tablename>/')
 @login_required
