@@ -1,3 +1,4 @@
+import ast
 import glob
 import os
 import subprocess
@@ -127,12 +128,13 @@ def get_dataset(uid, tablename):
         name = tablename.split('_')[1]
         response['data']['name'] = name
         response['data']['fields'] = [c.name for c in cls.__table__.columns]
+        response['data']['fields'].append('geojson')
+        #TODO: Add topojson support if the db is postgresql
 
         return jsonify(response)
 
 @mod_data.route('/<uid>/<tablename>/<field>/')
 @login_required
-#TODO Get the geom out.
 def get_dataset_field(uid, tablename, field):
     cuid = current_user.id
     if int(uid) != cuid:
@@ -148,11 +150,27 @@ def get_dataset_field(uid, tablename, field):
                 '__table_args__' : {'extend_existing': True}})
             current_app.class_references[tablename] = cls
 
-        if field == 'wkb_geometry':
+        if field == config.geom_column:
             vector = cls.query.with_entities(geofuncs.ST_AsGeoJSON(getattr(cls, field))).all()
+            response['data'][field] = [v[0] for v in vector]
+        elif field == 'geojson':
+            #TODO: How can this be cleaner?  Do I need 2 queries go get geojson?
+            rows = cls.query.all()
+            geoms = cls.query.with_entities(geofuncs.ST_AsGeoJSON(getattr(cls, config.geom_column))).all()
+            features = []
+            for i, row in enumerate(rows):
+                attributes = row.as_dict()
+                attributes.pop('wkb_geometry', None)
+                current_feature = {'type':'Feature',
+                        'geometry':ast.literal_eval(geoms[i][0]),
+                        'properties':attributes}
+                features.append(current_feature)
+            geojson = {"type": "FeatureCollection","features": features}
+            response['data']['geojson'] = geojson
+        elif field == 'topojson':
+            #TODO: Add topojson support if the DB is postgresql
+            pass
         else:
             vector = cls.query.with_entities(getattr(cls, field)).all()
-
-        response['data'][field] = [v[0] for v in vector]
+            response['data'][field] = [v[0] for v in vector]
         return jsonify(response)
-

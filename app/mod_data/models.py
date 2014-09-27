@@ -42,3 +42,6 @@ class UserPyObj(Base):
 
 class GeoPoly():
     wkb_geometry = db.Column(Geometry("POLYGON"))
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}

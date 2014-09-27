@@ -42,6 +42,7 @@ SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbpass,
                                                  dbhost,
                                                  dbname)
+geom_column = 'wkb_geometry'
 
 #GDAL Commands
 ogr2ogr = '/Users/jay/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
