@@ -29,6 +29,10 @@ lm.login_view = 'mod_user.signin'
 #Define the database to  be used by
 db = SQLAlchemy(app)
 
+#Setup a fixed length dict to store cached objs
+#TODO: Write a fixed length dict. by subclassing OrderedDict
+cachedobjs = {}
+
 #Initialize a listing of the PySAL functions
 """
 The idea here is that pysalfunctions could be swapped

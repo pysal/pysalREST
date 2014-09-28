@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 
 import geoalchemy2.functions as geofuncs
 
-from app import db, seen_classes
+from app import db, seen_classes, cachedobjs
 from app.mod_data.models import UserData, UserPyObj, GeoPoly
 from app.mod_data import upload_helpers as uph
 import config
@@ -114,7 +114,7 @@ def cached():
     for a in availabledata:
         dataname = a.datahash.split('_')
         entry = {'dataname':dataname[1],
-                'href':'/data/{}/{}'.format(cuid, a.datahash),
+                'href':'/data/cached/{}/{}'.format(cuid, a.datahash),
                 'datecreated': a.date_created,
                 'datemodified': a.date_modified}
         response['data'][a.id] = entry
@@ -129,12 +129,43 @@ def get_cached_entry(uid, objhash):
     else:
         response = {'status':'success','data':{}}
         row = UserPyObj.query.filter_by(datahash = objhash).first()
-        response['data']['date_created'] = None
-        response['data']['date_last_modified'] = None
-        response['data']['provenance'] = {}
-        print row
-    return response
+        name = row.datahash.split('_')[1]
+        response['data']['name'] = name
+        response['data']['date_created'] = row.date_created
+        response['data']['date_last_modified'] = row.date_modified
 
+        row.get_pyobj()
+        response['data']['methods'] = row.methods
+        response['data']['attributes'] = row.attributes
+        response['data']['provenance'] = {}
+    return jsonify(response)
+
+@mod_data.route('/cached/<uid>/<objhash>/<attribute>', methods=['GET'])
+@login_required
+def get_cached_entry_attribute(uid, objhash, attribute):
+    """
+    Get an attribute from a PyObj via either the internal cache or a DB call.
+    """
+    cuid = current_user.id
+    if int(uid) != cuid:
+        return "You are either not logged in or this is another user's data."
+    else:
+        response = {'status':'success','data':{}}
+        if not objhash in cachedobjs.keys():
+            row = UserPyObj.query.filter_by(datahash = objhash).first()
+            row.get_pyobj()
+        else:
+            pass
+        try:
+            response['data'][attribute] = getattr(row.liveobj, attribute)
+            return jsonify(response)
+        except:
+            return jsonify({'status':'failure', 'data':'Unable to find attribute'})
+
+@mod_data.route('/cached/<uid>/<objhash>/<method>', methods=['POST'])
+@login_required
+def call_cached_centry_method(uid, objhash, method):
+    raise NotImplementedError
 
 @mod_data.route('/<uid>/<tablename>/')
 #@login_required
