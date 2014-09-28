@@ -1,11 +1,13 @@
 import ast
+import cPickle
 import inspect
 
 import numpy as np
 import pysal as ps
 
 from pmd import pmdwrapper
-from app import pysalfunctions
+from app import pysalfunctions, db
+from app.mod_data.models import UserPyObj
 
 
 def post(request, module,method, module2=None):
@@ -56,7 +58,7 @@ def post(request, module,method, module2=None):
         for i, a in enumerate(args):
             try:
                 if a in UPLOADED_FILES:
-                    args[i] = UPLOAD_FOLDER + '/' +  a
+                    arcgs[i] = UPLOAD_FOLDER + '/' +  a
                     shpname = a.split('.')[0]
             except: pass
             try:
@@ -98,32 +100,21 @@ def post(request, module,method, module2=None):
         funcreturn = call(*args, **kwargs)
 
         #Write the W Object to the database
+        #TODO: This should cPickle all class returns and save them to the DB.
         if isinstance(funcreturn, ps.W):
             pdata = cPickle.dumps(funcreturn, cPickle.HIGHEST_PROTOCOL)
-            cur = get_db().cursor()
-            if method == 'queen_from_shapefile':
-                m = 'Queen'
-            else:
-                m = 'Rook'
-            indb = False
+            wtype = 'rook'
+            if 'queen' in method:
+                wtype = 'queen'
+            datahash = '4_columbus_{}'.format(wtype)
+            #TODO: CUID needs to be dynamic - pass in
+            #TODO: datahash needs to be intelligently generated
+            insertrow = UserPyObj(4, pdata,datahash=datahash)
+            db.session.add(insertrow)
+            db.session.commit()
 
-            #Query the db to see if the name / type is in the db
-            query = "SELECT Type, Shapefile FROM WObj"
-            cur = get_db().cursor().execute(query)
-            result = cur.fetchall()
-            for r in result:
-                if r[0] == m and r[1] == shpname:
-                    indb = True
-                    break
-
-            if indb == False:
-                obj = (m, sqlite3.Binary(pdata), funcreturn._shpName)
-                cur.execute("INSERT INTO WObj values (NULL, ?, ?, ?)",obj)
-                get_db().commit()
-            cur.close()
-
-            response['data'] = {'Shapefile':funcreturn._shpName,
-                                'Weight Type':method}
+            #TODO: This should return metadata, or some information other than done.
+            response['data'] = 'W Created'
         else:
             funcreturn = recursedict(vars(funcreturn))
             response['data'] = funcreturn
@@ -196,7 +187,10 @@ def get_method(module, method, module2 = None):
         reqargs = inspect.getargspec(method.__init__)
 
     args = reqargs.args
-    defaults = list(reqargs.defaults)
+    if reqargs.defaults != None:
+        defaults = list(reqargs.defaults)
+    else:
+        defaults = []
     try:
         args.remove('self')
     except:

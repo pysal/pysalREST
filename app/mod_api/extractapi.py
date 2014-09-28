@@ -3,6 +3,8 @@ import inspect
 import json
 import types
 
+import w_from_geojson
+
 def extractsubsub(package, d):
     sub_modules = inspect.getmembers(package, inspect.ismodule)
     functions = inspect.getmembers(package, inspect.isfunction)
@@ -53,4 +55,8 @@ def extract(package, pysalfunctions):
         pysalfunctions[modulename] = {}
         if module.__package__ != None and 'pysal' in module.__package__:
             pysalfunctions[modulename] = extractsub(module,pysalfunctions[modulename])
+
+    #Add the custom geojson_functions
+    pysalfunctions['weights']['queen_from_geojson'] = w_from_geojson.queen_geojson
+
     return pysalfunctions

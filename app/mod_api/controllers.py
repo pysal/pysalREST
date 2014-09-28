@@ -35,7 +35,7 @@ def get_modules(module):
     return jsonify(response)
 
 @mod_api.route('/<module>/<method>/', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def get_single_depth_method(module, method):
     if request.method == 'GET':
         if isinstance(pysalfunctions[module][method], dict):
