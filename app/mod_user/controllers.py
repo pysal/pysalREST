@@ -19,37 +19,49 @@ def unauthorized():
     """
     @login_required calls this when a user is unauthorized
     """
-    return redirect(url_for('signin'))
+    return redirect(url_for('user'))
 
 @mod_user.route('/', methods=['GET'])
-@login_required
 def user_home():
     """
-    User landing page
+    User landing page.  A GET request here hands the browser
+    a CSRF token.
     """
-    return '''
-    #If the user is signed in, give them some information
-    #Else redirect to the signin page
-    '''
-    pass
+    print "getting"
+    form = LoginForm(request.form)
+    return render_template("user/signin.html", form=form)
 
-@mod_user.route('/signin/', methods=['GET', 'POST'])
-def signin():
+@mod_user.route('/', methods=['POST'])
+def login():
     """
     Sign a user in a start a session
     """
     form = LoginForm(request.form)
-    if form.validate_on_submit():
+    if not form.validate_on_submit():
+        flash('Error logging in')
+    else:
         if request.form['submit'] == 'login':
             try:
                 user = User.query.filter_by(email = form.email.data).first()
+                if user == None:
+                    flash('User not found, please register')
+                    return render_template("user/signin.html", form=form)
             except:
                 return render_template("user/signin.html", form=form)
             #These should be hashed, etc.  This is development only.
+
             if user.password == form.password.data:
-                if login_user(user, remember=request.form['remember']):
-                    flash('Successfully logged in.')
-                    return redirect(url_for('mod_api.get_api'))
+                if 'remember' in request.form.keys():
+                    if login_user(user, remember=request.form['remember']):
+                        flash('Successfully logged in.')
+                        return redirect(url_for('mod_api.get_api'))
+                else:
+                    if login_user(user):
+                        flash('Successfully logged in.')
+                        return redirect(url_for('mod_api.get_api'))
+
+            else:
+                return "Incorrect password"
         elif request.form['submit'] == 'register':
             user = User.query.filter_by(email = form.email.data).first()
             if user != None:
@@ -66,7 +78,8 @@ def signin():
                 db.session.add(newuser)
                 db.session.commit()
                 render_template('user/signin.html', form=form)
-    return render_template("user/signin.html", form=form)
+
+
 
 #Checker to see if the user is already logged in
 @mod_user.before_request

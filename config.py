@@ -15,7 +15,7 @@ api = 'pysalrest'
 
 #SERVER
 server = 'cherry'
-port = 8081
+port = 8080
 host = '0.0.0.0'
 
 #Database
@@ -33,7 +33,7 @@ dbname = ''
 dbtypename = 'PostgreSQL'  #Used by ogr2ogr, must be a valid ogr2ogr db
 dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
-dbhost = 'localhost:5433'
+dbhost = 'localhost:5432'
 dbusername = 'postgres'
 dbpass = 'postgres'
 dbname = 'pysalrest'
