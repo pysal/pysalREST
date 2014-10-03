@@ -8,7 +8,7 @@ from app.mod_user.forms import LoginForm
 from app.mod_user.models import User, ROLE_ADMIN, ROLE_USER
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_user = Blueprint('auth', __name__)
+mod_user = Blueprint('auth', __name__, template_folder='templates/user')
 
 @lm.user_loader
 def load_user(id):
@@ -21,22 +21,15 @@ def unauthorized():
     """
     return redirect(url_for('user'))
 
-@mod_user.route('/', methods=['GET'])
-def user_home():
-    """
-    User landing page.  A GET request here hands the browser
-    a CSRF token.
-    """
-    print "getting"
-    form = LoginForm(request.form)
-    return render_template("user/signin.html", form=form)
-
-@mod_user.route('/', methods=['POST'])
+@mod_user.route('/', methods=['GET', 'POST'])
 def login():
     """
     Sign a user in a start a session
     """
     form = LoginForm(request.form)
+    if request.method == 'GET':
+        return render_template("user/signin.html", form=form)
+    
     if not form.validate_on_submit():
         flash('Error logging in')
     else:
@@ -54,11 +47,13 @@ def login():
                 if 'remember' in request.form.keys():
                     if login_user(user, remember=request.form['remember']):
                         flash('Successfully logged in.')
-                        return redirect(url_for('mod_api.get_api'))
+                        #return redirect('/pysalrest/api')
+			return redirect(url_for('mod_api.get_api'))
                 else:
                     if login_user(user):
                         flash('Successfully logged in.')
-                        return redirect(url_for('mod_api.get_api'))
+                        #return redirect('/pysalrest/api')
+			return redirect(url_for('mod_api.get_api'))
 
             else:
                 return "Incorrect password"
@@ -66,6 +61,7 @@ def login():
             user = User.query.filter_by(email = form.email.data).first()
             if user != None:
                 flash('A user with this email already exists')
+		return render_tempalte('user/signin.html', form=form)
             else:
                 email = form.email.data
                 try:
@@ -77,7 +73,7 @@ def login():
                 newuser = User(name=name, email=email, password=password)
                 db.session.add(newuser)
                 db.session.commit()
-                render_template('user/signin.html', form=form)
+                return render_template('user/signin.html', form=form)
 
 
 

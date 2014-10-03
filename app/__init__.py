@@ -6,11 +6,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 
 from app.mod_api.extractapi import extract
-import pysal as ps
 import config
+#from reverseproxy import ReverseProxied
+
+import pysal as ps
 
 #Create the app
 app = Flask(__name__)
+app.debug = config.DEBUG
+#app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 #Add a class_references attribute to the application
 with app.app_context():
@@ -43,10 +47,12 @@ a most nested level of 'function_name':func_object pairs.
 """
 pysalfunctions = extract(ps, {})
 
+'''
 #Error handling routed
 @app.errorhandler(404)
 def not_found(error):
     return "Error 404: Unable to find endpoint."
+'''
 
 #Home
 @app.route('/', methods=['GET'])
@@ -58,9 +64,7 @@ def api_root():
     return jsonify(response)
 
 
-
 ###Import components use a blue_print handler###
-
 #API
 from app.mod_api.controllers import mod_api as api_module
 app.register_blueprint(api_module, url_prefix='/api')
@@ -69,12 +73,9 @@ app.register_blueprint(api_module, url_prefix='/api')
 from app.mod_user.controllers import mod_user as user_module
 app.register_blueprint(user_module, url_prefix='/user')
 
-#Uploads
+#Data
 from app.mod_data.controllers import mod_data as data_module
 app.register_blueprint(data_module, url_prefix='/data')
-
-#Database
-
 
 #Create the tables if this is a new deployment
 db.create_all()

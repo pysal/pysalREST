@@ -16,7 +16,12 @@ api = 'pysalrest'
 #SERVER
 server = 'cherry'
 port = 8080
-host = '0.0.0.0'
+host = '127.0.0.1'
+
+#Define the application home url, i.e. '/'.  If run on a subdomain
+# use SERVER_NAME instead.
+APPLICATION_ROOT = '/'
+
 
 #Database
 """
@@ -33,10 +38,10 @@ dbname = ''
 dbtypename = 'PostgreSQL'  #Used by ogr2ogr, must be a valid ogr2ogr db
 dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
-dbhost = 'localhost:5432'
-dbusername = 'postgres'
-dbpass = 'postgres'
-dbname = 'pysalrest'
+dbhost = '10.0.23.5:5432'
+dbusername = 'pysal'
+dbpass = 'MmHkcUFL'
+dbname = 'cybergis'
 SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbusername,
                                                  dbpass,
@@ -45,7 +50,7 @@ SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
 geom_column = 'wkb_geometry'
 
 #GDAL Commands
-ogr2ogr = '/Users/jay/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
+ogr2ogr = '/usr/bin/ogr2ogr'
 
 #Logging
 loglocation = 'logging.log'

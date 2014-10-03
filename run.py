@@ -45,13 +45,8 @@ def main():
 
     if config['server'] == 'cherry':
         #Run the stable, cherrypy server
-        from cherrypy import wsgiserver
-        d = wsgiserver.WSGIPathInfoDispatcher({'/':app})
-        server = wsgiserver.CherryPyWSGIServer((config['host'], config['port']),d)
-        try:
-            server.start()
-        except KeyboardInterrupt:
-            server.stop()
+        from cherry import start
+    	start()
     else:
         #Run the development server
         app.run(host=config['host'], port=config['port'], debug=config['DEBUG'])
