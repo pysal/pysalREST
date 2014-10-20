@@ -64,15 +64,13 @@ def queen_geojson(gjobj):
 
     This is a modification to Serge's code that performs a search for
     """
-
     features = list(find_features(gjobj))[0]
-
+    
     polys = []
     ids = []
     i = 0
     for feature in features:
-        print feature
-        polys.append(ps.cg.asShape(geojson.Polygon(feature['geometry']['coordinates'])))
+        polys.append(ps.cg.asShape(feature['geometry']))
         ids.append(i)
         i += 1
     polygons = PolygonCollection(dict(zip(ids,polys)))

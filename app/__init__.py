@@ -1,13 +1,13 @@
 import os
-
+import flask
 from flask import Flask, jsonify, request, g, render_template, session,\
         redirect, url_for, escape, current_app
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
+from flask.ext.httpauth import HTTPBasicAuth
 
 from app.mod_api.extractapi import extract
 import config
-#from reverseproxy import ReverseProxied
+from decorators import crossdomain
 
 import pysal as ps
 
@@ -25,10 +25,6 @@ seen_classes = set()  # Geom tables already mapped
 #Configure the application from config.py
 app.config.from_object('config')
 
-#Instantiate the login manager
-lm = LoginManager()
-lm.init_app(app)
-lm.login_view = 'mod_user.signin'
 
 #Define the database to  be used by
 db = SQLAlchemy(app)
@@ -47,6 +43,20 @@ a most nested level of 'function_name':func_object pairs.
 """
 pysalfunctions = extract(ps, {})
 
+
+from app.mod_user.models import User
+auth = HTTPBasicAuth()
+@auth.verify_password
+def verify_password(username_or_token, password):
+    print username_or_token
+    user = User.verify_auth_token(username_or_token)
+    if not user:
+        user = User.query.filter_by(email=username_or_token).first()
+        if not user or not user.verifypwd(password):
+            return False
+    g.user = user
+    return True
+
 '''
 #Error handling routed
 @app.errorhandler(404)
@@ -63,7 +73,23 @@ def api_root():
                                  {'id':'data', 'href':'/data/', 'description':'Data, Upload, and Cached PyObject Items'}]
     return jsonify(response)
 
+@app.after_request
+def add_cors(resp):
+    """ Ensure all responses have the CORS headers. This ensures any failures are also accessible
+        by the client. """
+    resp.headers['Access-Control-Allow-Origin'] = flask.request.headers.get('Origin','*')
+    resp.headers['Access-Control-Allow-Credentials'] = 'true'
+    resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET'
+    resp.headers['Access-Control-Allow-Headers'] = flask.request.headers.get( 
+        'Access-Control-Request-Headers', 'Authorization')
+    # set low for debugging
+    if app.debug:
+        resp.headers['Access-Control-Max-Age'] = '86400'
+    return resp
 
+@app.before_request
+def before():
+    pass
 ###Import components use a blue_print handler###
 #API
 from app.mod_api.controllers import mod_api as api_module
@@ -71,7 +97,7 @@ app.register_blueprint(api_module, url_prefix='/api')
 
 #User Management
 from app.mod_user.controllers import mod_user as user_module
-app.register_blueprint(user_module, url_prefix='/user')
+users = app.register_blueprint(user_module, url_prefix='/user')
 
 #Data
 from app.mod_data.controllers import mod_data as data_module

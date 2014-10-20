@@ -1,13 +1,13 @@
 from api_helpers import post, recursedict, get_docs, get_method
 
 from flask import Blueprint, request, jsonify
-from app import db, pysalfunctions
-from flask.ext.login import login_required
+from app import auth, db, pysalfunctions
+
 
 mod_api = Blueprint('mod_api', __name__)
 
 @mod_api.route('/', methods=['GET'])
-#@login_required
+@auth.login_required
 def get_api():
     """
     The api homepage.
@@ -22,12 +22,11 @@ def get_api():
     return jsonify(response)
 
 @mod_api.route('/<module>/', methods=['GET'])
-#@login_required
+@auth.login_required
 def get_modules(module):
     """
     Modules within the
     """
-    print request
     methods = pysalfunctions[module].keys()
     response = {'status':'success','data':{}}
     response['data']['links'] = []
@@ -37,9 +36,8 @@ def get_modules(module):
     return jsonify(response)
 
 @mod_api.route('/<module>/<method>/', methods=['GET', 'POST'])
-#@login_required
+@auth.login_required
 def get_single_depth_method(module, method):
-    print request
     if request.method == 'GET':
         if isinstance(pysalfunctions[module][method], dict):
             methods = pysalfunctions[module][method].keys()
@@ -60,9 +58,8 @@ def get_single_depth_method(module, method):
 
 
 @mod_api.route('/<module>/<module2>/<method>/', methods=['GET', 'POST'])
-#@login_required
+@auth.login_required
 def get_nested_method(module, module2, method):
-    print request
     if request.method == 'GET':
         return jsonify(get_method(module, method, module2=module2))
     else:
@@ -73,11 +70,11 @@ def get_nested_method(module, module2, method):
         return jsonify(post(request, module, method, module2=module2))
 
 @mod_api.route('/<module>/<method>/docs/', methods=['GET'])
-#@login_required
+@auth.login_required
 def get_single_docs(module, method):
     return jsonify(get_docs(module, method))
 
 @mod_api.route('/<module>/<module2>/<method>/docs/', methods=['GET'])
-#@login_required
+@auth.login_required
 def get_nested_docs(module, module2, method):
     return jsonify(get_docs(module, method, module2=module2))

@@ -5,6 +5,8 @@ import inspect
 import numpy as np
 import pysal as ps
 
+from flask import g
+
 from pmd import pmdwrapper
 from app import pysalfunctions, db
 from app.mod_data.models import UserPyObj
@@ -64,14 +66,17 @@ def post(request, module,method, module2=None):
             try:
                 if a.split('_')[0] == 'cached':
                     cacheid = a.split('_')[1]
-                    query = "SELECT Obj FROM WObj WHERE ID = {}".format(cacheid)
-                    cur = get_db().cursor().execute(query)
-                    result = cur.fetchone()[0]
-                    obj = cPickle.loads(str(result))
-
+		    print cacheid
+		    #Get the object out of the DB
+		    result = UserPyObj.query.filter_by(id = cacheid).first()
+		    obj = cPickle.loads(str(result.pyobj))
                     args[i] = obj
-                    cur.close()
             except: pass
+
+	    if isinstance(a, list):
+		arr = np.array(a)
+		print arr.shape
+		args[i] = np.array(a)
 
         for k, v in kwargs.iteritems():
             try:
@@ -98,7 +103,6 @@ def post(request, module,method, module2=None):
 
         #Make the call and get the return items
         funcreturn = call(*args, **kwargs)
-
         #Write the W Object to the database
         #TODO: This should cPickle all class returns and save them to the DB.
         if isinstance(funcreturn, ps.W):
@@ -106,16 +110,18 @@ def post(request, module,method, module2=None):
             wtype = 'rook'
             if 'queen' in method:
                 wtype = 'queen'
-            datahash = '4_columbus_{}'.format(wtype)
-            #TODO: CUID needs to be dynamic - pass in
+    	    fromshp = req['name'].split('/')[-1]
+	    datahash = '{}_{}'.format(wtype, fromshp)
             #TODO: datahash needs to be intelligently generated
-            insertrow = UserPyObj(4, pdata,datahash=datahash)
+            insertrow = UserPyObj(g.user.id, pdata,datahash=datahash)
             db.session.add(insertrow)
             db.session.commit()
 
             #TODO: This should return metadata, or some information other than done.
             response['data'] = 'W Created'
-        else:
+        
+		
+	else:
             funcreturn = recursedict(vars(funcreturn))
             response['data'] = funcreturn
 

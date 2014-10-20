@@ -3,6 +3,7 @@ import inspect
 
 from app import db
 from geoalchemy2 import Geometry
+
 #Base DB Model - All other tables subclass this class
 class Base(db.Model):
 
@@ -68,3 +69,12 @@ class GeoPoly():
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+class GeoMultiPoly():
+    wkb_geometry = db.Column(Geometry("MULTIPOLYGON"))
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+GEOMLOOKUP = {'Polygon':GeoPoly,
+	     'MultiPolygon':GeoMultiPoly}

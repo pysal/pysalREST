@@ -1,84 +1,52 @@
 from flask import Blueprint, request, render_template, \
-                  flash, g, session, redirect, url_for
-from flask.ext.login import login_user, logout_user, current_user, login_required
-from app import db, lm
+                  flash, g, session, redirect, url_for, jsonify
+from app import db, auth
 import app
 
-from app.mod_user.forms import LoginForm
+from flask_cors import cross_origin
+
 from app.mod_user.models import User, ROLE_ADMIN, ROLE_USER
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_user = Blueprint('auth', __name__, template_folder='templates/user')
 
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-@lm.unauthorized_handler
-def unauthorized():
+@mod_user.route('/token/', methods=['GET'])
+@auth.login_required
+def get_auth_token():
     """
-    @login_required calls this when a user is unauthorized
-    """
-    return redirect(url_for('user'))
-
-@mod_user.route('/', methods=['GET', 'POST'])
-def login():
-    """
-    Sign a user in a start a session
-    """
-    form = LoginForm(request.form)
-    if request.method == 'GET':
-        return render_template("user/signin.html", form=form)
+    Authentication can be via a username password combination
+    curl -k -L -i -u  jay@jay.com:jay https://webpool.csf.asu.edu/pysalrest/user/token/
     
-    if not form.validate_on_submit():
-        flash('Error logging in')
-    else:
-        if request.form['submit'] == 'login':
-            try:
-                user = User.query.filter_by(email = form.email.data).first()
-                if user == None:
-                    flash('User not found, please register')
-                    return render_template("user/signin.html", form=form)
-            except:
-                return render_template("user/signin.html", form=form)
-            #These should be hashed, etc.  This is development only.
+    or, more securely, via a token.  This is the function to get said token so that
+     username:password are not constantly passed
 
-            if user.password == form.password.data:
-                if 'remember' in request.form.keys():
-                    if login_user(user, remember=request.form['remember']):
-                        flash('Successfully logged in.')
-                        #return redirect('/pysalrest/api')
-			return redirect(url_for('mod_api.get_api'))
-                else:
-                    if login_user(user):
-                        flash('Successfully logged in.')
-                        #return redirect('/pysalrest/api')
-			return redirect(url_for('mod_api.get_api'))
+    curl -k -L -i -u  big_long_token:unused https://webpool.csf.asu.edu/pysalrest/user/token/
+    """
+    token = g.user.generate_auth_token()
+    uid = g.user.id
+    return jsonify({'token':token.decode('ascii'), 'uid':uid})
 
-            else:
-                return "Incorrect password"
-        elif request.form['submit'] == 'register':
-            user = User.query.filter_by(email = form.email.data).first()
-            if user != None:
-                flash('A user with this email already exists')
-		return render_tempalte('user/signin.html', form=form)
-            else:
-                email = form.email.data
-                try:
-                    name = email.split('@')[0]
-                except:
-                    flash('Invalid email')
-                    return render_templace("user/signin.html", form=form)
-                password = form.password.data
-                newuser = User(name=name, email=email, password=password)
-                db.session.add(newuser)
-                db.session.commit()
-                return render_template('user/signin.html', form=form)
+@mod_user.route('/register/', methods=['POST'])
+def register():
+    """
+    Register a new user with the backend
+    
+    Example:
+    --------
+    curl -k -L -XPOST -i -H "Content-Type:application/x-www-form-urlencoded" -d "email=jay@jay.com&password=jay" https:/webpool.csf.asu.edu/pysalrest/user/register/
+    
+    """
+    print request.form
+    print type(request.form)
+    email = request.form.get('email')
+    password = request.form.get('password')
+    name = email.split('@')[0]
+    user = User(name=name, email=email)
+    user.hashpwd(password)
+    db.session.add(user)
+    db.session.commit()
 
+    token = user.generate_auth_token()
+    uid = user.id    
 
-
-#Checker to see if the user is already logged in
-@mod_user.before_request
-def before_request():
-    g.user = current_user
-
+    return jsonify({'username':user.name, 'token':token.decode('ascii'), 'uid':uid})

@@ -1,0 +1,98 @@
+Usage: ogr2ogr [--help-general] [-skipfailures] [-append] [-update]
+               [-select field_list] [-where restricted_where]
+               [-progress] [-sql <sql statement>] [-dialect dialect]
+               [-preserve_fid] [-fid FID]
+               [-spat xmin ymin xmax ymax] [-geomfield field]
+               [-a_srs srs_def] [-t_srs srs_def] [-s_srs srs_def]
+               [-f format_name] [-overwrite] [[-dsco NAME=VALUE] ...]
+               dst_datasource_name src_datasource_name
+               [-lco NAME=VALUE] [-nln name] [-nlt type] [-dim 2|3|layer_dim] [layer [layer ...]]
+
+Advanced options :
+               [-gt n]
+               [-clipsrc [xmin ymin xmax ymax]|WKT|datasource|spat_extent]
+               [-clipsrcsql sql_statement] [-clipsrclayer layer]
+               [-clipsrcwhere expression]
+               [-clipdst [xmin ymin xmax ymax]|WKT|datasource]
+               [-clipdstsql sql_statement] [-clipdstlayer layer]
+               [-clipdstwhere expression]
+               [-wrapdateline][-datelineoffset val]
+               [[-simplify tolerance] | [-segmentize max_dist]]
+               [-addfields]
+               [-relaxedFieldNameMatch]
+               [-fieldTypeToString All|(type1[,type2]*)] [-unsetFieldWidth]
+               [-fieldmap identity | index1[,index2]*]
+               [-splitlistfields] [-maxsubfields val]
+               [-explodecollections] [-zfield field_name]
+               [-gcp pixel line easting northing [elevation]]* [-order n | -tps]
+
+ -f format_name: output file format name, possible values are:
+     -f "ESRI Shapefile"
+     -f "MapInfo File"
+     -f "TIGER"
+     -f "S57"
+     -f "DGN"
+     -f "Memory"
+     -f "BNA"
+     -f "CSV"
+     -f "GML"
+     -f "GPX"
+     -f "KML"
+     -f "GeoJSON"
+     -f "GMT"
+     -f "WAsP"
+     -f "PCIDSK"
+     -f "DXF"
+     -f "Geoconcept"
+     -f "GeoRSS"
+     -f "GPSTrackMaker"
+     -f "PGDump"
+     -f "GPSBabel"
+     -f "PDF"
+ -append: Append to existing layer instead of creating new if it exists
+ -overwrite: delete the output layer and recreate it empty
+ -update: Open existing output datasource in update mode
+ -progress: Display progress on terminal. Only works if input layers have the 
+                                          "fast feature count" capability
+ -select field_list: Comma-delimited list of fields from input layer to
+                     copy to the new layer (defaults to all)
+ -where restricted_where: Attribute query (like SQL WHERE)
+ -wrapdateline: split geometries crossing the dateline meridian
+                (long. = +/- 180deg)
+ -datelineoffset: offset from dateline in degrees
+                (default long. = +/- 10deg,
+                geometries within 170deg to -170deg will be splited)
+ -sql statement: Execute given SQL statement and save result.
+ -dialect value: select a dialect, usually OGRSQL to avoid native sql.
+ -skipfailures: skip features or layers that fail to convert
+ -gt n: group n features per transaction (default 20000)
+ -spat xmin ymin xmax ymax: spatial query extents
+ -simplify tolerance: distance tolerance for simplification.
+ -segmentize max_dist: maximum distance between 2 nodes.
+                       Used to create intermediate points
+ -dsco NAME=VALUE: Dataset creation option (format specific)
+ -lco  NAME=VALUE: Layer creation option (format specific)
+ -nln name: Assign an alternate name to the new layer
+ -nlt type: Force a geometry type for new layer.  One of NONE, GEOMETRY,
+      POINT, LINESTRING, POLYGON, GEOMETRYCOLLECTION, MULTIPOINT,
+      MULTIPOLYGON, or MULTILINESTRING, or PROMOTE_TO_MULTI.  Add "25D" for 3D layers.
+      Default is type of source layer.
+ -dim dimension: Force the coordinate dimension to the specified value.
+ -fieldTypeToString type1,...: Converts fields of specified types to
+      fields of type string in the new layer. Valid types are : Integer,
+      Real, String, Date, Time, DateTime, Binary, IntegerList, RealList,
+      StringList. Special value All will convert all fields to strings.
+ -fieldmap index1,index2,...: Specifies the list of field indexes to be
+      copied from the source to the destination. The (n)th value specified
+      in the list is the index of the field in the target layer definition
+      in which the n(th) field of the source layer must be copied. Index count
+      starts at zero. There must be exactly as many values in the list as
+      the count of the fields in the source layer. We can use the 'identity'
+      setting to specify that the fields should be transferred by using the
+      same order. This setting should be used along with the append setting. -a_srs srs_def: Assign an output SRS
+ -t_srs srs_def: Reproject/transform to this SRS on output
+ -s_srs srs_def: Override source SRS
+
+ Srs_def can be a full WKT definition (hard to escape properly),
+ or a well known definition (ie. EPSG:4326) or a file with a WKT
+ definition.

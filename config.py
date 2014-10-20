@@ -1,8 +1,8 @@
 DEBUG=True
-THREADS_PER_PAGE = 2
-CSRF_ENABLED = True
+THREADS_PER_PAGE = 1
+#CSRF_ENABLED = False
 SECRET_KEY = '\x97}\x81k\x94Hs\xc9R\\L\x9f\xf3J\x9e\x85nn\xca\xa5_\xc8\xacg'
-CSRF_SESSION_KEY = "makeme"
+#CSRF_SESSION_KEY = "makeme"
 
 ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip', 'amd', 'pmd'])
 
@@ -18,10 +18,7 @@ server = 'cherry'
 port = 8080
 host = '127.0.0.1'
 
-#Define the application home url, i.e. '/'.  If run on a subdomain
-# use SERVER_NAME instead.
 APPLICATION_ROOT = '/'
-
 
 #Database
 """
@@ -50,7 +47,7 @@ SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
 geom_column = 'wkb_geometry'
 
 #GDAL Commands
-ogr2ogr = '/usr/bin/ogr2ogr'
+ogr2ogr = '/home/apache/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
 
 #Logging
 loglocation = 'logging.log'

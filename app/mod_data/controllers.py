@@ -1,24 +1,24 @@
 import ast
+import decimal
 import glob
 import os
 import subprocess
 import tempfile
 
 from flask import Blueprint, request, jsonify, g, current_app
-from flask.ext.login import login_required, current_user
 from werkzeug.utils import secure_filename
 
 import geoalchemy2.functions as geofuncs
 
-from app import db, seen_classes, cachedobjs
-from app.mod_data.models import UserData, UserPyObj, GeoPoly
+from app import auth, db, seen_classes, cachedobjs
+from app.mod_data.models import UserData, UserPyObj, GeoPoly, GEOMLOOKUP
 from app.mod_data import upload_helpers as uph
 import config
 
 mod_data = Blueprint('mod_data', __name__)
 
 @mod_data.route('/', methods=['GET'])
-@login_required
+@auth.login_required
 def data():
     """
     The data homepage.
@@ -30,27 +30,26 @@ def data():
     return jsonify(response)
 
 @mod_data.route('/listdata/', methods=['GET'])
-@login_required
+@auth.login_required
 def listdata():
     """
     List the available datasets by querying the DB and
     returning metadata about the available user uploaded data.
     """
-    cuid = current_user.id
+    cuid = g.user.id
     response = {'status':'success','data':{}}
     availabledata = UserData.query.filter_by(userid = cuid).all()
     for a in availabledata:
         dataname = a.datahash.split('_')
         entry = {'dataname':dataname[1],
-                'href':'/data/{}/{}'.format(cuid, a.datahash),
+                'href':'data/{}/{}'.format(cuid, a.datahash),
                 'datecreated': a.date_created,
                 'datemodified': a.date_modified}
         response['data'][a.id] = entry
     return jsonify(response)
 
 @mod_data.route('/upload/', methods=['POST'])
-#TODO: Turn on login here and remove static CUID.
-#@login_required
+@auth.login_required
 def upload():
     """
     Upload to a temporary directory, validate, call ogr2ogr and write to the DB
@@ -61,11 +60,19 @@ def upload():
     Example 2 is a subset of NAT, zipped.
     curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http://localhost:8080/data/upload/
     curl -X POST -F filename=@NAT_Subset.zip http://localhost:8080/data/upload/
+    
+    Do not forget to pass the login token (-u bigstring:unused)
     """
-    tmpdir = tempfile.mkdtemp()
-    cuid = 4
-    #cuid = current_user.id
-
+    print "UPLOADING"
+    if hasattr(g.user, 'tmpdir'):    
+        tmpdir = g.user.tmpdir
+        print g.user
+    else:
+        tmpdir = tempfile.mkdtemp()
+        g.user.tmpdir = tmpdir
+    print tmpdir
+    cuid = g.user.id
+    
     for f in request.files.values():
         if f and uph.allowed_file(f.filename):
             filename = secure_filename(f.filename)
@@ -89,7 +96,10 @@ def upload():
                                                                  config.dbpass,
                                                                  config.dbname),
                shp,
-               '-nln', shptablename]
+               '-nlt', 'PROMOTE_TO_MULTI',
+               '-nln', shptablename,
+               '-lco', 'GEOMETRY_NAME={}'.format(config.geom_column)]
+
         response = subprocess.call(cmd)
 
         uploadeddata = UserData(cuid, shptablename)
@@ -103,17 +113,18 @@ def upload():
     return tmpdir
 
 @mod_data.route('/cached/', methods=['GET'])
-@login_required
+@auth.login_required
 def cached():
     """
     List the cached python objects for a given user.
     """
-    cuid = current_user.id
+    cuid = g.user.id
     response = {'status':'success','data':{}}
     availabledata = UserPyObj.query.filter_by(userid = cuid).all()
     for a in availabledata:
         dataname = a.datahash.split('_')
         entry = {'dataname':dataname[1],
+		'id':a.id,
                 'href':'/data/cached/{}/{}'.format(cuid, a.datahash),
                 'datecreated': a.date_created,
                 'datemodified': a.date_modified}
@@ -121,9 +132,9 @@ def cached():
     return jsonify(response)
 
 @mod_data.route('/cached/<uid>/<objhash>', methods=['GET'])
-@login_required
+@auth.login_required
 def get_cached_entry(uid, objhash):
-    cuid = current_user.id
+    cuid = g.user.id
     if int(uid) != cuid:
         return "You are either not logged in or this is another user's data."
     else:
@@ -141,12 +152,12 @@ def get_cached_entry(uid, objhash):
     return jsonify(response)
 
 @mod_data.route('/cached/<uid>/<objhash>/<attribute>', methods=['GET'])
-@login_required
+@auth.login_required
 def get_cached_entry_attribute(uid, objhash, attribute):
     """
     Get an attribute from a PyObj via either the internal cache or a DB call.
     """
-    cuid = current_user.id
+    cuid = g.user.id
     if int(uid) != cuid:
         return "You are either not logged in or this is another user's data."
     else:
@@ -163,15 +174,14 @@ def get_cached_entry_attribute(uid, objhash, attribute):
             return jsonify({'status':'failure', 'data':'Unable to find attribute'})
 
 @mod_data.route('/cached/<uid>/<objhash>/<method>', methods=['POST'])
-@login_required
+@auth.login_required
 def call_cached_centry_method(uid, objhash, method):
     raise NotImplementedError
 
 @mod_data.route('/<uid>/<tablename>/')
-#@login_required
+@auth.login_required
 def get_dataset(uid, tablename):
-    #cuid = current_user.id
-    cuid = 4
+    cuid = g.user.id
     if int(uid) != cuid:
         return "You are either not logged in or this is another user's data."
     else:
@@ -181,7 +191,10 @@ def get_dataset(uid, tablename):
         else:
             db.metadata.reflect(bind=db.engine)
             seen_classes.add(tablename)
-            cls = type(str(tablename), (GeoPoly, db.Model,), {'__tablename__':tablename,
+            #Dynamic class creation using metaclasses
+	    geomtype = "Polygon"
+	    basegeomcls = GEOMLOOKUP[geomtype]
+	    cls = type(str(tablename), (basegeomcls, db.Model,), {'__tablename__':tablename,
                 '__table_args__' : {'extend_existing': True}})
             current_app.class_references[tablename] = cls
 
@@ -194,10 +207,9 @@ def get_dataset(uid, tablename):
         return jsonify(response)
 
 @mod_data.route('/<uid>/<tablename>/<field>/')
-#@login_required
+@auth.login_required
 def get_dataset_field(uid, tablename, field):
-    #cuid = current_user.id
-    cuid = 4
+    cuid = g.user.id
     if int(uid) != cuid:
         return "You are either not logged in or this is another user's data."
     else:
@@ -221,6 +233,9 @@ def get_dataset_field(uid, tablename, field):
             features = []
             for i, row in enumerate(rows):
                 attributes = row.as_dict()
+		for k, v in attributes.iteritems():
+		    if isinstance(v, decimal.Decimal):
+			attributes[k] = float(v)
                 attributes.pop('wkb_geometry', None)
                 current_feature = {'type':'Feature',
                         'geometry':ast.literal_eval(geoms[i][0]),
@@ -233,5 +248,9 @@ def get_dataset_field(uid, tablename, field):
             pass
         else:
             vector = cls.query.with_entities(getattr(cls, field)).all()
-            response['data'][field] = [v[0] for v in vector]
+    	    responsevector = [v[0] for v in vector]
+	    if isinstance(responsevector[0], decimal.Decimal):
+		for i, v in enumerate(responsevector):
+ 		    responsevector[i] = float(v)
+            response['data'][field] = responsevector
         return jsonify(response)

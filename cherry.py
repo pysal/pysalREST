@@ -24,7 +24,6 @@ def start():
     
     app_logged = FotsTransLogger(app, format=log_format)
     cherrypy.tree.graft(app_logged, config.APPLICATION_ROOT)
-
     cherrypy.config.update({
 	    'engine.autoreload_on':True,
 	    'log.screen':True,
@@ -50,7 +49,6 @@ class FotsTransLogger(TransLogger):
         [08/Jan/2013:23:50:03] ENGINE Bus STARTED
         [08/Jan/2013:23:50:45] REQUES GET 200 / (192.168.172.1) 830
         """
-
         if bytes is None:
             bytes = '-'
         remote_addr = '-'
