@@ -98,12 +98,28 @@ def post(request, module,method, module2=None):
 
 
         #This is a hack until I get the vector/list checking going on
-        if module == 'esda':
-            args[0] = np.array(args[0])
+        #if module == 'esda':
+            #args[0] = np.array(args[0])
 
         #Make the call and get the return items
-        funcreturn = call(*args, **kwargs)
-        #Write the W Object to the database
+        try:
+	    funcreturn = call(*args, **kwargs)
+        except:
+	    try:
+		for i,a in enumerate(args):
+ 		    if isinstance(a, list):
+		    	args[i] = np.array(args[i]).reshape(-1,1)
+		    if isinstance(a, np.ndarray):
+			args[i] = a.reshape(-1,1)
+		funcreturn = call(*args, **kwargs)
+	    except:
+		for i, a in enumerate(args):
+		    if isinstance(a,list):
+			print "LATER"
+			args[i] = np.array(args[i]).reshape(1,-1)
+		funcreturn = call(*args, **kwargs)
+	
+	#Write the W Object to the database
         #TODO: This should cPickle all class returns and save them to the DB.
         if isinstance(funcreturn, ps.W):
             pdata = cPickle.dumps(funcreturn, cPickle.HIGHEST_PROTOCOL)
