@@ -1,7 +1,8 @@
 import ast
+from collections import OrderedDict
 import cPickle
 import inspect
-
+import re
 import numpy as np
 import pysal as ps
 
@@ -60,7 +61,7 @@ def post(request, module,method, module2=None):
         for i, a in enumerate(args):
             try:
                 if a in UPLOADED_FILES:
-                    arcgs[i] = UPLOAD_FOLDER + '/' +  a
+                    args[i] = UPLOAD_FOLDER + '/' +  a
                     shpname = a.split('.')[0]
             except: pass
             try:
@@ -205,10 +206,16 @@ def get_method(module, method, module2 = None):
     #Inspect the method to get the arguments
     try:
         reqargs = inspect.getargspec(method)
+        classtype = False
     except:
         reqargs = inspect.getargspec(method.__init__)
+        classtype = True
 
+    docstring = inspect.getdoc(method)
+    
+    #Remove self and get defaults
     args = reqargs.args
+    
     if reqargs.defaults != None:
         defaults = list(reqargs.defaults)
     else:
@@ -217,18 +224,46 @@ def get_method(module, method, module2 = None):
         args.remove('self')
     except:
         pass
+    #Parse the docstring for an argument type
+    argtype = OrderedDict()
+    doclist = docstring.split('\n')
+    for a in args:
+        argtype[a] = {'name': a, 'type':'Unknown', 'description':'None'}
+        for i, l in enumerate(doclist):
+            if re.match(r'\b{}\b'.format(a), l):
+                intype = l.split(':')[-1]
+                argtype[a]['type'] = intype.strip()
+                desc = []
+                j = 1
+                while ':' not in doclist[i+j]:
+                    if len(doclist[i+j]) == 0:
+                        break
+                    desc.append(doclist[i+j].strip() + ' ')
+                    j += 1
 
-    #Pack the arguments into the pos_template
-    response['data']['post_template'] = {'args':[], 'kwargs':{}}
+                description = "".join(desc)
+                argtype[a]['description'] = description
+            if 'Attributes' in l:
+                break
+    #Pack the arguments into the post template
+    response['data']['post_template'] = {'args':[], 'kwargs':[]}
     diff = len(defaults) - len(args)
-    for i, arg in enumerate(args):
+    for i, arg in enumerate(argtype):
         if diff < 0:
             diff += 1
-            response['data']['post_template']['args'].append(arg)
+            response['data']['post_template']['args'].append(argtype[arg])
         else:
-            response['data']['post_template']['kwargs'][arg] = defaults[diff]
-
+            default = defaults[diff]
+            argtype[arg]['default'] = default
+            response['data']['post_template']['kwargs'].append(argtype[arg])
+            diff += 1
     response['data']['links'] = {'id':'docs',
                                  'href':'{}/{}/docs/'.format(module, mname)}
-    return response
 
+    #Try to extract the return types using a metaclass
+    if inspect.isclass(method):
+        dummy = type('dummy', (method,),{})
+        a = dummy(None)
+        print inspect.getmembers(dummy)
+    
+    return response
