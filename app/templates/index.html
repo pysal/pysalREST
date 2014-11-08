@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <title>Sample Application</title>
-<link rel="stylesheet" href="/css/jquery-ui.css">
-<script src="/js/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="static/css/jquery-ui.css">
+<script src="static/js/jquery-1.11.1.min.js"></script>
 
-<script src="/js/dropzone.js"></script>
-<link rel="stylesheet" href="/css/dropzone.css">
+<script src="static/js/dropzone.js"></script>
+<link rel="stylesheet" href="static/css/dropzone.css">
     
-<script src="/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+<script src="static/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="static/css/bootstrap.min.css">
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
 
-<script src="/js/knockout-2.2.1.js"></script>
+<script src="static/js/knockout-2.2.1.js"></script>
     
-<script src="/js/d3.v3.min.js" charset="utf-8"></script>
-<script src="/js/colorbrewer.v1.min.js"></script>
+<script src="static/js/d3.v3.min.js" charset="utf-8"></script>
+<script src="static/js/colorbrewer.v1.min.js"></script>
     
-<script type="text/javascript" src="/js/jquery-impromptu.min.js"></script>
-<link rel="stylesheet" href="/css/jquery-impromptu.min.css">
+<script type="text/javascript" src="static/js/jquery-impromptu.min.js"></script>
+<link rel="stylesheet" href="static/css/jquery-impromptu.min.css">
     
 <style>
 #dropstyle {
@@ -470,7 +470,7 @@ div.tooltip {
         function ShapefileViewModel() {  
             var self = this;
             
-            self.shapefilelistURI = 'http://localhost:8080/listdata/';
+            self.shapefilelistURI = '/pysalrest/listdata';
 
             //Array to store available shapefiles and currently selected shapefile
             self.shapefiles = ko.observableArray();
@@ -516,7 +516,7 @@ div.tooltip {
             //Render the shapefile using D3
             self.drawshapefile = function(shpname, rdata){
                 //make API call
-                var shapefileuri = 'http://localhost:8080/listdata/' + shpname + '/thegeom/';
+                var shapefileuri = '/pysalrest/listdata/' + shpname + '/thegeom';
                 var map = mapvis.renderMap(shapefileuri, rdata);
                 self.shapefile(shpname);
                 self.updateWstatus(shpname);
@@ -527,7 +527,7 @@ div.tooltip {
                 //Check the cached url to see if W objects exist
                 var Wstatus = {"Queen":false,
                               "Rook": false};
-                self.ajax("http://localhost:8080/cached/", 'GET').done(function(response){
+                self.ajax("/pysalrest/cached", 'GET').done(function(response){
                     self.wobjs.removeAll()
                     //Parse the cached list to see which match the current shapefile
                     var resp = response.data.cacheditems
@@ -560,7 +560,7 @@ div.tooltip {
             self.shapefile.subscribe(function() {
                 shpname = self.shapefile()
                 //Populate a dropdown with available fields in the shapefile
-                self.shapefileinfoURI = 'http://localhost:8080/listdata/' + shpname + '/'
+                self.shapefileinfoURI = '/pysalrest/listdata/' + shpname
                 self.fields.removeAll()
                 self.ajax(self.shapefileinfoURI, 'GET').done(function(response) {
                     var fields = response.data.fields;
@@ -575,7 +575,7 @@ div.tooltip {
             
             //When a field is selected, update the field vector to store the data client side
             self.field.subscribe(function() {
-                var shapefileFieldURI = 'http://localhost:8080/listdata/' + self.shapefile() + '/' + self.field() + '/' 
+                var shapefileFieldURI = '/pysalrest/listdata/' + self.shapefile() + '/' + self.field() 
                 self.ajax(shapefileFieldURI, 'GET').done(function(response){
                     self.currentFieldVector = response.data[self.field()]
                 }); 
@@ -605,7 +605,7 @@ div.tooltip {
         //Model View of available ESDA autocorrelation measures
         function SpatAutoViewModel(){
           var self = this;
-          var SpatAutoBaseURI = 'http://localhost:8080/api/esda/'
+          var SpatAutoBaseURI = '/pysalrest/api/esda'
           
           //Store available and current method family
           self.methodfamilies = ko.observableArray()
@@ -647,7 +647,7 @@ div.tooltip {
 
             //Sub method
             self.methodfamily.subscribe(function(){
-                var methodsURI = SpatAutoBaseURI + self.methodfamily() + '/'
+                var methodsURI = SpatAutoBaseURI + '/' + self.methodfamily()
                 self.ajax(methodsURI, 'GET').done(function(response){
                     var links = response.data.links;
                     for (var i=0;i < links.length;i++){
@@ -658,7 +658,7 @@ div.tooltip {
             
             //Kwargs
             self.method.subscribe(function(){
-                var methodURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() + '/'
+                var methodURI = SpatAutoBaseURI + '/' + self.methodfamily() + '/' + self.method()
                 //Make the ajax call
                 self.ajax(methodURI, 'GET').done(function(response){
                     var kwargs = response.data.post_template.kwargs;
@@ -699,7 +699,7 @@ div.tooltip {
                 data['kwargs'] = kwargstring;
                 
                 //Make the post request
-                var postURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() +'/'
+                var postURI = SpatAutoBaseURI + '/' + self.methodfamily() + '/' + self.method()
                 self.ajax(postURI, 'POST', data).done(function(response){    
                     var rdata = response.data
                     console.log(rdata)
@@ -751,7 +751,7 @@ div.tooltip {
             
             //Show the documentation for the method / class
             self.showDocumentation = function(name){
-                var documentationURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() + '/docs/'
+                var documentationURI = SpatAutoBaseURI + self.methodfamily() + '/' + self.method() + '/docs'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
                     $.prompt(JSON.stringify(docs, null, 2));
@@ -762,7 +762,7 @@ div.tooltip {
         //Model View of available ESDA classifiers
         function ESDAViewModel(){
             var self = this;
-            self.ESDAbaseURI = 'http://localhost:8080/api/esda/mapclassify/'
+            self.ESDAbaseURI = '/pysalrest/api/esda/mapclassify'
             
             //Store the current classifier
             self.classifiers = ko.observableArray();
@@ -803,7 +803,7 @@ div.tooltip {
             //Subscribe to the classifier drop down - when it changes, update the kwargs inputs
             self.selectedClassifier.subscribe(function(){
                 //Get the method / class arguments
-                var classifierMethodURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() + '/'
+                var classifierMethodURI = '/pysalrest/api/esda/mapclassify/' + self.selectedClassifier()
 
                 //Make the ajax call
                 self.ajax(classifierMethodURI, 'GET').done(function(response){
@@ -824,7 +824,7 @@ div.tooltip {
             
             //Show the documentation for the method / class
             self.showDocumentation = function(name){
-                var documentationURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() + '/docs/'
+                var documentationURI = '/pysalrest/api/esda/mapclassify/' + self.selectedClassifier() + '/docs'
                 self.ajax(documentationURI, 'GET').done(function(response){
                     var docs = response.data.docstring;
                     $.prompt(JSON.stringify(docs, null, 4));
@@ -853,7 +853,7 @@ div.tooltip {
                 //console.log($.toJSON(data))
                 
                 //Make the post request
-                var postURI = 'http://localhost:8080/api/esda/mapclassify/' + self.selectedClassifier() +'/'
+                var postURI = '/pysalrest/api/esda/mapclassify/' + self.selectedClassifier()
                 self.ajax(postURI, 'POST', data).done(function(response){
                     var rdata = response.data
                     mapvis.onUpdate(rdata);
@@ -891,7 +891,7 @@ div.tooltip {
                                   'Rook': 'rook_from_shapefile'}
         
             self.onExecute = function(){
-                var posturl = 'http://localhost:8080/api/weights/' + self.wmethod_lookup[self.wmethod()] + '/'
+                var posturl = '/pysalrest/api/weights/' + self.wmethod_lookup[self.wmethod()]
                 var inputshp = shapefileview.shapefile() + '.shp'
                 
                 var data = {};
@@ -917,7 +917,7 @@ div.tooltip {
             self.renderedpmd = ko.observable("No AMD Selected...");
             self.resultpmd = ko.observable("No results yet. Execute an AMD.")
             
-                        //Helper to make the ajax get call - an this moved to a higher level?
+            //Helper to make the ajax get call - an this moved to a higher level?
             self.ajax = function(uri, method, data) {
                 var request = {
                     url: uri,
@@ -935,21 +935,21 @@ div.tooltip {
             }
         
             //List the available PMD when the page loads
-            self.ajax("http://localhost:8080/listdata/", 'GET').done(function(response) {
+            self.ajax("/pysalrest/listdata", 'GET').done(function(response) {
                 for (var key in response.data.pmd){
                     self.availablepmd.push(key);
                 }
             }); 
             
             self.currentpmd.subscribe(function(){
-                var pmdURI = 'http://localhost:8080/listdata/' + self.currentpmd() + '/' 
+                var pmdURI = '/pysalrest/listdata/' + self.currentpmd() 
                 self.ajax(pmdURI, 'GET').done(function(response){
                     self.renderedpmd(response.data);
                 }); 
             });
             
             self.onExecute = function(){
-                pmdexecuteURI = 'http://localhost:8080/amd/'
+                pmdexecuteURI = '/pysalrest/amd/'
                 //POST request to execute the current PMD
                 self.ajax(pmdexecuteURI, 'POST', self.renderedpmd()).done(function(response){
                     //Update the shapefile list with the PMD data
@@ -967,7 +967,7 @@ div.tooltip {
                     data['kwargs'] = {'k':5}
 
                     //Make the post request
-                    var postURI = 'http://localhost:8080/api/esda/mapclassify/Quantiles/'
+                    var postURI = '/pysalrest/api/esda/mapclassify/Quantiles/'
                     self.ajax(postURI, 'POST', data).done(function(response){
                         var rdata = response.data  
                         self.ReClass(rdata)
@@ -1003,7 +1003,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8080/upload/",
+          url: "/pysalrest/upload",
           dictDefaultMessage: "Drop a .pmd, .amd, or .wmd here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB
@@ -1032,7 +1032,7 @@ div.tooltip {
                 });
             },
             
-          url: "http://localhost:8080/upload/",
+          url: "/pysalrest/upload",
           dictDefaultMessage: "Drop shp, shx, dbf or .zip here...",
           paramName: "file", // The name that will be used to transfer the file
           maxFilesize: 20, // MB

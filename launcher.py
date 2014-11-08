@@ -1,4 +1,4 @@
-import pysalrest
+import app.pysalrest
 import argparse
 import ConfigParser
 import os.path
@@ -15,15 +15,23 @@ def _parse_args():
     return vars(parser.parse_args())
 
 def _parse_file(path):
+    """
+    Parse the configuration file into an args dict.
+    """
     if not os.path.exists(path):
         return {}
     config = ConfigParser.ConfigParser()
     config.read(path)
-    return dict(config['pyrest'])
+    configuration = {}
+    for section in config.sections():
+        options = config.options(section)
+        for o in options:
+            configuration[o] = config.get(section, o)
+    return configuration
 
 def _get_config():
-    args = {'server': 'cherrypy',
-            'cfg': 'pysalrest.cfg',
+    args = {'server': 'cherry',
+            'cfg': 'config',
             'api': 'pysalrest',
             'port': 8080,
             'host': '0.0.0.0',
@@ -31,15 +39,18 @@ def _get_config():
             }
     args.update({k:v for (k,v) in _parse_args().items() if v is not None})
     configfile = args['cfg']
+    cfgopts = importlib.import_module(args['cfg'])
+    print dir(cfgopts)
+    exit()
     cfgopts = _parse_file(configfile)
     cfgopts.update(args)
     return cfgopts
 
 def main():
     cfg = _get_config()
+    print cfg
     try:
         engine = importlib.import_module(cfg['server'])
-        print engine
     except ImportError:
         raise ImportError("Could not load server integration implementation: %s" % (cfg['server'],))
     try:
