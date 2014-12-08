@@ -3,7 +3,6 @@ from api_helpers import post, recursedict, get_docs, get_method
 from flask import Blueprint, request, jsonify
 from app import auth, db, pysalfunctions
 
-
 mod_api = Blueprint('mod_api', __name__)
 
 @mod_api.route('/', methods=['GET'])
@@ -64,6 +63,7 @@ def get_nested_method(module, module2, method):
         return jsonify(get_method(module, method, module2=module2))
     else:
         if not request.json:
+	    print "NOTJSON"
             response = {'status':'error','data':{}}
             response['data'] = 'Post datatype was not json'
             return jsonify(response), 400

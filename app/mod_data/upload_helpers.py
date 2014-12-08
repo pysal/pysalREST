@@ -33,7 +33,6 @@ def unzip(filename, path):
                 if w in (os.curdir, os.pardir, ''):
                     continue
                 destination = os.path.join(path, w)
-                print destination
             zf.extract(m, destination)
     return
 
@@ -42,7 +41,7 @@ def hashname(filename, cuid=None):
     Take a filename and hash into a valid database table name
     in the form userid_shapefilename_timestamp
     """
-    basename = os.path.basename(filename.split('.')[0])
+    basename = os.path.basename(filename.split('.')[0]).lower()
     hashl = hashlib.sha1()
     hashl.update(str(time.time()))
 
