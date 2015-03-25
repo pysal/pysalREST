@@ -86,70 +86,6 @@ def list_tabular_data():
     response['data'] = getdatalist(cuid)
     return jsonify(response)
 
-#Pull out to the top level into a mod_upload
-@mod_data.route('/upload/', methods=['POST'])
-@auth.login_required
-def upload():
-    """
-    Upload to a temporary directory, validate, call ogr2ogr and write to the DB
-
-    Using curl via the command line.
-    ---------------------------------
-    Example 1 is from pysal examples (from that dir)
-    Example 2 is a subset of NAT, zipped.
-    Example 3 is columbus via the webpool and a sample user.
-    curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http://localhost:8080/mydata/upload/
-    curl -X POST -F filename=@NAT_Subset.zip http://localhost:8080/mydata/upload/
-    curl -i -k -u jay@jay.com:jay -X POST -F filename=@col.zip  https://webpool.csf.asu.edu/pysalrest/mydata/upload/
-    """
-    if hasattr(g.user, 'tmpdir'):    
-        tmpdir = g.user.tmpdir
-    else:
-        tmpdir = tempfile.mkdtemp()
-        g.user.tmpdir = tmpdir
-    cuid = g.user.id
-    for f in request.files.values():
-        if f and uph.allowed_file(f.filename):
-            filename = secure_filename(f.filename)
-            savepath = os.path.join(tmpdir, filename)
-            f.save(savepath)
-
-            basename, ext = filename.split('.')
-            if ext == 'zip':
-                uph.unzip(savepath, tmpdir)
-
-    #Now iterate over all the shapefiles and call ogr2ogr
-    shps = glob.glob(os.path.join(tmpdir, '*.shp'))
-    for shp in shps:
-        shptablename = os.path.splitext(os.path.basename(shp))[0]
-	datahashvalue = '{}_{}_{}'.format(cuid, shptablename, time.time())
-	datahash = hashlib.md5(datahashvalue).hexdigest()
-
-	host, port = config.dbhost.split(':')
-        cmd = [config.ogr2ogr, '-f', "{}".format(config.dbtypename),
-               "{}:host={} port={} user={} password={} dbname={}".format(config.dbabbrev,
-                                                                 host,
-                                                                 port,
-                                                                 config.dbusername,
-                                                                 config.dbpass,
-                                                                 config.dbname),
-               shp,
-               '-nlt', 'PROMOTE_TO_MULTI',
-               '-nln', datahash,
-               '-lco', 'GEOMETRY_NAME={}'.format(config.geom_column),
-		'-skipfailures']
-
-        response = subprocess.call(cmd)
-
-        uploadeddata = UserData(cuid, datahash, shptablename)
-        db.session.add(uploadeddata)
-        db.session.commit()
-
-    #Cleanup
-    shutil.rmtree(tmpdir)
-
-    return jsonify({'status':'success', 'data':{'href':'mydata/{}'.format(datahash)}})
-
 
 def parse_nontabular(response, row):
     """
@@ -268,10 +204,10 @@ def get_dataset_field(tablename, field):
        features = []
        for i, row in enumerate(rows):
            attributes = row.as_dict()
-       for k, v in attributes.iteritems():
-     	   if isinstance(v, decimal.Decimal):
-   	       attributes[k] = float(v)
            attributes.pop('wkb_geometry', None)
+           for k, v in attributes.iteritems():
+     	       if isinstance(v, decimal.Decimal):
+   	           attributes[k] = float(v)
            current_feature = {'type':'Feature',
                    'geometry':ast.literal_eval(geoms[i][0]),
                    'properties':attributes}

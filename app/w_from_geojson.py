@@ -7,23 +7,21 @@ Originally prototyped by Serge - I need this for the REST API
 """
 
 class PolygonCollection:
+    '''
+    Parameters
+    ----------
+    polygons : dict
+              key is polygon Id, value is PySAL Polygon object
+    bbox : list (optional)
+          [left, lower, right, upper]
+
+    Notes
+    -----
+    bbox is supported in geojson specification at both the feature and feature collection level. However, not all geojson writers generate the bbox at the feature collection level.
+    In those cases, the bbox property will be set on initial access.
+
+    '''
     def __init__(self, polygons, bbox=None):
-        """
-
-        Parameters
-        ==========
-        polygons: dict
-                  key is polygon Id, value is PySAL Polygon object
-        bbox: list (optional)
-              [left, lower, right, upper]
-
-        Notes
-        =====
-        bbox is supported in geojson specification at both the feature and feature collection level. However, not all geojson writers generate the bbox at the feature collection level.
-        In those cases, the bbox property will be set on initial access.
-
-        """
-
         self.type=ps.cg.Polygon
         self.n = len(polygons)
         self.polygons = polygons
@@ -44,7 +42,7 @@ class PolygonCollection:
         return self.polygons[index]
 
 
-def find_features(d, key='features'):
+def _find_features(d, key='features'):
     """
     Recursively search a nested dictionary for a 'features' key.
     This handles geojson extraction when the geojson object is not at the
@@ -58,17 +56,27 @@ def find_features(d, key='features'):
         if isinstance(value, dict):
             for m in d[k].itervalues():
 		print "NESTED: ", m, m.keys()
-                for n in find_features(m):
+                for n in _find_features(m):
                     yield n
+
 
 def queen_geojson(gjobj):
     """
     Constructs a PySAL queen contiguity W from a geojson object.
-
-    This is a modification to Serge's code that performs a search for
+    This is a modification to Serge's code.
+    
+    Parameters
+    -----------
+    gjobj : dict
+            A dictionary representing a geojson object
+            
+    Returns
+    -------
+    W     : W
+            A queen contiguity W Object
     """
-    print type(gjobj)
-    #features = list(find_features(gjobj))[0]
+    
+    #features = list(_find_features(gjobj))[0]
     features = list(gjobj['geojson']['features'])
     polys = []
     ids = []
@@ -80,3 +88,4 @@ def queen_geojson(gjobj):
     polygons = PolygonCollection(dict(zip(ids,polys)))
     neighbors = ps.weights.Contiguity.ContiguityWeightsPolygons(polygons).w
     return ps.W(neighbors)
+

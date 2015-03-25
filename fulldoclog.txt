@@ -1,0 +1,4721 @@
+<function steady_state at 0x7fb1b20c58c0>
+<function var_fmpt at 0x7fb1b20c59b0>
+<function fmpt at 0x7fb1b20c5938>
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+<function knox at 0x7fb1b20d39b0>
+<function modified_knox at 0x7fb1b20d3b90>
+<function mantel at 0x7fb1b20d3aa0>
+<function jacquez at 0x7fb1b20d3b18>
+<function rose at 0x7fb1b20d3668>
+pysal.spatial_dynamics.rank.SpatialTau
+pysal.spatial_dynamics.rank.Tau
+pysal.spatial_dynamics.rank.Theta
+<function pseudop at 0x7fb1b20d3140>
+<function get_lower at 0x7fb1b20d3938>
+<function shuffle_matrix at 0x7fb1b20d38c0>
+<function prais at 0x7fb1b20c5f50>
+<function chi2 at 0x7fb1b20c5a28>
+<function shorrock at 0x7fb1b20d3050>
+pysal.spatial_dynamics.markov.Spatial_Markov
+<function homogeneity at 0x7fb1b20d30c8>
+pysal.spatial_dynamics.markov.Homogeneity_Results
+pysal.spatial_dynamics.markov.Markov
+<function kullback at 0x7fb1b20c5de8>
+pysal.spatial_dynamics.markov.LISA_Markov
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7fb1b20e0230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7fb1b20e0320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+<function noneMax at 0x7fb1b20e02a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+<function weight_convert at 0x7fb1b20e0050>
+pysal.core.util.wkt.WKTParser
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+<class 'pysal.core.FileIO.FileIO'>
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+pysal.region.randomregion.Random_Region
+pysal.region.randomregion.Random_Regions
+pysal.region.maxp.Maxp_LISA
+pysal.region.maxp.Maxp
+<function check_contiguity at 0x7fb1b20b9848>
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7fb1b20b97d0>
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7fb1b581d9b0>
+<function union_all at 0x7fb1b5820ed8>
+<function Rtree at 0x7fb1b58357d0>
+<function avg_diagonals at 0x7fb1b5835848>
+<function closest at 0x7fb1b5838938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7fb1b58388c0>
+<function silhouette_coeff at 0x7fb1b5838848>
+<function silhouette_w at 0x7fb1b58387d0>
+<function k_means_cluster at 0x7fb1b58389b0>
+<class 'pysal.cg.rtree.Rect'>
+<function get_angle_between at 0x7fb1b581ded8>
+<function get_point_at_angle_and_dist at 0x7fb1b5820488>
+<function get_points_dist at 0x7fb1b5820398>
+<function get_polygon_point_dist at 0x7fb1b5820320>
+<function get_segment_point_dist at 0x7fb1b5820410>
+<function bbcommon at 0x7fb1b581dde8>
+<function get_rectangle_rectangle_intersection at 0x7fb1b58202a8>
+<function get_polygon_point_intersect at 0x7fb1b5820140>
+<function ccw at 0x7fb1b58205f0>
+<function point_touches_rectangle at 0x7fb1b5820758>
+<function get_segments_intersect at 0x7fb1b5820050>
+<function is_collinear at 0x7fb1b581df50>
+<function get_shared_segments at 0x7fb1b58207d0>
+<function get_ray_segment_intersect at 0x7fb1b5820230>
+<function distance_matrix at 0x7fb1b5820848>
+<function get_segment_point_intersect at 0x7fb1b58200c8>
+<function convex_hull at 0x7fb1b5820500>
+<function is_clockwise at 0x7fb1b5820578>
+<function seg_intersect at 0x7fb1b5820668>
+<function get_bounding_box at 0x7fb1b581de60>
+<function get_rectangle_point_intersect at 0x7fb1b58201b8>
+<function asShape at 0x7fb1c2581140>
+<class 'pysal.cg.shapes.Polygon'>
+<class 'pysal.cg.shapes.Chain'>
+<class 'pysal.cg.shapes.Point'>
+<class 'pysal.cg.shapes.LineSegment'>
+pysal.cg.shapes.VerticalLine
+pysal.cg.shapes.Line
+<class 'pysal.cg.shapes.Ring'>
+pysal.cg.shapes.Rectangle
+pysal.cg.shapes.Ray
+<function arcdist2linear at 0x7fb1be25e9b0>
+<function linear2arcdist at 0x7fb1be25ea28>
+<function fast_threshold at 0x7fb1be25ec80>
+<function toXYZ at 0x7fb1be25eaa0>
+<function fast_knn at 0x7fb1be25ec08>
+<function toLngLat at 0x7fb1be25eb18>
+<function harcdist at 0x7fb1be25ef50>
+<function <lambda> at 0x7fb1be25ee60>
+<function lonlat at 0x7fb1be25ecf8>
+<function geointerpolate at 0x7fb1c2581050>
+<function arcdist at 0x7fb1be25e0c8>
+<function geogrid at 0x7fb1c25810c8>
+<function haversine at 0x7fb1be25ed70>
+<function brute_knn at 0x7fb1be25eb90>
+<function radangle at 0x7fb1be25eed8>
+pysal.cg.locators.PointLocator
+pysal.cg.locators.PolygonLocator
+pysal.cg.locators.BruteForcePointLocator
+pysal.cg.locators.Grid
+pysal.cg.locators.IntervalTree
+pysal.inequality.gini.Gini
+pysal.inequality.gini.Gini_Spatial
+pysal.inequality.theil.TheilD
+pysal.inequality.theil.TheilDSim
+pysal.inequality.theil.Theil
+<class 'pysal.weights.Distance.DistanceBand'>
+<class 'pysal.weights.Distance.Kernel'>
+<function knnW at 0x7fb1b57e8050>
+<function queen_geojson at 0x7fb1b2052c08>
+<function lag_spatial at 0x7fb1b57ef140>
+<function buildContiguity at 0x7fb1b57e8500>
+<function higher_order at 0x7fb1b57e4410>
+<function full at 0x7fb1b57e45f0>
+<function min_threshold_distance at 0x7fb1b57e4938>
+<function shimbel at 0x7fb1b57e4578>
+<function get_ids at 0x7fb1b57e4848>
+<function write_gal at 0x7fb1b57e4a28>
+<function block_weights at 0x7fb1b57e42a8>
+<function regime_weights at 0x7fb1b57e4230>
+<function higher_order_sp at 0x7fb1b57e4488>
+<function hexLat2W at 0x7fb1b57e4140>
+<function insert_diagonal at 0x7fb1b57e4758>
+<function remap_ids at 0x7fb1b57e47d0>
+<function w_local_cluster at 0x7fb1b57e4500>
+<function full2W at 0x7fb1b57e4668>
+<function get_points_array_from_shapefile at 0x7fb1b57e48c0>
+<function comb at 0x7fb1b57e4320>
+<function lat2W at 0x7fb1b57e41b8>
+<function order at 0x7fb1b57e4398>
+<function WSP2W at 0x7fb1b57e46e0>
+<function lat2SW at 0x7fb1b57e49b0>
+<class 'pysal.weights.weights.WSP'>
+<class 'pysal.weights.weights.W'>
+<function queen_from_shapefile at 0x7fb1b57e8938>
+<function min_threshold_dist_from_shapefile at 0x7fb1b57e8f50>
+<function adaptive_kernelW at 0x7fb1b57e8e60>
+<function build_lattice_shapefile at 0x7fb1b57ef050>
+<function adaptive_kernelW_from_shapefile at 0x7fb1b57e8ed8>
+<function threshold_continuousW_from_array at 0x7fb1b57e8c80>
+<function threshold_continuousW_from_shapefile at 0x7fb1b57e8cf8>
+<function knnW_from_shapefile at 0x7fb1b57e8b18>
+<function threshold_binaryW_from_array at 0x7fb1b57e8b90>
+<function rook_from_shapefile at 0x7fb1b57e89b0>
+<function spw_from_gal at 0x7fb1b57e8a28>
+<function kernelW_from_shapefile at 0x7fb1b57e8de8>
+<function knnW_from_array at 0x7fb1b57e8aa0>
+<function threshold_binaryW_from_shapefile at 0x7fb1b57e8c08>
+<function kernelW at 0x7fb1b57e8d70>
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+pysal.weights._contW_binning.ContiguityWeights_binning
+<function bbcommon at 0x7fb1b57e8488>
+<function w_clip at 0x7fb1b57ef488>
+<function w_union at 0x7fb1b57ef230>
+<function w_difference at 0x7fb1b57ef320>
+<function w_subset at 0x7fb1b57ef410>
+<function w_symmetric_difference at 0x7fb1b57ef398>
+<function w_intersection at 0x7fb1b57ef2a8>
+<function get_path at 0x7fb1b1b0f410>
+pysal.spreg.error_sp.BaseGM_Combo
+pysal.spreg.error_sp.BaseGM_Endog_Error
+pysal.spreg.error_sp.GM_Combo
+pysal.spreg.error_sp.GM_Endog_Error
+pysal.spreg.error_sp.BaseGM_Error
+pysal.spreg.error_sp.GM_Error
+pysal.spreg.twosls_regimes.TSLS_Regimes
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7fb1b1f79c08>
+<function get_lags at 0x7fb1b1f79938>
+<function sphstack at 0x7fb1b1f79d70>
+<function optim_moments at 0x7fb1b1f797d0>
+<function get_A2_hom at 0x7fb1b1f796e0>
+<function iter_msg at 0x7fb1b1f79b90>
+<function spdot at 0x7fb1b1f79c80>
+<function spmin at 0x7fb1b1f79e60>
+<function inverse_prod at 0x7fb1b1f799b0>
+<function get_A1_het at 0x7fb1b1f79320>
+<function RegressionProps_basic at 0x7fb1b1f7f050>
+<function power_expansion at 0x7fb1b1f79a28>
+<function set_endog at 0x7fb1b1f79aa0>
+<function foptim_par at 0x7fb1b1f79848>
+<function spmax at 0x7fb1b1f79ed8>
+<function spbroadcast at 0x7fb1b1f79de8>
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7fb1b1f79cf8>
+<function get_A1_hom at 0x7fb1b1f79668>
+<function set_warn at 0x7fb1b1f79f50>
+<function get_spFilter at 0x7fb1b1f798c0>
+<function set_endog_sparse at 0x7fb1b1f79b18>
+<function get_psi_sigma at 0x7fb1b1fa4488>
+pysal.spreg.error_sp_het.GM_Combo_Het
+<function get_a1a2 at 0x7fb1b1fa49b0>
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+<function get_Omega_GS2SLS at 0x7fb1b1fa4aa0>
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+<function get_vm_het at 0x7fb1b1fa48c0>
+pysal.spreg.error_sp_het.GM_Error_Het
+<function get_P_hat at 0x7fb1b1fa4938>
+<function get_vc_het_tsls at 0x7fb1b1fa4a28>
+<function get_vc_het at 0x7fb1b1fa4848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+pysal.spreg.ols.BaseOLS
+pysal.spreg.ols.OLS
+pysal.spreg.twosls_sp.BaseGM_Lag
+pysal.spreg.twosls_sp.GM_Lag
+pysal.spreg.ml_lag.ML_Lag
+<function lag_c_loglik_ord at 0x7fb1b1b09c80>
+pysal.spreg.ml_lag.BaseML_Lag
+<function lag_c_loglik at 0x7fb1b1b09b18>
+<function set_name_h at 0x7fb1b1f88b90>
+<function set_name_yend at 0x7fb1b1f889b0>
+<function set_name_q_sp at 0x7fb1b1f88b18>
+<function check_spat_diag at 0x7fb1b1f88f50>
+<function check_weights at 0x7fb1b1f88e60>
+<function check_robust at 0x7fb1b1f88ed8>
+<function check_arrays at 0x7fb1b1f88d70>
+<function set_name_ds at 0x7fb1b1f88848>
+<function set_name_y at 0x7fb1b1f888c0>
+<function set_name_x at 0x7fb1b1f88938>
+<function set_name_multi at 0x7fb1b1f88cf8>
+<function check_regimes at 0x7fb1b1f80050>
+<function set_robust at 0x7fb1b1f88c08>
+<function check_constant at 0x7fb1b1f800c8>
+<function set_name_q at 0x7fb1b1f88a28>
+<function check_y at 0x7fb1b1f88de8>
+<function set_name_yend_sp at 0x7fb1b1f88aa0>
+<function set_name_w at 0x7fb1b1f88c80>
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+pysal.spreg.ols_regimes.OLS_Regimes
+<function ar2 at 0x7fb1b1f7f2a8>
+<function koenker_bassett at 0x7fb1b1f7f6e0>
+<function akaike at 0x7fb1b1f7f410>
+<function likratiotest at 0x7fb1b1f7f848>
+<function r2 at 0x7fb1b1f7f230>
+<function se_betas at 0x7fb1b1f7f320>
+<function jarque_bera at 0x7fb1b1f7f578>
+<function vif at 0x7fb1b1f7f758>
+<function breusch_pagan at 0x7fb1b1f7f5f0>
+<function schwarz at 0x7fb1b1f7f488>
+<function f_stat at 0x7fb1b1f7f140>
+<function condition_index at 0x7fb1b1f7f500>
+<function white at 0x7fb1b1f7f668>
+<function constant_check at 0x7fb1b1f7f7d0>
+<function log_likelihood at 0x7fb1b1f7f398>
+<function t_stat at 0x7fb1b1f7f1b8>
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+<function symmetrize at 0x7fb1b1b09aa0>
+<function robust_vm at 0x7fb1b1f9b5f0>
+<function hac_multi at 0x7fb1b1f9b668>
+<function pr2_aspatial at 0x7fb1b1f7f9b0>
+<function pr2_spatial at 0x7fb1b1f7fa28>
+<function t_stat at 0x7fb1b1f7f938>
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+pysal.spreg.twosls.TSLS
+pysal.spreg.twosls.BaseTSLS
+<function beta_diag_lag at 0x7fb1b1f9a758>
+<function build_coefs_body_instruments at 0x7fb1b1f9a7d0>
+<function GM_Combo_Hom_multi at 0x7fb1b1f9a488>
+<function OLS at 0x7fb1b1f80848>
+<function GM_Endog_Error_Hom_multi at 0x7fb1b1f9a0c8>
+<function summary_multi at 0x7fb1b1f9a9b0>
+<function summary_sur at 0x7fb1b1f9aed8>
+<function summary_spat_diag_intro at 0x7fb1b1f9b230>
+<function GM_Combo_Het_multi at 0x7fb1b1f9a578>
+<function TSLS at 0x7fb1b1f80938>
+<function summary_iteration at 0x7fb1b1f9ade8>
+<function summary_intro at 0x7fb1b1f9ab18>
+<function summary_warning at 0x7fb1b1f9b050>
+<function GM_Combo at 0x7fb1b1f9a320>
+<function beta_diag_ols at 0x7fb1b1f9a668>
+<function GM_Endog_Error at 0x7fb1b1f80de8>
+<function ML_Lag at 0x7fb1b1f80b18>
+<function OLS_multi at 0x7fb1b1f808c0>
+<function GM_Combo_Hom at 0x7fb1b1f9a410>
+<function GM_Combo_multi at 0x7fb1b1f9a398>
+<function summary_vm at 0x7fb1b1f9b410>
+<function summary_chow at 0x7fb1b1f9af50>
+<function GM_Error_Hom_multi at 0x7fb1b1f80f50>
+<function GM_Error at 0x7fb1b1f80cf8>
+<function GM_Endog_Error_Hom at 0x7fb1b1f9a050>
+<function ML_Lag_multi at 0x7fb1b1f80b90>
+<function GM_Lag_multi at 0x7fb1b1f80aa0>
+<function summary_close at 0x7fb1b1f9b500>
+<function summary_spat_diag_probit at 0x7fb1b1f9b398>
+<function summary_open at 0x7fb1b1f9aaa0>
+<function GM_Combo_Het at 0x7fb1b1f9a500>
+<function TSLS_multi at 0x7fb1b1f809b0>
+<function spat_diag_instruments at 0x7fb1b1f9a8c0>
+<function summary_coefs_lambda at 0x7fb1b1f9acf8>
+<function ML_Error at 0x7fb1b1f80c08>
+<function summary_coefs_allx at 0x7fb1b1f9ac08>
+<function GM_Lag at 0x7fb1b1f80a28>
+<function GM_Error_Het at 0x7fb1b1f9a140>
+<function summary_coefs_intro at 0x7fb1b1f9ab90>
+<function Probit at 0x7fb1b1f9a5f0>
+<function spat_diag_ols at 0x7fb1b1f9a848>
+<function summary_spat_diag_ols at 0x7fb1b1f9b320>
+<function GM_Error_Hom at 0x7fb1b1f80ed8>
+<function GM_Endog_Error_multi at 0x7fb1b1f80e60>
+<function summary_pred at 0x7fb1b1f9b488>
+<function GM_Endog_Error_Het at 0x7fb1b1f9a230>
+<function summary_spat_diag_intro_global at 0x7fb1b1f9b2a8>
+<function summary_coefs_somex at 0x7fb1b1f9ac80>
+<function summary_regimes at 0x7fb1b1f9ae60>
+<function GM_Endog_Error_Het_multi at 0x7fb1b1f9a2a8>
+<function summary_nonspat_diag_2 at 0x7fb1b1f9b1b8>
+<function summary_nonspat_diag_1 at 0x7fb1b1f9b140>
+<function summary at 0x7fb1b1f9a938>
+<function summary_coefs_instruments at 0x7fb1b1f9ad70>
+<function summary_coefs_slopes at 0x7fb1b1f9b0c8>
+<function GM_Error_multi at 0x7fb1b1f80d70>
+<function ML_Error_multi at 0x7fb1b1f80c80>
+<function beta_diag at 0x7fb1b1f9a6e0>
+<function GM_Error_Het_multi at 0x7fb1b1f9a1b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+<function akTest at 0x7fb1b1f88758>
+pysal.spreg.diagnostics_sp.LMtests
+<function get_zI at 0x7fb1b1f886e0>
+<function rlmLag at 0x7fb1b1f88488>
+pysal.spreg.diagnostics_sp.AKtest
+<function lmLag at 0x7fb1b1f88398>
+<function lmErr at 0x7fb1b1f7fd70>
+<function get_eI at 0x7fb1b1f88668>
+<function get_mI at 0x7fb1b1f88578>
+<function lmSarma at 0x7fb1b1f88500>
+<function rlmErr at 0x7fb1b1f88410>
+<function get_vI at 0x7fb1b1f885f0>
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+<function get_omega_hom_ols at 0x7fb1b1faf1b8>
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+<function get_vc_hom at 0x7fb1b1faf0c8>
+<function moments_hom at 0x7fb1b1fa4c08>
+pysal.spreg.error_sp_hom.GM_Error_Hom
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+<function get_omega_hom at 0x7fb1b1faf140>
+<function err_c_loglik at 0x7fb1b1b0f0c8>
+pysal.spreg.ml_error.ML_Error
+pysal.spreg.ml_error.BaseML_Error
+<function err_c_loglik_ord at 0x7fb1b1b0f320>
+<function sp_tests at 0x7fb1b1b09848>
+<function newton at 0x7fb1b1afcc08>
+pysal.spreg.probit.Probit
+<function moran_KP at 0x7fb1b1b098c0>
+pysal.spreg.probit.BaseProbit
+pysal.spreg.error_sp_het_regimes.GM_Combo_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Endog_Error_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Error_Het_Regimes
+pysal.spreg.regimes.Wald
+<function wald_test at 0x7fb1b1faf848>
+<function w_regimes at 0x7fb1b1fafc80>
+<function buildR at 0x7fb1b1fafa28>
+<function x2xsp at 0x<function steady_state at 0x7ff1253058c0>
+1
+<function var_fmpt at 0x7ff1253059b0>
+1
+<function fmpt at 0x7ff125305938>
+1
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+2
+<function knox at 0x7ff1253139b0>
+4
+<function modified_knox at 0x7ff125313b90>
+4
+<function mantel at 0x7ff125313aa0>
+2
+<function jacquez at 0x7ff125313b18>
+3
+<function rose at 0x7ff125313668>
+2
+pysal.spatial_dynamics.rank.SpatialTau
+3
+pysal.spatial_dynamics.rank.Tau
+2
+pysal.spatial_dynamics.rank.Theta
+2
+<function pseudop at 0x7ff125313140>
+<function get_lower at 0x7ff125313938>
+1
+<function shuffle_matrix at 0x7ff1253138c0>
+2
+<function prais at 0x7ff125305f50>
+1
+<function chi2 at 0x7ff125305a28>
+2
+<function shorrock at 0x7ff125313050>
+1
+pysal.spatial_dynamics.markov.Spatial_Markov
+2
+<function homogeneity at 0x7ff1253130c8>
+1
+pysal.spatial_dynamics.markov.Homogeneity_Results
+1
+pysal.spatial_dynamics.markov.Markov
+1
+<function kullback at 0x7ff125305de8>
+1
+pysal.spatial_dynamics.markov.LISA_Markov
+2
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+1
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7ff125320230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7ff125320320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+0
+<function noneMax at 0x7ff1253202a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+1
+<function weight_convert at 0x7ff125320050>
+2
+pysal.core.util.wkt.WKTParser
+0
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+0
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+0
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+0
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+0
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+0
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+0
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+0
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+0
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+0
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+0
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+0
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+0
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+0
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+0
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+0
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+0
+<class 'pysal.core.FileIO.FileIO'>
+0
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+0
+pysal.region.randomregion.Random_Region
+1
+pysal.region.randomregion.Random_Regions
+1
+pysal.region.maxp.Maxp_LISA
+5
+pysal.region.maxp.Maxp
+4
+<function check_contiguity at 0x7ff1252f9848>
+3
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7ff1252f97d0>
+2
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7ff1289dd9b0>
+<function union_all at 0x7ff1289e0ed8>
+<function Rtree at 0x7ff1289f57d0>
+<function avg_diagonals at 0x7ff1289f5848>
+<function closest at 0x7ff1289f7938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7ff1289f78c0>
+<function silhouette_coeff at 0x7ff1289f7848>
+<function silhouette_w at 0x7ff1289f77d0>
+<function k_means_cluster at 0x7ff1289f79b0>
+<class 'pysal.cg.rtree.Rect'>
+4
+<function get_angle_between at 0x7ff1289dded8>
+2
+<function get_point_at_angle_and_dist at 0x7ff1289e0488>
+3
+<function get_points_dist at 0x7ff1289e0398>
+2
+<function get_polygon_point_dist at 0x7ff1289e0320>
+2
+<function get_segment_point_dist at 0x7ff1289e0410>
+2
+<function bbcommon at 0x7ff1289ddde8>
+2
+<function get_rectangle_rectangle_intersection at 0x7ff1289e02a8>
+2
+<function get_polygon_point_intersect at 0x7ff1289e0140>
+2
+<function ccw at 0x7ff1289e05f0>
+1
+<function point_touches_rectangle at 0x7ff1289e0758>
+2
+<function get_segments_intersect at 0x7ff1289e0050>
+2
+<function is_collinear at 0x7ff1289ddf50>
+3
+<function get_shared_segments at 0x7ff1289e07d0>
+2
+<function get_ray_segment_intersect at 0x7ff1289e0230>
+2
+<function distance_matrix at 0x7ff1289e0848>
+1
+<function get_segment_point_intersect at 0x7ff1289e00c8>
+2
+<function convex_hull at 0x7ff1289e0500>
+1
+<function is_clockwise at 0x7ff1289e0578>
+1
+<function seg_intersect at 0x7ff1289e0668>
+4
+<function get_bounding_box at 0x7ff1289dde60>
+1
+<function get_rectangle_point_intersect at 0x7ff1289e01b8>
+2
+<function asShape at 0x7ff135781140>
+1
+<class 'pysal.cg.shapes.Polygon'>
+1
+<class 'pysal.cg.shapes.Chain'>
+1
+<class 'pysal.cg.shapes.Point'>
+1
+<class 'pysal.cg.shapes.LineSegment'>
+2
+pysal.cg.shapes.VerticalLine
+1
+pysal.cg.shapes.Line
+2
+<class 'pysal.cg.shapes.Ring'>
+1
+pysal.cg.shapes.Rectangle
+4
+pysal.cg.shapes.Ray
+2
+<function arcdist2linear at 0x7ff13145e9b0>
+1
+<function linear2arcdist at 0x7ff13145ea28>
+1
+<function fast_threshold at 0x7ff13145ec80>
+<function toXYZ at 0x7ff13145eaa0>
+1
+<function fast_knn at 0x7ff13145ec08>
+2
+<function toLngLat at 0x7ff13145eb18>
+<function harcdist at 0x7ff13145ef50>
+2
+<function <lambda> at 0x7ff13145ee60>
+<function lonlat at 0x7ff13145ecf8>
+1
+<function geointerpolate at 0x7ff135781050>
+3
+<function arcdist at 0x7ff13145e0c8>
+2
+<function geogrid at 0x7ff1357810c8>
+3
+<function haversine at 0x7ff13145ed70>
+1
+<function brute_knn at 0x7ff13145eb90>
+2
+<function radangle at 0x7ff13145eed8>
+2
+pysal.cg.locators.PointLocator
+1
+pysal.cg.locators.PolygonLocator
+1
+pysal.cg.locators.BruteForcePointLocator
+1
+pysal.cg.locators.Grid
+2
+pysal.cg.locators.IntervalTree
+1
+pysal.inequality.gini.Gini
+1
+pysal.inequality.gini.Gini_Spatial
+2
+pysal.inequality.theil.TheilD
+2
+pysal.inequality.theil.TheilDSim
+2
+pysal.inequality.theil.Theil
+1
+<class 'pysal.weights.Distance.DistanceBand'>
+2
+<class 'pysal.weights.Distance.Kernel'>
+1
+<function knnW at 0x7ff125222050>
+1
+<function queen_geojson at 0x7ff124d85c08>
+1
+<function lag_spatial at 0x7ff125229140>
+2
+<function buildContiguity at 0x7ff125222500>
+1
+<function higher_order at 0x7ff12521e410>
+1
+<function full at 0x7ff12521e5f0>
+1
+<function min_threshold_distance at 0x7ff12521e938>
+1
+<function shimbel at 0x7ff12521e578>
+1
+<function get_ids at 0x7ff12521e848>
+2
+<function write_gal at 0x7ff12521ea28>
+<function block_weights at 0x7ff12521e2a8>
+1
+<function regime_weights at 0x7ff12521e230>
+1
+<function higher_order_sp at 0x7ff12521e488>
+1
+<function hexLat2W at 0x7ff12521e140>
+0
+<function insert_diagonal at 0x7ff12521e758>
+1
+<function remap_ids at 0x7ff12521e7d0>
+2
+<function w_local_cluster at 0x7ff12521e500>
+1
+<function full2W at 0x7ff12521e668>
+1
+<function get_points_array_from_shapefile at 0x7ff12521e8c0>
+1
+<function comb at 0x7ff12521e320>
+1
+<function lat2W at 0x7ff12521e1b8>
+0
+<function order at 0x7ff12521e398>
+1
+<function WSP2W at 0x7ff12521e6e0>
+1
+<function lat2SW at 0x7ff12521e9b0>
+0
+<class 'pysal.weights.weights.WSP'>
+1
+<class 'pysal.weights.weights.W'>
+1
+<function queen_from_shapefile at 0x7ff125222938>
+1
+<function min_threshold_dist_from_shapefile at 0x7ff125222f50>
+1
+<function adaptive_kernelW at 0x7ff125222e60>
+1
+<function build_lattice_shapefile at 0x7ff125229050>
+3
+<function adaptive_kernelW_from_shapefile at 0x7ff125222ed8>
+1
+<function threshold_continuousW_from_array at 0x7ff125222c80>
+2
+<function threshold_continuousW_from_shapefile at 0x7ff125222cf8>
+2
+<function knnW_from_shapefile at 0x7ff125222b18>
+1
+<function threshold_binaryW_from_array at 0x7ff125222b90>
+2
+<function rook_from_shapefile at 0x7ff1252229b0>
+1
+<function spw_from_gal at 0x7ff125222a28>
+1
+<function kernelW_from_shapefile at 0x7ff125222de8>
+1
+<function knnW_from_array at 0x7ff125222aa0>
+1
+<function threshold_binaryW_from_shapefile at 0x7ff125222c08>
+2
+<function kernelW at 0x7ff125222d70>
+1
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+1
+pysal.weights._contW_binning.ContiguityWeights_binning
+2
+<function bbcommon at 0x7ff125222488>
+2
+<function w_clip at 0x7ff125229488>
+2
+<function w_union at 0x7ff125229230>
+2
+<function w_difference at 0x7ff125229320>
+2
+<function w_subset at 0x7ff125229410>
+2
+<function w_symmetric_difference at 0x7ff125229398>
+2
+<function w_intersection at 0x7ff1252292a8>
+2
+<function get_path at 0x7ff12525c410>
+pysal.spreg.error_sp.BaseGM_Combo
+2
+pysal.spreg.error_sp.BaseGM_Endog_Error
+5
+pysal.spreg.error_sp.GM_Combo
+2
+pysal.spreg.error_sp.GM_Endog_Error
+5
+pysal.spreg.error_sp.BaseGM_Error
+3
+pysal.spreg.error_sp.GM_Error
+3
+pysal.spreg.twosls_regimes.TSLS_Regimes
+5
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7ff1252b9c08>
+<function get_lags at 0x7ff1252b9938>
+3
+<function sphstack at 0x7ff1252b9d70>
+2
+<function optim_moments at 0x7ff1252b97d0>
+1
+<function get_A2_hom at 0x7ff1252b96e0>
+1
+<function iter_msg at 0x7ff1252b9b90>
+<function spdot at 0x7ff1252b9c80>
+2
+<function spmin at 0x7ff1252b9e60>
+1
+<function inverse_prod at 0x7ff1252b99b0>
+3
+<function get_A1_het at 0x7ff1252b9320>
+1
+<function RegressionProps_basic at 0x7ff1252bf050>
+1
+<function power_expansion at 0x7ff1252b9a28>
+3
+<function set_endog at 0x7ff1252b9aa0>
+<function foptim_par at 0x7ff1252b9848>
+2
+<function spmax at 0x7ff1252b9ed8>
+1
+<function spbroadcast at 0x7ff1252b9de8>
+2
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7ff1252b9cf8>
+2
+<function get_A1_hom at 0x7ff1252b9668>
+1
+<function set_warn at 0x7ff1252b9f50>
+2
+<function get_spFilter at 0x7ff1252b98c0>
+3
+<function set_endog_sparse at 0x7ff1252b9b18>
+7
+<function get_psi_sigma at 0x7ff1252e4488>
+3
+pysal.spreg.error_sp_het.GM_Combo_Het
+2
+<function get_a1a2 at 0x7ff1252e49b0>
+8
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+3
+<function get_Omega_GS2SLS at 0x7ff1252e4aa0>
+6
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+5
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+2
+<function get_vm_het at 0x7ff1252e48c0>
+5
+pysal.spreg.error_sp_het.GM_Error_Het
+3
+<function get_P_hat at 0x7ff1252e4938>
+3
+<function get_vc_het_tsls at 0x7ff1252e4a28>
+<function get_vc_het at 0x7ff1252e4848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+5
+pysal.spreg.ols.BaseOLS
+2
+pysal.spreg.ols.OLS
+2
+pysal.spreg.twosls_sp.BaseGM_Lag
+2
+pysal.spreg.twosls_sp.GM_Lag
+2
+pysal.spreg.ml_lag.ML_Lag
+3
+<function lag_c_loglik_ord at 0x7ff125256c80>
+pysal.spreg.ml_lag.BaseML_Lag
+3
+<function lag_c_loglik at 0x7ff125256b18>
+<function set_name_h at 0x7ff1252c8b90>
+2
+<function set_name_yend at 0x7ff1252c89b0>
+2
+<function set_name_q_sp at 0x7ff1252c8b18>
+4
+<function check_spat_diag at 0x7ff1252c8f50>
+2
+<function check_weights at 0x7ff1252c8e60>
+2
+<function check_robust at 0x7ff1252c8ed8>
+2
+<function check_arrays at 0x7ff1252c8d70>
+0
+<function set_name_ds at 0x7ff1252c8848>
+1
+<function set_name_y at 0x7ff1252c88c0>
+1
+<function set_name_x at 0x7ff1252c8938>
+2
+<function set_name_multi at 0x7ff1252c8cf8>
+11
+<function check_regimes at 0x7ff1252c0050>
+1
+<function set_robust at 0x7ff1252c8c08>
+1
+<function check_constant at 0x7ff1252c00c8>
+1
+<function set_name_q at 0x7ff1252c8a28>
+2
+<function check_y at 0x7ff1252c8de8>
+2
+<function set_name_yend_sp at 0x7ff1252c8aa0>
+1
+<function set_name_w at 0x7ff1252c8c80>
+2
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+6
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+3
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+4
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+3
+pysal.spreg.ols_regimes.OLS_Regimes
+3
+<function ar2 at 0x7ff1252bf2a8>
+1
+<function koenker_bassett at 0x7ff1252bf6e0>
+1
+<function akaike at 0x7ff1252bf410>
+1
+<function likratiotest at 0x7ff1252bf848>
+2
+<function r2 at 0x7ff1252bf230>
+1
+<function se_betas at 0x7ff1252bf320>
+1
+<function jarque_bera at 0x7ff1252bf578>
+1
+<function vif at 0x7ff1252bf758>
+1
+<function breusch_pagan at 0x7ff1252bf5f0>
+1
+<function schwarz at 0x7ff1252bf488>
+1
+<function f_stat at 0x7ff1252bf140>
+1
+<function condition_index at 0x7ff1252bf500>
+1
+<function white at 0x7ff1252bf668>
+1
+<function constant_check at 0x7ff1252bf7d0>
+1
+<function log_likelihood at 0x7ff1252bf398>
+1
+<function t_stat at 0x7ff1252bf1b8>
+1
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+3
+<function symmetrize at 0x7ff125256aa0>
+1
+<function robust_vm at 0x7ff1252db5f0>
+1
+<function hac_multi at 0x7ff1252db668>
+2
+<function pr2_aspatial at 0x7ff1252bf9b0>
+1
+<function pr2_spatial at 0x7ff1252bfa28>
+1
+<function t_stat at 0x7ff1252bf938>
+1
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+3
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+4
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+6
+pysal.spreg.twosls.TSLS
+4
+pysal.spreg.twosls.BaseTSLS
+3
+<function beta_diag_lag at 0x7ff1252da758>
+<function build_coefs_body_instruments at 0x7ff1252da7d0>
+<function GM_Combo_Hom_multi at 0x7ff1252da488>
+<function OLS at 0x7ff1252c0848>
+<function GM_Endog_Error_Hom_multi at 0x7ff1252da0c8>
+<function summary_multi at 0x7ff1252da9b0>
+<function summary_sur at 0x7ff1252daed8>
+1
+<function summary_spat_diag_intro at 0x7ff1252db230>
+<function GM_Combo_Het_multi at 0x7ff1252da578>
+<function TSLS at 0x7ff1252c0938>
+<function summary_iteration at 0x7ff1252dade8>
+1
+<function summary_intro at 0x7ff1252dab18>
+<function summary_warning at 0x7ff1252db050>
+<function GM_Combo at 0x7ff1252da320>
+<function beta_diag_ols at 0x7ff1252da668>
+<function GM_Endog_Error at 0x7ff1252c0de8>
+<function ML_Lag at 0x7ff1252c0b18>
+<function OLS_multi at 0x7ff1252c08c0>
+<function GM_Combo_Hom at 0x7ff1252da410>
+<function GM_Combo_multi at 0x7ff1252da398>
+<function summary_vm at 0x7ff1252db410>
+<function summary_chow at 0x7ff1252daf50>
+<function GM_Error_Hom_multi at 0x7ff1252c0f50>
+<function GM_Error at 0x7ff1252c0cf8>
+<function GM_Endog_Error_Hom at 0x7ff1252da050>
+<function ML_Lag_multi at 0x7ff1252c0b90>
+<function GM_Lag_multi at 0x7ff1252c0aa0>
+<function summary_close at 0x7ff1252db500>
+<function summary_spat_diag_probit at 0x7ff1252db398>
+<function summary_open at 0x7ff1252daaa0>
+<function GM_Combo_Het at 0x7ff1252da500>
+<function TSLS_multi at 0x7ff1252c09b0>
+<function spat_diag_instruments at 0x7ff1252da8c0>
+<function summary_coefs_lambda at 0x7ff1252dacf8>
+<function ML_Error at 0x7ff1252c0c08>
+<function summary_coefs_allx at 0x7ff1252dac08>
+<function GM_Lag at 0x7ff1252c0a28>
+<function GM_Error_Het at 0x7ff1252da140>
+<function summary_coefs_intro at 0x7ff1252dab90>
+<function Probit at 0x7ff1252da5f0>
+<function spat_diag_ols at 0x7ff1252da848>
+<function summary_spat_diag_ols at 0x7ff1252db320>
+<function GM_Error_Hom at 0x7ff1252c0ed8>
+<function GM_Endog_Error_multi at 0x7ff1252c0e60>
+<function summary_pred at 0x7ff1252db488>
+<function GM_Endog_Error_Het at 0x7ff1252da230>
+<function summary_spat_diag_intro_global at 0x7ff1252db2a8>
+<function summary_coefs_somex at 0x7ff1252dac80>
+2
+<function summary_regimes at 0x7ff1252dae60>
+1
+<function GM_Endog_Error_Het_multi at 0x7ff1252da2a8>
+<function summary_nonspat_diag_2 at 0x7ff1252db1b8>
+<function summary_nonspat_diag_1 at 0x7ff1252db140>
+<function summary at 0x7ff1252da938>
+<function summary_coefs_instruments at 0x7ff1252dad70>
+1
+<function summary_coefs_slopes at 0x7ff1252db0c8>
+<function GM_Error_multi at 0x7ff1252c0d70>
+<function ML_Error_multi at 0x7ff1252c0c80>
+<function beta_diag at 0x7ff1252da6e0>
+<function GM_Error_Het_multi at 0x7ff1252da1b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+3
+<function akTest at 0x7ff1252c8758>
+pysal.spreg.diagnostics_sp.LMtests
+2
+<function get_zI at 0x7ff1252c86e0>
+3
+<function rlmLag at 0x7ff1252c8488>
+3
+pysal.spreg.diagnostics_sp.AKtest
+2
+<function lmLag at 0x7ff1252c8398>
+3
+<function lmErr at 0x7ff1252bfd70>
+3
+<function get_eI at 0x7ff1252c8668>
+3
+<function get_mI at 0x7ff1252c8578>
+3
+<function lmSarma at 0x7ff1252c8500>
+3
+<function rlmErr at 0x7ff1252c8410>
+3
+<function get_vI at 0x7ff1252c85f0>
+4
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+2
+<function get_omega_hom_ols at 0x7ff1252ef1b8>
+6
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+3
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+2
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+2
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+5
+<function get_vc_hom at 0x7ff1252ef0c8>
+5
+<function moments_hom at 0x7ff1252e4c08>
+4
+pysal.spreg.error_sp_hom.GM_Error_Hom
+3
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+5
+<function get_omega_hom at 0x7ff1252ef140>
+6
+<function err_c_loglik at 0x7ff12525c0c8>
+pysal.spreg.ml_error.ML_Error
+3
+pysal.spreg.ml_er<function steady_state at 0x7f0d2fead8c0>
+PRE
+<function var_fmpt at 0x7f0d2fead9b0>
+PRE
+<function fmpt at 0x7f0d2fead938>
+PRE
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+PRE
+<function knox at 0x7f0d2febb9b0>
+PRE
+<function modified_knox at 0x7f0d2febbb90>
+PRE
+<function mantel at 0x7f0d2febbaa0>
+PRE
+<function jacquez at 0x7f0d2febbb18>
+PRE
+<function rose at 0x7f0d2febb668>
+PRE
+pysal.spatial_dynamics.rank.SpatialTau
+PRE
+pysal.spatial_dynamics.rank.Tau
+PRE
+pysal.spatial_dynamics.rank.Theta
+PRE
+<function pseudop at 0x7f0d2febb140>
+<function get_lower at 0x7f0d2febb938>
+PRE
+<function shuffle_matrix at 0x7f0d2febb8c0>
+PRE
+<function prais at 0x7f0d2feadf50>
+PRE
+<function chi2 at 0x7f0d2feada28>
+PRE
+<function shorrock at 0x7f0d2febb050>
+PRE
+pysal.spatial_dynamics.markov.Spatial_Markov
+PRE
+<function homogeneity at 0x7f0d2febb0c8>
+PRE
+pysal.spatial_dynamics.markov.Homogeneity_Results
+PRE
+pysal.spatial_dynamics.markov.Markov
+PRE
+<function kullback at 0x7f0d2feadde8>
+PRE
+pysal.spatial_dynamics.markov.LISA_Markov
+PRE
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+PRE
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7f0d2fec7230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7f0d2fec7320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+PRE
+<function noneMax at 0x7f0d2fec72a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+PRE
+<function weight_convert at 0x7f0d2fec7050>
+PRE
+pysal.core.util.wkt.WKTParser
+PRE
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+PRE
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+PRE
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+PRE
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+PRE
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+PRE
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+PRE
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+PRE
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+PRE
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+PRE
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+PRE
+<class 'pysal.core.FileIO.FileIO'>
+PRE
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+PRE
+pysal.region.randomregion.Random_Region
+PRE
+pysal.region.randomregion.Random_Regions
+PRE
+pysal.region.maxp.Maxp_LISA
+PRE
+pysal.region.maxp.Maxp
+PRE
+<function check_contiguity at 0x7f0d2fea0848>
+PRE
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7f0d2fea07d0>
+PRE
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7f0d336049b0>
+<function union_all at 0x7f0d33607ed8>
+<function Rtree at 0x7f0d3361c7d0>
+<function avg_diagonals at 0x7f0d3361c848>
+<function closest at 0x7f0d3361e938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7f0d3361e8c0>
+<function silhouette_coeff at 0x7f0d3361e848>
+<function silhouette_w at 0x7f0d3361e7d0>
+<function k_means_cluster at 0x7f0d3361e9b0>
+<class 'pysal.cg.rtree.Rect'>
+PRE
+<function get_angle_between at 0x7f0d33604ed8>
+PRE
+<function get_point_at_angle_and_dist at 0x7f0d33607488>
+PRE
+<function get_points_dist at 0x7f0d33607398>
+PRE
+<function get_polygon_point_dist at 0x7f0d33607320>
+PRE
+<function get_segment_point_dist at 0x7f0d33607410>
+PRE
+<function bbcommon at 0x7f0d33604de8>
+PRE
+<function get_rectangle_rectangle_intersection at 0x7f0d336072a8>
+PRE
+<function get_polygon_point_intersect at 0x7f0d33607140>
+PRE
+<function ccw at 0x7f0d336075f0>
+PRE
+<function point_touches_rectangle at 0x7f0d33607758>
+PRE
+<function get_segments_intersect at 0x7f0d33607050>
+PRE
+<function is_collinear at 0x7f0d33604f50>
+PRE
+<function get_shared_segments at 0x7f0d336077d0>
+PRE
+<function get_ray_segment_intersect at 0x7f0d33607230>
+PRE
+<function distance_matrix at 0x7f0d33607848>
+PRE
+<function get_segment_point_intersect at 0x7f0d336070c8>
+PRE
+<function convex_hull at 0x7f0d33607500>
+PRE
+<function is_clockwise at 0x7f0d33607578>
+PRE
+<function seg_intersect at 0x7f0d33607668>
+PRE
+<function get_bounding_box at 0x7f0d33604e60>
+PRE
+<function get_rectangle_point_intersect at 0x7f0d336071b8>
+PRE
+<function asShape at 0x7f0d3ac21140>
+PRE
+<class 'pysal.cg.shapes.Polygon'>
+PRE
+<class 'pysal.cg.shapes.Chain'>
+PRE
+<class 'pysal.cg.shapes.Point'>
+PRE
+<class 'pysal.cg.shapes.LineSegment'>
+PRE
+pysal.cg.shapes.VerticalLine
+PRE
+pysal.cg.shapes.Line
+PRE
+<class 'pysal.cg.shapes.Ring'>
+PRE
+pysal.cg.shapes.Rectangle
+PRE
+pysal.cg.shapes.Ray
+PRE
+<function arcdist2linear at 0x7f0d4037a9b0>
+PRE
+<function linear2arcdist at 0x7f0d4037aa28>
+PRE
+<function fast_threshold at 0x7f0d4037ac80>
+<function toXYZ at 0x7f0d4037aaa0>
+PRE
+<function fast_knn at 0x7f0d4037ac08>
+PRE
+<function toLngLat at 0x7f0d4037ab18>
+<function harcdist at 0x7f0d4037af50>
+PRE
+<function <lambda> at 0x7f0d4037ae60>
+<function lonlat at 0x7f0d4037acf8>
+PRE
+<function geointerpolate at 0x7f0d3ac21050>
+PRE
+<function arcdist at 0x7f0d4037a0c8>
+PRE
+<function geogrid at 0x7f0d3ac210c8>
+PRE
+<function haversine at 0x7f0d4037ad70>
+PRE
+<function brute_knn at 0x7f0d4037ab90>
+PRE
+<function radangle at 0x7f0d4037aed8>
+PRE
+pysal.cg.locators.PointLocator
+PRE
+pysal.cg.locators.PolygonLocator
+PRE
+pysal.cg.locators.BruteForcePointLocator
+PRE
+pysal.cg.locators.Grid
+PRE
+pysal.cg.locators.IntervalTree
+PRE
+pysal.inequality.gini.Gini
+PRE
+pysal.inequality.gini.Gini_Spatial
+PRE
+pysal.inequality.theil.TheilD
+PRE
+pysal.inequality.theil.TheilDSim
+PRE
+pysal.inequality.theil.Theil
+PRE
+<class 'pysal.weights.Distance.DistanceBand'>
+PRE
+<class 'pysal.weights.Distance.Kernel'>
+PRE
+<function knnW at 0x7f0d335cf050>
+PRE
+<function queen_geojson at 0x7f0d2fe39c08>
+PRE
+<function lag_spatial at 0x7f0d335d6140>
+PRE
+<function buildContiguity at 0x7f0d335cf500>
+PRE
+<function higher_order at 0x7f0d335cb410>
+PRE
+<function full at 0x7f0d335cb5f0>
+PRE
+<function min_threshold_distance at 0x7f0d335cb938>
+PRE
+<function shimbel at 0x7f0d335cb578>
+PRE
+<function get_ids at 0x7f0d335cb848>
+PRE
+<function write_gal at 0x7f0d335cba28>
+<function block_weights at 0x7f0d335cb2a8>
+PRE
+<function regime_weights at 0x7f0d335cb230>
+PRE
+<function higher_order_sp at 0x7f0d335cb488>
+PRE
+<function hexLat2W at 0x7f0d335cb140>
+PRE
+<function insert_diagonal at 0x7f0d335cb758>
+PRE
+<function remap_ids at 0x7f0d335cb7d0>
+PRE
+<function w_local_cluster at 0x7f0d335cb500>
+PRE
+<function full2W at 0x7f0d335cb668>
+PRE
+<function get_points_array_from_shapefile at 0x7f0d335cb8c0>
+PRE
+<function comb at 0x7f0d335cb320>
+PRE
+<function lat2W at 0x7f0d335cb1b8>
+PRE
+<function order at 0x7f0d335cb398>
+PRE
+<function WSP2W at 0x7f0d335cb6e0>
+PRE
+<function lat2SW at 0x7f0d335cb9b0>
+PRE
+<class 'pysal.weights.weights.WSP'>
+PRE
+<class 'pysal.weights.weights.W'>
+PRE
+<function queen_from_shapefile at 0x7f0d335cf938>
+PRE
+<function min_threshold_dist_from_shapefile at 0x7f0d335cff50>
+PRE
+<function adaptive_kernelW at 0x7f0d335cfe60>
+PRE
+<function build_lattice_shapefile at 0x7f0d335d6050>
+PRE
+<function adaptive_kernelW_from_shapefile at 0x7f0d335cfed8>
+PRE
+<function threshold_continuousW_from_array at 0x7f0d335cfc80>
+PRE
+<function threshold_continuousW_from_shapefile at 0x7f0d335cfcf8>
+PRE
+<function knnW_from_shapefile at 0x7f0d335cfb18>
+PRE
+<function threshold_binaryW_from_array at 0x7f0d335cfb90>
+PRE
+<function rook_from_shapefile at 0x7f0d335cf9b0>
+PRE
+<function spw_from_gal at 0x7f0d335cfa28>
+PRE
+<function kernelW_from_shapefile at 0x7f0d335cfde8>
+PRE
+<function knnW_from_array at 0x7f0d335cfaa0>
+PRE
+<function threshold_binaryW_from_shapefile at 0x7f0d335cfc08>
+PRE
+<function kernelW at 0x7f0d335cfd70>
+PRE
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+PRE
+pysal.weights._contW_binning.ContiguityWeights_binning
+PRE
+<function bbcommon at 0x7f0d335cf488>
+PRE
+<function w_clip at 0x7f0d335d6488>
+PRE
+<function w_union at 0x7f0d335d6230>
+PRE
+<function w_difference at 0x7f0d335d6320>
+PRE
+<function w_subset at 0x7f0d335d6410>
+PRE
+<function w_symmetric_difference at 0x7f0d335d6398>
+PRE
+<function w_intersection at 0x7f0d335d62a8>
+PRE
+<function get_path at 0x7f0d2f8f6410>
+pysal.spreg.error_sp.BaseGM_Combo
+PRE
+pysal.spreg.error_sp.BaseGM_Endog_Error
+PRE
+pysal.spreg.error_sp.GM_Combo
+PRE
+pysal.spreg.error_sp.GM_Endog_Error
+PRE
+pysal.spreg.error_sp.BaseGM_Error
+PRE
+pysal.spreg.error_sp.GM_Error
+PRE
+pysal.spreg.twosls_regimes.TSLS_Regimes
+PRE
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7f0d2fd5fc08>
+<function get_lags at 0x7f0d2fd5f938>
+PRE
+<function sphstack at 0x7f0d2fd5fd70>
+PRE
+<function optim_moments at 0x7f0d2fd5f7d0>
+PRE
+<function get_A2_hom at 0x7f0d2fd5f6e0>
+PRE
+<function iter_msg at 0x7f0d2fd5fb90>
+<function spdot at 0x7f0d2fd5fc80>
+PRE
+<function spmin at 0x7f0d2fd5fe60>
+PRE
+<function inverse_prod at 0x7f0d2fd5f9b0>
+PRE
+<function get_A1_het at 0x7f0d2fd5f320>
+PRE
+<function RegressionProps_basic at 0x7f0d2fd65050>
+PRE
+<function power_expansion at 0x7f0d2fd5fa28>
+PRE
+<function set_endog at 0x7f0d2fd5faa0>
+<function foptim_par at 0x7f0d2fd5f848>
+PRE
+<function spmax at 0x7f0d2fd5fed8>
+PRE
+<function spbroadcast at 0x7f0d2fd5fde8>
+PRE
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7f0d2fd5fcf8>
+PRE
+<function get_A1_hom at 0x7f0d2fd5f668>
+PRE
+<function set_warn at 0x7f0d2fd5ff50>
+PRE
+<function get_spFilter at 0x7f0d2fd5f8c0>
+PRE
+<function set_endog_sparse at 0x7f0d2fd5fb18>
+PRE
+<function get_psi_sigma at 0x7f0d2fd8b488>
+PRE
+pysal.spreg.error_sp_het.GM_Combo_Het
+PRE
+<function get_a1a2 at 0x7f0d2fd8b9b0>
+PRE
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+PRE
+<function get_Omega_GS2SLS at 0x7f0d2fd8baa0>
+PRE
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+PRE
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+PRE
+<function get_vm_het at 0x7f0d2fd8b8c0>
+PRE
+pysal.spreg.error_sp_het.GM_Error_Het
+PRE
+<function get_P_hat at 0x7f0d2fd8b938>
+PRE
+<function get_vc_het_tsls at 0x7f0d2fd8ba28>
+<function get_vc_het at 0x7f0d2fd8b848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+PRE
+pysal.spreg.ols.BaseOLS
+PRE
+pysal.spreg.ols.OLS
+PRE
+pysal.spreg.twosls_sp.BaseGM_Lag
+PRE
+pysal.spreg.twosls_sp.GM_Lag
+PRE
+pysal.spreg.ml_lag.ML_Lag
+PRE
+<function lag_c_loglik_ord at 0x7f0d2f8f0c80>
+pysal.spreg.ml_lag.BaseML_Lag
+PRE
+<function lag_c_loglik at 0x7f0d2f8f0b18>
+<function set_name_h at 0x7f0d2fd6eb90>
+PRE
+<function set_name_yend at 0x7f0d2fd6e9b0>
+PRE
+<function set_name_q_sp at 0x7f0d2fd6eb18>
+PRE
+<function check_spat_diag at 0x7f0d2fd6ef50>
+PRE
+<function check_weights at 0x7f0d2fd6ee60>
+PRE
+<function check_robust at 0x7f0d2fd6eed8>
+PRE
+<function check_arrays at 0x7f0d2fd6ed70>
+PRE
+<function set_name_ds at 0x7f0d2fd6e848>
+PRE
+<function set_name_y at 0x7f0d2fd6e8c0>
+PRE
+<function set_name_x at 0x7f0d2fd6e938>
+PRE
+<function set_name_multi at 0x7f0d2fd6ecf8>
+PRE
+<function check_regimes at 0x7f0d2fd66050>
+PRE
+<function set_robust at 0x7f0d2fd6ec08>
+PRE
+<function check_constant at 0x7f0d2fd660c8>
+PRE
+<function set_name_q at 0x7f0d2fd6ea28>
+PRE
+<function check_y at 0x7f0d2fd6ede8>
+PRE
+<function set_name_yend_sp at 0x7f0d2fd6eaa0>
+PRE
+<function set_name_w at 0x7f0d2fd6ec80>
+PRE
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+PRE
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+PRE
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+PRE
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+PRE
+pysal.spreg.ols_regimes.OLS_Regimes
+PRE
+<function ar2 at 0x7f0d2fd652a8>
+PRE
+<function koenker_bassett at 0x7f0d2fd656e0>
+PRE
+<function akaike at 0x7f0d2fd65410>
+PRE
+<function likratiotest at 0x7f0d2fd65848>
+PRE
+<function r2 at 0x7f0d2fd65230>
+PRE
+<function se_betas at 0x7f0d2fd65320>
+PRE
+<function jarque_bera at 0x7f0d2fd65578>
+PRE
+<function vif at 0x7f0d2fd65758>
+PRE
+<function breusch_pagan at 0x7f0d2fd655f0>
+PRE
+<function schwarz at 0x7f0d2fd65488>
+PRE
+<function f_stat at 0x7f0d2fd65140>
+PRE
+<function condition_index at 0x7f0d2fd65500>
+PRE
+<function white at 0x7f0d2fd65668>
+PRE
+<function constant_check at 0x7f0d2fd657d0>
+PRE
+<function log_likelihood at 0x7f0d2fd65398>
+PRE
+<function t_stat at 0x7f0d2fd651b8>
+PRE
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+PRE
+<function symmetrize at 0x7f0d2f8f0aa0>
+PRE
+<function robust_vm at 0x7f0d2fd825f0>
+PRE
+<function hac_multi at 0x7f0d2fd82668>
+PRE
+<function pr2_aspatial at 0x7f0d2fd659b0>
+PRE
+<function pr2_spatial at 0x7f0d2fd65a28>
+PRE
+<function t_stat at 0x7f0d2fd65938>
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+PRE
+pysal.spreg.twosls.TSLS
+PRE
+pysal.spreg.twosls.BaseTSLS
+PRE
+<function beta_diag_lag at 0x7f0d2fd81758>
+<function build_coefs_body_instruments at 0x7f0d2fd817d0>
+<function GM_Combo_Hom_multi at 0x7f0d2fd81488>
+<function OLS at 0x7f0d2fd66848>
+<function GM_Endog_Error_Hom_multi at 0x7f0d2fd810c8>
+<function summary_multi at 0x7f0d2fd819b0>
+<function summary_sur at 0x7f0d2fd81ed8>
+PRE
+<function summary_spat_diag_intro at 0x7f0d2fd82230>
+<function GM_Combo_Het_multi at 0x7f0d2fd81578>
+<function TSLS at 0x7f0d2fd66938>
+<function summary_iteration at 0x7f0d2fd81de8>
+PRE
+<function summary_intro at 0x7f0d2fd81b18>
+<function summary_warning at 0x7f0d2fd82050>
+<function GM_Combo at 0x7f0d2fd81320>
+<function beta_diag_ols at 0x7f0d2fd81668>
+<function GM_Endog_Error at 0x7f0d2fd66de8>
+<function ML_Lag at 0x7f0d2fd66b18>
+<function OLS_multi at 0x7f0d2fd668c0>
+<function GM_Combo_Hom at 0x7f0d2fd81410>
+<function GM_Combo_multi at 0x7f0d2fd81398>
+<function summary_vm at 0x7f0d2fd82410>
+<function summary_chow at 0x7f0d2fd81f50>
+<function GM_Error_Hom_multi at 0x7f0d2fd66f50>
+<function GM_Error at 0x7f0d2fd66cf8>
+<function GM_Endog_Error_Hom at 0x7f0d2fd81050>
+<function ML_Lag_multi at 0x7f0d2fd66b90>
+<function GM_Lag_multi at 0x7f0d2fd66aa0>
+<function summary_close at 0x7f0d2fd82500>
+<function summary_spat_diag_probit at 0x7f0d2fd82398>
+<function summary_open at 0x7f0d2fd81aa0>
+<function GM_Combo_Het at 0x7f0d2fd81500>
+<function TSLS_multi at 0x7f0d2fd669b0>
+<function spat_diag_instruments at 0x7f0d2fd818c0>
+<function summary_coefs_lambda at 0x7f0d2fd81cf8>
+<function ML_Error at 0x7f0d2fd66c08>
+<function summary_coefs_allx at 0x7f0d2fd81c08>
+<function GM_Lag at 0x7f0d2fd66a28>
+<function GM_Error_Het at 0x7f0d2fd81140>
+<function summary_coefs_intro at 0x7f0d2fd81b90>
+<function Probit at 0x7f0d2fd815f0>
+<function spat_diag_ols at 0x7f0d2fd81848>
+<function summary_spat_diag_ols at 0x7f0d2fd82320>
+<function GM_Error_Hom at 0x7f0d2fd66ed8>
+<function GM_Endog_Error_multi at 0x7f0d2fd66e60>
+<function summary_pred at 0x7f0d2fd82488>
+<function GM_Endog_Error_Het at 0x7f0d2fd81230>
+<function summary_spat_diag_intro_global at 0x7f0d2fd822a8>
+<function summary_coefs_somex at 0x7f0d2fd81c80>
+PRE
+<function summary_regimes at 0x7f0d2fd81e60>
+PRE
+<function GM_Endog_Error_Het_multi at 0x7f0d2fd812a8>
+<function summary_nonspat_diag_2 at 0x7f0d2fd821b8>
+<function summary_nonspat_diag_1 at 0x7f0d2fd82140>
+<function summary at 0x7f0d2fd81938>
+<function summary_coefs_instruments at 0x7f0d2fd81d70>
+PRE
+<function summary_coefs_slopes at 0x7f0d2fd820c8>
+<function GM_Error_multi at 0x7f0d2fd66d70>
+<function ML_Error_multi at 0x7f0d2fd66c80>
+<function beta_diag at 0x7f0d2fd816e0>
+<function GM_Error_Het_multi at 0x7f0d2fd811b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+PRE
+<function akTest at 0x7f0d2fd6e758>
+pysal.spreg.diagnostics_sp.LMtests
+PRE
+<function get_zI at 0x7f0d2fd6e6e0>
+PRE
+<function rlmLag at 0x7f0d2fd6e488>
+PRE
+pysal.spreg.diagnostics_sp.AKtest
+PRE
+<function lmLag at 0x7f0d2fd6e398>
+PRE
+<function lmErr at 0x7f0d2fd65d70>
+PRE
+<function get_eI at 0x7f0d2fd6e668>
+PRE
+<function get_mI at 0x7f0d2fd6e578>
+PRE
+<function lmSarma at 0x7f0d2fd6e500>
+PRE
+<function rlmErr at 0x7f0d2fd6e410>
+PRE
+<function get_vI at 0x7f0d2fd6e5f0>
+PRE
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+PRE<function steady_state at 0x7f01ac21f8c0>
+PRE
+<function var_fmpt at 0x7f01ac21f9b0>
+PRE
+<function fmpt at 0x7f01ac21f938>
+PRE
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+PRE
+<function knox at 0x7f01ac22c9b0>
+PRE
+<function modified_knox at 0x7f01ac22cb90>
+PRE
+<function mantel at 0x7f01ac22caa0>
+PRE
+<function jacquez at 0x7f01ac22cb18>
+PRE
+<function rose at 0x7f01ac22c668>
+PRE
+pysal.spatial_dynamics.rank.SpatialTau
+PRE
+pysal.spatial_dynamics.rank.Tau
+PRE
+pysal.spatial_dynamics.rank.Theta
+PRE
+<function pseudop at 0x7f01ac22c140>
+<function get_lower at 0x7f01ac22c938>
+PRE
+<function shuffle_matrix at 0x7f01ac22c8c0>
+PRE
+<function prais at 0x7f01ac21ff50>
+PRE
+<function chi2 at 0x7f01ac21fa28>
+PRE
+<function shorrock at 0x7f01ac22c050>
+PRE
+pysal.spatial_dynamics.markov.Spatial_Markov
+PRE
+<function homogeneity at 0x7f01ac22c0c8>
+PRE
+pysal.spatial_dynamics.markov.Homogeneity_Results
+PRE
+pysal.spatial_dynamics.markov.Markov
+PRE
+<function kullback at 0x7f01ac21fde8>
+PRE
+pysal.spatial_dynamics.markov.LISA_Markov
+PRE
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+PRE
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7f01ac239230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7f01ac239320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+PRE
+<function noneMax at 0x7f01ac2392a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+PRE
+<function weight_convert at 0x7f01ac239050>
+PRE
+pysal.core.util.wkt.WKTParser
+PRE
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+PRE
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+PRE
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+PRE
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+PRE
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+PRE
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+PRE
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+PRE
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+PRE
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+PRE
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+PRE
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+PRE
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+PRE
+<class 'pysal.core.FileIO.FileIO'>
+PRE
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+PRE
+pysal.region.randomregion.Random_Region
+PRE
+pysal.region.randomregion.Random_Regions
+PRE
+pysal.region.maxp.Maxp_LISA
+PRE
+pysal.region.maxp.Maxp
+PRE
+<function check_contiguity at 0x7f01ac214848>
+PRE
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7f01ac2147d0>
+PRE
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7f01afa769b0>
+<function union_all at 0x7f01afa79ed8>
+<function Rtree at 0x7f01afa8e7d0>
+<function avg_diagonals at 0x7f01afa8e848>
+<function closest at 0x7f01afa90938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7f01afa908c0>
+<function silhouette_coeff at 0x7f01afa90848>
+<function silhouette_w at 0x7f01afa907d0>
+<function k_means_cluster at 0x7f01afa909b0>
+<class 'pysal.cg.rtree.Rect'>
+PRE
+<function get_angle_between at 0x7f01afa76ed8>
+PRE
+<function get_point_at_angle_and_dist at 0x7f01afa79488>
+PRE
+<function get_points_dist at 0x7f01afa79398>
+PRE
+<function get_polygon_point_dist at 0x7f01afa79320>
+PRE
+<function get_segment_point_dist at 0x7f01afa79410>
+PRE
+<function bbcommon at 0x7f01afa76de8>
+PRE
+<function get_rectangle_rectangle_intersection at 0x7f01afa792a8>
+PRE
+<function get_polygon_point_intersect at 0x7f01afa79140>
+PRE
+<function ccw at 0x7f01afa795f0>
+PRE
+<function point_touches_rectangle at 0x7f01afa79758>
+PRE
+<function get_segments_intersect at 0x7f01afa79050>
+PRE
+<function is_collinear at 0x7f01afa76f50>
+PRE
+<function get_shared_segments at 0x7f01afa797d0>
+PRE
+<function get_ray_segment_intersect at 0x7f01afa79230>
+PRE
+<function distance_matrix at 0x7f01afa79848>
+PRE
+<function get_segment_point_intersect at 0x7f01afa790c8>
+PRE
+<function convex_hull at 0x7f01afa79500>
+PRE
+<function is_clockwise at 0x7f01afa79578>
+PRE
+<function seg_intersect at 0x7f01afa79668>
+PRE
+<function get_bounding_box at 0x7f01afa76e60>
+PRE
+<function get_rectangle_point_intersect at 0x7f01afa791b8>
+PRE
+<function asShape at 0x7f01bc7da140>
+PRE
+<class 'pysal.cg.shapes.Polygon'>
+PRE
+<class 'pysal.cg.shapes.Chain'>
+PRE
+<class 'pysal.cg.shapes.Point'>
+PRE
+<class 'pysal.cg.shapes.LineSegment'>
+PRE
+pysal.cg.shapes.VerticalLine
+PRE
+pysal.cg.shapes.Line
+PRE
+<class 'pysal.cg.shapes.Ring'>
+PRE
+pysal.cg.shapes.Rectangle
+PRE
+pysal.cg.shapes.Ray
+PRE
+<function arcdist2linear at 0x7f01b84b79b0>
+PRE
+<function linear2arcdist at 0x7f01b84b7a28>
+PRE
+<function fast_threshold at 0x7f01b84b7c80>
+<function toXYZ at 0x7f01b84b7aa0>
+PRE
+<function fast_knn at 0x7f01b84b7c08>
+PRE
+<function toLngLat at 0x7f01b84b7b18>
+<function harcdist at 0x7f01b84b7f50>
+PRE
+<function <lambda> at 0x7f01b84b7e60>
+<function lonlat at 0x7f01b84b7cf8>
+PRE
+<function geointerpolate at 0x7f01bc7da050>
+PRE
+<function arcdist at 0x7f01b84b70c8>
+PRE
+<function geogrid at 0x7f01bc7da0c8>
+PRE
+<function haversine at 0x7f01b84b7d70>
+PRE
+<function brute_knn at 0x7f01b84b7b90>
+PRE
+<function radangle at 0x7f01b84b7ed8>
+PRE
+pysal.cg.locators.PointLocator
+PRE
+pysal.cg.locators.PolygonLocator
+PRE
+pysal.cg.locators.BruteForcePointLocator
+PRE
+pysal.cg.locators.Grid
+PRE
+pysal.cg.locators.IntervalTree
+PRE
+pysal.inequality.gini.Gini
+PRE
+pysal.inequality.gini.Gini_Spatial
+PRE
+pysal.inequality.theil.TheilD
+PRE
+pysal.inequality.theil.TheilDSim
+PRE
+pysal.inequality.theil.Theil
+PRE
+<class 'pysal.weights.Distance.DistanceBand'>
+PRE
+<class 'pysal.weights.Distance.Kernel'>
+PRE
+<function knnW at 0x7f01afa41050>
+PRE
+<function queen_geojson at 0x7f01ac2ebc08>
+PRE
+<function lag_spatial at 0x7f01afa48140>
+PRE
+<function buildContiguity at 0x7f01afa41500>
+PRE
+<function higher_order at 0x7f01afa3d410>
+PRE
+<function full at 0x7f01afa3d5f0>
+PRE
+<function min_threshold_distance at 0x7f01afa3d938>
+PRE
+<function shimbel at 0x7f01afa3d578>
+PRE
+<function get_ids at 0x7f01afa3d848>
+PRE
+<function write_gal at 0x7f01afa3da28>
+<function block_weights at 0x7f01afa3d2a8>
+PRE
+<function regime_weights at 0x7f01afa3d230>
+PRE
+<function higher_order_sp at 0x7f01afa3d488>
+PRE
+<function hexLat2W at 0x7f01afa3d140>
+PRE
+<function insert_diagonal at 0x7f01afa3d758>
+PRE
+<function remap_ids at 0x7f01afa3d7d0>
+PRE
+<function w_local_cluster at 0x7f01afa3d500>
+PRE
+<function full2W at 0x7f01afa3d668>
+PRE
+<function get_points_array_from_shapefile at 0x7f01afa3d8c0>
+PRE
+<function comb at 0x7f01afa3d320>
+PRE
+<function lat2W at 0x7f01afa3d1b8>
+PRE
+<function order at 0x7f01afa3d398>
+PRE
+<function WSP2W at 0x7f01afa3d6e0>
+PRE
+<function lat2SW at 0x7f01afa3d9b0>
+PRE
+<class 'pysal.weights.weights.WSP'>
+PRE
+<class 'pysal.weights.weights.W'>
+PRE
+<function queen_from_shapefile at 0x7f01afa41938>
+PRE
+<function min_threshold_dist_from_shapefile at 0x7f01afa41f50>
+PRE
+<function adaptive_kernelW at 0x7f01afa41e60>
+PRE
+<function build_lattice_shapefile at 0x7f01afa48050>
+PRE
+<function adaptive_kernelW_from_shapefile at 0x7f01afa41ed8>
+PRE
+<function threshold_continuousW_from_array at 0x7f01afa41c80>
+PRE
+<function threshold_continuousW_from_shapefile at 0x7f01afa41cf8>
+PRE
+<function knnW_from_shapefile at 0x7f01afa41b18>
+PRE
+<function threshold_binaryW_from_array at 0x7f01afa41b90>
+PRE
+<function rook_from_shapefile at 0x7f01afa419b0>
+PRE
+<function spw_from_gal at 0x7f01afa41a28>
+PRE
+<function kernelW_from_shapefile at 0x7f01afa41de8>
+PRE
+<function knnW_from_array at 0x7f01afa41aa0>
+PRE
+<function threshold_binaryW_from_shapefile at 0x7f01afa41c08>
+PRE
+<function kernelW at 0x7f01afa41d70>
+PRE
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+PRE
+pysal.weights._contW_binning.ContiguityWeights_binning
+PRE
+<function bbcommon at 0x7f01afa41488>
+PRE
+<function w_clip at 0x7f01afa48488>
+PRE
+<function w_union at 0x7f01afa48230>
+PRE
+<function w_difference at 0x7f01afa48320>
+PRE
+<function w_subset at 0x7f01afa48410>
+PRE
+<function w_symmetric_difference at 0x7f01afa48398>
+PRE
+<function w_intersection at 0x7f01afa482a8>
+PRE
+<function get_path at 0x7f01abd68410>
+pysal.spreg.error_sp.BaseGM_Combo
+PRE
+pysal.spreg.error_sp.BaseGM_Endog_Error
+PRE
+pysal.spreg.error_sp.GM_Combo
+PRE
+pysal.spreg.error_sp.GM_Endog_Error
+PRE
+pysal.spreg.error_sp.BaseGM_Error
+PRE
+pysal.spreg.error_sp.GM_Error
+PRE
+pysal.spreg.twosls_regimes.TSLS_Regimes
+PRE
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7f01ac1d1c08>
+<function get_lags at 0x7f01ac1d1938>
+PRE
+<function sphstack at 0x7f01ac1d1d70>
+PRE
+<function optim_moments at 0x7f01ac1d17d0>
+PRE
+<function get_A2_hom at 0x7f01ac1d16e0>
+PRE
+<function iter_msg at 0x7f01ac1d1b90>
+<function spdot at 0x7f01ac1d1c80>
+PRE
+<function spmin at 0x7f01ac1d1e60>
+PRE
+<function inverse_prod at 0x7f01ac1d19b0>
+PRE
+<function get_A1_het at 0x7f01ac1d1320>
+PRE
+<function RegressionProps_basic at 0x7f01ac1d7050>
+PRE
+<function power_expansion at 0x7f01ac1d1a28>
+PRE
+<function set_endog at 0x7f01ac1d1aa0>
+<function foptim_par at 0x7f01ac1d1848>
+PRE
+<function spmax at 0x7f01ac1d1ed8>
+PRE
+<function spbroadcast at 0x7f01ac1d1de8>
+PRE
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7f01ac1d1cf8>
+PRE
+<function get_A1_hom at 0x7f01ac1d1668>
+PRE
+<function set_warn at 0x7f01ac1d1f50>
+PRE
+<function get_spFilter at 0x7f01ac1d18c0>
+PRE
+<function set_endog_sparse at 0x7f01ac1d1b18>
+PRE
+<function get_psi_sigma at 0x7f01ac1fd488>
+PRE
+pysal.spreg.error_sp_het.GM_Combo_Het
+PRE
+<function get_a1a2 at 0x7f01ac1fd9b0>
+PRE
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+PRE
+<function get_Omega_GS2SLS at 0x7f01ac1fdaa0>
+PRE
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+PRE
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+PRE
+<function get_vm_het at 0x7f01ac1fd8c0>
+PRE
+pysal.spreg.error_sp_het.GM_Error_Het
+PRE
+<function get_P_hat at 0x7f01ac1fd938>
+PRE
+<function get_vc_het_tsls at 0x7f01ac1fda28>
+<function get_vc_het at 0x7f01ac1fd848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+PRE
+pysal.spreg.ols.BaseOLS
+PRE
+pysal.spreg.ols.OLS
+PRE
+pysal.spreg.twosls_sp.BaseGM_Lag
+PRE
+pysal.spreg.twosls_sp.GM_Lag
+PRE
+pysal.spreg.ml_lag.ML_Lag
+PRE
+<function lag_c_loglik_ord at 0x7f01abd62c80>
+pysal.spreg.ml_lag.BaseML_Lag
+PRE
+<function lag_c_loglik at 0x7f01abd62b18>
+<function set_name_h at 0x7f01ac1e0b90>
+PRE
+<function set_name_yend at 0x7f01ac1e09b0>
+PRE
+<function set_name_q_sp at 0x7f01ac1e0b18>
+PRE
+<function check_spat_diag at 0x7f01ac1e0f50>
+PRE
+<function check_weights at 0x7f01ac1e0e60>
+PRE
+<function check_robust at 0x7f01ac1e0ed8>
+PRE
+<function check_arrays at 0x7f01ac1e0d70>
+PRE
+<function set_name_ds at 0x7f01ac1e0848>
+PRE
+<function set_name_y at 0x7f01ac1e08c0>
+PRE
+<function set_name_x at 0x7f01ac1e0938>
+PRE
+<function set_name_multi at 0x7f01ac1e0cf8>
+PRE
+<function check_regimes at 0x7f01ac1d8050>
+PRE
+<function set_robust at 0x7f01ac1e0c08>
+PRE
+<function check_constant at 0x7f01ac1d80c8>
+PRE
+<function set_name_q at 0x7f01ac1e0a28>
+PRE
+<function check_y at 0x7f01ac1e0de8>
+PRE
+<function set_name_yend_sp at 0x7f01ac1e0aa0>
+PRE
+<function set_name_w at 0x7f01ac1e0c80>
+PRE
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+PRE
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+PRE
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+PRE
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+PRE
+pysal.spreg.ols_regimes.OLS_Regimes
+PRE
+<function ar2 at 0x7f01ac1d72a8>
+PRE
+<function koenker_bassett at 0x7f01ac1d76e0>
+PRE
+<function akaike at 0x7f01ac1d7410>
+PRE
+<function likratiotest at 0x7f01ac1d7848>
+PRE
+<function r2 at 0x7f01ac1d7230>
+PRE
+<function se_betas at 0x7f01ac1d7320>
+PRE
+<function jarque_bera at 0x7f01ac1d7578>
+PRE
+<function vif at 0x7f01ac1d7758>
+PRE
+<function breusch_pagan at 0x7f01ac1d75f0>
+PRE
+<function schwarz at 0x7f01ac1d7488>
+PRE
+<function f_stat at 0x7f01ac1d7140>
+PRE
+<function condition_index at 0x7f01ac1d7500>
+PRE
+<function white at 0x7f01ac1d7668>
+PRE
+<function constant_check at 0x7f01ac1d77d0>
+PRE
+<function log_likelihood at 0x7f01ac1d7398>
+PRE
+<function t_stat at 0x7f01ac1d71b8>
+PRE
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+PRE
+<function symmetrize at 0x7f01abd62aa0>
+PRE
+<function robust_vm at 0x7f01ac1f45f0>
+PRE
+<function hac_multi at 0x7f01ac1f4668>
+PRE
+<function pr2_aspatial at 0x7f01ac1d79b0>
+PRE
+<function pr2_spatial at 0x7f01ac1d7a28>
+PRE
+<function t_stat at 0x7f01ac1d7938>
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+PRE
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+PRE
+pysal.spreg.twosls.TSLS
+PRE
+pysal.spreg.twosls.BaseTSLS
+PRE
+<function beta_diag_lag at 0x7f01ac1f3758>
+<function build_coefs_body_instruments at 0x7f01ac1f37d0>
+<function GM_Combo_Hom_multi at 0x7f01ac1f3488>
+<function OLS at 0x7f01ac1d8848>
+<function GM_Endog_Error_Hom_multi at 0x7f01ac1f30c8>
+<function summary_multi at 0x7f01ac1f39b0>
+<function summary_sur at 0x7f01ac1f3ed8>
+PRE
+<function summary_spat_diag_intro at 0x7f01ac1f4230>
+<function GM_Combo_Het_multi at 0x7f01ac1f3578>
+<function TSLS at 0x7f01ac1d8938>
+<function summary_iteration at 0x7f01ac1f3de8>
+PRE
+<function summary_intro at 0x7f01ac1f3b18>
+<function summary_warning at 0x7f01ac1f4050>
+<function GM_Combo at 0x7f01ac1f3320>
+<function beta_diag_ols at 0x7f01ac1f3668>
+<function GM_Endog_Error at 0x7f01ac1d8de8>
+<function ML_Lag at 0x7f01ac1d8b18>
+<function OLS_multi at 0x7f01ac1d88c0>
+<function GM_Combo_Hom at 0x7f01ac1f3410>
+<function GM_Combo_multi at 0x7f01ac1f3398>
+<function summary_vm at 0x7f01ac1f4410>
+<function summary_chow at 0x7f01ac1f3f50>
+<function GM_Error_Hom_multi at 0x7f01ac1d8f50>
+<function GM_Error at 0x7f01ac1d8cf8>
+<function GM_Endog_Error_Hom at 0x7f01ac1f3050>
+<function ML_Lag_multi at 0x7f01ac1d8b90>
+<function GM_Lag_multi at 0x7f01ac1d8aa0>
+<function summary_close at 0x7f01ac1f4500>
+<function summary_spat_diag_probit at 0x7f01ac1f4398>
+<function summary_open at 0x7f01ac1f3aa0>
+<function GM_Combo_Het at 0x7f01ac1f3500>
+<function TSLS_multi at 0x7f01ac1d89b0>
+<function spat_diag_instruments at 0x7f01ac1f38c0>
+<function summary_coefs_lambda at 0x7f01ac1f3cf8>
+<function ML_Error at 0x7f01ac1d8c08>
+<function summary_coefs_allx at 0x7f01ac1f3c08>
+<function GM_Lag at 0x7f01ac1d8a28>
+<function GM_Error_Het at 0x7f01ac1f3140>
+<function summary_coefs_intro at 0x7f01ac1f3b90>
+<function Probit at 0x7f01ac1f35f0>
+<function spat_diag_ols at 0x7f01ac1f3848>
+<function summary_spat_diag_ols at 0x7f01ac1f4320>
+<function GM_Error_Hom at 0x7f01ac1d8ed8>
+<function GM_Endog_Error_multi at 0x7f01ac1d8e60>
+<function summary_pred at 0x7f01ac1f4488>
+<function GM_Endog_Error_Het at 0x7f01ac1f3230>
+<function summary_spat_diag_intro_global at 0x7f01ac1f42a8>
+<function summary_coefs_somex at 0x7f01ac1f3c80>
+PRE
+<function summary_regimes at 0x7f01ac1f3e60>
+PRE
+<function GM_Endog_Error_Het_multi at 0x7f01ac1f32a8>
+<function summary_nonspat_diag_2 at 0x7f01ac1f41b8>
+<function summary_nonspat_diag_1 at 0x7f01ac1f4140>
+<function summary at 0x7f01ac1f3938>
+<function summary_coefs_instruments at 0x7f01ac1f3d70>
+PRE
+<function summary_coefs_slopes at 0x7f01ac1f40c8>
+<function GM_Error_multi at 0x7f01ac1d8d70>
+<function ML_Error_multi at 0x7f01ac1d8c80>
+<function beta_diag at 0x7f01ac1f36e0>
+<function GM_Error_Het_multi at 0x7f01ac1f31b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+PRE
+<function akTest at 0x7f01ac1e0758>
+pysal.spreg.diagnostics_sp.LMtests
+PRE
+<function get_zI at 0x7f01ac1e06e0>
+PRE
+<function rlmLag at 0x7f01ac1e0488>
+PRE
+pysal.spreg.diagnostics_sp.AKtest
+PRE
+<function lmLag at 0x7f01ac1e0398>
+PRE
+<function lmErr at 0x7f01ac1d7d70>
+PRE
+<function get_eI at 0x7f01ac1e0668>
+PRE
+<function get_mI at 0x7f01ac1e0578>
+PRE
+<function lmSarma at 0x7f01ac1e0500>
+PRE
+<function rlmErr at 0x7f01ac1e0410>
+PRE
+<function get_vI at 0x7f01ac1e05f0>
+PRE
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+PRE<function steady_state at 0x7fd8fc06b8c0>
+PRE
+1
+<function var_fmpt at 0x7fd8fc06b9b0>
+PRE
+1
+<function fmpt at 0x7fd8fc06b938>
+PRE
+1
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+PRE
+2
+<function knox at 0x7fd8fc0799b0>
+PRE
+4
+<function modified_knox at 0x7fd8fc079b90>
+PRE
+4
+<function mantel at 0x7fd8fc079aa0>
+PRE
+2
+<function jacquez at 0x7fd8fc079b18>
+PRE
+3
+<function rose at 0x7fd8fc079668>
+PRE
+2
+pysal.spatial_dynamics.rank.SpatialTau
+PRE
+3
+pysal.spatial_dynamics.rank.Tau
+PRE
+2
+pysal.spatial_dynamics.rank.Theta
+PRE
+2
+<function pseudop at 0x7fd8fc079140>
+<function get_lower at 0x7fd8fc079938>
+PRE
+1
+<function shuffle_matrix at 0x7fd8fc0798c0>
+PRE
+2
+<function prais at 0x7fd8fc06bf50>
+PRE
+1
+<function chi2 at 0x7fd8fc06ba28>
+PRE
+2
+<function shorrock at 0x7fd8fc079050>
+PRE
+1
+pysal.spatial_dynamics.markov.Spatial_Markov
+PRE
+2
+<function homogeneity at 0x7fd8fc0790c8>
+PRE
+1
+pysal.spatial_dynamics.markov.Homogeneity_Results
+PRE
+1
+pysal.spatial_dynamics.markov.Markov
+PRE
+1
+<function kullback at 0x7fd8fc06bde8>
+PRE
+1
+pysal.spatial_dynamics.markov.LISA_Markov
+PRE
+2
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+PRE
+1
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7fd8fc085230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7fd8fc085320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+PRE
+0
+<function noneMax at 0x7fd8fc0852a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+PRE
+1
+<function weight_convert at 0x7fd8fc085050>
+PRE
+2
+pysal.core.util.wkt.WKTParser
+PRE
+0
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+PRE
+0
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+PRE
+0
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+PRE
+0
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+PRE
+0
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+PRE
+0
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+PRE
+0
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+PRE
+0
+<class 'pysal.core.FileIO.FileIO'>
+PRE
+0
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+PRE
+0
+pysal.region.randomregion.Random_Region
+PRE
+1
+pysal.region.randomregion.Random_Regions
+PRE
+1
+pysal.region.maxp.Maxp_LISA
+PRE
+5
+pysal.region.maxp.Maxp
+PRE
+4
+<function check_contiguity at 0x7fd8fc05f848>
+PRE
+3
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7fd8fc05f7d0>
+PRE
+2
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7fd8ff8c29b0>
+<function union_all at 0x7fd8ff8c5ed8>
+<function Rtree at 0x7fd8ff8da7d0>
+<function avg_diagonals at 0x7fd8ff8da848>
+<function closest at 0x7fd8ff8dc938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7fd8ff8dc8c0>
+<function silhouette_coeff at 0x7fd8ff8dc848>
+<function silhouette_w at 0x7fd8ff8dc7d0>
+<function k_means_cluster at 0x7fd8ff8dc9b0>
+<class 'pysal.cg.rtree.Rect'>
+PRE
+4
+<function get_angle_between at 0x7fd8ff8c2ed8>
+PRE
+2
+<function get_point_at_angle_and_dist at 0x7fd8ff8c5488>
+PRE
+3
+<function get_points_dist at 0x7fd8ff8c5398>
+PRE
+2
+<function get_polygon_point_dist at 0x7fd8ff8c5320>
+PRE
+2
+<function get_segment_point_dist at 0x7fd8ff8c5410>
+PRE
+2
+<function bbcommon at 0x7fd8ff8c2de8>
+PRE
+2
+<function get_rectangle_rectangle_intersection at 0x7fd8ff8c52a8>
+PRE
+2
+<function get_polygon_point_intersect at 0x7fd8ff8c5140>
+PRE
+2
+<function ccw at 0x7fd8ff8c55f0>
+PRE
+1
+<function point_touches_rectangle at 0x7fd8ff8c5758>
+PRE
+2
+<function get_segments_intersect at 0x7fd8ff8c5050>
+PRE
+2
+<function is_collinear at 0x7fd8ff8c2f50>
+PRE
+3
+<function get_shared_segments at 0x7fd8ff8c57d0>
+PRE
+2
+<function get_ray_segment_intersect at 0x7fd8ff8c5230>
+PRE
+2
+<function distance_matrix at 0x7fd8ff8c5848>
+PRE
+1
+<function get_segment_point_intersect at 0x7fd8ff8c50c8>
+PRE
+2
+<function convex_hull at 0x7fd8ff8c5500>
+PRE
+1
+<function is_clockwise at 0x7fd8ff8c5578>
+PRE
+1
+<function seg_intersect at 0x7fd8ff8c5668>
+PRE
+4
+<function get_bounding_box at 0x7fd8ff8c2e60>
+PRE
+1
+<function get_rectangle_point_intersect at 0x7fd8ff8c51b8>
+PRE
+2
+<function asShape at 0x7fd906edf140>
+PRE
+1
+<class 'pysal.cg.shapes.Polygon'>
+PRE
+1
+<class 'pysal.cg.shapes.Chain'>
+PRE
+1
+<class 'pysal.cg.shapes.Point'>
+PRE
+1
+<class 'pysal.cg.shapes.LineSegment'>
+PRE
+2
+pysal.cg.shapes.VerticalLine
+PRE
+1
+pysal.cg.shapes.Line
+PRE
+2
+<class 'pysal.cg.shapes.Ring'>
+PRE
+1
+pysal.cg.shapes.Rectangle
+PRE
+4
+pysal.cg.shapes.Ray
+PRE
+2
+<function arcdist2linear at 0x7fd90c6389b0>
+PRE
+1
+<function linear2arcdist at 0x7fd90c638a28>
+PRE
+1
+<function fast_threshold at 0x7fd90c638c80>
+<function toXYZ at 0x7fd90c638aa0>
+PRE
+1
+<function fast_knn at 0x7fd90c638c08>
+PRE
+2
+<function toLngLat at 0x7fd90c638b18>
+<function harcdist at 0x7fd90c638f50>
+PRE
+2
+<function <lambda> at 0x7fd90c638e60>
+<function lonlat at 0x7fd90c638cf8>
+PRE
+1
+<function geointerpolate at 0x7fd906edf050>
+PRE
+3
+<function arcdist at 0x7fd90c6380c8>
+PRE
+2
+<function geogrid at 0x7fd906edf0c8>
+PRE
+3
+<function haversine at 0x7fd90c638d70>
+PRE
+1
+<function brute_knn at 0x7fd90c638b90>
+PRE
+2
+<function radangle at 0x7fd90c638ed8>
+PRE
+2
+pysal.cg.locators.PointLocator
+PRE
+1
+pysal.cg.locators.PolygonLocator
+PRE
+1
+pysal.cg.locators.BruteForcePointLocator
+PRE
+1
+pysal.cg.locators.Grid
+PRE
+2
+pysal.cg.locators.IntervalTree
+PRE
+1
+pysal.inequality.gini.Gini
+PRE
+1
+pysal.inequality.gini.Gini_Spatial
+PRE
+2
+pysal.inequality.theil.TheilD
+PRE
+2
+pysal.inequality.theil.TheilDSim
+PRE
+2
+pysal.inequality.theil.Theil
+PRE
+1
+<class 'pysal.weights.Distance.DistanceBand'>
+PRE
+2
+<class 'pysal.weights.Distance.Kernel'>
+PRE
+1
+<function knnW at 0x7fd8ff88d050>
+PRE
+1
+<function queen_geojson at 0x7fd8fc137c08>
+PRE
+1
+<function lag_spatial at 0x7fd8ff894140>
+PRE
+2
+<function buildContiguity at 0x7fd8ff88d500>
+PRE
+1
+<function higher_order at 0x7fd8ff889410>
+PRE
+1
+<function full at 0x7fd8ff8895f0>
+PRE
+1
+<function min_threshold_distance at 0x7fd8ff889938>
+PRE
+1
+<function shimbel at 0x7fd8ff889578>
+PRE
+1
+<function get_ids at 0x7fd8ff889848>
+PRE
+2
+<function write_gal at 0x7fd8ff889a28>
+<function block_weights at 0x7fd8ff8892a8>
+PRE
+1
+<function regime_weights at 0x7fd8ff889230>
+PRE
+1
+<function higher_order_sp at 0x7fd8ff889488>
+PRE
+1
+<function hexLat2W at 0x7fd8ff889140>
+PRE
+0
+<function insert_diagonal at 0x7fd8ff889758>
+PRE
+1
+<function remap_ids at 0x7fd8ff8897d0>
+PRE
+2
+<function w_local_cluster at 0x7fd8ff889500>
+PRE
+1
+<function full2W at 0x7fd8ff889668>
+PRE
+1
+<function get_points_array_from_shapefile at 0x7fd8ff8898c0>
+PRE
+1
+<function comb at 0x7fd8ff889320>
+PRE
+1
+<function lat2W at 0x7fd8ff8891b8>
+PRE
+0
+<function order at 0x7fd8ff889398>
+PRE
+1
+<function WSP2W at 0x7fd8ff8896e0>
+PRE
+1
+<function lat2SW at 0x7fd8ff8899b0>
+PRE
+0
+<class 'pysal.weights.weights.WSP'>
+PRE
+1
+<class 'pysal.weights.weights.W'>
+PRE
+1
+<function queen_from_shapefile at 0x7fd8ff88d938>
+PRE
+1
+<function min_threshold_dist_from_shapefile at 0x7fd8ff88df50>
+PRE
+1
+<function adaptive_kernelW at 0x7fd8ff88de60>
+PRE
+1
+<function build_lattice_shapefile at 0x7fd8ff894050>
+PRE
+3
+<function adaptive_kernelW_from_shapefile at 0x7fd8ff88ded8>
+PRE
+1
+<function threshold_continuousW_from_array at 0x7fd8ff88dc80>
+PRE
+2
+<function threshold_continuousW_from_shapefile at 0x7fd8ff88dcf8>
+PRE
+2
+<function knnW_from_shapefile at 0x7fd8ff88db18>
+PRE
+1
+<function threshold_binaryW_from_array at 0x7fd8ff88db90>
+PRE
+2
+<function rook_from_shapefile at 0x7fd8ff88d9b0>
+PRE
+1
+<function spw_from_gal at 0x7fd8ff88da28>
+PRE
+1
+<function kernelW_from_shapefile at 0x7fd8ff88dde8>
+PRE
+1
+<function knnW_from_array at 0x7fd8ff88daa0>
+PRE
+1
+<function threshold_binaryW_from_shapefile at 0x7fd8ff88dc08>
+PRE
+2
+<function kernelW at 0x7fd8ff88dd70>
+PRE
+1
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+PRE
+1
+pysal.weights._contW_binning.ContiguityWeights_binning
+PRE
+2
+<function bbcommon at 0x7fd8ff88d488>
+PRE
+2
+<function w_clip at 0x7fd8ff894488>
+PRE
+2
+<function w_union at 0x7fd8ff894230>
+PRE
+2
+<function w_difference at 0x7fd8ff894320>
+PRE
+2
+<function w_subset at 0x7fd8ff894410>
+PRE
+2
+<function w_symmetric_difference at 0x7fd8ff894398>
+PRE
+2
+<function w_intersection at 0x7fd8ff8942a8>
+PRE
+2
+<function get_path at 0x7fd8fbbb4410>
+pysal.spreg.error_sp.BaseGM_Combo
+PRE
+2
+pysal.spreg.error_sp.BaseGM_Endog_Error
+PRE
+5
+pysal.spreg.error_sp.GM_Combo
+PRE
+2
+pysal.spreg.error_sp.GM_Endog_Error
+PRE
+5
+pysal.spreg.error_sp.BaseGM_Error
+PRE
+3
+pysal.spreg.error_sp.GM_Error
+PRE
+3
+pysal.spreg.twosls_regimes.TSLS_Regimes
+PRE
+5
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7fd8fc01dc08>
+<function get_lags at 0x7fd8fc01d938>
+PRE
+3
+<function sphstack at 0x7fd8fc01dd70>
+PRE
+2
+<function optim_moments at 0x7fd8fc01d7d0>
+PRE
+1
+<function get_A2_hom at 0x7fd8fc01d6e0>
+PRE
+1
+<function iter_msg at 0x7fd8fc01db90>
+<function spdot at 0x7fd8fc01dc80>
+PRE
+2
+<function spmin at 0x7fd8fc01de60>
+PRE
+1
+<function inverse_prod at 0x7fd8fc01d9b0>
+PRE
+3
+<function get_A1_het at 0x7fd8fc01d320>
+PRE
+1
+<function RegressionProps_basic at 0x7fd8fc023050>
+PRE
+1
+<function power_expansion at 0x7fd8fc01da28>
+PRE
+3
+<function set_endog at 0x7fd8fc01daa0>
+<function foptim_par at 0x7fd8fc01d848>
+PRE
+2
+<function spmax at 0x7fd8fc01ded8>
+PRE
+1
+<function spbroadcast at 0x7fd8fc01dde8>
+PRE
+2
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7fd8fc01dcf8>
+PRE
+2
+<function get_A1_hom at 0x7fd8fc01d668>
+PRE
+1
+<function set_warn at 0x7fd8fc01df50>
+PRE
+2
+<function get_spFilter at 0x7fd8fc01d8c0>
+PRE
+3
+<function set_endog_sparse at 0x7fd8fc01db18>
+PRE
+7
+<function get_psi_sigma at 0x7fd8fc049488>
+PRE
+3
+pysal.spreg.error_sp_het.GM_Combo_Het
+PRE
+2
+<function get_a1a2 at 0x7fd8fc0499b0>
+PRE
+8
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+PRE
+3
+<function get_Omega_GS2SLS at 0x7fd8fc049aa0>
+PRE
+6
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+PRE
+5
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+PRE
+2
+<function get_vm_het at 0x7fd8fc0498c0>
+PRE
+5
+pysal.spreg.error_sp_het.GM_Error_Het
+PRE
+3
+<function get_P_hat at 0x7fd8fc049938>
+PRE
+3
+<function get_vc_het_tsls at 0x7fd8fc049a28>
+<function get_vc_het at 0x7fd8fc049848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+PRE
+5
+pysal.spreg.ols.BaseOLS
+PRE
+2
+pysal.spreg.ols.OLS
+PRE
+2
+pysal.spreg.twosls_sp.BaseGM_Lag
+PRE
+2
+pysal.spreg.twosls_sp.GM_Lag
+PRE
+2
+pysal.spreg.ml_lag.ML_Lag
+PRE
+3
+<function lag_c_loglik_ord at 0x7fd8fbbaec80>
+pysal.spreg.ml_lag.BaseML_Lag
+PRE
+3
+<function lag_c_loglik at 0x7fd8fbbaeb18>
+<function set_name_h at 0x7fd8fc02cb90>
+PRE
+2
+<function set_name_yend at 0x7fd8fc02c9b0>
+PRE
+2
+<function set_name_q_sp at 0x7fd8fc02cb18>
+PRE
+4
+<function check_spat_diag at 0x7fd8fc02cf50>
+PRE
+2
+<function check_weights at 0x7fd8fc02ce60>
+PRE
+2
+<function check_robust at 0x7fd8fc02ced8>
+PRE
+2
+<function check_arrays at 0x7fd8fc02cd70>
+PRE
+0
+<function set_name_ds at 0x7fd8fc02c848>
+PRE
+1
+<function set_name_y at 0x7fd8fc02c8c0>
+PRE
+1
+<function set_name_x at 0x7fd8fc02c938>
+PRE
+2
+<function set_name_multi at 0x7fd8fc02ccf8>
+PRE
+11
+<function check_regimes at 0x7fd8fc024050>
+PRE
+1
+<function set_robust at 0x7fd8fc02cc08>
+PRE
+1
+<function check_constant at 0x7fd8fc0240c8>
+PRE
+1
+<function set_name_q at 0x7fd8fc02ca28>
+PRE
+2
+<function check_y at 0x7fd8fc02cde8>
+PRE
+2
+<function set_name_yend_sp at 0x7fd8fc02caa0>
+PRE
+1
+<function set_name_w at 0x7fd8fc02cc80>
+PRE
+2
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+PRE
+6
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+PRE
+3
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+PRE
+4
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+PRE
+3
+pysal.spreg.ols_regimes.OLS_Regimes
+PRE
+3
+<function ar2 at 0x7fd8fc0232a8>
+PRE
+1
+<function koenker_bassett at 0x7fd8fc0236e0>
+PRE
+1
+<function akaike at 0x7fd8fc023410>
+PRE
+1
+<function likratiotest at 0x7fd8fc023848>
+PRE
+2
+<function r2 at 0x7fd8fc023230>
+PRE
+1
+<function se_betas at 0x7fd8fc023320>
+PRE
+1
+<function jarque_bera at 0x7fd8fc023578>
+PRE
+1
+<function vif at 0x7fd8fc023758>
+PRE
+1
+<function breusch_pagan at 0x7fd8fc0235f0>
+PRE
+1
+<function schwarz at 0x7fd8fc023488>
+PRE
+1
+<function f_stat at 0x7fd8fc023140>
+PRE
+1
+<function condition_index at 0x7fd8fc023500>
+PRE
+1
+<function white at 0x7fd8fc023668>
+PRE
+1
+<function constant_check at 0x7fd8fc0237d0>
+PRE
+1
+<function log_likelihood at 0x7fd8fc023398>
+PRE
+1
+<function t_stat at 0x7fd8fc0231b8>
+PRE
+1
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+PRE
+3
+<function symmetrize at 0x7fd8fbbaeaa0>
+PRE
+1
+<function robust_vm at 0x7fd8fc0405f0>
+PRE
+1
+<function hac_multi at 0x7fd8fc040668>
+PRE
+2
+<function pr2_aspatial at 0x7fd8fc0239b0>
+PRE
+1
+<function pr2_spatial at 0x7fd8fc023a28>
+PRE
+1
+<function t_stat at 0x7fd8fc023938>
+PRE
+1
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+PRE
+3
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+PRE
+4
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+PRE
+6
+pysal.spreg.twosls.TSLS
+PRE
+4
+pysal.spreg.twosls.BaseTSLS
+PRE
+3
+<function beta_diag_lag at 0x7fd8fc03f758>
+<function build_coefs_body_instruments at 0x7fd8fc03f7d0>
+<function GM_Combo_Hom_multi at 0x7fd8fc03f488>
+<function OLS at 0x7fd8fc024848>
+<function GM_Endog_Error_Hom_multi at 0x7fd8fc03f0c8>
+<function summary_multi at 0x7fd8fc03f9b0>
+<function summary_sur at 0x7fd8fc03fed8>
+PRE
+1
+<function summary_spat_diag_intro at 0x7fd8fc040230>
+<function GM_Combo_Het_multi at 0x7fd8fc03f578>
+<function TSLS at 0x7fd8fc024938>
+<function summary_iteration at 0x7fd8fc03fde8>
+PRE
+1
+<function summary_intro at 0x7fd8fc03fb18>
+<function summary_warning at 0x7fd8fc040050>
+<function GM_Combo at 0x7fd8fc03f320>
+<function beta_diag_ols at 0x7fd8fc03f668>
+<function GM_Endog_Error at 0x7fd8fc024de8>
+<function ML_Lag at 0x7fd8fc024b18>
+<function OLS_multi at 0x7fd8fc0248c0>
+<function GM_Combo_Hom at 0x7fd8fc03f410>
+<function GM_Combo_multi at 0x7fd8fc03f398>
+<function summary_vm at 0x7fd8fc040410>
+<function summary_chow at 0x7fd8fc03ff50>
+<function GM_Error_Hom_multi at 0x7fd8fc024f50>
+<function GM_Error at 0x7fd8fc024cf8>
+<function GM_Endog_Error_Hom at 0x7fd8fc03f050>
+<function ML_Lag_multi at 0x7fd8fc024b90>
+<function GM_Lag_multi at 0x7fd8fc024aa0>
+<function summary_close at 0x7fd8fc040500>
+<function summary_spat_diag_probit at 0x7fd8fc040398>
+<function summary_open at 0x7fd8fc03faa0>
+<function GM_Combo_Het at 0x7fd8fc03f500>
+<function TSLS_multi at 0x7fd8fc0249b0>
+<function spat_diag_instruments at 0x7fd8fc03f8c0>
+<function summary_coefs_lambda at 0x7fd8fc03fcf8>
+<function ML_Error at 0x7fd8fc024c08>
+<function summary_coefs_allx at 0x7fd8fc03fc08>
+<function GM_Lag at 0x7fd8fc024a28>
+<function GM_Error_Het at 0x7fd8fc03f140>
+<function summary_coefs_intro at 0x7fd8fc03fb90>
+<function Probit at 0x7fd8fc03f5f0>
+<function spat_diag_ols at 0x7fd8fc03f848>
+<function summary_spat_diag_ols at 0x7fd8fc040320>
+<function GM_Error_Hom at 0x7fd8fc024ed8>
+<function GM_Endog_Error_multi at 0x7fd8fc024e60>
+<function summary_pred at 0x7fd8fc040488>
+<function GM_Endog_Error_Het at 0x7fd8fc03f230>
+<function summary_spat_diag_intro_global at 0x7fd8fc0402a8>
+<function summary_coefs_somex at 0x7fd8fc03fc80>
+PRE
+2
+<function summary_regimes at 0x7fd8fc03fe60>
+PRE
+1
+<function GM_Endog_Error_Het_multi at 0x7fd8fc03f2a8>
+<function summary_nonspat_diag_2 at 0x7fd8fc0401b8>
+<function summary_nonspat_diag_1 at 0x7fd8fc040140>
+<function summary at 0x7fd8fc03f938>
+<function summary_coefs_instruments at 0x7fd8fc03fd70>
+PRE
+1
+<function summary_coefs_slopes at 0x7fd8fc0400c8>
+<function GM_Error_multi at 0x7fd8fc024d70>
+<function ML_Error_multi at 0x7fd8fc024c80>
+<function beta_diag at 0x7fd8fc03f6e0>
+<function GM_Error_Het_multi at 0x7fd8fc03f1b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+PRE
+3
+<function akTest at 0x7fd8fc02c758>
+pysal.spreg.diagnostics_sp.LMtests
+PRE
+2
+<function get_zI at 0x7fd8fc02c6e0>
+PRE
+3
+<function rlmLag at 0x7fd8fc02c488>
+PRE
+3
+pysal.spreg.diagnostics_sp.AKtest
+PRE
+2
+<function lmLag at 0x7fd8fc02c398>
+PRE
+3
+<function lmErr at 0x7fd8fc023d70>
+PRE
+3
+<function get_eI at 0x7fd8fc02c668>
+PRE
+3
+<function get_mI at 0x7fd8fc02c578>
+PRE
+3
+<function lmSarma at 0x7fd8fc02c500>
+PRE
+3
+<function rlmErr at 0x7fd8fc02c410>
+PRE
+3
+<function get_vI at 0x7fd8fc02c5f0>
+PRE
+4
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+PRE
+2
+<function get_omega_hom_ols at 0x7fd8fc0541b8>
+PRE
+6
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+PRE
+3
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+PRE
+2
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+PRE
+2
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+PRE
+5
+<function get_vc_hom at 0x7fd8fc0540c8>
+PRE
+5
+<function moments_hom at 0x7fd8fc049c08>
+PRE
+4
+pysal.spreg.error_sp_hom.GM_Error_Hom
+PRE
+3
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+PRE
+5
+<function get_omega_hom at 0x7fd8fc054140>
+PRE
+6
+<function err_c_loglik at 0x7fd8fbbb40c8>
+pysal.spreg.ml_error.ML_Error
+PRE
+3
+pysal.spreg.ml_error.BaseML_Error
+PRE
+3
+<function err_c_loglik_ord at 0x7fd8fbbb4320>
+<function sp_tests at 0x7fd8fbbae848>
+PRE
+1
+<function newton at 0x7fd8fbba1c08>
+PRE
+5
+pysal.spreg.probit.Probit
+PRE
+2
+<function moran_KP at 0x7fd8fbbae8c0>
+PRE
+3
+pysal.spreg.probit.BaseProbit
+PRE
+2
+pysal.spreg.error_sp_het_regimes.GM_Combo_Het_Regimes
+PRE
+3
+pysal.spreg.error_sp_het_regimes.GM_Endog_Error_Het_Regimes
+PRE
+6
+pysal.spreg.error_sp_het_regimes.GM_Error_Het_Regimes
+PRE
+4
+pysal.spreg.regimes.Wald
+PRE
+2
+<function wald_test at 0x7fd8fc054848>
+PRE
+4
+<function w_regimes at 0x7fd8fc054c80>
+PRE
+3
+<function buildR at 0x7fd8fc054a28>
+PRE
+3
+<function x2xsp at 0x7fd8fc054d70>
+PRE
+3
+<function regimeX_setup at 0x7fd8fc054b18>
+PRE
+4
+<function buildR1var at 0x7fd8fc054aa0>
+PRE
+5
+<function set_name_x_regimes at 0x7fd8fc054b90>
+PRE
+5
+pysal.spreg.regimes.Chow
+PRE
+1
+<function check_cols2regi at 0x7fd8fc054de8>
+PRE
+3
+<function w_regimes_union at 0x7fd8fc054cf8>
+PRE
+3
+<function w_regime at 0x7fd8fc054c08>
+PRE
+3
+pysal.spreg.regimes.Regimes_Frame
+PRE
+4
+<function load_example at 0x7fd8ff870320>
+PRE
+0
+pysal.esda.mapclassify.Fisher_Jenks_Sampled
+PRE
+1
+pysal.esda.mapclassify.Std_Mean
+PRE
+1
+pysal.esda.mapclassify.Percentiles
+PRE
+1
+pysal.esda.mapclassify.Max_P_Classifier
+PRE
+1
+pysal.esda.mapclassify.Fisher_Jenks
+PRE
+1
+pysal.esda.mapclassify.Equal_Interval
+PRE
+1
+<function quantile at 0x7fd8ff870140>
+PRE
+1
+pysal.esda.mapclassify.Map_Classifier
+PRE
+1
+pysal.esda.mapclassify.Quantiles
+PRE
+1
+pysal.esda.mapclassify.Natural_Breaks
+PRE
+1
+<function natural_breaks at 0x7fd8ff870398>
+PRE
+1
+<function bin at 0x7fd8ff870230>
+PRE
+2
+pysal.esda.mapclassify.Jenks_Caspall_Forced
+PRE
+1
+<function bin1d at 0x7fd8ff8702a8>
+PRE
+2
+<function binC at 0x7fd8ff8701b8>
+PRE
+2
+pysal.esda.mapclassify.K_classifiers
+PRE
+1
+<function fj at 0x7fd8ff873938>
+pysal.esda.mapclassify.Maximum_Breaks
+PRE
+1
+pysal.esda.mapclassify.Box_Plot
+PRE
+1
+pysal.esda.mapclassify.Jenks_Caspall_Sampled
+PRE
+1
+<function gadf at 0x7fd8ff8738c0>
+PRE
+1
+pysal.esda.mapclassify.Jenks_Caspall
+PRE
+1
+pysal.esda.mapclassify.User_Defined
+PRE
+2
+<function opt_part at 0x7fd8ff873a28>
+PRE
+1
+pysal.esda.getisord.G_Local
+PRE
+2
+pysal.esda.getisord.G
+PRE
+2
+pysal.esda.smoothing.Spatial_Filtering
+PRE
+6
+<function choynowski at 0x7fd8ff8949b0>
+PRE
+3
+pysal.esda.smoothing.Empirical_Bayes
+PRE
+2
+pysal.esda.smoothing.Age_Adjusted_Smoother
+PRE
+4
+pysal.esda.smoothing.Spatial_Rate
+PRE
+3
+pysal.esda.smoothing.Kernel_Smoother
+PRE
+3
+<function weighted_median at 0x7fd8ff8946e0>
+PRE
+2
+<function crude_age_standardization at 0x7fd8ff8947d0>
+PRE
+3
+<function standardized_mortality_ratio at 0x7fd8ff894938>
+PRE
+5
+pysal.esda.smoothing.Disk_Smoother
+PRE
+3
+<function assuncao_rate at 0x7fd8ff894a28>
+PRE
+2
+<function sum_by_n at 0x7fd8ff894758>
+PRE
+3
+pysal.esda.smoothing.Headbanging_Triples
+PRE
+2
+pysal.esda.smoothing.Excess_Risk
+PRE
+2
+pysal.esda.smoothing.Headbanging_Median_Rate
+PRE
+3
+pysal.esda.smoothing.Spatial_Empirical_Bayes
+PRE
+3
+pysal.esda.smoothing.Spatial_Median_Rate
+PRE
+3
+<functi<function steady_state at 0x7f2e82c1e8c0>
+<function var_fmpt at 0x7f2e82c1e9b0>
+<function fmpt at 0x7f2e82c1e938>
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+<function knox at 0x7f2e82c2d9b0>
+<function modified_knox at 0x7f2e82c2db90>
+<function mantel at 0x7f2e82c2daa0>
+<function jacquez at 0x7f2e82c2db18>
+<function rose at 0x7f2e82c2d668>
+pysal.spatial_dynamics.rank.SpatialTau
+pysal.spatial_dynamics.rank.Tau
+pysal.spatial_dynamics.rank.Theta
+<function pseudop at 0x7f2e82c2d140>
+<function get_lower at 0x7f2e82c2d938>
+<function shuffle_matrix at 0x7f2e82c2d8c0>
+<function prais at 0x7f2e82c1ef50>
+<function chi2 at 0x7f2e82c1ea28>
+<function shorrock at 0x7f2e82c2d050>
+pysal.spatial_dynamics.markov.Spatial_Markov
+<function homogeneity at 0x7f2e82c2d0c8>
+pysal.spatial_dynamics.markov.Homogeneity_Results
+pysal.spatial_dynamics.markov.Markov
+<function kullback at 0x7f2e82c1ede8>
+pysal.spatial_dynamics.markov.LISA_Markov
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7f2e82c39230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7f2e82c39320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+<function noneMax at 0x7f2e82c392a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+<function weight_convert at 0x7f2e82c39050>
+pysal.core.util.wkt.WKTParser
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+<class 'pysal.core.FileIO.FileIO'>
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+pysal.region.randomregion.Random_Region
+pysal.region.randomregion.Random_Regions
+pysal.region.maxp.Maxp_LISA
+pysal.region.maxp.Maxp
+<function check_contiguity at 0x7f2e82c12848>
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7f2e82c127d0>
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7f2e862f69b0>
+<function union_all at 0x7f2e862f9ed8>
+<function Rtree at 0x7f2e8630e7d0>
+<function avg_diagonals at 0x7f2e8630e848>
+<function closest at 0x7f2e86310938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7f2e863108c0>
+<function silhouette_coeff at 0x7f2e86310848>
+<function silhouette_w at 0x7f2e863107d0>
+<function k_means_cluster at 0x7f2e863109b0>
+<class 'pysal.cg.rtree.Rect'>
+<function get_angle_between at 0x7f2e862f6ed8>
+<function get_point_at_angle_and_dist at 0x7f2e862f9488>
+<function get_points_dist at 0x7f2e862f9398>
+<function get_polygon_point_dist at 0x7f2e862f9320>
+<function get_segment_point_dist at 0x7f2e862f9410>
+<function bbcommon at 0x7f2e862f6de8>
+<function get_rectangle_rectangle_intersection at 0x7f2e862f92a8>
+<function get_polygon_point_intersect at 0x7f2e862f9140>
+<function ccw at 0x7f2e862f95f0>
+<function point_touches_rectangle at 0x7f2e862f9758>
+<function get_segments_intersect at 0x7f2e862f9050>
+<function is_collinear at 0x7f2e862f6f50>
+<function get_shared_segments at 0x7f2e862f97d0>
+<function get_ray_segment_intersect at 0x7f2e862f9230>
+<function distance_matrix at 0x7f2e862f9848>
+<function get_segment_point_intersect at 0x7f2e862f90c8>
+<function convex_hull at 0x7f2e862f9500>
+<function is_clockwise at 0x7f2e862f9578>
+<function seg_intersect at 0x7f2e862f9668>
+<function get_bounding_box at 0x7f2e862f6e60>
+<function get_rectangle_point_intersect at 0x7f2e862f91b8>
+<function asShape at 0x7f2e8d953140>
+<class 'pysal.cg.shapes.Polygon'>
+<class 'pysal.cg.shapes.Chain'>
+<class 'pysal.cg.shapes.Point'>
+<class 'pysal.cg.shapes.LineSegment'>
+pysal.cg.shapes.VerticalLine
+pysal.cg.shapes.Line
+<class 'pysal.cg.shapes.Ring'>
+pysal.cg.shapes.Rectangle
+pysal.cg.shapes.Ray
+<function arcdist2linear at 0x7f2e930ac9b0>
+<function linear2arcdist at 0x7f2e930aca28>
+<function fast_threshold at 0x7f2e930acc80>
+<function toXYZ at 0x7f2e930acaa0>
+<function fast_knn at 0x7f2e930acc08>
+<function toLngLat at 0x7f2e930acb18>
+<function harcdist at 0x7f2e930acf50>
+<function <lambda> at 0x7f2e930ace60>
+<function lonlat at 0x7f2e930accf8>
+<function geointerpolate at 0x7f2e8d953050>
+<function arcdist at 0x7f2e930ac0c8>
+<function geogrid at 0x7f2e8d9530c8>
+<function haversine at 0x7f2e930acd70>
+<function brute_knn at 0x7f2e930acb90>
+<function radangle at 0x7f2e930aced8>
+pysal.cg.locators.PointLocator
+pysal.cg.locators.PolygonLocator
+pysal.cg.locators.BruteForcePointLocator
+pysal.cg.locators.Grid
+pysal.cg.locators.IntervalTree
+pysal.inequality.gini.Gini
+pysal.inequality.gini.Gini_Spatial
+pysal.inequality.theil.TheilD
+pysal.inequality.theil.TheilDSim
+pysal.inequality.theil.Theil
+<class 'pysal.weights.Distance.DistanceBand'>
+<class 'pysal.weights.Distance.Kernel'>
+<function knnW at 0x7f2e82b3b050>
+<function queen_geojson at 0x7f2e8269ec08>
+<function lag_spatial at 0x7f2e82b42140>
+<function buildContiguity at 0x7f2e82b3b500>
+<function higher_order at 0x7f2e82b37410>
+<function full at 0x7f2e82b375f0>
+<function min_threshold_distance at 0x7f2e82b37938>
+<function shimbel at 0x7f2e82b37578>
+<function get_ids at 0x7f2e82b37848>
+<function write_gal at 0x7f2e82b37a28>
+<function block_weights at 0x7f2e82b372a8>
+<function regime_weights at 0x7f2e82b37230>
+<function higher_order_sp at 0x7f2e82b37488>
+<function hexLat2W at 0x7f2e82b37140>
+<function insert_diagonal at 0x7f2e82b37758>
+<function remap_ids at 0x7f2e82b377d0>
+<function w_local_cluster at 0x7f2e82b37500>
+<function full2W at 0x7f2e82b37668>
+<function get_points_array_from_shapefile at 0x7f2e82b378c0>
+<function comb at 0x7f2e82b37320>
+<function lat2W at 0x7f2e82b371b8>
+<function order at 0x7f2e82b37398>
+<function WSP2W at 0x7f2e82b376e0>
+<function lat2SW at 0x7f2e82b379b0>
+<class 'pysal.weights.weights.WSP'>
+<class 'pysal.weights.weights.W'>
+<function queen_from_shapefile at 0x7f2e82b3b938>
+<function min_threshold_dist_from_shapefile at 0x7f2e82b3bf50>
+<function adaptive_kernelW at 0x7f2e82b3be60>
+<function build_lattice_shapefile at 0x7f2e82b42050>
+<function adaptive_kernelW_from_shapefile at 0x7f2e82b3bed8>
+<function threshold_continuousW_from_array at 0x7f2e82b3bc80>
+<function threshold_continuousW_from_shapefile at 0x7f2e82b3bcf8>
+<function knnW_from_shapefile at 0x7f2e82b3bb18>
+<function threshold_binaryW_from_array at 0x7f2e82b3bb90>
+<function rook_from_shapefile at 0x7f2e82b3b9b0>
+<function spw_from_gal at 0x7f2e82b3ba28>
+<function kernelW_from_shapefile at 0x7f2e82b3bde8>
+<function knnW_from_array at 0x7f2e82b3baa0>
+<function threshold_binaryW_from_shapefile at 0x7f2e82b3bc08>
+<function kernelW at 0x7f2e82b3bd70>
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+pysal.weights._contW_binning.ContiguityWeights_binning
+<function bbcommon at 0x7f2e82b3b488>
+<function w_clip at 0x7f2e82b42488>
+<function w_union at 0x7f2e82b42230>
+<function w_difference at 0x7f2e82b42320>
+<function w_subset at 0x7f2e82b42410>
+<function w_symmetric_difference at 0x7f2e82b42398>
+<function w_intersection at 0x7f2e82b422a8>
+<function get_path at 0x7f2e82b75410>
+pysal.spreg.error_sp.BaseGM_Combo
+pysal.spreg.error_sp.BaseGM_Endog_Error
+pysal.spreg.error_sp.GM_Combo
+pysal.spreg.error_sp.GM_Endog_Error
+pysal.spreg.error_sp.BaseGM_Error
+pysal.spreg.error_sp.GM_Error
+pysal.spreg.twosls_regimes.TSLS_Regimes
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7f2e82bd1c08>
+<function get_lags at 0x7f2e82bd1938>
+<function sphstack at 0x7f2e82bd1d70>
+<function optim_moments at 0x7f2e82bd17d0>
+<function get_A2_hom at 0x7f2e82bd16e0>
+<function iter_msg at 0x7f2e82bd1b90>
+<function spdot at 0x7f2e82bd1c80>
+<function spmin at 0x7f2e82bd1e60>
+<function inverse_prod at 0x7f2e82bd19b0>
+<function get_A1_het at 0x7f2e82bd1320>
+<function RegressionProps_basic at 0x7f2e82bd7050>
+<function power_expansion at 0x7f2e82bd1a28>
+<function set_endog at 0x7f2e82bd1aa0>
+<function foptim_par at 0x7f2e82bd1848>
+<function spmax at 0x7f2e82bd1ed8>
+<function spbroadcast at 0x7f2e82bd1de8>
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7f2e82bd1cf8>
+<function get_A1_hom at 0x7f2e82bd1668>
+<function set_warn at 0x7f2e82bd1f50>
+<function get_spFilter at 0x7f2e82bd18c0>
+<function set_endog_sparse at 0x7f2e82bd1b18>
+<function get_psi_sigma at 0x7f2e82bfd488>
+pysal.spreg.error_sp_het.GM_Combo_Het
+<function get_a1a2 at 0x7f2e82bfd9b0>
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+<function get_Omega_GS2SLS at 0x7f2e82bfdaa0>
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+<function get_vm_het at 0x7f2e82bfd8c0>
+pysal.spreg.error_sp_het.GM_Error_Het
+<function get_P_hat at 0x7f2e82bfd938>
+<function get_vc_het_tsls at 0x7f2e82bfda28>
+<function get_vc_het at 0x7f2e82bfd848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+pysal.spreg.ols.BaseOLS
+pysal.spreg.ols.OLS
+pysal.spreg.twosls_sp.BaseGM_Lag
+pysal.spreg.twosls_sp.GM_Lag
+pysal.spreg.ml_lag.ML_Lag
+<function lag_c_loglik_ord at 0x7f2e82b6fc80>
+pysal.spreg.ml_lag.BaseML_Lag
+<function lag_c_loglik at 0x7f2e82b6fb18>
+<function set_name_h at 0x7f2e82be0b90>
+<function set_name_yend at 0x7f2e82be09b0>
+<function set_name_q_sp at 0x7f2e82be0b18>
+<function check_spat_diag at 0x7f2e82be0f50>
+<function check_weights at 0x7f2e82be0e60>
+<function check_robust at 0x7f2e82be0ed8>
+<function check_arrays at 0x7f2e82be0d70>
+<function set_name_ds at 0x7f2e82be0848>
+<function set_name_y at 0x7f2e82be08c0>
+<function set_name_x at 0x7f2e82be0938>
+<function set_name_multi at 0x7f2e82be0cf8>
+<function check_regimes at 0x7f2e82bd8050>
+<function set_robust at 0x7f2e82be0c08>
+<function check_constant at 0x7f2e82bd80c8>
+<function set_name_q at 0x7f2e82be0a28>
+<function check_y at 0x7f2e82be0de8>
+<function set_name_yend_sp at 0x7f2e82be0aa0>
+<function set_name_w at 0x7f2e82be0c80>
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+pysal.spreg.ols_regimes.OLS_Regimes
+<function ar2 at 0x7f2e82bd72a8>
+<function koenker_bassett at 0x7f2e82bd76e0>
+<function akaike at 0x7f2e82bd7410>
+<function likratiotest at 0x7f2e82bd7848>
+<function r2 at 0x7f2e82bd7230>
+<function se_betas at 0x7f2e82bd7320>
+<function jarque_bera at 0x7f2e82bd7578>
+<function vif at 0x7f2e82bd7758>
+<function breusch_pagan at 0x7f2e82bd75f0>
+<function schwarz at 0x7f2e82bd7488>
+<function f_stat at 0x7f2e82bd7140>
+<function condition_index at 0x7f2e82bd7500>
+<function white at 0x7f2e82bd7668>
+<function constant_check at 0x7f2e82bd77d0>
+<function log_likelihood at 0x7f2e82bd7398>
+<function t_stat at 0x7f2e82bd71b8>
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+<function symmetrize at 0x7f2e82b6faa0>
+<function robust_vm at 0x7f2e82bf45f0>
+<function hac_multi at 0x7f2e82bf4668>
+<function pr2_aspatial at 0x7f2e82bd79b0>
+<function pr2_spatial at 0x7f2e82bd7a28>
+<function t_stat at 0x7f2e82bd7938>
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+pysal.spreg.twosls.TSLS
+pysal.spreg.twosls.BaseTSLS
+<function beta_diag_lag at 0x7f2e82bf3758>
+<function build_coefs_body_instruments at 0x7f2e82bf37d0>
+<function GM_Combo_Hom_multi at 0x7f2e82bf3488>
+<function OLS at 0x7f2e82bd8848>
+<function GM_Endog_Error_Hom_multi at 0x7f2e82bf30c8>
+<function summary_multi at 0x7f2e82bf39b0>
+<function summary_sur at 0x7f2e82bf3ed8>
+<function summary_spat_diag_intro at 0x7f2e82bf4230>
+<function GM_Combo_Het_multi at 0x7f2e82bf3578>
+<function TSLS at 0x7f2e82bd8938>
+<function summary_iteration at 0x7f2e82bf3de8>
+<function summary_intro at 0x7f2e82bf3b18>
+<function summary_warning at 0x7f2e82bf4050>
+<function GM_Combo at 0x7f2e82bf3320>
+<function beta_diag_ols at 0x7f2e82bf3668>
+<function GM_Endog_Error at 0x7f2e82bd8de8>
+<function ML_Lag at 0x7f2e82bd8b18>
+<function OLS_multi at 0x7f2e82bd88c0>
+<function GM_Combo_Hom at 0x7f2e82bf3410>
+<function GM_Combo_multi at 0x7f2e82bf3398>
+<function summary_vm at 0x7f2e82bf4410>
+<function summary_chow at 0x7f2e82bf3f50>
+<function GM_Error_Hom_multi at 0x7f2e82bd8f50>
+<function GM_Error at 0x7f2e82bd8cf8>
+<function GM_Endog_Error_Hom at 0x7f2e82bf3050>
+<function ML_Lag_multi at 0x7f2e82bd8b90>
+<function GM_Lag_multi at 0x7f2e82bd8aa0>
+<function summary_close at 0x7f2e82bf4500>
+<function summary_spat_diag_probit at 0x7f2e82bf4398>
+<function summary_open at 0x7f2e82bf3aa0>
+<function GM_Combo_Het at 0x7f2e82bf3500>
+<function TSLS_multi at 0x7f2e82bd89b0>
+<function spat_diag_instruments at 0x7f2e82bf38c0>
+<function summary_coefs_lambda at 0x7f2e82bf3cf8>
+<function ML_Error at 0x7f2e82bd8c08>
+<function summary_coefs_allx at 0x7f2e82bf3c08>
+<function GM_Lag at 0x7f2e82bd8a28>
+<function GM_Error_Het at 0x7f2e82bf3140>
+<function summary_coefs_intro at 0x7f2e82bf3b90>
+<function Probit at 0x7f2e82bf35f0>
+<function spat_diag_ols at 0x7f2e82bf3848>
+<function summary_spat_diag_ols at 0x7f2e82bf4320>
+<function GM_Error_Hom at 0x7f2e82bd8ed8>
+<function GM_Endog_Error_multi at 0x7f2e82bd8e60>
+<function summary_pred at 0x7f2e82bf4488>
+<function GM_Endog_Error_Het at 0x7f2e82bf3230>
+<function summary_spat_diag_intro_global at 0x7f2e82bf42a8>
+<function summary_coefs_somex at 0x7f2e82bf3c80>
+<function summary_regimes at 0x7f2e82bf3e60>
+<function GM_Endog_Error_Het_multi at 0x7f2e82bf32a8>
+<function summary_nonspat_diag_2 at 0x7f2e82bf41b8>
+<function summary_nonspat_diag_1 at 0x7f2e82bf4140>
+<function summary at 0x7f2e82bf3938>
+<function summary_coefs_instruments at 0x7f2e82bf3d70>
+<function summary_coefs_slopes at 0x7f2e82bf40c8>
+<function GM_Error_multi at 0x7f2e82bd8d70>
+<function ML_Error_multi at 0x7f2e82bd8c80>
+<function beta_diag at 0x7f2e82bf36e0>
+<function GM_Error_Het_multi at 0x7f2e82bf31b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+<function akTest at 0x7f2e82be0758>
+pysal.spreg.diagnostics_sp.LMtests
+<function get_zI at 0x7f2e82be06e0>
+<function rlmLag at 0x7f2e82be0488>
+pysal.spreg.diagnostics_sp.AKtest
+<function lmLag at 0x7f2e82be0398>
+<function lmErr at 0x7f2e82bd7d70>
+<function get_eI at 0x7f2e82be0668>
+<function get_mI at 0x7f2e82be0578>
+<function lmSarma at 0x7f2e82be0500>
+<function rlmErr at 0x7f2e82be0410>
+<function get_vI at 0x7f2e82be05f0>
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+<function get_omega_hom_ols at 0x7f2e82c081b8>
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+<function get_vc_hom at 0x7f2e82c080c8>
+<function moments_hom at 0x7f2e82bfdc08>
+pysal.spreg.error_sp_hom.GM_Error_Hom
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+<function get_omega_hom at 0x7f2e82c08140>
+<function err_c_loglik at 0x7f2e82b750c8>
+pysal.spreg.ml_error.ML_Error
+pysal.spreg.ml_error.BaseML_Error
+<function err_c_loglik_ord at 0x7f2e82b75320>
+<function sp_tests at 0x7f2e82b6f848>
+<function newton at 0x7f2e82b62c08>
+pysal.spreg.probit.Probit
+<function moran_KP at 0x7f2e82b6f8c0>
+pysal.spreg.probit.BaseProbit
+pysal.spreg.error_sp_het_regimes.GM_Combo_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Endog_Error_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Error_Het_Regimes
+pysal.spreg.regimes.Wald
+<function wald_test at 0x7f2e82c08848>
+<function w_regimes at 0x7f2e82c08c80>
+<function buildR at 0x7f2e82c08a28>
+<function x2xsp at 0x<function steady_state at 0x7f8fd32b88c0>
+<function var_fmpt at 0x7f8fd32b89b0>
+<function fmpt at 0x7f8fd32b8938>
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+<function knox at 0x7f8fd32c79b0>
+<function modified_knox at 0x7f8fd32c7b90>
+<function mantel at 0x7f8fd32c7aa0>
+<function jacquez at 0x7f8fd32c7b18>
+<function rose at 0x7f8fd32c7668>
+pysal.spatial_dynamics.rank.SpatialTau
+pysal.spatial_dynamics.rank.Tau
+pysal.spatial_dynamics.rank.Theta
+<function pseudop at 0x7f8fd32c7140>
+<function get_lower at 0x7f8fd32c7938>
+<function shuffle_matrix at 0x7f8fd32c78c0>
+<function prais at 0x7f8fd32b8f50>
+<function chi2 at 0x7f8fd32b8a28>
+<function shorrock at 0x7f8fd32c7050>
+pysal.spatial_dynamics.markov.Spatial_Markov
+<function homogeneity at 0x7f8fd32c70c8>
+pysal.spatial_dynamics.markov.Homogeneity_Results
+pysal.spatial_dynamics.markov.Markov
+<function kullback at 0x7f8fd32b8de8>
+pysal.spatial_dynamics.markov.LISA_Markov
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7f8fd32d3230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7f8fd32d3320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+<function noneMax at 0x7f8fd32d32a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+<function weight_convert at 0x7f8fd32d3050>
+pysal.core.util.wkt.WKTParser
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+<class 'pysal.core.FileIO.FileIO'>
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+pysal.region.randomregion.Random_Region
+pysal.region.randomregion.Random_Regions
+pysal.region.maxp.Maxp_LISA
+pysal.region.maxp.Maxp
+<function check_contiguity at 0x7f8fd32ac848>
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7f8fd32ac7d0>
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7f8fd69909b0>
+<function union_all at 0x7f8fd6993ed8>
+<function Rtree at 0x7f8fd69a87d0>
+<function avg_diagonals at 0x7f8fd69a8848>
+<function closest at 0x7f8fd69aa938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7f8fd69aa8c0>
+<function silhouette_coeff at 0x7f8fd69aa848>
+<function silhouette_w at 0x7f8fd69aa7d0>
+<function k_means_cluster at 0x7f8fd69aa9b0>
+<class 'pysal.cg.rtree.Rect'>
+<function get_angle_between at 0x7f8fd6990ed8>
+<function get_point_at_angle_and_dist at 0x7f8fd6993488>
+<function get_points_dist at 0x7f8fd6993398>
+<function get_polygon_point_dist at 0x7f8fd6993320>
+<function get_segment_point_dist at 0x7f8fd6993410>
+<function bbcommon at 0x7f8fd6990de8>
+<function get_rectangle_rectangle_intersection at 0x7f8fd69932a8>
+<function get_polygon_point_intersect at 0x7f8fd6993140>
+<function ccw at 0x7f8fd69935f0>
+<function point_touches_rectangle at 0x7f8fd6993758>
+<function get_segments_intersect at 0x7f8fd6993050>
+<function is_collinear at 0x7f8fd6990f50>
+<function get_shared_segments at 0x7f8fd69937d0>
+<function get_ray_segment_intersect at 0x7f8fd6993230>
+<function distance_matrix at 0x7f8fd6993848>
+<function get_segment_point_intersect at 0x7f8fd69930c8>
+<function convex_hull at 0x7f8fd6993500>
+<function is_clockwise at 0x7f8fd6993578>
+<function seg_intersect at 0x7f8fd6993668>
+<function get_bounding_box at 0x7f8fd6990e60>
+<function get_rectangle_point_intersect at 0x7f8fd69931b8>
+<function asShape at 0x7f8fddfed140>
+<class 'pysal.cg.shapes.Polygon'>
+<class 'pysal.cg.shapes.Chain'>
+<class 'pysal.cg.shapes.Point'>
+<class 'pysal.cg.shapes.LineSegment'>
+pysal.cg.shapes.VerticalLine
+pysal.cg.shapes.Line
+<class 'pysal.cg.shapes.Ring'>
+pysal.cg.shapes.Rectangle
+pysal.cg.shapes.Ray
+<function arcdist2linear at 0x7f8fe37469b0>
+<function linear2arcdist at 0x7f8fe3746a28>
+<function fast_threshold at 0x7f8fe3746c80>
+<function toXYZ at 0x7f8fe3746aa0>
+<function fast_knn at 0x7f8fe3746c08>
+<function toLngLat at 0x7f8fe3746b18>
+<function harcdist at 0x7f8fe3746f50>
+<function <lambda> at 0x7f8fe3746e60>
+<function lonlat at 0x7f8fe3746cf8>
+<function geointerpolate at 0x7f8fddfed050>
+<function arcdist at 0x7f8fe37460c8>
+<function geogrid at 0x7f8fddfed0c8>
+<function haversine at 0x7f8fe3746d70>
+<function brute_knn at 0x7f8fe3746b90>
+<function radangle at 0x7f8fe3746ed8>
+pysal.cg.locators.PointLocator
+pysal.cg.locators.PolygonLocator
+pysal.cg.locators.BruteForcePointLocator
+pysal.cg.locators.Grid
+pysal.cg.locators.IntervalTree
+pysal.inequality.gini.Gini
+pysal.inequality.gini.Gini_Spatial
+pysal.inequality.theil.TheilD
+pysal.inequality.theil.TheilDSim
+pysal.inequality.theil.Theil
+<class 'pysal.weights.Distance.DistanceBand'>
+<class 'pysal.weights.Distance.Kernel'>
+<function knnW at 0x7f8fd31d5050>
+<function queen_geojson at 0x7f8fd2d38c08>
+<function lag_spatial at 0x7f8fd31dc140>
+<function buildContiguity at 0x7f8fd31d5500>
+<function higher_order at 0x7f8fd31d1410>
+<function full at 0x7f8fd31d15f0>
+<function min_threshold_distance at 0x7f8fd31d1938>
+<function shimbel at 0x7f8fd31d1578>
+<function get_ids at 0x7f8fd31d1848>
+<function write_gal at 0x7f8fd31d1a28>
+<function block_weights at 0x7f8fd31d12a8>
+<function regime_weights at 0x7f8fd31d1230>
+<function higher_order_sp at 0x7f8fd31d1488>
+<function hexLat2W at 0x7f8fd31d1140>
+<function insert_diagonal at 0x7f8fd31d1758>
+<function remap_ids at 0x7f8fd31d17d0>
+<function w_local_cluster at 0x7f8fd31d1500>
+<function full2W at 0x7f8fd31d1668>
+<function get_points_array_from_shapefile at 0x7f8fd31d18c0>
+<function comb at 0x7f8fd31d1320>
+<function lat2W at 0x7f8fd31d11b8>
+<function order at 0x7f8fd31d1398>
+<function WSP2W at 0x7f8fd31d16e0>
+<function lat2SW at 0x7f8fd31d19b0>
+<class 'pysal.weights.weights.WSP'>
+<class 'pysal.weights.weights.W'>
+<function queen_from_shapefile at 0x7f8fd31d5938>
+<function min_threshold_dist_from_shapefile at 0x7f8fd31d5f50>
+<function adaptive_kernelW at 0x7f8fd31d5e60>
+<function build_lattice_shapefile at 0x7f8fd31dc050>
+<function adaptive_kernelW_from_shapefile at 0x7f8fd31d5ed8>
+<function threshold_continuousW_from_array at 0x7f8fd31d5c80>
+<function threshold_continuousW_from_shapefile at 0x7f8fd31d5cf8>
+<function knnW_from_shapefile at 0x7f8fd31d5b18>
+<function threshold_binaryW_from_array at 0x7f8fd31d5b90>
+<function rook_from_shapefile at 0x7f8fd31d59b0>
+<function spw_from_gal at 0x7f8fd31d5a28>
+<function kernelW_from_shapefile at 0x7f8fd31d5de8>
+<function knnW_from_array at 0x7f8fd31d5aa0>
+<function threshold_binaryW_from_shapefile at 0x7f8fd31d5c08>
+<function kernelW at 0x7f8fd31d5d70>
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+pysal.weights._contW_binning.ContiguityWeights_binning
+<function bbcommon at 0x7f8fd31d5488>
+<function w_clip at 0x7f8fd31dc488>
+<function w_union at 0x7f8fd31dc230>
+<function w_difference at 0x7f8fd31dc320>
+<function w_subset at 0x7f8fd31dc410>
+<function w_symmetric_difference at 0x7f8fd31dc398>
+<function w_intersection at 0x7f8fd31dc2a8>
+<function get_path at 0x7f8fd320f410>
+pysal.spreg.error_sp.BaseGM_Combo
+pysal.spreg.error_sp.BaseGM_Endog_Error
+pysal.spreg.error_sp.GM_Combo
+pysal.spreg.error_sp.GM_Endog_Error
+pysal.spreg.error_sp.BaseGM_Error
+pysal.spreg.error_sp.GM_Error
+pysal.spreg.twosls_regimes.TSLS_Regimes
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7f8fd326bc08>
+<function get_lags at 0x7f8fd326b938>
+<function sphstack at 0x7f8fd326bd70>
+<function optim_moments at 0x7f8fd326b7d0>
+<function get_A2_hom at 0x7f8fd326b6e0>
+<function iter_msg at 0x7f8fd326bb90>
+<function spdot at 0x7f8fd326bc80>
+<function spmin at 0x7f8fd326be60>
+<function inverse_prod at 0x7f8fd326b9b0>
+<function get_A1_het at 0x7f8fd326b320>
+<function RegressionProps_basic at 0x7f8fd3271050>
+<function power_expansion at 0x7f8fd326ba28>
+<function set_endog at 0x7f8fd326baa0>
+<function foptim_par at 0x7f8fd326b848>
+<function spmax at 0x7f8fd326bed8>
+<function spbroadcast at 0x7f8fd326bde8>
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7f8fd326bcf8>
+<function get_A1_hom at 0x7f8fd326b668>
+<function set_warn at 0x7f8fd326bf50>
+<function get_spFilter at 0x7f8fd326b8c0>
+<function set_endog_sparse at 0x7f8fd326bb18>
+<function get_psi_sigma at 0x7f8fd3297488>
+pysal.spreg.error_sp_het.GM_Combo_Het
+<function get_a1a2 at 0x7f8fd32979b0>
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+<function get_Omega_GS2SLS at 0x7f8fd3297aa0>
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+<function get_vm_het at 0x7f8fd32978c0>
+pysal.spreg.error_sp_het.GM_Error_Het
+<function get_P_hat at 0x7f8fd3297938>
+<function get_vc_het_tsls at 0x7f8fd3297a28>
+<function get_vc_het at 0x7f8fd3297848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+pysal.spreg.ols.BaseOLS
+pysal.spreg.ols.OLS
+pysal.spreg.twosls_sp.BaseGM_Lag
+pysal.spreg.twosls_sp.GM_Lag
+pysal.spreg.ml_lag.ML_Lag
+<function lag_c_loglik_ord at 0x7f8fd3209c80>
+pysal.spreg.ml_lag.BaseML_Lag
+<function lag_c_loglik at 0x7f8fd3209b18>
+<function set_name_h at 0x7f8fd327ab90>
+<function set_name_yend at 0x7f8fd327a9b0>
+<function set_name_q_sp at 0x7f8fd327ab18>
+<function check_spat_diag at 0x7f8fd327af50>
+<function check_weights at 0x7f8fd327ae60>
+<function check_robust at 0x7f8fd327aed8>
+<function check_arrays at 0x7f8fd327ad70>
+<function set_name_ds at 0x7f8fd327a848>
+<function set_name_y at 0x7f8fd327a8c0>
+<function set_name_x at 0x7f8fd327a938>
+<function set_name_multi at 0x7f8fd327acf8>
+<function check_regimes at 0x7f8fd3272050>
+<function set_robust at 0x7f8fd327ac08>
+<function check_constant at 0x7f8fd32720c8>
+<function set_name_q at 0x7f8fd327aa28>
+<function check_y at 0x7f8fd327ade8>
+<function set_name_yend_sp at 0x7f8fd327aaa0>
+<function set_name_w at 0x7f8fd327ac80>
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+pysal.spreg.ols_regimes.OLS_Regimes
+<function ar2 at 0x7f8fd32712a8>
+<function koenker_bassett at 0x7f8fd32716e0>
+<function akaike at 0x7f8fd3271410>
+<function likratiotest at 0x7f8fd3271848>
+<function r2 at 0x7f8fd3271230>
+<function se_betas at 0x7f8fd3271320>
+<function jarque_bera at 0x7f8fd3271578>
+<function vif at 0x7f8fd3271758>
+<function breusch_pagan at 0x7f8fd32715f0>
+<function schwarz at 0x7f8fd3271488>
+<function f_stat at 0x7f8fd3271140>
+<function condition_index at 0x7f8fd3271500>
+<function white at 0x7f8fd3271668>
+<function constant_check at 0x7f8fd32717d0>
+<function log_likelihood at 0x7f8fd3271398>
+<function t_stat at 0x7f8fd32711b8>
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+<function symmetrize at 0x7f8fd3209aa0>
+<function robust_vm at 0x7f8fd328e5f0>
+<function hac_multi at 0x7f8fd328e668>
+<function pr2_aspatial at 0x7f8fd32719b0>
+<function pr2_spatial at 0x7f8fd3271a28>
+<function t_stat at 0x7f8fd3271938>
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+pysal.spreg.twosls.TSLS
+pysal.spreg.twosls.BaseTSLS
+<function beta_diag_lag at 0x7f8fd328d758>
+<function build_coefs_body_instruments at 0x7f8fd328d7d0>
+<function GM_Combo_Hom_multi at 0x7f8fd328d488>
+<function OLS at 0x7f8fd3272848>
+<function GM_Endog_Error_Hom_multi at 0x7f8fd328d0c8>
+<function summary_multi at 0x7f8fd328d9b0>
+<function summary_sur at 0x7f8fd328ded8>
+<function summary_spat_diag_intro at 0x7f8fd328e230>
+<function GM_Combo_Het_multi at 0x7f8fd328d578>
+<function TSLS at 0x7f8fd3272938>
+<function summary_iteration at 0x7f8fd328dde8>
+<function summary_intro at 0x7f8fd328db18>
+<function summary_warning at 0x7f8fd328e050>
+<function GM_Combo at 0x7f8fd328d320>
+<function beta_diag_ols at 0x7f8fd328d668>
+<function GM_Endog_Error at 0x7f8fd3272de8>
+<function ML_Lag at 0x7f8fd3272b18>
+<function OLS_multi at 0x7f8fd32728c0>
+<function GM_Combo_Hom at 0x7f8fd328d410>
+<function GM_Combo_multi at 0x7f8fd328d398>
+<function summary_vm at 0x7f8fd328e410>
+<function summary_chow at 0x7f8fd328df50>
+<function GM_Error_Hom_multi at 0x7f8fd3272f50>
+<function GM_Error at 0x7f8fd3272cf8>
+<function GM_Endog_Error_Hom at 0x7f8fd328d050>
+<function ML_Lag_multi at 0x7f8fd3272b90>
+<function GM_Lag_multi at 0x7f8fd3272aa0>
+<function summary_close at 0x7f8fd328e500>
+<function summary_spat_diag_probit at 0x7f8fd328e398>
+<function summary_open at 0x7f8fd328daa0>
+<function GM_Combo_Het at 0x7f8fd328d500>
+<function TSLS_multi at 0x7f8fd32729b0>
+<function spat_diag_instruments at 0x7f8fd328d8c0>
+<function summary_coefs_lambda at 0x7f8fd328dcf8>
+<function ML_Error at 0x7f8fd3272c08>
+<function summary_coefs_allx at 0x7f8fd328dc08>
+<function GM_Lag at 0x7f8fd3272a28>
+<function GM_Error_Het at 0x7f8fd328d140>
+<function summary_coefs_intro at 0x7f8fd328db90>
+<function Probit at 0x7f8fd328d5f0>
+<function spat_diag_ols at 0x7f8fd328d848>
+<function summary_spat_diag_ols at 0x7f8fd328e320>
+<function GM_Error_Hom at 0x7f8fd3272ed8>
+<function GM_Endog_Error_multi at 0x7f8fd3272e60>
+<function summary_pred at 0x7f8fd328e488>
+<function GM_Endog_Error_Het at 0x7f8fd328d230>
+<function summary_spat_diag_intro_global at 0x7f8fd328e2a8>
+<function summary_coefs_somex at 0x7f8fd328dc80>
+<function summary_regimes at 0x7f8fd328de60>
+<function GM_Endog_Error_Het_multi at 0x7f8fd328d2a8>
+<function summary_nonspat_diag_2 at 0x7f8fd328e1b8>
+<function summary_nonspat_diag_1 at 0x7f8fd328e140>
+<function summary at 0x7f8fd328d938>
+<function summary_coefs_instruments at 0x7f8fd328dd70>
+<function summary_coefs_slopes at 0x7f8fd328e0c8>
+<function GM_Error_multi at 0x7f8fd3272d70>
+<function ML_Error_multi at 0x7f8fd3272c80>
+<function beta_diag at 0x7f8fd328d6e0>
+<function GM_Error_Het_multi at 0x7f8fd328d1b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+<function akTest at 0x7f8fd327a758>
+pysal.spreg.diagnostics_sp.LMtests
+<function get_zI at 0x7f8fd327a6e0>
+<function rlmLag at 0x7f8fd327a488>
+pysal.spreg.diagnostics_sp.AKtest
+<function lmLag at 0x7f8fd327a398>
+<function lmErr at 0x7f8fd3271d70>
+<function get_eI at 0x7f8fd327a668>
+<function get_mI at 0x7f8fd327a578>
+<function lmSarma at 0x7f8fd327a500>
+<function rlmErr at 0x7f8fd327a410>
+<function get_vI at 0x7f8fd327a5f0>
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+<function get_omega_hom_ols at 0x7f8fd32a21b8>
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+<function get_vc_hom at 0x7f8fd32a20c8>
+<function moments_hom at 0x7f8fd3297c08>
+pysal.spreg.error_sp_hom.GM_Error_Hom
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+<function get_omega_hom at 0x7f8fd32a2140>
+<function err_c_loglik at 0x7f8fd320f0c8>
+pysal.spreg.ml_error.ML_Error
+pysal.spreg.ml_error.BaseML_Error
+<function err_c_loglik_ord at 0x7f8fd320f320>
+<function sp_tests at 0x7f8fd3209848>
+<function newton at 0x7f8fd31fcc08>
+pysal.spreg.probit.Probit
+<function moran_KP at 0x7f8fd32098c0>
+pysal.spreg.probit.BaseProbit
+pysal.spreg.error_sp_het_regimes.GM_Combo_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Endog_Error_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Error_Het_Regimes
+pysal.spreg.regimes.Wald
+<function wald_test at 0x7f8fd32a2848>
+<function w_regimes at 0x7f8fd32a2c80>
+<function buildR at 0x7f8fd32a2a28>
+<function x2xsp at 0x<function steady_state at 0x7f00d97768c0>
+<function var_fmpt at 0x7f00d97769b0>
+<function fmpt at 0x7f00d9776938>
+pysal.spatial_dynamics.interaction.SpaceTimeEvents
+<function knox at 0x7f00d97859b0>
+<function modified_knox at 0x7f00d9785b90>
+<function mantel at 0x7f00d9785aa0>
+<function jacquez at 0x7f00d9785b18>
+<function rose at 0x7f00d9785668>
+pysal.spatial_dynamics.rank.SpatialTau
+pysal.spatial_dynamics.rank.Tau
+pysal.spatial_dynamics.rank.Theta
+<function pseudop at 0x7f00d9785140>
+<function get_lower at 0x7f00d9785938>
+<function shuffle_matrix at 0x7f00d97858c0>
+<function prais at 0x7f00d9776f50>
+<function chi2 at 0x7f00d9776a28>
+<function shorrock at 0x7f00d9785050>
+pysal.spatial_dynamics.markov.Spatial_Markov
+<function homogeneity at 0x7f00d97850c8>
+pysal.spatial_dynamics.markov.Homogeneity_Results
+pysal.spatial_dynamics.markov.Markov
+<function kullback at 0x7f00d9776de8>
+pysal.spatial_dynamics.markov.LISA_Markov
+pysal.core.util.shapefile.MultiPoint
+pysal.core.util.shapefile.NullShape
+pysal.core.util.shapefile.shp_file
+pysal.core.util.shapefile.Polygon
+<function struct2arrayinfo at 0x7f00d9791230>
+pysal.core.util.shapefile.MultiPointM
+pysal.core.util.shapefile.MultiPatch
+<class 'pysal.core.util.shapefile.Point'>
+<class 'pysal.core.util.shapefile.PolyLineZ'>
+pysal.core.util.shapefile.PointM
+pysal.core.util.shapefile.PolyLineM
+pysal.core.util.shapefile.PolygonM
+pysal.core.util.shapefile.PolyLine
+<function noneMin at 0x7f00d9791320>
+pysal.core.util.shapefile.MultiPointZ
+<class 'pysal.core.util.shapefile.PolygonZ'>
+<class 'pysal.core.util.shapefile.PointZ'>
+pysal.core.util.shapefile.shx_file
+<function noneMax at 0x7f00d97912a8>
+<class 'pysal.core.util.weight_converter.WeightConverter'>
+<function weight_convert at 0x7f00d9791050>
+pysal.core.util.wkt.WKTParser
+<class 'pysal.core.IOHandlers.pyDbfIO.DBF'>
+<class 'pysal.core.IOHandlers.mtx.MtxIO'>
+<class 'pysal.core.IOHandlers.stata_txt.StataTextIO'>
+<class 'pysal.core.IOHandlers.mat.MatIO'>
+<class 'pysal.core.IOHandlers.arcgis_swm.ArcGISSwmIO'>
+<class 'pysal.core.IOHandlers.gal.GalIO'>
+<class 'pysal.core.IOHandlers.geoda_txt.GeoDaTxtReader'>
+<class 'pysal.core.IOHandlers.dat.DatIO'>
+<class 'pysal.core.IOHandlers.gwt.unique_filter'>
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>
+<class 'pysal.core.IOHandlers.pyShpIO.PurePyShpWrapper'>
+<class 'pysal.core.IOHandlers.geobugs_txt.GeoBUGSTextIO'>
+<class 'pysal.core.IOHandlers.wk1.Wk1IO'>
+<class 'pysal.core.IOHandlers.arcgis_dbf.ArcGISDbfIO'>
+<class 'pysal.core.IOHandlers.csvWrapper.csvWrapper'>
+<class 'pysal.core.IOHandlers.arcgis_txt.ArcGISTextIO'>
+<class 'pysal.core.IOHandlers.wkt.WKTReader'>
+<class 'pysal.core.FileIO.FileIO'>
+<class 'pysal.core.FileIO.FileIO_MetaCls'>
+<class 'pysal.core.Tables.DataTable'>
+pysal.region.randomregion.Random_Region
+pysal.region.randomregion.Random_Regions
+pysal.region.maxp.Maxp_LISA
+pysal.region.maxp.Maxp
+<function check_contiguity at 0x7f00d976a848>
+<class 'pysal.region.components.Graph'>
+<function is_component at 0x7f00d976a7d0>
+<class 'pysal.cg.kdtree.Arc_KDTree'>
+<function KDTree at 0x7f00dce4e9b0>
+<function union_all at 0x7f00dce51ed8>
+<function Rtree at 0x7f00dce667d0>
+<function avg_diagonals at 0x7f00dce66848>
+<function closest at 0x7f00dce68938>
+<class 'pysal.cg.rtree.RTree'>
+<function center_of_gravity at 0x7f00dce688c0>
+<function silhouette_coeff at 0x7f00dce68848>
+<function silhouette_w at 0x7f00dce687d0>
+<function k_means_cluster at 0x7f00dce689b0>
+<class 'pysal.cg.rtree.Rect'>
+<function get_angle_between at 0x7f00dce4eed8>
+<function get_point_at_angle_and_dist at 0x7f00dce51488>
+<function get_points_dist at 0x7f00dce51398>
+<function get_polygon_point_dist at 0x7f00dce51320>
+<function get_segment_point_dist at 0x7f00dce51410>
+<function bbcommon at 0x7f00dce4ede8>
+<function get_rectangle_rectangle_intersection at 0x7f00dce512a8>
+<function get_polygon_point_intersect at 0x7f00dce51140>
+<function ccw at 0x7f00dce515f0>
+<function point_touches_rectangle at 0x7f00dce51758>
+<function get_segments_intersect at 0x7f00dce51050>
+<function is_collinear at 0x7f00dce4ef50>
+<function get_shared_segments at 0x7f00dce517d0>
+<function get_ray_segment_intersect at 0x7f00dce51230>
+<function distance_matrix at 0x7f00dce51848>
+<function get_segment_point_intersect at 0x7f00dce510c8>
+<function convex_hull at 0x7f00dce51500>
+<function is_clockwise at 0x7f00dce51578>
+<function seg_intersect at 0x7f00dce51668>
+<function get_bounding_box at 0x7f00dce4ee60>
+<function get_rectangle_point_intersect at 0x7f00dce511b8>
+<function asShape at 0x7f00e44ab140>
+<class 'pysal.cg.shapes.Polygon'>
+<class 'pysal.cg.shapes.Chain'>
+<class 'pysal.cg.shapes.Point'>
+<class 'pysal.cg.shapes.LineSegment'>
+pysal.cg.shapes.VerticalLine
+pysal.cg.shapes.Line
+<class 'pysal.cg.shapes.Ring'>
+pysal.cg.shapes.Rectangle
+pysal.cg.shapes.Ray
+<function arcdist2linear at 0x7f00e9c049b0>
+<function linear2arcdist at 0x7f00e9c04a28>
+<function fast_threshold at 0x7f00e9c04c80>
+<function toXYZ at 0x7f00e9c04aa0>
+<function fast_knn at 0x7f00e9c04c08>
+<function toLngLat at 0x7f00e9c04b18>
+<function harcdist at 0x7f00e9c04f50>
+<function <lambda> at 0x7f00e9c04e60>
+<function lonlat at 0x7f00e9c04cf8>
+<function geointerpolate at 0x7f00e44ab050>
+<function arcdist at 0x7f00e9c040c8>
+<function geogrid at 0x7f00e44ab0c8>
+<function haversine at 0x7f00e9c04d70>
+<function brute_knn at 0x7f00e9c04b90>
+<function radangle at 0x7f00e9c04ed8>
+pysal.cg.locators.PointLocator
+pysal.cg.locators.PolygonLocator
+pysal.cg.locators.BruteForcePointLocator
+pysal.cg.locators.Grid
+pysal.cg.locators.IntervalTree
+pysal.inequality.gini.Gini
+pysal.inequality.gini.Gini_Spatial
+pysal.inequality.theil.TheilD
+pysal.inequality.theil.TheilDSim
+pysal.inequality.theil.Theil
+<class 'pysal.weights.Distance.DistanceBand'>
+<class 'pysal.weights.Distance.Kernel'>
+<function knnW at 0x7f00d9693050>
+<function queen_geojson at 0x7f00d91f6c08>
+<function lag_spatial at 0x7f00d969a140>
+<function buildContiguity at 0x7f00d9693500>
+<function higher_order at 0x7f00d968f410>
+<function full at 0x7f00d968f5f0>
+<function min_threshold_distance at 0x7f00d968f938>
+<function shimbel at 0x7f00d968f578>
+<function get_ids at 0x7f00d968f848>
+<function write_gal at 0x7f00d968fa28>
+<function block_weights at 0x7f00d968f2a8>
+<function regime_weights at 0x7f00d968f230>
+<function higher_order_sp at 0x7f00d968f488>
+<function hexLat2W at 0x7f00d968f140>
+<function insert_diagonal at 0x7f00d968f758>
+<function remap_ids at 0x7f00d968f7d0>
+<function w_local_cluster at 0x7f00d968f500>
+<function full2W at 0x7f00d968f668>
+<function get_points_array_from_shapefile at 0x7f00d968f8c0>
+<function comb at 0x7f00d968f320>
+<function lat2W at 0x7f00d968f1b8>
+<function order at 0x7f00d968f398>
+<function WSP2W at 0x7f00d968f6e0>
+<function lat2SW at 0x7f00d968f9b0>
+<class 'pysal.weights.weights.WSP'>
+<class 'pysal.weights.weights.W'>
+<function queen_from_shapefile at 0x7f00d9693938>
+<function min_threshold_dist_from_shapefile at 0x7f00d9693f50>
+<function adaptive_kernelW at 0x7f00d9693e60>
+<function build_lattice_shapefile at 0x7f00d969a050>
+<function adaptive_kernelW_from_shapefile at 0x7f00d9693ed8>
+<function threshold_continuousW_from_array at 0x7f00d9693c80>
+<function threshold_continuousW_from_shapefile at 0x7f00d9693cf8>
+<function knnW_from_shapefile at 0x7f00d9693b18>
+<function threshold_binaryW_from_array at 0x7f00d9693b90>
+<function rook_from_shapefile at 0x7f00d96939b0>
+<function spw_from_gal at 0x7f00d9693a28>
+<function kernelW_from_shapefile at 0x7f00d9693de8>
+<function knnW_from_array at 0x7f00d9693aa0>
+<function threshold_binaryW_from_shapefile at 0x7f00d9693c08>
+<function kernelW at 0x7f00d9693d70>
+pysal.weights._contW_binning.ContiguityWeightsPolygons
+pysal.weights._contW_binning.ContiguityWeights_binning
+<function bbcommon at 0x7f00d9693488>
+<function w_clip at 0x7f00d969a488>
+<function w_union at 0x7f00d969a230>
+<function w_difference at 0x7f00d969a320>
+<function w_subset at 0x7f00d969a410>
+<function w_symmetric_difference at 0x7f00d969a398>
+<function w_intersection at 0x7f00d969a2a8>
+<function get_path at 0x7f00d96cd410>
+pysal.spreg.error_sp.BaseGM_Combo
+pysal.spreg.error_sp.BaseGM_Endog_Error
+pysal.spreg.error_sp.GM_Combo
+pysal.spreg.error_sp.GM_Endog_Error
+pysal.spreg.error_sp.BaseGM_Error
+pysal.spreg.error_sp.GM_Error
+pysal.spreg.twosls_regimes.TSLS_Regimes
+pysal.spreg.utils.RegressionPropsY
+<function sp_att at 0x7f00d9729c08>
+<function get_lags at 0x7f00d9729938>
+<function sphstack at 0x7f00d9729d70>
+<function optim_moments at 0x7f00d97297d0>
+<function get_A2_hom at 0x7f00d97296e0>
+<function iter_msg at 0x7f00d9729b90>
+<function spdot at 0x7f00d9729c80>
+<function spmin at 0x7f00d9729e60>
+<function inverse_prod at 0x7f00d97299b0>
+<function get_A1_het at 0x7f00d9729320>
+<function RegressionProps_basic at 0x7f00d972f050>
+<function power_expansion at 0x7f00d9729a28>
+<function set_endog at 0x7f00d9729aa0>
+<function foptim_par at 0x7f00d9729848>
+<function spmax at 0x7f00d9729ed8>
+<function spbroadcast at 0x7f00d9729de8>
+pysal.spreg.utils.RegressionPropsVM
+<function spmultiply at 0x7f00d9729cf8>
+<function get_A1_hom at 0x7f00d9729668>
+<function set_warn at 0x7f00d9729f50>
+<function get_spFilter at 0x7f00d97298c0>
+<function set_endog_sparse at 0x7f00d9729b18>
+<function get_psi_sigma at 0x7f00d9755488>
+pysal.spreg.error_sp_het.GM_Combo_Het
+<function get_a1a2 at 0x7f00d97559b0>
+pysal.spreg.error_sp_het.BaseGM_Error_Het
+<function get_Omega_GS2SLS at 0x7f00d9755aa0>
+pysal.spreg.error_sp_het.BaseGM_Endog_Error_Het
+pysal.spreg.error_sp_het.BaseGM_Combo_Het
+<function get_vm_het at 0x7f00d97558c0>
+pysal.spreg.error_sp_het.GM_Error_Het
+<function get_P_hat at 0x7f00d9755938>
+<function get_vc_het_tsls at 0x7f00d9755a28>
+<function get_vc_het at 0x7f00d9755848>
+pysal.spreg.error_sp_het.GM_Endog_Error_Het
+pysal.spreg.ols.BaseOLS
+pysal.spreg.ols.OLS
+pysal.spreg.twosls_sp.BaseGM_Lag
+pysal.spreg.twosls_sp.GM_Lag
+pysal.spreg.ml_lag.ML_Lag
+<function lag_c_loglik_ord at 0x7f00d96c7c80>
+pysal.spreg.ml_lag.BaseML_Lag
+<function lag_c_loglik at 0x7f00d96c7b18>
+<function set_name_h at 0x7f00d9738b90>
+<function set_name_yend at 0x7f00d97389b0>
+<function set_name_q_sp at 0x7f00d9738b18>
+<function check_spat_diag at 0x7f00d9738f50>
+<function check_weights at 0x7f00d9738e60>
+<function check_robust at 0x7f00d9738ed8>
+<function check_arrays at 0x7f00d9738d70>
+<function set_name_ds at 0x7f00d9738848>
+<function set_name_y at 0x7f00d97388c0>
+<function set_name_x at 0x7f00d9738938>
+<function set_name_multi at 0x7f00d9738cf8>
+<function check_regimes at 0x7f00d9730050>
+<function set_robust at 0x7f00d9738c08>
+<function check_constant at 0x7f00d97300c8>
+<function set_name_q at 0x7f00d9738a28>
+<function check_y at 0x7f00d9738de8>
+<function set_name_yend_sp at 0x7f00d9738aa0>
+<function set_name_w at 0x7f00d9738c80>
+pysal.spreg.error_sp_regimes.GM_Endog_Error_Regimes
+pysal.spreg.error_sp_regimes.GM_Combo_Regimes
+pysal.spreg.error_sp_regimes.GM_Error_Regimes
+pysal.spreg.ml_lag_regimes.ML_Lag_Regimes
+pysal.spreg.ols_regimes.OLS_Regimes
+<function ar2 at 0x7f00d972f2a8>
+<function koenker_bassett at 0x7f00d972f6e0>
+<function akaike at 0x7f00d972f410>
+<function likratiotest at 0x7f00d972f848>
+<function r2 at 0x7f00d972f230>
+<function se_betas at 0x7f00d972f320>
+<function jarque_bera at 0x7f00d972f578>
+<function vif at 0x7f00d972f758>
+<function breusch_pagan at 0x7f00d972f5f0>
+<function schwarz at 0x7f00d972f488>
+<function f_stat at 0x7f00d972f140>
+<function condition_index at 0x7f00d972f500>
+<function white at 0x7f00d972f668>
+<function constant_check at 0x7f00d972f7d0>
+<function log_likelihood at 0x7f00d972f398>
+<function t_stat at 0x7f00d972f1b8>
+pysal.spreg.ml_error_regimes.ML_Error_Regimes
+<function symmetrize at 0x7f00d96c7aa0>
+<function robust_vm at 0x7f00d974c5f0>
+<function hac_multi at 0x7f00d974c668>
+<function pr2_aspatial at 0x7f00d972f9b0>
+<function pr2_spatial at 0x7f00d972fa28>
+<function t_stat at 0x7f00d972f938>
+pysal.spreg.error_sp_hom_regimes.GM_Combo_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Error_Hom_Regimes
+pysal.spreg.error_sp_hom_regimes.GM_Endog_Error_Hom_Regimes
+pysal.spreg.twosls.TSLS
+pysal.spreg.twosls.BaseTSLS
+<function beta_diag_lag at 0x7f00d974b758>
+<function build_coefs_body_instruments at 0x7f00d974b7d0>
+<function GM_Combo_Hom_multi at 0x7f00d974b488>
+<function OLS at 0x7f00d9730848>
+<function GM_Endog_Error_Hom_multi at 0x7f00d974b0c8>
+<function summary_multi at 0x7f00d974b9b0>
+<function summary_sur at 0x7f00d974bed8>
+<function summary_spat_diag_intro at 0x7f00d974c230>
+<function GM_Combo_Het_multi at 0x7f00d974b578>
+<function TSLS at 0x7f00d9730938>
+<function summary_iteration at 0x7f00d974bde8>
+<function summary_intro at 0x7f00d974bb18>
+<function summary_warning at 0x7f00d974c050>
+<function GM_Combo at 0x7f00d974b320>
+<function beta_diag_ols at 0x7f00d974b668>
+<function GM_Endog_Error at 0x7f00d9730de8>
+<function ML_Lag at 0x7f00d9730b18>
+<function OLS_multi at 0x7f00d97308c0>
+<function GM_Combo_Hom at 0x7f00d974b410>
+<function GM_Combo_multi at 0x7f00d974b398>
+<function summary_vm at 0x7f00d974c410>
+<function summary_chow at 0x7f00d974bf50>
+<function GM_Error_Hom_multi at 0x7f00d9730f50>
+<function GM_Error at 0x7f00d9730cf8>
+<function GM_Endog_Error_Hom at 0x7f00d974b050>
+<function ML_Lag_multi at 0x7f00d9730b90>
+<function GM_Lag_multi at 0x7f00d9730aa0>
+<function summary_close at 0x7f00d974c500>
+<function summary_spat_diag_probit at 0x7f00d974c398>
+<function summary_open at 0x7f00d974baa0>
+<function GM_Combo_Het at 0x7f00d974b500>
+<function TSLS_multi at 0x7f00d97309b0>
+<function spat_diag_instruments at 0x7f00d974b8c0>
+<function summary_coefs_lambda at 0x7f00d974bcf8>
+<function ML_Error at 0x7f00d9730c08>
+<function summary_coefs_allx at 0x7f00d974bc08>
+<function GM_Lag at 0x7f00d9730a28>
+<function GM_Error_Het at 0x7f00d974b140>
+<function summary_coefs_intro at 0x7f00d974bb90>
+<function Probit at 0x7f00d974b5f0>
+<function spat_diag_ols at 0x7f00d974b848>
+<function summary_spat_diag_ols at 0x7f00d974c320>
+<function GM_Error_Hom at 0x7f00d9730ed8>
+<function GM_Endog_Error_multi at 0x7f00d9730e60>
+<function summary_pred at 0x7f00d974c488>
+<function GM_Endog_Error_Het at 0x7f00d974b230>
+<function summary_spat_diag_intro_global at 0x7f00d974c2a8>
+<function summary_coefs_somex at 0x7f00d974bc80>
+<function summary_regimes at 0x7f00d974be60>
+<function GM_Endog_Error_Het_multi at 0x7f00d974b2a8>
+<function summary_nonspat_diag_2 at 0x7f00d974c1b8>
+<function summary_nonspat_diag_1 at 0x7f00d974c140>
+<function summary at 0x7f00d974b938>
+<function summary_coefs_instruments at 0x7f00d974bd70>
+<function summary_coefs_slopes at 0x7f00d974c0c8>
+<function GM_Error_multi at 0x7f00d9730d70>
+<function ML_Error_multi at 0x7f00d9730c80>
+<function beta_diag at 0x7f00d974b6e0>
+<function GM_Error_Het_multi at 0x7f00d974b1b8>
+pysal.spreg.twosls_sp_regimes.GM_Lag_Regimes
+<function akTest at 0x7f00d9738758>
+pysal.spreg.diagnostics_sp.LMtests
+<function get_zI at 0x7f00d97386e0>
+<function rlmLag at 0x7f00d9738488>
+pysal.spreg.diagnostics_sp.AKtest
+<function lmLag at 0x7f00d9738398>
+<function lmErr at 0x7f00d972fd70>
+<function get_eI at 0x7f00d9738668>
+<function get_mI at 0x7f00d9738578>
+<function lmSarma at 0x7f00d9738500>
+<function rlmErr at 0x7f00d9738410>
+<function get_vI at 0x7f00d97385f0>
+pysal.spreg.diagnostics_sp.spDcache
+pysal.spreg.diagnostics_sp.MoranRes
+<function get_omega_hom_ols at 0x7f00d97601b8>
+pysal.spreg.error_sp_hom.BaseGM_Error_Hom
+pysal.spreg.error_sp_hom.GM_Combo_Hom
+pysal.spreg.error_sp_hom.BaseGM_Combo_Hom
+pysal.spreg.error_sp_hom.GM_Endog_Error_Hom
+<function get_vc_hom at 0x7f00d97600c8>
+<function moments_hom at 0x7f00d9755c08>
+pysal.spreg.error_sp_hom.GM_Error_Hom
+pysal.spreg.error_sp_hom.BaseGM_Endog_Error_Hom
+<function get_omega_hom at 0x7f00d9760140>
+<function err_c_loglik at 0x7f00d96cd0c8>
+pysal.spreg.ml_error.ML_Error
+pysal.spreg.ml_error.BaseML_Error
+<function err_c_loglik_ord at 0x7f00d96cd320>
+<function sp_tests at 0x7f00d96c7848>
+<function newton at 0x7f00d96bac08>
+pysal.spreg.probit.Probit
+<function moran_KP at 0x7f00d96c78c0>
+pysal.spreg.probit.BaseProbit
+pysal.spreg.error_sp_het_regimes.GM_Combo_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Endog_Error_Het_Regimes
+pysal.spreg.error_sp_het_regimes.GM_Error_Het_Regimes
+pysal.spreg.regimes.Wald
+<function wald_test at 0x7f00d9760848>
+<function w_regimes at 0x7f00d9760c80>
+<function buildR at 0x7f00d9760a28>
+<function x2xsp at 0x7f00d9760d70>
+<function regimeX_setup at 0x7f00d9760b18>
+<function buildR1var at 0x7f00d9760aa0>
+<function set_name_x_regimes at 0x7f00d9760b90>
+pysal.spreg.regimes.Chow
+<function check_cols2regi at 0x7f00d9760de8>
+<function w_regimes_union at 0x7f00d9760cf8>
+<function w_regime at 0x7f00d9760c08>
+pysal.spreg.regimes.Regimes_Frame
+<function load_example at 0x7f00d9676320>
+pysal.esda.mapclassify.Fisher_Jenks_Sampled
+pysal.esda.mapclassify.Std_Mean
+pysal.esda.mapclassify.Percentiles
+pysal.esda.mapclassify.Max_P_Classifier
+pysal.esda.mapclassify.Fisher_Jenks
+pysal.esda.mapclassify.Equal_Interval
+<function quantile at 0x7f00d9676140>
+pysal.esda.mapclassify.Map_Classifier
+pysal.esda.mapclassify.Quantiles
+pysal.esda.mapclassify.Natural_Breaks
+<function natural_breaks at 0x7f00d9676398>
+<function bin at 0x7f00d9676230>
+pysal.esda.mapclassify.Jenks_Caspall_Forced
+<function bin1d at 0x7f00d96762a8>
+<function binC at 0x7f00d96761b8>
+pysal.esda.mapclassify.K_classifiers
+<function fj at 0x7f00d9679938>
+pysal.esda.mapclassify.Maximum_Breaks
+pysal.esda.mapclassify.Box_Plot
+pysal.esda.mapclassify.Jenks_Caspall_Sampled
+<function gadf at 0x7f00d96798c0>
+pysal.esda.mapclassify.Jenks_Caspall
+pysal.esda.mapclassify.User_Defined
+<function opt_part at 0x7f00d9679a28>
+pysal.esda.getisord.G_Local
+pysal.esda.getisord.G
+pysal.esda.smoothing.Spatial_Filtering
+<function choynowski at 0x7f00d969a9b0>
+pysal.esda.smoothing.Empirical_Bayes
+pysal.esda.smoothing.Age_Adjusted_Smoother
+pysal.esda.smoothing.Spatial_Rate
+pysal.esda.smoothing.Kernel_Smoother
+<function weighted_median at 0x7f00d969a6e0>
+<function crude_age_standardization at 0x7f00d969a7d0>
+<function standardized_mortality_ratio at 0x7f00d969a938>
+pysal.esda.smoothing.Disk_Smoother
+<function assuncao_rate at 0x7f00d969aa28>
+<function sum_by_n at 0x7f00d969a758>
+pysal.esda.smoothing.Headbanging_Triples
+pysal.esda.smoothing.Excess_Risk
+pysal.esda.smoothing.Headbanging_Median_Rate
+pysal.esda.smoothing.Spatial_Empirical_Bayes
+pysal.esda.smoothing.Spatial_Median_Rate
+<function direct_age_standardization at 0x7f00d969a848>
+<function indirect_age_standardization at 0x7f00d969a8c0>
+<function flatten at 0x7f00d969a668>
+pysal.esda.join_counts.Join_Counts
+<function Moran_BV_matrix at 0x7f00d969aaa0>
+pysal.esda.moran.Moran_Rate
+pysal.esda.moran.Moran_BV
+pysal.esda.moran.Moran_Local_Rate
+pysal.esda.moran.Moran
+pysal.esda.moran.Moran_Local
+pysal.esda.gamma.Gamma
+pysal.esda.geary.Geary

@@ -1,0 +1,670 @@
+{
+  "spatial_dynamics": {
+    "ergodic": {
+      "steady_state": true, 
+      "var_fmpt": true, 
+      "fmpt": true
+    }, 
+    "interaction": {
+      "SpaceTimeEvents": true, 
+      "knox": true, 
+      "modified_knox": true, 
+      "mantel": true, 
+      "jacquez": true
+    }, 
+    "directional": {
+      "rose": true
+    }, 
+    "rank": {
+      "SpatialTau": true, 
+      "Tau": true, 
+      "Theta": true, 
+      "pseudop": true
+    }, 
+    "util": {
+      "get_lower": true, 
+      "shuffle_matrix": true
+    }, 
+    "markov": {
+      "prais": true, 
+      "chi2": true, 
+      "shorrock": true, 
+      "Spatial_Markov": true, 
+      "homogeneity": true, 
+      "Homogeneity_Results": true, 
+      "Markov": true, 
+      "kullback": true, 
+      "LISA_Markov": true
+    }
+  }, 
+  "core": {
+    "util": {
+      "shapefile": {
+        "MultiPoint": false, 
+        "NullShape": false, 
+        "shp_file": false, 
+        "Polygon": false, 
+        "struct2arrayinfo": false, 
+        "MultiPointM": false, 
+        "MultiPatch": false, 
+        "Point": false, 
+        "PolyLineZ": false, 
+        "PointM": false, 
+        "PolyLineM": false, 
+        "PolygonM": false, 
+        "PolyLine": false, 
+        "noneMin": false, 
+        "MultiPointZ": false, 
+        "PolygonZ": false, 
+        "PointZ": false, 
+        "shx_file": false, 
+        "noneMax": false
+      }, 
+      "weight_converter": {
+        "WeightConverter": false, 
+        "weight_convert": false
+      }, 
+      "wkt": {
+        "WKTParser": false
+      }
+    }, 
+    "IOHandlers": {
+      "pyDbfIO": {
+        "DBF": false
+      }, 
+      "mtx": {
+        "MtxIO": false
+      }, 
+      "stata_txt": {
+        "StataTextIO": false
+      }, 
+      "mat": {
+        "MatIO": false
+      }, 
+      "arcgis_swm": {
+        "ArcGISSwmIO": false
+      }, 
+      "gal": {
+        "GalIO": false
+      }, 
+      "geoda_txt": {
+        "GeoDaTxtReader": false
+      }, 
+      "dat": {
+        "DatIO": false
+      }, 
+      "gwt": {
+        "unique_filter": false, 
+        "GwtIO": false
+      }, 
+      "pyShpIO": {
+        "PurePyShpWrapper": false
+      }, 
+      "geobugs_txt": {
+        "GeoBUGSTextIO": false
+      }, 
+      "wk1": {
+        "Wk1IO": false
+      }, 
+      "arcgis_dbf": {
+        "ArcGISDbfIO": false
+      }, 
+      "csvWrapper": {
+        "csvWrapper": false
+      }, 
+      "arcgis_txt": {
+        "ArcGISTextIO": false
+      }, 
+      "wkt": {
+        "WKTReader": false
+      }
+    }, 
+    "FileIO": {
+      "FileIO": false, 
+      "FileIO_MetaCls": false
+    }, 
+    "Tables": {
+      "DataTable": false
+    }
+  }, 
+  "network": {
+    "util": {
+      "nearest_neighbor_search": true, 
+      "compute_length": true, 
+      "generatetree": true, 
+      "dijkstra": true, 
+      "nearestneighborsearch": true, 
+      "cumulativedistances": true, 
+      "shortest_path": true, 
+      "get_neighbor_distances": true
+    }, 
+    "network": {
+      "PointPattern": true, 
+      "SortedEdges": true, 
+      "Network": true, 
+      "SimulatedPointPattern": true
+    }, 
+    "analysis": {
+      "NetworkK": true, 
+      "NetworkF": true, 
+      "NetworkG": true, 
+      "gfunction": true, 
+      "kfunction": true, 
+      "NetworkBase": true, 
+      "ffunction": true
+    }
+  }, 
+  "region": {
+    "randomregion": {
+      "Random_Region": true, 
+      "Random_Regions": true
+    }, 
+    "maxp": {
+      "Maxp_LISA": true, 
+      "Maxp": true
+    }, 
+    "components": {
+      "check_contiguity": true, 
+      "Graph": true, 
+      "is_component": true
+    }
+  }, 
+  "cg": {
+    "kdtree": {
+      "Arc_KDTree": true, 
+      "KDTree": true
+    }, 
+    "rtree": {
+      "union_all": true, 
+      "Rtree": true, 
+      "avg_diagonals": true, 
+      "closest": true, 
+      "RTree": true, 
+      "center_of_gravity": true, 
+      "silhouette_coeff": true, 
+      "silhouette_w": true, 
+      "k_means_cluster": true, 
+      "Rect": true
+    }, 
+    "standalone": {
+      "get_angle_between": true, 
+      "get_point_at_angle_and_dist": true, 
+      "get_points_dist": true, 
+      "get_polygon_point_dist": true, 
+      "get_segment_point_dist": true, 
+      "bbcommon": true, 
+      "get_rectangle_rectangle_intersection": true, 
+      "get_polygon_point_intersect": true, 
+      "ccw": true, 
+      "point_touches_rectangle": true, 
+      "get_segments_intersect": true, 
+      "is_collinear": true, 
+      "get_shared_segments": true, 
+      "get_ray_segment_intersect": true, 
+      "distance_matrix": true, 
+      "get_segment_point_intersect": true, 
+      "convex_hull": true, 
+      "is_clockwise": true, 
+      "seg_intersect": true, 
+      "get_bounding_box": true, 
+      "get_rectangle_point_intersect": true
+    }, 
+    "shapes": {
+      "asShape": true, 
+      "Polygon": true, 
+      "Chain": true, 
+      "Point": true, 
+      "LineSegment": true, 
+      "VerticalLine": true, 
+      "Line": true, 
+      "Ring": true, 
+      "Rectangle": true, 
+      "Ray": true
+    }, 
+    "sphere": {
+      "arcdist2linear": true, 
+      "linear2arcdist": true, 
+      "fast_threshold": true, 
+      "toXYZ": true, 
+      "fast_knn": true, 
+      "toLngLat": true, 
+      "harcdist": true, 
+      "<lambda>": true, 
+      "lonlat": true, 
+      "geointerpolate": true, 
+      "arcdist": true, 
+      "geogrid": true, 
+      "haversine": true, 
+      "brute_knn": true, 
+      "radangle": true
+    }, 
+    "locators": {
+      "PointLocator": true, 
+      "PolygonLocator": true, 
+      "BruteForcePointLocator": true, 
+      "Grid": true, 
+      "IntervalTree": true
+    }
+  }, 
+  "inequality": {
+    "gini": {
+      "Gini": true, 
+      "Gini_Spatial": true
+    }, 
+    "theil": {
+      "TheilD": true, 
+      "TheilDSim": true, 
+      "Theil": true
+    }
+  }, 
+  "weights": {
+    "Distance": {
+      "DistanceBand": true, 
+      "Kernel": true, 
+      "knnW": true
+    }, 
+    "queen_from_geojson": true, 
+    "spatial_lag": {
+      "lag_spatial": true
+    }, 
+    "Contiguity": {
+      "buildContiguity": true
+    }, 
+    "util": {
+      "higher_order": true, 
+      "full": true, 
+      "min_threshold_distance": true, 
+      "shimbel": true, 
+      "get_ids": true, 
+      "write_gal": true, 
+      "block_weights": true, 
+      "regime_weights": true, 
+      "higher_order_sp": true, 
+      "hexLat2W": true, 
+      "insert_diagonal": true, 
+      "remap_ids": true, 
+      "w_local_cluster": true, 
+      "full2W": true, 
+      "get_points_array_from_shapefile": true, 
+      "comb": true, 
+      "lat2W": true, 
+      "order": true, 
+      "WSP2W": true, 
+      "lat2SW": true
+    }, 
+    "weights": {
+      "WSP": true, 
+      "W": true
+    }, 
+    "user": {
+      "queen_from_shapefile": true, 
+      "min_threshold_dist_from_shapefile": true, 
+      "adaptive_kernelW": true, 
+      "build_lattice_shapefile": true, 
+      "adaptive_kernelW_from_shapefile": true, 
+      "threshold_continuousW_from_array": true, 
+      "threshold_continuousW_from_shapefile": true, 
+      "knnW_from_shapefile": true, 
+      "threshold_binaryW_from_array": true, 
+      "rook_from_shapefile": true, 
+      "spw_from_gal": true, 
+      "kernelW_from_shapefile": true, 
+      "knnW_from_array": true, 
+      "threshold_binaryW_from_shapefile": true, 
+      "kernelW": true
+    }, 
+    "_contW_binning": {
+      "ContiguityWeightsPolygons": true, 
+      "ContiguityWeights_binning": true, 
+      "bbcommon": true
+    }, 
+    "Wsets": {
+      "w_clip": true, 
+      "w_union": true, 
+      "w_difference": true, 
+      "w_subset": true, 
+      "w_symmetric_difference": true, 
+      "w_intersection": true
+    }
+  }, 
+  "examples": {
+    "get_path": true
+  }, 
+  "spreg": {
+    "error_sp": {
+      "BaseGM_Combo": true, 
+      "BaseGM_Endog_Error": true, 
+      "GM_Combo": true, 
+      "GM_Endog_Error": true, 
+      "BaseGM_Error": true, 
+      "GM_Error": true
+    }, 
+    "twosls_regimes": {
+      "TSLS_Regimes": true
+    }, 
+    "utils": {
+      "RegressionPropsY": true, 
+      "sp_att": true, 
+      "get_lags": true, 
+      "sphstack": true, 
+      "optim_moments": true, 
+      "get_A2_hom": true, 
+      "iter_msg": true, 
+      "spdot": true, 
+      "spmin": true, 
+      "inverse_prod": true, 
+      "get_A1_het": true, 
+      "RegressionProps_basic": true, 
+      "power_expansion": true, 
+      "set_endog": true, 
+      "foptim_par": true, 
+      "spmax": true, 
+      "spbroadcast": true, 
+      "RegressionPropsVM": true, 
+      "spmultiply": true, 
+      "get_A1_hom": true, 
+      "set_warn": true, 
+      "get_spFilter": true, 
+      "set_endog_sparse": true
+    }, 
+    "error_sp_het": {
+      "get_psi_sigma": true, 
+      "GM_Combo_Het": true, 
+      "get_a1a2": true, 
+      "BaseGM_Error_Het": true, 
+      "get_Omega_GS2SLS": true, 
+      "BaseGM_Endog_Error_Het": true, 
+      "BaseGM_Combo_Het": true, 
+      "get_vm_het": true, 
+      "GM_Error_Het": true, 
+      "get_P_hat": true, 
+      "get_vc_het_tsls": true, 
+      "get_vc_het": true, 
+      "GM_Endog_Error_Het": true
+    }, 
+    "ols": {
+      "BaseOLS": true, 
+      "OLS": true
+    }, 
+    "twosls_sp": {
+      "BaseGM_Lag": true, 
+      "GM_Lag": true
+    }, 
+    "ml_lag": {
+      "ML_Lag": true, 
+      "lag_c_loglik_ord": true, 
+      "BaseML_Lag": true, 
+      "lag_c_loglik": true
+    }, 
+    "user_output": {
+      "set_name_h": true, 
+      "set_name_yend": true, 
+      "set_name_q_sp": true, 
+      "check_spat_diag": true, 
+      "check_weights": true, 
+      "check_robust": true, 
+      "check_arrays": true, 
+      "set_name_ds": true, 
+      "set_name_y": true, 
+      "set_name_x": true, 
+      "set_name_multi": true, 
+      "check_regimes": true, 
+      "set_robust": true, 
+      "check_constant": true, 
+      "set_name_q": true, 
+      "check_y": true, 
+      "set_name_yend_sp": true, 
+      "set_name_w": true
+    }, 
+    "error_sp_regimes": {
+      "GM_Endog_Error_Regimes": true, 
+      "GM_Combo_Regimes": true, 
+      "GM_Error_Regimes": true
+    }, 
+    "ml_lag_regimes": {
+      "ML_Lag_Regimes": true
+    }, 
+    "ols_regimes": {
+      "OLS_Regimes": true
+    }, 
+    "diagnostics": {
+      "ar2": true, 
+      "koenker_bassett": true, 
+      "akaike": true, 
+      "likratiotest": true, 
+      "r2": true, 
+      "se_betas": true, 
+      "jarque_bera": true, 
+      "vif": true, 
+      "breusch_pagan": true, 
+      "schwarz": true, 
+      "f_stat": true, 
+      "condition_index": true, 
+      "white": true, 
+      "constant_check": true, 
+      "log_likelihood": true, 
+      "t_stat": true
+    }, 
+    "ml_error_regimes": {
+      "ML_Error_Regimes": true
+    }, 
+    "w_utils": {
+      "symmetrize": true
+    }, 
+    "robust": {
+      "robust_vm": true, 
+      "hac_multi": true
+    }, 
+    "diagnostics_tsls": {
+      "pr2_aspatial": true, 
+      "pr2_spatial": true, 
+      "t_stat": true
+    }, 
+    "error_sp_hom_regimes": {
+      "GM_Combo_Hom_Regimes": true, 
+      "GM_Error_Hom_Regimes": true, 
+      "GM_Endog_Error_Hom_Regimes": true
+    }, 
+    "twosls": {
+      "TSLS": true, 
+      "BaseTSLS": true
+    }, 
+    "summary_output": {
+      "beta_diag_lag": true, 
+      "build_coefs_body_instruments": true, 
+      "GM_Combo_Hom_multi": true, 
+      "OLS": true, 
+      "GM_Endog_Error_Hom_multi": true, 
+      "summary_multi": true, 
+      "summary_sur": true, 
+      "summary_spat_diag_intro": true, 
+      "GM_Combo_Het_multi": true, 
+      "TSLS": true, 
+      "summary_iteration": true, 
+      "summary_intro": true, 
+      "summary_warning": true, 
+      "GM_Combo": true, 
+      "beta_diag_ols": true, 
+      "GM_Endog_Error": true, 
+      "ML_Lag": true, 
+      "OLS_multi": true, 
+      "GM_Combo_Hom": true, 
+      "GM_Combo_multi": true, 
+      "summary_vm": true, 
+      "summary_chow": true, 
+      "GM_Error_Hom_multi": true, 
+      "GM_Error": true, 
+      "GM_Endog_Error_Hom": true, 
+      "ML_Lag_multi": true, 
+      "GM_Lag_multi": true, 
+      "summary_close": true, 
+      "summary_spat_diag_probit": true, 
+      "summary_open": true, 
+      "GM_Combo_Het": true, 
+      "TSLS_multi": true, 
+      "spat_diag_instruments": true, 
+      "summary_coefs_lambda": true, 
+      "ML_Error": true, 
+      "summary_coefs_allx": true, 
+      "GM_Lag": true, 
+      "GM_Error_Het": true, 
+      "summary_coefs_intro": true, 
+      "Probit": true, 
+      "spat_diag_ols": true, 
+      "summary_spat_diag_ols": true, 
+      "GM_Error_Hom": true, 
+      "GM_Endog_Error_multi": true, 
+      "summary_pred": true, 
+      "GM_Endog_Error_Het": true, 
+      "summary_spat_diag_intro_global": true, 
+      "summary_coefs_somex": true, 
+      "summary_regimes": true, 
+      "GM_Endog_Error_Het_multi": true, 
+      "summary_nonspat_diag_2": true, 
+      "summary_nonspat_diag_1": true, 
+      "summary": true, 
+      "summary_coefs_instruments": true, 
+      "summary_coefs_slopes": true, 
+      "GM_Error_multi": true, 
+      "ML_Error_multi": true, 
+      "beta_diag": true, 
+      "GM_Error_Het_multi": true
+    }, 
+    "twosls_sp_regimes": {
+      "GM_Lag_Regimes": true
+    }, 
+    "diagnostics_sp": {
+      "akTest": true, 
+      "LMtests": true, 
+      "get_zI": true, 
+      "rlmLag": true, 
+      "AKtest": true, 
+      "lmLag": true, 
+      "lmErr": true, 
+      "get_eI": true, 
+      "get_mI": true, 
+      "lmSarma": true, 
+      "rlmErr": true, 
+      "get_vI": true, 
+      "spDcache": true, 
+      "MoranRes": true
+    }, 
+    "error_sp_hom": {
+      "get_omega_hom_ols": true, 
+      "BaseGM_Error_Hom": true, 
+      "GM_Combo_Hom": true, 
+      "BaseGM_Combo_Hom": true, 
+      "GM_Endog_Error_Hom": true, 
+      "get_vc_hom": true, 
+      "moments_hom": true, 
+      "GM_Error_Hom": true, 
+      "BaseGM_Endog_Error_Hom": true, 
+      "get_omega_hom": true
+    }, 
+    "ml_error": {
+      "err_c_loglik": true, 
+      "ML_Error": true, 
+      "BaseML_Error": true, 
+      "err_c_loglik_ord": true
+    }, 
+    "probit": {
+      "sp_tests": true, 
+      "newton": true, 
+      "Probit": true, 
+      "moran_KP": true, 
+      "BaseProbit": true
+    }, 
+    "error_sp_het_regimes": {
+      "GM_Combo_Het_Regimes": true, 
+      "GM_Endog_Error_Het_Regimes": true, 
+      "GM_Error_Het_Regimes": true
+    }, 
+    "regimes": {
+      "Wald": true, 
+      "wald_test": true, 
+      "w_regimes": true, 
+      "buildR": true, 
+      "x2xsp": true, 
+      "regimeX_setup": true, 
+      "buildR1var": true, 
+      "set_name_x_regimes": true, 
+      "Chow": true, 
+      "check_cols2regi": true, 
+      "w_regimes_union": true, 
+      "w_regime": true, 
+      "Regimes_Frame": true
+    }
+  }, 
+  "esda": {
+    "mapclassify": {
+      "load_example": false, 
+      "Fisher_Jenks_Sampled": true, 
+      "Std_Mean": true, 
+      "Percentiles": true, 
+      "Max_P_Classifier": true, 
+      "Fisher_Jenks": true, 
+      "Equal_Interval": true, 
+      "quantile": true, 
+      "Map_Classifier": true, 
+      "Quantiles": true, 
+      "Natural_Breaks": true, 
+      "natural_breaks": true, 
+      "bin": true, 
+      "Jenks_Caspall_Forced": true, 
+      "bin1d": true, 
+      "binC": false, 
+      "K_classifiers": true, 
+      "fj": false, 
+      "Maximum_Breaks": true, 
+      "Box_Plot": true, 
+      "Jenks_Caspall_Sampled": true, 
+      "gadf": false, 
+      "Jenks_Caspall": true, 
+      "User_Defined": true, 
+      "opt_part": true
+    }, 
+    "getisord": {
+      "G_Local": true, 
+      "G": true
+    }, 
+    "smoothing": {
+      "Spatial_Filtering": false, 
+      "choynowski": false, 
+      "Empirical_Bayes": false, 
+      "Age_Adjusted_Smoother": false, 
+      "Spatial_Rate": false, 
+      "Kernel_Smoother": false, 
+      "weighted_median": false, 
+      "crude_age_standardization": false, 
+      "standardized_mortality_ratio": false, 
+      "Disk_Smoother": false, 
+      "assuncao_rate": false, 
+      "sum_by_n": false, 
+      "Headbanging_Triples": false, 
+      "Excess_Risk": false, 
+      "Headbanging_Median_Rate": false, 
+      "Spatial_Empirical_Bayes": false, 
+      "Spatial_Median_Rate": false, 
+      "direct_age_standardization": false, 
+      "indirect_age_standardization": false, 
+      "flatten": false
+    }, 
+    "join_counts": {
+      "Join_Counts": true
+    }, 
+    "moran": {
+      "Moran_BV_matrix": true, 
+      "Moran_Rate": true, 
+      "Moran_BV": true, 
+      "Moran_Local_Rate": true, 
+      "Moran": true, 
+      "Moran_Local": true
+    }, 
+    "gamma": {
+      "Gamma": true
+    }, 
+    "geary": {
+      "Geary": true
+    }
+  }
+}
