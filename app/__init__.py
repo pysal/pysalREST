@@ -13,7 +13,7 @@ import config
 from decorators import crossdomain
 
 #TODO: Library name from config
-import pysal as ps
+ps = __import__(config.library)
 
 #Create the app
 app = Flask(__name__)
@@ -93,7 +93,7 @@ if config.generatemap:
     walk_dict(mapping)
     import json
     with open('librarymap.json', 'w') as mapfile:
-        mapfile.write(json.dumps(mapping, indent=2)) 
+        mapfile.write(json.dumps(mapping, indent=2))
 
 if config.loadmap:
     import json
@@ -140,7 +140,7 @@ def add_cors(resp):
     resp.headers['Access-Control-Allow-Origin'] = flask.request.headers.get('Origin','*')
     resp.headers['Access-Control-Allow-Credentials'] = 'true'
     resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET'
-    resp.headers['Access-Control-Allow-Headers'] = flask.request.headers.get( 
+    resp.headers['Access-Control-Allow-Headers'] = flask.request.headers.get(
         'Access-Control-Request-Headers', 'Authorization')
     # set low for debugging
     if app.debug:
