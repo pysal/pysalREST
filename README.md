@@ -11,19 +11,19 @@ We make two assumptions about your library:
 
 Currently we impose a third limitation in the structure of the directories within your modules.  We have statically coded the logic to traverse two directory levels deep from the root.  Any functionality deeper is not exposed.  For example, we successfully expose all functionality in:
 
--root
-	-a
-	-b
-		-b1
+	-root
+		-a
+		-b
+			-b1
 		
 but fail to expose all functionality from 1a1 in the following example.
 
--root
-	-a
-		-a1
-			-1a1
-	-b
-		-b1
+	-root
+		-a
+			-a1
+				-1a1
+		-b
+			-b1
 		
 In an upcoming PR we will replace all hard coded traversal with recursive traversal.
 
@@ -31,39 +31,62 @@ Configuration
 -------------
 Configuration occurs via the confi.py file.  This file is not accessible via the REST interface.  We expose the following via the configuration file:
 
-DEBUG - boolean defining whether debug messages should be logged
-THREADS_PER_PAGE - integer number of threads per connection
-SECRET_KEY - your secret hash key
-ALLOWED_EXTENSIONS - for the data service, only uploads with these extensions are accepted
+General
+________
 
-BASE_DIR - current installation path, you should not need to change this
+* DEBUG - boolean defining whether debug messages should be logged
+* THREADS\_PER\_PAGE - integer number of threads per connection
+* SECRET\_KEY - your secret hash key
+* ALLOWED\_EXTENSIONS - for the data service, only uploads with these extensions are accepted
 
-library - the name of the module as you would use in an import statement, e.g. pysal
-api - the name of the api used in URLs
-generatemap - boolean defining whether a json map of the exposed functionality should be generated
-localmap - the name of a map to be lodaded to curate functionality
+* BASE\_DIR - current installation path, you should not need to change this
 
-server - the name of the server to use, alter if you do not want to use cherrypy
-port - the port to run the server on
-host - the ip to run the server on, e.g. localhost
+API
+________
 
-APPLICATION_ROOT - the base URL to be appended to all other URLs
-baseurl - the baseurl appened when generating hrefs in the API
-basedataurl - as above, except a base url to data
 
-dbtypename - an ogr2ogr specific parameter defining the database type; if you are not using ogr2ogr you can ignore
-dbabbrev - database abbreviation for ogr2ogr
-dbtype - used for SQLAlchemy mapping
-dbhost - address to the db
-dbusername - username with read/write priveleges
-dbpass - the dbusername's password
-dbname - the name of the database at the given address
+* library - the name of the module as you would use in an import statement, e.g. pysal
+* api - the name of the api used in URLs
+* generatemap - boolean defining whether a json map of the exposed functionality should be generated
+* localmap - the name of a map to be lodaded to curate functionality
 
-geom_column - in the case of a POSTGIS enabled database, this is the default geometry column name
+Server
+________
 
-ogr2ogr - PATH to the ogr2ogr command
 
-loglocation - PATH for logs
+* server - the name of the server to use, alter if you do not want to use cherrypy
+* port - the port to run the server on
+* host - the ip to run the server on, e.g. localhost
+
+* APPLICATION\_ROOT - the base URL to be appended to all other URLs
+* baseurl - the baseurl appened when generating hrefs in the API
+* basedataurl - as above, except a base url to data
+
+Database Setup
+_________________
+
+
+* dbtypename - an ogr2ogr specific parameter defining the database type; if you are not using ogr2ogr you can ignore
+* dbabbrev - database abbreviation for ogr2ogr
+* dbtype - used for SQLAlchemy mapping
+* dbhost - address to the db
+* dbusername - username with read/write priveleges
+* dbpass - the dbusername's password
+* dbname - the name of the database at the given address
+
+* geom_column - in the case of a POSTGIS enabled database, this is the default geometry column name
+
+3rd Party
+__________
+
+
+* ogr2ogr - PATH to the ogr2ogr command
+
+Logging
+________
+
+
+* loglocation - PATH for logs
 
 Running the server
 ------------------
