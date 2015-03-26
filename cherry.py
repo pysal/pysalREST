@@ -15,6 +15,8 @@ def start(host, port):
         server.stop()
 '''
 
+cherrypy.response.timeout = 3600
+
 def start():
     # Enable custom Paste access logging
     log_format = (

@@ -1,0 +1,229 @@
+pysal.spatial_dynamics.interaction.SpaceTimeEvents: Misalignment / Error in arguments.
+<function rose at 0x7fe3b5c9a668>: Misalignment / Error in arguments.
+<function pseudop at 0x7fe3b5c9a140>: No documentation.
+<function shuffle_matrix at 0x7fe3b5c9a8c0>: Misalignment / Error in arguments.
+pysal.spatial_dynamics.markov.Spatial_Markov: Misalignment / Error in arguments.
+<function homogeneity at 0x7fe3b5c9a0c8>: Misalignment / Error in arguments.
+pysal.spatial_dynamics.markov.Homogeneity_Results: Misalignment / Error in arguments.
+pysal.core.util.shapefile.MultiPoint: No documentation.
+pysal.core.util.shapefile.NullShape: No documentation.
+pysal.core.util.shapefile.shp_file: Misalignment / Error in arguments.
+<function struct2arrayinfo at 0x7fe3b5ca7230>: No documentation.
+pysal.core.util.shapefile.MultiPointM: No documentation.
+pysal.core.util.shapefile.MultiPatch: No documentation.
+<class 'pysal.core.util.shapefile.PolyLineZ'>: No documentation.
+pysal.core.util.shapefile.PointM: No documentation.
+pysal.core.util.shapefile.PolyLineM: No documentation.
+pysal.core.util.shapefile.PolygonM: No documentation.
+<function noneMin at 0x7fe3b5ca7320>: No documentation.
+pysal.core.util.shapefile.MultiPointZ: No documentation.
+<class 'pysal.core.util.shapefile.PolygonZ'>: No documentation.
+<class 'pysal.core.util.shapefile.PointZ'>: No documentation.
+pysal.core.util.shapefile.shx_file: Misalignment / Error in arguments.
+<function noneMax at 0x7fe3b5ca72a8>: No documentation.
+<class 'pysal.core.util.weight_converter.WeightConverter'>: Misalignment / Error in arguments.
+<function weight_convert at 0x7fe3b5ca7050>: Misalignment / Error in arguments.
+<class 'pysal.core.IOHandlers.gwt.GwtIO'>: No documentation.
+<class 'pysal.core.FileIO.FileIO'>: Misalignment / Error in arguments.
+<class 'pysal.region.components.Graph'>: No documentation.
+<function is_component at 0x7fe3b5c817d0>: Misalignment / Error in arguments.
+<class 'pysal.cg.kdtree.Arc_KDTree'>: No documentation.
+<function KDTree at 0x7fe3b94e59b0>: No documentation.
+<function union_all at 0x7fe3b94e8ed8>: No documentation.
+<function Rtree at 0x7fe3b94fc7d0>: No documentation.
+<function avg_diagonals at 0x7fe3b94fc848>: No documentation.
+<function closest at 0x7fe3b94fe938>: No documentation.
+<class 'pysal.cg.rtree.RTree'>: No documentation.
+<function center_of_gravity at 0x7fe3b94fe8c0>: No documentation.
+<function silhouette_coeff at 0x7fe3b94fe848>: No documentation.
+<function silhouette_w at 0x7fe3b94fe7d0>: No documentation.
+<function k_means_cluster at 0x7fe3b94fe9b0>: No documentation.
+<class 'pysal.cg.rtree.Rect'>: Misalignment / Error in arguments.
+<function get_angle_between at 0x7fe3b94e5ed8>: Misalignment / Error in arguments.
+<function get_point_at_angle_and_dist at 0x7fe3b94e8488>: Misalignment / Error in arguments.
+<function get_points_dist at 0x7fe3b94e8398>: Misalignment / Error in arguments.
+<function get_polygon_point_dist at 0x7fe3b94e8320>: Misalignment / Error in arguments.
+<function get_segment_point_dist at 0x7fe3b94e8410>: Misalignment / Error in arguments.
+<function bbcommon at 0x7fe3b94e5de8>: Misalignment / Error in arguments.
+<function get_rectangle_rectangle_intersection at 0x7fe3b94e82a8>: Misalignment / Error in arguments.
+<function get_polygon_point_intersect at 0x7fe3b94e8140>: Misalignment / Error in arguments.
+<function ccw at 0x7fe3b94e85f0>: Misalignment / Error in arguments.
+<function point_touches_rectangle at 0x7fe3b94e8758>: Misalignment / Error in arguments.
+<function get_segments_intersect at 0x7fe3b94e8050>: Misalignment / Error in arguments.
+<function is_collinear at 0x7fe3b94e5f50>: Misalignment / Error in arguments.
+<function get_shared_segments at 0x7fe3b94e87d0>: Misalignment / Error in arguments.
+<function get_ray_segment_intersect at 0x7fe3b94e8230>: Misalignment / Error in arguments.
+<function get_segment_point_intersect at 0x7fe3b94e80c8>: Misalignment / Error in arguments.
+<function convex_hull at 0x7fe3b94e8500>: Misalignment / Error in arguments.
+<function is_clockwise at 0x7fe3b94e8578>: Misalignment / Error in arguments.
+<function seg_intersect at 0x7fe3b94e8668>: Misalignment / Error in arguments.
+<function get_bounding_box at 0x7fe3b94e5e60>: Misalignment / Error in arguments.
+<function get_rectangle_point_intersect at 0x7fe3b94e81b8>: Misalignment / Error in arguments.
+<function asShape at 0x7fe3c6248140>: Misalignment / Error in arguments.
+<class 'pysal.cg.shapes.Polygon'>: Misalignment / Error in arguments.
+<class 'pysal.cg.shapes.Chain'>: Misalignment / Error in arguments.
+<class 'pysal.cg.shapes.Point'>: Misalignment / Error in arguments.
+pysal.cg.shapes.VerticalLine: Misalignment / Error in arguments.
+pysal.cg.shapes.Line: Misalignment / Error in arguments.
+<class 'pysal.cg.shapes.Ring'>: Misalignment / Error in arguments.
+pysal.cg.shapes.Rectangle: Misalignment / Error in arguments.
+pysal.cg.shapes.Ray: Misalignment / Error in arguments.
+<function linear2arcdist at 0x7fe3c1f25a28>: Misalignment / Error in arguments.
+<function fast_threshold at 0x7fe3c1f25c80>: No documentation.
+<function toXYZ at 0x7fe3c1f25aa0>: Misalignment / Error in arguments.
+<function fast_knn at 0x7fe3c1f25c08>: Misalignment / Error in arguments.
+<function toLngLat at 0x7fe3c1f25b18>: No documentation.
+<function harcdist at 0x7fe3c1f25f50>: Misalignment / Error in arguments.
+<function <lambda> at 0x7fe3c1f25e60>: No documentation.
+<function lonlat at 0x7fe3c1f25cf8>: Misalignment / Error in arguments.
+<function geointerpolate at 0x7fe3c6248050>: Misalignment / Error in arguments.
+<function geogrid at 0x7fe3c62480c8>: Misalignment / Error in arguments.
+<function haversine at 0x7fe3c1f25d70>: Misalignment / Error in arguments.
+<function brute_knn at 0x7fe3c1f25b90>: Misalignment / Error in arguments.
+<function radangle at 0x7fe3c1f25ed8>: Misalignment / Error in arguments.
+pysal.cg.locators.PointLocator: Misalignment / Error in arguments.
+pysal.cg.locators.PolygonLocator: Misalignment / Error in arguments.
+pysal.cg.locators.BruteForcePointLocator: Misalignment / Error in arguments.
+pysal.cg.locators.Grid: Misalignment / Error in arguments.
+pysal.cg.locators.IntervalTree: Misalignment / Error in arguments.
+pysal.inequality.gini.Gini: Misalignment / Error in arguments.
+pysal.inequality.gini.Gini_Spatial: Misalignment / Error in arguments.
+<function queen_geojson at 0x7fe3b5d59c08>: Misalignment / Error in arguments.
+<function write_gal at 0x7fe3b94aba28>: No documentation.
+<function higher_order_sp at 0x7fe3b94ab488>: Misalignment / Error in arguments.
+<function comb at 0x7fe3b94ab320>: Misalignment / Error in arguments.
+<function spw_from_gal at 0x7fe3b94afa28>: Misalignment / Error in arguments.
+<function knnW_from_array at 0x7fe3b94afaa0>: Misalignment / Error in arguments.
+pysal.weights._contW_binning.ContiguityWeightsPolygons: Misalignment / Error in arguments.
+pysal.weights._contW_binning.ContiguityWeights_binning: Misalignment / Error in arguments.
+<function bbcommon at 0x7fe3b94af488>: Misalignment / Error in arguments.
+<function w_union at 0x7fe3b94b6230>: Misalignment / Error in arguments.
+<function w_difference at 0x7fe3b94b6320>: Misalignment / Error in arguments.
+<function w_subset at 0x7fe3b94b6410>: Misalignment / Error in arguments.
+<function w_symmetric_difference at 0x7fe3b94b6398>: Misalignment / Error in arguments.
+<function w_intersection at 0x7fe3b94b62a8>: Misalignment / Error in arguments.
+<function get_path at 0x7fe3b57d6410>: No documentation.
+<function sp_att at 0x7fe3b5c40c08>: No documentation.
+<function optim_moments at 0x7fe3b5c407d0>: Misalignment / Error in arguments.
+<function iter_msg at 0x7fe3b5c40b90>: No documentation.
+<function RegressionProps_basic at 0x7fe3b5c46050>: Misalignment / Error in arguments.
+<function power_expansion at 0x7fe3b5c40a28>: Misalignment / Error in arguments.
+<function set_endog at 0x7fe3b5c40aa0>: No documentation.
+<function foptim_par at 0x7fe3b5c40848>: Misalignment / Error in arguments.
+<function set_warn at 0x7fe3b5c40f50>: Misalignment / Error in arguments.
+<function set_endog_sparse at 0x7fe3b5c40b18>: Misalignment / Error in arguments.
+<function get_a1a2 at 0x7fe3b5c6b9b0>: Misalignment / Error in arguments.
+<function get_Omega_GS2SLS at 0x7fe3b5c6baa0>: Misalignment / Error in arguments.
+<function get_P_hat at 0x7fe3b5c6b938>: Misalignment / Error in arguments.
+<function get_vc_het_tsls at 0x7fe3b5c6ba28>: No documentation.
+<function lag_c_loglik_ord at 0x7fe3b57d0c80>: No documentation.
+<function lag_c_loglik at 0x7fe3b57d0b18>: No documentation.
+<function set_name_yend at 0x7fe3b5c4f9b0>: Misalignment / Error in arguments.
+<function set_name_q_sp at 0x7fe3b5c4fb18>: Misalignment / Error in arguments.
+<function check_robust at 0x7fe3b5c4fed8>: Misalignment / Error in arguments.
+<function set_name_y at 0x7fe3b5c4f8c0>: Misalignment / Error in arguments.
+<function set_name_multi at 0x7fe3b5c4fcf8>: Misalignment / Error in arguments.
+<function likratiotest at 0x7fe3b5c46848>: Misalignment / Error in arguments.
+<function symmetrize at 0x7fe3b57d0aa0>: Misalignment / Error in arguments.
+<function pr2_spatial at 0x7fe3b5c46a28>: Misalignment / Error in arguments.
+<function beta_diag_lag at 0x7fe3b5c61758>: No documentation.
+<function build_coefs_body_instruments at 0x7fe3b5c617d0>: No documentation.
+<function GM_Combo_Hom_multi at 0x7fe3b5c61488>: No documentation.
+<function OLS at 0x7fe3b5c47848>: No documentation.
+<function GM_Endog_Error_Hom_multi at 0x7fe3b5c610c8>: No documentation.
+<function summary_multi at 0x7fe3b5c619b0>: No documentation.
+<function summary_sur at 0x7fe3b5c61ed8>: Misalignment / Error in arguments.
+<function summary_spat_diag_intro at 0x7fe3b5c62230>: No documentation.
+<function GM_Combo_Het_multi at 0x7fe3b5c61578>: No documentation.
+<function TSLS at 0x7fe3b5c47938>: No documentation.
+<function summary_iteration at 0x7fe3b5c61de8>: Misalignment / Error in arguments.
+<function summary_intro at 0x7fe3b5c61b18>: No documentation.
+<function summary_warning at 0x7fe3b5c62050>: No documentation.
+<function GM_Combo at 0x7fe3b5c61320>: No documentation.
+<function beta_diag_ols at 0x7fe3b5c61668>: No documentation.
+<function GM_Endog_Error at 0x7fe3b5c47de8>: No documentation.
+<function ML_Lag at 0x7fe3b5c47b18>: No documentation.
+<function OLS_multi at 0x7fe3b5c478c0>: No documentation.
+<function GM_Combo_Hom at 0x7fe3b5c61410>: No documentation.
+<function GM_Combo_multi at 0x7fe3b5c61398>: No documentation.
+<function summary_vm at 0x7fe3b5c62410>: No documentation.
+<function summary_chow at 0x7fe3b5c61f50>: No documentation.
+<function GM_Error_Hom_multi at 0x7fe3b5c47f50>: No documentation.
+<function GM_Error at 0x7fe3b5c47cf8>: No documentation.
+<function GM_Endog_Error_Hom at 0x7fe3b5c61050>: No documentation.
+<function ML_Lag_multi at 0x7fe3b5c47b90>: No documentation.
+<function GM_Lag_multi at 0x7fe3b5c47aa0>: No documentation.
+<function summary_close at 0x7fe3b5c62500>: No documentation.
+<function summary_spat_diag_probit at 0x7fe3b5c62398>: No documentation.
+<function summary_open at 0x7fe3b5c61aa0>: No documentation.
+<function GM_Combo_Het at 0x7fe3b5c61500>: No documentation.
+<function TSLS_multi at 0x7fe3b5c479b0>: No documentation.
+<function spat_diag_instruments at 0x7fe3b5c618c0>: No documentation.
+<function summary_coefs_lambda at 0x7fe3b5c61cf8>: No documentation.
+<function ML_Error at 0x7fe3b5c47c08>: No documentation.
+<function summary_coefs_allx at 0x7fe3b5c61c08>: No documentation.
+<function GM_Lag at 0x7fe3b5c47a28>: No documentation.
+<function GM_Error_Het at 0x7fe3b5c61140>: No documentation.
+<function summary_coefs_intro at 0x7fe3b5c61b90>: No documentation.
+<function Probit at 0x7fe3b5c615f0>: No documentation.
+<function spat_diag_ols at 0x7fe3b5c61848>: No documentation.
+<function summary_spat_diag_ols at 0x7fe3b5c62320>: No documentation.
+<function GM_Error_Hom at 0x7fe3b5c47ed8>: No documentation.
+<function GM_Endog_Error_multi at 0x7fe3b5c47e60>: No documentation.
+<function summary_pred at 0x7fe3b5c62488>: No documentation.
+<function GM_Endog_Error_Het at 0x7fe3b5c61230>: No documentation.
+<function summary_spat_diag_intro_global at 0x7fe3b5c622a8>: No documentation.
+<function summary_coefs_somex at 0x7fe3b5c61c80>: Misalignment / Error in arguments.
+<function summary_regimes at 0x7fe3b5c61e60>: Misalignment / Error in arguments.
+<function GM_Endog_Error_Het_multi at 0x7fe3b5c612a8>: No documentation.
+<function summary_nonspat_diag_2 at 0x7fe3b5c621b8>: No documentation.
+<function summary_nonspat_diag_1 at 0x7fe3b5c62140>: No documentation.
+<function summary at 0x7fe3b5c61938>: No documentation.
+<function summary_coefs_instruments at 0x7fe3b5c61d70>: Misalignment / Error in arguments.
+<function summary_coefs_slopes at 0x7fe3b5c620c8>: No documentation.
+<function GM_Error_multi at 0x7fe3b5c47d70>: No documentation.
+<function ML_Error_multi at 0x7fe3b5c47c80>: No documentation.
+<function beta_diag at 0x7fe3b5c616e0>: No documentation.
+<function GM_Error_Het_multi at 0x7fe3b5c611b8>: No documentation.
+pysal.spreg.diagnostics_sp.LMtests: Misalignment / Error in arguments.
+<function get_zI at 0x7fe3b5c4f6e0>: Misalignment / Error in arguments.
+<function rlmLag at 0x7fe3b5c4f488>: Misalignment / Error in arguments.
+<function lmLag at 0x7fe3b5c4f398>: Misalignment / Error in arguments.
+<function lmErr at 0x7fe3b5c46d70>: Misalignment / Error in arguments.
+<function get_eI at 0x7fe3b5c4f668>: Misalignment / Error in arguments.
+<function get_mI at 0x7fe3b5c4f578>: Misalignment / Error in arguments.
+<function lmSarma at 0x7fe3b5c4f500>: Misalignment / Error in arguments.
+<function rlmErr at 0x7fe3b5c4f410>: Misalignment / Error in arguments.
+<function get_vI at 0x7fe3b5c4f5f0>: Misalignment / Error in arguments.
+<function get_omega_hom_ols at 0x7fe3b5c771b8>: Misalignment / Error in arguments.
+<function get_vc_hom at 0x7fe3b5c770c8>: Misalignment / Error in arguments.
+<function moments_hom at 0x7fe3b5c6bc08>: Misalignment / Error in arguments.
+<function get_omega_hom at 0x7fe3b5c77140>: Misalignment / Error in arguments.
+<function err_c_loglik at 0x7fe3b57d60c8>: No documentation.
+<function err_c_loglik_ord at 0x7fe3b57d6320>: No documentation.
+<function w_regimes at 0x7fe3b5c77c80>: Misalignment / Error in arguments.
+<function x2xsp at 0x7fe3b5c77d70>: Misalignment / Error in arguments.
+<function buildR1var at 0x7fe3b5c77aa0>: Misalignment / Error in arguments.
+<function check_cols2regi at 0x7fe3b5c77de8>: Misalignment / Error in arguments.
+<function w_regimes_union at 0x7fe3b5c77cf8>: Misalignment / Error in arguments.
+<function w_regime at 0x7fe3b5c77c08>: Misalignment / Error in arguments.
+pysal.spreg.regimes.Regimes_Frame: Misalignment / Error in arguments.
+pysal.esda.mapclassify.Map_Classifier: Misalignment / Error in arguments.
+<function natural_breaks at 0x7fe3b9493398>: Misalignment / Error in arguments.
+<function bin1d at 0x7fe3b94932a8>: Misalignment / Error in arguments.
+<function fj at 0x7fe3b9495938>: No documentation.
+<function opt_part at 0x7fe3b9495a28>: Misalignment / Error in arguments.
+pysal.esda.getisord.G_Local: Misalignment / Error in arguments.
+pysal.esda.getisord.G: Misalignment / Error in arguments.
+pysal.esda.smoothing.Age_Adjusted_Smoother: Misalignment / Error in arguments.
+pysal.esda.smoothing.Spatial_Rate: Misalignment / Error in arguments.
+pysal.esda.smoothing.Kernel_Smoother: Misalignment / Error in arguments.
+pysal.esda.smoothing.Disk_Smoother: Misalignment / Error in arguments.
+pysal.esda.smoothing.Headbanging_Triples: Misalignment / Error in arguments.
+pysal.esda.smoothing.Headbanging_Median_Rate: Misalignment / Error in arguments.
+pysal.esda.smoothing.Spatial_Empirical_Bayes: Misalignment / Error in arguments.
+pysal.esda.smoothing.Spatial_Median_Rate: Misalignment / Error in arguments.
+<function flatten at 0x7fe3b94b6668>: Misalignment / Error in arguments.
+pysal.esda.moran.Moran_Local_Rate: Misalignment / Error in arguments.
+pysal.esda.moran.Moran_Local: Misalignment / Error in arguments.
+pysal.esda.geary.Geary: Misalignment / Error in arguments.

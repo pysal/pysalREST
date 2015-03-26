@@ -1,0 +1,111 @@
+import collections
+import inspect
+import json
+import types
+
+def getFromDict(dataDict, mapList):
+    return reduce(lambda d, k: d[k], mapList, dataDict)
+
+def setInDict(dataDict, mapList, value):
+    d = dataDict
+    for k in mapList[:-1]:
+        if not k in d.keys():
+            d[k] = {}
+        d = d[k]
+    getFromDict(dataDict, mapList[:-1])[mapList[-1]] = value
+    
+def recursive_extract(package, d, packagename, visited):
+    sub_modules = inspect.getmembers(package, inspect.ismodule)
+    functions = inspect.getmembers(package, inspect.isfunction)
+    classes = inspect.getmembers(package, inspect.isclass)
+
+    for classname, classobj in classes:
+        modulepath = classobj.__module__.split('.')
+        modulepath.append(classobj.__name__)
+        if modulepath[0] in packagename:
+            setInDict(d, modulepath[1:], classobj)
+    
+    for funcname, funcobj in functions:
+        modulepath = funcobj.__module__.split('.')
+        modulepath.append(funcobj.__name__)
+        if modulepath[0] in packagename:
+            setInDict(d, modulepath[1:], funcobj)
+    
+    for modulename, submodule in sub_modules:
+        modulepath = submodule.__name__.split('.')
+        if modulepath[0] in packagename and submodule not in visited:
+            visited.add(submodule)
+            recursive_extract(submodule, d, packagename, visited)
+
+'''
+def clean_dict(d):
+    for k,v in d.items():
+        if isinstance(v, dict):
+	    if not v:
+		d.pop(k, None)
+	    else:
+            	clean_dict(v)
+        else:
+            module = v.__module__
+	    basemodule = module.split('.')[0]
+	    if basemodule != 'pysal':
+		d.pop(k, None)
+	    
+def extractsubsub(package, d):
+    sub_modules = inspect.getmembers(package, inspect.ismodule)
+    functions = inspect.getmembers(package, inspect.isfunction)
+    classes = inspect.getmembers(package, inspect.isclass)
+
+    for functionname, function in functions:
+        d[functionname] = function
+
+    for classname, classobj in classes:
+        d[classname] = classobj
+
+    for modulename, module in sub_modules:
+        pass
+    return d
+
+def extractsub(package, d):
+    sub_modules = inspect.getmembers(package, inspect.ismodule)
+    functions = inspect.getmembers(package, inspect.isfunction)
+    classes = inspect.getmembers(package, inspect.isclass)
+
+    for functionname, function in functions:
+        d[functionname] = function
+
+    for classname, classobj in classes:
+        d[classname] = classobj
+
+    for modulename, module in sub_modules:
+        d[modulename] = {}
+        if module.__package__ != None and 'pysal' in module.__package__:
+            d[modulename] = extractsubsub(module, d[modulename])
+
+    return d
+
+def extract(package, pysalfunctions):
+    sub_modules = inspect.getmembers(package, inspect.ismodule)
+    functions = inspect.getmembers(package, inspect.isfunction)
+    classes = inspect.getmembers(package, inspect.isclass)
+
+    pysalfunctions['TopLevel'] = {}
+
+    for functionname, function in functions:
+        pysalfunctions['TopLevel'] [functionname] = function
+
+    for classname, classobj in classes:
+        pysalfunctions['TopLevel'] [classname] = classobj
+
+    for modulename, module in sub_modules:
+        pysalfunctions[modulename] = {}
+        if module.__package__ != None and 'pysal' in module.__package__:
+            pysalfunctions[modulename] = extractsub(module,pysalfunctions[modulename])
+
+    #Add the custom geojson_functions
+    pysalfunctions['weights']['queen_from_geojson'] = w_from_geojson.queen_geojson
+
+    clean_dict(pysalfunctions)
+
+    return pysalfunctions
+'''

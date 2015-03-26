@@ -11,7 +11,7 @@ class Base(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
+    date_accessed = db.Column(db.DateTime, default=db.func.current_timestamp(),
                               onupdate=db.func.current_timestamp())
 
 #User to Data Lookup Table
@@ -21,10 +21,12 @@ class UserData(Base):
 
     userid = db.Column(db.Integer, nullable=False)
     datahash = db.Column(db.String(256), nullable=False)
+    dataname = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, userid, datahash):
+    def __init__(self, userid, datahash, dataname):
         self.userid = userid
         self.datahash = datahash
+	self.dataname = dataname
 
     def __repr__(self):
         return '<User: {} | Data: {}>'.format(self.userid,
@@ -35,13 +37,15 @@ class UserPyObj(Base):
     __tablename__ = 'userpyobj'
 
     userid = db.Column(db.Integer, nullable=False)
+    dataname = db.Column(db.String(256), nullable=False)
     pyobj = db.Column(db.LargeBinary, nullable=False)
     datahash = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, userid, pyobj, datahash=None):
+    def __init__(self, userid, pyobj, dataname, datahash=None):
         self.userid = userid
         self.pyobj = pyobj
         self.datahash = datahash
+	self.dataname = dataname
 
     def get_pyobj(self):
         """

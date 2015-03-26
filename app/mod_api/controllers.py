@@ -1,8 +1,8 @@
 from api_helpers import post, recursedict, get_docs, get_method
 
 from flask import Blueprint, request, jsonify
-from app import auth, db, pysalfunctions
-
+from config import baseurl
+from app import auth, db, libraryfunctions
 
 mod_api = Blueprint('mod_api', __name__)
 
@@ -13,12 +13,11 @@ def get_api():
     The api homepage.
     """
     print "GETTING API"
-    response = {'status':'success','data':{}}
-    response['data']['links'] = []
+    response = {'status':'success','links':[]}
 
-    toplevel = pysalfunctions.keys()
+    toplevel = libraryfunctions.keys()
     for i in toplevel:
-        response['data']['links'].append({'id':'{}'.format(i), 'href':'/api/{}'.format( i)})
+        response['links'].append({'id':'{}'.format(i), 'href':baseurl + '/api/{}'.format( i)})
     return jsonify(response)
 
 @mod_api.route('/<module>/', methods=['GET'])
@@ -27,25 +26,23 @@ def get_modules(module):
     """
     Modules within the
     """
-    methods = pysalfunctions[module].keys()
-    response = {'status':'success','data':{}}
-    response['data']['links'] = []
+    methods = libraryfunctions[module].keys()
+    response = {'status':'success','links':[]}
     for i in methods:
-        response['data']['links'].append({'id':'{}'.format(i),
-                                          'href':'/api/{}/{}/'.format(module,i)})
+        response['links'].append({'id':'{}'.format(i),
+                                          'href':baseurl + '/api/{}/{}/'.format(module,i)})
     return jsonify(response)
 
 @mod_api.route('/<module>/<method>/', methods=['GET', 'POST'])
 @auth.login_required
 def get_single_depth_method(module, method):
     if request.method == 'GET':
-        if isinstance(pysalfunctions[module][method], dict):
-            methods = pysalfunctions[module][method].keys()
-            response = {'status':'success','data':{}}
-            response['data']['links'] = []
+        if isinstance(libraryfunctions[module][method], dict):
+            methods = libraryfunctions[module][method].keys()
+            response = {'status':'success','links':[]}
             for i in methods:
-                response['data']['links'].append({'id':'{}'.format(i),
-                                                'href':'/api/{}/{}/{}'.format(module,method,i)})
+                response['links'].append({'id':'{}'.format(i),
+                                                'href':baseurl + '/api/{}/{}/{}'.format(module,method,i)})
             return jsonify(response)
         else:
             return jsonify(get_method(module, method))
@@ -64,6 +61,7 @@ def get_nested_method(module, module2, method):
         return jsonify(get_method(module, method, module2=module2))
     else:
         if not request.json:
+	    print "NOTJSON"
             response = {'status':'error','data':{}}
             response['data'] = 'Post datatype was not json'
             return jsonify(response), 400

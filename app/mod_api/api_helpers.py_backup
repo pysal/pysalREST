@@ -21,35 +21,13 @@ from app.mod_data.models import UserPyObj
 
 def getargorder(call):
     """
-    Get the order of required args from a function.
+    Get the order of required args from a function. 
     Does not support *args currently.
     """
-
     try:
-        args = inspect.getargspec(call)
-	try:
-	    nargs = len(args.args)
-	except:
-	    nargs = 0 
-	try:
-	    ndef = len(args.defaults)
-	except:
- 	    ndef = 0
-	nreqargs = nargs - ndef
-	argorder = args.args[:nreqargs]	
+        argorder = inspect.getargspec(call)[0]
     except:
-        args = inspect.getargspec(call.__init__)
-	try:
-	    nargs = len(args.args)
-	except:
-	    nargs = 0
-	try:	
-	    ndef = len(args.defaults)
-	except:
-	    ndef = 0
-	nreqargs = nargs - ndef
-	argorder = args.args[1:nreqargs] #Ignore self
-    print argorder
+        argorder = inspect.getargspec(call.__init__)[0][1:]  #ignore self
     return argorder
 
 def gettoken(a):
@@ -94,6 +72,7 @@ def post(request, module,method, module2=None):
 
     curl -i -k -H "Content-Type: application/json" -u jay@jay.com:jay -X POST -d '{"args":{y":[12, 10.8, 11, 10.8, 10.8, 10.6, 10.8, 10.3, 10.3,10.3,10.4,10.5,10.2,10.0,9.9]}, "kwargs":{"k":5}}' https://webpool.csf.asu.edu/pysalrest/api/esda/mapclassify/Fisher_Jenks/
     """
+    #TODO: This needs a refactor badly - handling python objs, etc.
     if not request.json:
         response = {'status':'error','data':{}}
         response['data'] = 'Post datatype was not json'
@@ -101,8 +80,7 @@ def post(request, module,method, module2=None):
     else:
         response = {'status':'success','data':{}}
         #Setup the call, the args and the kwargs
-       	
-	#TODO: This needs to be cleans so that manual 2 module traversal is automated... 
+        
 	if module2 == None:
 	    argorder = getargorder(libraryfunctions[module][method])
 	    call = libraryfunctions[module][method]
@@ -111,58 +89,52 @@ def post(request, module,method, module2=None):
 	    argorder = getargorder(libraryfunctions[module][module2][method])
             call = libraryfunctions[module][module2][method]
 	    #call = pmdwrapper(libraryfunctions[module][module2][method])
+
         #Parse the args
         keys = request.json.keys()
         req = request.json
         #Setup the python arg / kwarg containers
         args = []
         kwargs = {}
-        
-	if 'arguments' in req.keys():
-	    arguments = req['arguments']
-	    if 'required_arguments' in arguments.keys():
-		for a in argorder:
-		    #Check if the arg is a URL or raw data
-       		    try:
-		        v = arguments['required_arguments'][a]
-		    except:
-		        a_key = '{}_href'.format(a)
-		        v = arguments['required_arguments'][a_key]
-			try:
-			    v = gettoken(v)  #Grab the data via the token
-		 	except:
-	    		    return {'status':'failure', 'message':'Unable to get data from url: {}'.format(v)}
-			
- 		    #Convert to a Python object
+        if 'args' in keys:
+	    for a in argorder:
+		if a in req['args'].keys():
+		    #Try to treat as a url, assuming tokenized input
+		    value = req['args'][a]
+		    value = gettoken(value)
+                    if not value:
+			value = req['args'][a]
+	  	    if not a:
+	    		return {'status':'failure', 'message':'Unable to get data from url: {}'.format(a)}
+		    
+		    #Try to cast the data to a python type
 		    try:
-			pythonarg = ast.literal_eval(v)
+			pythonarg = ast.literal_eval(value)
 		    except:
-			pythonarg = v
-	
+			pythonarg = value
 		    if isinstance(pythonarg, list):
 			pythonarg = np.array(pythonarg)
-		    args.append(pythonarg)
+                    args.append(pythonarg)
+		#An unexpected argument was provided
+		else:		
+		    print "Arg {} not found in inputs. Trying anyway".format(a)
+	if 'kwargs' in keys:
+            for k, v in req['kwargs'].iteritems():
+		#Try to treat as a token
+		value = v		
+	  	value = gettoken(v)
+		if not value:
+               	    value = v
+ 
+		#Try to cast the response to a json object
+                try:
+                    kwargs[k] =  ast.literal_eval(v)
+                except:
+                    kwargs[k] = v
+	    if isinstance(a, list):
+		arr = np.array(a)
+		kwargs[k] = np.array(a)
 
-	    if 'optional_arguments' in arguments.keys():
-	    	for k, v in arguments['optional_arguments'].iteritems():
-		    if '_href' in k:
-			try:
-			    v = gettoken(v)
-			    k = k.split('_')[0]  #clean the _href off
-			except:	
-	    		    return {'status':'failure', 'message':'Unable to get data from url: {}'.format(v)}
-	    	    
-		    #Convert to a python object
-		    try:
-		 	pythonarg = ast.literal_eval(v)
-		    except:
-			pythonarg = v
-		    
-		    #Cast to a ndarray
-		    if isinstance(v, list):
-			v = np.array(v)
-
-		    kwargs[k] = v
 
 	#Explicit duck typing
         #Make the call and get the return items
@@ -183,8 +155,8 @@ def post(request, module,method, module2=None):
 		funcreturn = call(*args, **kwargs)
 	
 	pdata = cPickle.dumps(funcreturn, cPickle.HIGHEST_PROTOCOL)
-	#datahashvalues = '{}_{}'.format(time.time(), funcreturn)
-	datahash = hashlib.sha256(pdata).hexdigest()
+	datahashvalues = '{}_{}'.format(time.time(), funcreturn)
+	datahash = hashlib.md5(datahashvalues).hexdigest()
 	insertrow = UserPyObj(g.user.id, pdata, method, datahash=datahash)
 	db.session.add(insertrow)
 	db.session.commit() 
@@ -195,6 +167,7 @@ def post(request, module,method, module2=None):
 	    publicattributes = [a for a in attributes if not (a[0].startswith('_') and a[0].startswith('__'))]
 	except:
 	    pass
+        
 	
 	#Build the response
 	response['data'] = {}
@@ -253,10 +226,138 @@ def get_method(module, method, module2 = None):
     """
     Query the API to get the POST parameters.
     """
+    #Setup the response strings
+    response = {'status':'success'}
+    mname = method
+    response['name'] = mname
+    response['methods'] = ['GET', 'POST']
+    #Extract the method from the method dict
     if module2 == None:
-        response = librarydocs[module][method]
-    	response['doc_href'] = baseurl + '/api/{}/{}/docs/'.format(module, method)
+        method = libraryfunctions[module][method]
     else:
-        response = librarydocs[module][module2][method]
-    	response['doc_href'] = baseurl + '/api/{}/{}/{}/docs/'.format(module, module2, method)
+        method = libraryfunctions[module][module2][method]
+
+    #Inspect the method to get the arguments
+    try:
+        reqargs = inspect.getargspec(method)
+        classtype = False
+    except:
+        reqargs = inspect.getargspec(method.__init__)
+        classtype = True
+
+    docstring = inspect.getdoc(method)
+    
+    #Remove self and get defaults
+    args = reqargs.args
+    
+    if reqargs.defaults != None:
+        defaults = list(reqargs.defaults)
+    else:
+        defaults = []
+    try:
+        args.remove('self')
+    except:
+        pass
+    #Parse the docstring for an argument type
+    argtype = OrderedDict()
+    doclist = docstring.split('\n')
+    for a in args:
+        argtype[a] = {'name': a, 'type':'Unknown', 'description':'None'}
+        for i, l in enumerate(doclist):
+            if re.match(r'\b{}\b'.format(a), l):
+                intype = l.split(':')[-1]
+                argtype[a]['type'] = intype.strip()
+                desc = []
+                j = 1
+                while ':' not in doclist[i+j]:
+                    if len(doclist[i+j]) == 0:
+                        break
+		
+                    desc.append(doclist[i+j].strip() + ' ')
+                    j += 1
+		    if i + j >= len(doclist):
+			break
+                description = "".join(desc)
+                argtype[a]['description'] = description
+            if 'Attributes' in l:
+                break
+    #Pack the arguments into the post template
+    response['arguments'] = {'required_arguments':{},
+                                     'optional_arguments':{}}
+    diff = len(defaults) - len(args)
+    #TODO: Required args needs to be a dict.
+    for i, arg in enumerate(argtype):
+        if diff < 0:
+            diff += 1
+	    data = argtype[arg]
+	    name = data['name']
+	    data.pop('name', None)
+            response['arguments']['required_arguments'][name] = argtype[arg]
+        else:
+            default = defaults[diff]
+            argtype[arg]['default'] = default
+	    data = argtype[arg]
+	    name = data['name']
+	    data.pop('name', None)
+            response['arguments']['optional_arguments'][name] = data
+            diff += 1
+    response['doc_href'] = baseurl + '/{}/{}/docs/'.format(module, mname)
+    
+    response['response'] = {}
+    if inspect.isclass(method):
+	#Parse for Attributes in the doc string
+	inattributes = False
+	for i, l in enumerate(doclist):
+	    if 'Attribute' in l:
+		inattributes = True
+	    if inattributes:
+		if ':' in l:
+		    j = 1
+		    line = l.split(':')
+		    name = line[0].strip()
+		    type = line[1].strip()
+      		    desc = []
+		    if i + j > len(doclist):
+			continue
+                        if len(doclist[i+j]) == 0:
+                            break
+                        desc.append(doclist[i+j].strip() + ' ')
+                        j += 1
+			if i+j >= len(doclist):
+			    break
+		    description = "".join(desc)
+		    response['response'][name] =  {'type':type, 'description':description}
+	
+    else:
+    	response['response'] = []
+    	#Parse for Returns in the docstring 
+	inreturns = False
+	for i, l in enumerate(doclist):
+	    if 'Returns' in l:
+		inreturns = True
+	    if inreturns:
+		if ':' in l:
+		    j=1
+		    line = l.split(':')
+		    name = line[0].strip()
+		    type = line[1].strip()
+		    desc = []
+ 		    if i + j >= len(doclist):
+			continue
+                    while ':' not in doclist[i+j]:
+                        if len(doclist[i+j]) == 0:
+                            break
+                        desc.append(doclist[i+j].strip() + ' ')
+                        j += 1
+ 			if i + j >= len(doclist):
+				break
+                    description = "".join(desc)
+                    response['response'].append({'name':name, 'type':type, 'description':description})
+    methoddescription = []
+    for l in doclist:
+	if len(l) == 0:
+	    break
+	methoddescription.append(l.strip())
+
+    response['description'] = "".join(methoddescription)
     return response
