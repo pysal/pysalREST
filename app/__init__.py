@@ -5,7 +5,8 @@ import flask
 from flask import Flask, jsonify, request, g, render_template, session,\
         redirect, url_for, escape, current_app
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.httpauth import HTTPBasicAuth
+from flask.ext.login import LoginManager
+#from flask.ext.httpauth import HTTPBasicAuth
 
 from app.mod_api.extractapi import recursive_extract, recursive_documentation
 
@@ -18,6 +19,9 @@ ps = __import__(config.library)
 #Create the app
 app = Flask(__name__)
 app.debug = config.DEBUG
+
+#Create the login manager
+lm = LoginManager(app)
 
 #Add a class_references attribute to the application
 with app.app_context():
@@ -106,6 +110,11 @@ if config.loadmap:
     clean_empty(libraryfunctions)
     clean_empty(libraryfunctions)
 
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+'''
 from app.mod_user.models import User
 auth = HTTPBasicAuth()
 @auth.verify_password
@@ -118,7 +127,6 @@ def verify_password(username_or_token, password):
     g.user = user
     return True
 
-'''
 #Error handling routed
 @app.errorhandler(404)
 def not_found(error):
@@ -164,8 +172,8 @@ from app.mod_data.controllers import mod_data as data_module
 app.register_blueprint(data_module, url_prefix='/mydata')
 
 #Uploads
-from app.mod_upload.controllers import mod_upload as upload_module
-app.register_blueprint(upload_module, url_prefix='/upload')
+#from app.mod_upload.controllers import mod_upload as upload_module
+#app.register_blueprint(upload_module, url_prefix='/upload')
 
 #Create the tables if this is a new deployment
 db.create_all()
