@@ -6,7 +6,6 @@ from flask import Flask, jsonify, request, g, render_template, session,\
         redirect, url_for, escape, current_app
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
-#from flask.ext.httpauth import HTTPBasicAuth
 
 from app.mod_api.extractapi import recursive_extract, recursive_documentation
 
@@ -112,6 +111,8 @@ if config.loadmap:
 
 @lm.user_loader
 def load_user(id):
+    #Lazy load to avoid cylical imports
+    from app.mod_user.models import User
     return User.query.get(int(id))
 
 '''

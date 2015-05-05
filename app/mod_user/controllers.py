@@ -86,7 +86,7 @@ def logout():
     logout_user()
     return
 
-@mod_user.route('authorize/<provider>', methods=['GET'])
+@mod_user.route('/authorize/<provider>', methods=['GET'])
 def oauth_authorize(provider):
     if not current_user.is_anonymous():
         return redirect(url_for('index'))
@@ -108,4 +108,4 @@ def oauth_callback(provider):
         db.session.add(user)
         db.session.commit()
     login_user(user, True)
-    return redirect(url_for('user.index'))
+    return jsonify({'status':'success', 'data':'Successfully logged in'})
