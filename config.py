@@ -10,7 +10,8 @@ ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip', 'amd', 'pmd'])
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-#API
+###API###
+library = 'pysal'
 api = 'pysalrest'
 generatemap = True
 loadmap = 'libraryconfig.json'
@@ -22,7 +23,7 @@ host = '10.0.21.105'
 
 """
 Base URL is the URL of the API.
-Base data URL can be the same url, if pysalREST is to be run as a 
+Base data URL can be the same url, if pysalREST is to be run as a
  single server service.  Alternatively, you can specify a URL, if
  pysalDATA is to be used to run a distinct data service.
 """
@@ -30,7 +31,7 @@ APPLICATION_ROOT = '/'
 baseurl = 'https://webpool.csf.asu.edu/' + api
 basedataurl = 'https://webpool.csf.asu.edu/pysaldata'
 
-#Database
+#Database setup
 """
 For a local SQLite DB:
 dbtypename = 'Sqlite'
@@ -56,8 +57,8 @@ SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbname)
 geom_column = 'wkb_geometry'
 
-#GDAL Commands
+#This section holds PATHs to necessary 3rd party, commandline tools
 ogr2ogr = '/home/apache/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
 
-#Logging
+#Log file location
 loglocation = 'logging.log'

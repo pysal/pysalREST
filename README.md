@@ -1,81 +1,97 @@
-pysalREST Sample Application
+pysalREST
 =============================
-The repository contains a Vagrantfile for use with the Vagrant virtual machine management software.  This VM contains all of the necessary software dependencies (GDAL, Python via Anaconda, Fiona, etc.).  Installation takes ~20-30 minutes are the machine image is downloaded and all dependencies are installed.
+This repository contains an automated Python library extraction tool originally developed to expose the PySAL library as a RESTful service.  Conceptually, we sought to introspect the entirety of our code base and expose each function and class as a RESTful endpoint.  As the project evolved, we added the ability to interface with a server side database, ingest external data sources via HREFs, and curate the functionality to be exposed.
 
-Launcing the VM
------------------
-To launch the VM, simply execute `vagrant up` in the directory where pysalREST has been cloned.
+We leverage the Flask python microframework to create the RESTful service and cherrypy to run as either a lighweight production server or behind a traditional webserver such as Apache.
 
-Host-Only-Network
+We make two assumptions about your library:
+
+1. Your documentation conforms to the numpydoc specification: https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+2. Your project does not wrap an existing C style library.  We see libraries such as GDAL, where a single class is the entry point to a majority of the functionality, as problematic using our approach.
+
+Currently we impose a third limitation in the structure of the directories within your modules.  We have statically coded the logic to traverse two directory levels deep from the root.  Any functionality deeper is not exposed.  For example, we successfully expose all functionality in:
+
+	-root
+		-a
+		-b
+			-b1
+		
+but fail to expose all functionality from 1a1 in the following example.
+
+	-root
+		-a
+			-a1
+				-1a1
+		-b
+			-b1
+		
+In an upcoming PR we will replace all hard coded traversal with recursive traversal.
+
+Configuration
+-------------
+Configuration occurs via the confi.py file.  This file is not accessible via the REST interface.  We expose the following via the configuration file:
+
+General
+________
+
+* DEBUG - boolean defining whether debug messages should be logged
+* THREADS\_PER\_PAGE - integer number of threads per connection
+* SECRET\_KEY - your secret hash key
+* ALLOWED\_EXTENSIONS - for the data service, only uploads with these extensions are accepted
+
+* BASE\_DIR - current installation path, you should not need to change this
+
+API
+________
+
+
+* library - the name of the module as you would use in an import statement, e.g. pysal
+* api - the name of the api used in URLs
+* generatemap - boolean defining whether a json map of the exposed functionality should be generated
+* localmap - the name of a map to be lodaded to curate functionality
+
+Server
+________
+
+
+* server - the name of the server to use, alter if you do not want to use cherrypy
+* port - the port to run the server on
+* host - the ip to run the server on, e.g. localhost
+
+* APPLICATION\_ROOT - the base URL to be appended to all other URLs
+* baseurl - the baseurl appened when generating hrefs in the API
+* basedataurl - as above, except a base url to data
+
+Database Setup
+_________________
+
+
+* dbtypename - an ogr2ogr specific parameter defining the database type; if you are not using ogr2ogr you can ignore
+* dbabbrev - database abbreviation for ogr2ogr
+* dbtype - used for SQLAlchemy mapping
+* dbhost - address to the db
+* dbusername - username with read/write priveleges
+* dbpass - the dbusername's password
+* dbname - the name of the database at the given address
+
+* geom_column - in the case of a POSTGIS enabled database, this is the default geometry column name
+
+3rd Party
+__________
+
+
+* ogr2ogr - PATH to the ogr2ogr command
+
+Logging
+________
+
+
+* loglocation - PATH for logs
+
+Running the server
 ------------------
-The VM sets up a NAT and a host only netowrk.  Port 8080 is forwarded from the guest to the host.  To connect to the server use localhost:8080.  To view the sample application use localhost:8080/index.html/
+For initial testing, we suggest running a localhost, cherrypy based server.  This allows for local testing of all endpoints.
 
-Launching the Sample Application
----------------------------------
-The sample application **should** launch automatically when the VM has booted.  If it does not:
+To do this, modify config.py, setting the host parameter equal to localhost and the port to some currently unused port.  Finally, execute `python run.py`.
 
-* `vagrant ssh` to ssh into the virtual machine
-* `cd pysalREST` into the directory where pysalREST has been cloned.  In the default installation this is `~/pysalREST`
-* `python -m launcher --server=cherry --api=pysalrest --port=8080` 
-
-To connect to the sample application open a web browser on the host OS at localhost:8080/index.html.  Note: It is important to use localhost and not 127.0.0.1 due to some javascript origin issue.
-
-pysalREST API
-================
-PySALREST can be launched in three ways:
-
-1. Using the lightweight flask server (development server):
-
-`python flaskapp.py`
-
-The base URL is not localhost:5000
-
-2. Using CherryPy (Midweight Server)
-
-`python launcher -m --server cherry --api=pysalrest --port 8081`
-
-It is safe to omit the port flag if not services run on 8081.  The default is 8080.  Yielding a base URL of localhost:8080
-
-3. Behind Apache as a WSGI.
-
-Navigation
------------
-The goal of the service is that it is machine discoverable.  Therefore, `href` tags will be scattered in with more human readable return information to support mapping the struture of the API.
-
-For the human user:
-
- * `/api/` is the root access to the API.  From here all PySAL methods are available in the URL form `/api/module/method`.  The method endpoints can then be accessed via POST requests to call methods on some JSON provided arguments.  See POST Request for Method Calls, below.
- * `/listdata/` is a listing of the datasets which have been uploaded.  This is a flat file upload for now.  From here, all data information, inclusing feature geometries and attributes are accessible in the form `/listsdata/dataset/` and `listdata/dataset/field`.
- * `/upload/` is a POST only access point for uploading data.  See POST Request for File Uploads, below, for more information.
- *  `/cached/` is access to a sqlite database that stores Python class instance objects.  Currently this only supports the PySAL W Object.  Access takes the form of `/cached/id/` to access a listing of available attributes and methods.  Attributes can be accessd via a GET request to `/cached/id/attribute` and methods can be called on the object (which is then updated in the database) via a POST request to `/cached/id/method_name` with args sent as well formed JSON
-
-POST Request for Method Calls:
--------------------------------
-
-This uses curl and is a canned example using Fisher Jenks to classify the Hartigan Olympic  running times.
- 
-`curl -i -H "Content-Type: application/json" -X POST -d '{"args":["[12, 10.8, 11, 10.8, 10.8, 10.6, 10.8, 10.3, 10.3,10.3,10.4,10.5,10.2,10.0,9.9]"], "kwargs":{"k":5}}' http://localhost:5000/api/esda/fisher_jenks/`
-
-POST Request for File Uploads:
--------------------------------
-More curl examples for a single .zip and multiple shapfile components:
-
-`curl -X POST -F filename=@NAT.zip http://localhost:8081/upload/`
-
-`curl -X POST -F shp=@columbus.shp -F shx=@columbus.shx -F dbf=@columbus.dbf http:/localhost:8081/upload/`
-
-POST Request to call a method on an object:
--------------------------------------------
-Another curl example.  This example assumes that nothing has been uploaded.  Simply change the ID to point at the shapefile in the cache database if you have data uploaded.
-
-1. Upload NAT: `curl -X POST -F filename=@NAT.zip http://localhost:5000/upload/`
-
-2. Generate a W: `curl -i -H "Content-Type: application/json" -X POST -d '{"args":[NAT.shp]}' http://localhost:5000/api/weights/queen_from_shapefile/`
-
-3. Row standardize the W: `curl -i -H "Content-Type: application/json" -X POST -d '{"args":["r"]}' http://localhost:5000/cached/1/set_transform/`  - This assumes that NAT is id=1.  Alter to the last DB entry if you have uploaded other shapefiles.
-
-4. Check the standardization via the webbrowser: `http://localhost:5000/cached/1/weights/`
-
-5. Revert to binary weights: `curl -i -H "Content-Type: application/json" -X POST -d '{"args":["b"]}' http://localhost:5000/cached/1/set_transform/`
- 
-
+On run, pysalREST will introspect your code base and extraction documentation.  Classes and functions for which documentation extraction fails will print an error message to the terminal.

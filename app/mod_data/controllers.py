@@ -1,23 +1,15 @@
 import ast
 import decimal
-import glob
-import hashlib
-import os
-import shutil
-import subprocess
-import tempfile
-import time
 
 import numpy as np
 
-from flask import Blueprint, request, jsonify, g, current_app
-from werkzeug.utils import secure_filename
+from flask import Blueprint, jsonify, g, current_app
+from flask.ext.login import login_required
 
 import geoalchemy2.functions as geofuncs
 
-from app import auth, db, seen_classes, cachedobjs
+from app import db, seen_classes
 from app.mod_data.models import UserData, UserPyObj, GeoPoly, GEOMLOOKUP
-from app.mod_data import upload_helpers as uph
 import config
 
 mod_data = Blueprint('mod_data', __name__)
@@ -53,7 +45,7 @@ def getdatalist(cuid, tabular = True):
     return entries
 
 @mod_data.route('/', methods=['GET'])
-@auth.login_required
+@login_required
 def listdata():
     """
     List the available datasets by querying the DB and
@@ -63,15 +55,15 @@ def listdata():
     response = {'status':'success','data':{'tabular':{}, 'nontabular':{}}}
     response['data']['tabular'] = getdatalist(cuid)
     response['data']['nontabular'] = getdatalist(cuid, tabular=False)
-	
+
     response['links'] = [{'id':'nontabular', 'href':'/mydata/nontabular'},
 			 { 'id':'tabular', 'href':'/mydaya/tabular'}]
-   
+
 
     return jsonify(response)
 
 @mod_data.route('/nontabular/', methods=['GET'])
-@auth.login_required
+@login_required
 def list_nontabular_data():
     cuid = g.user.id
     response = {'status':'success', 'data':{'nontabular'}}
@@ -79,7 +71,7 @@ def list_nontabular_data():
     return jsonify(response)
 
 @mod_data.route('/tabular/', methods=['GET'])
-@auth.login_required
+@login_required
 def list_tabular_data():
     cuid = g.user.id
     response = {'status':'success', 'data':{'nontabular'}}
@@ -115,7 +107,7 @@ def parse_tabular(response, tablename, tablehash):
     else:
         db.metadata.reflect(bind=db.engine)
         seen_classes.add(tablehash)
-        #Dynamic class creation using metaclasses	 
+        #Dynamic class creation using metaclasses
         geomtype = "Polygon"
 	basegeomcls = GEOMLOOKUP[geomtype]
  	cls = type(str(tablehash), (basegeomcls, db.Model,), {'__tablename__':tablehash,
@@ -134,7 +126,7 @@ def parse_tabular(response, tablename, tablehash):
 #@auth.login_required
 def get_cached_entry(objhash):
     response = {'status':'success','data':{}}
-   
+
     row = UserPyObj.query.filter_by(datahash = objhash).first()
     if row != None:
 	response = parse_nontabular(response, row)
@@ -159,12 +151,12 @@ def get_stored_entry(objhash, value):
     row = UserPyObj.query.filter_by(datahash = objhash).first()
     if row != None:
     	row.get_pyobj()
-	if value != 'full_result' and value != 'raw':	
+	if value != 'full_result' and value != 'raw':
 	    try:
 		responsedata =  getattr(row.liveobj, value)
 	        if isinstance(responsedata, np.ndarray):
 			responsedata = responsedata.tolist()
-		response['data'] = responsedata	
+		response['data'] = responsedata
 		return jsonify(response)
 	    except:
 		return jsonify({'status':'failure', 'data':'Unable to find value'})
@@ -178,7 +170,7 @@ def get_stored_entry(objhash, value):
 	return jsonify(response)
 
 @mod_data.route('/cached/<uid>/<objhash>/<method>', methods=['POST'])
-@auth.login_required
+@login_required
 def call_cached_centry_method(uid, objhash, method):
     raise NotImplementedError
 

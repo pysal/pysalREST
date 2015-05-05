@@ -26,7 +26,7 @@ class UserData(Base):
     def __init__(self, userid, datahash, dataname):
         self.userid = userid
         self.datahash = datahash
-	self.dataname = dataname
+        self.dataname = dataname
 
     def __repr__(self):
         return '<User: {} | Data: {}>'.format(self.userid,
@@ -42,10 +42,11 @@ class UserPyObj(Base):
     datahash = db.Column(db.String(256), nullable=False)
 
     def __init__(self, userid, pyobj, dataname, datahash=None):
+        super(UserPyObj, self).__init__()
         self.userid = userid
         self.pyobj = pyobj
         self.datahash = datahash
-	self.dataname = dataname
+        self.dataname = dataname
 
     def get_pyobj(self):
         """
