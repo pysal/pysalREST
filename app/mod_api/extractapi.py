@@ -7,7 +7,7 @@ import xml.etree.ElementTree as etree
 
 sphinxmapper = {'term':'name',
                 'classifier':'type',
-                'paragraph':'description', 
+                'paragraph':'description',
                 'definition':'name'}
 
 def getFromDict(dataDict, mapList):
@@ -20,7 +20,7 @@ def setInDict(dataDict, mapList, value):
             d[k] = {}
         d = d[k]
     getFromDict(dataDict, mapList[:-1])[mapList[-1]] = value
-    
+
 def recursive_extract(package, d, packagename, visited):
     sub_modules = inspect.getmembers(package, inspect.ismodule)
     functions = inspect.getmembers(package, inspect.isfunction)
@@ -33,7 +33,7 @@ def recursive_extract(package, d, packagename, visited):
             if classobj.__name__.startswith('_'):
                 continue
             setInDict(d, modulepath[1:], classobj)
-    
+
     for funcname, funcobj in functions:
         modulepath = funcobj.__module__.split('.')
         modulepath.append(funcobj.__name__)
@@ -41,7 +41,7 @@ def recursive_extract(package, d, packagename, visited):
             if funcobj.__name__.startswith('_'):
                 continue
             setInDict(d, modulepath[1:], funcobj)
-    
+
     for modulename, submodule in sub_modules:
         modulepath = submodule.__name__.split('.')
         if modulepath[0] in packagename and submodule not in visited:
@@ -55,20 +55,6 @@ def recursive_documentation(d):
         else:
             d[k] = generate_docs(v)
 
-'''
-def recursive_documentation(d):
-    for k, v in d.iteritems():
-        if isinstance(v, dict):
-            recursive_documentation(v)
-        else:
-            try:
-                d[k] = generate_docs(v)
-                if d[k] is None:
-                    pass
-            except:
-                d[k] = {'status':'error', 'description': 'Unable to generate documentation.' }
-'''
-         
 def getargorder(call):
     """
     Get the order of required args from a function.
@@ -87,14 +73,15 @@ def generate_docs(v):
         return None
 
     response_template = {'status':'success',
-                'arguments':{'optional_arguments':{},
-                'required_arguments':{}},
+                'arguments':{},
                 'description':None,
                 'doc_href':None,
                 'methods':['GET', 'POST'],
                 'name':v.__name__,
-                'response':{}}
-    
+                'response':{},
+                'server_arguments':{'callbacks':[],
+                    'polling':[]}}
+
     if not inspect.isclass(v):
         reqargs = inspect.getargspec(v)
         classtype = False
@@ -114,7 +101,7 @@ def generate_docs(v):
     else:
         print "{} ERROR: Unable to determine class or function".format(v.__name__)
         return
-    
+
     args = reqargs.args
 
     if reqargs.defaults != None:
@@ -166,19 +153,19 @@ def generate_docs(v):
                             documentation_extraction[key][currententry]['selection'] = var.text
                         else:
                             documentation_extraction[key][currententry]['type'] = var.text
-    
+
     if 'attributes' in documentation_extraction.keys():
         response_template['response'] = documentation_extraction['attributes']
     elif 'returns' in documentation_extraction.keys():
         response_template['response'] = documentation_extraction['returns']
     else:
         response_template['response'] = 'Neither class attributes nor return values defined'
-    
+
     #Check for the parameters keyword. If it is not present, doc is likley not numpydoc compliant
     if not 'parameters' in documentation_extraction.keys():
         print "{} ERROR: parameters key not in extracted doc.  Is the doc string numpydoc compliant?".format(v.__name__)
         return None
-    
+
     try:
         nargs = len(reqargs.args)
     except:
@@ -188,129 +175,20 @@ def generate_docs(v):
         ndef = len(reqargs.defaults)
     except:
         ndef = 0
-    #Classify parameters as optional or required, fill in defaults.
-    #try:
+
     nrequired = nargs - ndef
-    cdict = response_template['arguments']['required_arguments']
+    cdict = response_template['arguments']
     for i in reqargs.args[:nrequired]:
         if i in documentation_extraction['parameters'].keys():
             cdict[i] = documentation_extraction['parameters'][i]
         else:
             print "{} ERROR: {} in parameter list, but not in doc string".format(v.__name__, i)
-            
-    cdict = response_template['arguments']['optional_arguments']
+
+    cdict = response_template['arguments']
     for c, i in enumerate(reqargs.args[nrequired:]):
         if i in documentation_extraction['parameters'].keys():
             cdict[i] = documentation_extraction['parameters'][i]
             cdict[i]['default'] = reqargs.defaults[c]
         else:
             print "{} ERROR: {} in parameter list, but not in doc string".format(v.__name__, i)
-    #except:
-        #print "{}: Misalignment / Error in arguments.".format(v)
-        #response_template = {'status':'error', 'description':'Unable to parse arguments'}
-
     return response_template
-
-'''
-def generate_docs(v):
-    docs = inspect.getdoc(v)
-    if docs is None:
-	#print "{}: No documentation.".format(v)
-        return None
-    
-    response_template = {'status':'success',
-                'arguments':{'optional_arguments':{},
-                'required_arguments':{}},
-                'description':None,
-                'doc_href':None,
-                'methods':['GET', 'POST'],
-                'name':v.__name__,
-                'response':{}}
-    try:
-        reqargs = inspect.getargspec(v)
-        classtype = False
-    except:
-        reqargs = inspect.getargspec(v.__init__)
-        classtype = True
-    args = reqargs.args
-    
-    if reqargs.defaults != None:
-        defaults = list(reqargs.defaults)
-    else:
-        defaults = None
-
-    if classtype == True:
-        args.remove('self')
-    
-    argtype = OrderedDict()
-    for a in args:
-        argtype[a] = {'name':a, 'chain_name':'{}_href'.format(a),
-                      'type':'Unknown', 'description':'None'}
-    doctree = publish_doctree(docs).asdom()
-    doctree = etree.fromstring(doctree.toxml())
-
-    response_template['description'] = doctree[0].text
-    sections = doctree.findall('section')
-
-    parameters = {}
-    attributes = {}
-    documentation_extraction = {}
-    for sub in doctree.findall('section'):
-        key = sub.attrib['names']
-        documentation_extraction[key] = {} 
-        for i in sub.findall('definition_list'):
-            for j in i.findall('definition_list_item'):
-                currententry = j.getchildren()[0].text
-                if key == 'parameters':
-                    documentation_extraction[key][currententry] = {'chain_name':'{}_href'.format(currententry),
-								   'name':'{}'.format(currententry)}
-                else:
-                    documentation_extraction[key][currententry] = {}
-                for var in j.getchildren()[1:]:
-                    if var.tag == 'definition':
-                        documentation_extraction[key][currententry]['description'] = var.getchildren()[0].text
-                    else:
-                        if var.text[0] == '{':
-                            pythonliteral = eval(var.text)
-                            selectiontype = type(iter(pythonliteral).next())
-                            if selectiontype == str:
-                                selectiontype = 'string'
-                            documentation_extraction[key][currententry]['type'] = selectiontype
-			    selections = {}
-			    for i in pythonliteral:
-				selections[i] = i
-			    print selections
-                            documentation_extraction[key][currententry]['options'] = selections
-                        else:
-                            documentation_extraction[key][currententry]['type'] = var.text			
-    try:
-        response_template['response'] = documentation_extraction['attributes']
-    except:
-        response_template['response'] = documentation_extraction['returns']
-    
-    try:
-        nargs = len(reqargs.args)
-    except:
-        nargs = 0
-        
-    try:
-        ndef = len(reqargs.defaults)
-    except:
-        ndef = 0
-    #Classify parameters as optional or required, fill in defaults.
-    try:
-        nrequired = nargs - ndef
-	cdict = response_template['arguments']['required_arguments']
-        for i in reqargs.args[:nrequired]:
-            cdict[i] = documentation_extraction['parameters'][i]
-		
-    	cdict = response_template['arguments']['optional_arguments']
-    	for c, i in enumerate(reqargs.args[nrequired:]):
-            cdict[i] = documentation_extraction['parameters'][i]
-            cdict[i]['default'] = reqargs.defaults[c]
-    except:
-	#print "{}: Misalignment / Error in arguments.".format(v)
-        response_template = {'status':'error', 'description':'Unable to parse arguments'}
-
-    return response_template
-'''
