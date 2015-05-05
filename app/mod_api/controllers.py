@@ -6,8 +6,9 @@ import numpy as np
 from api_helpers import getargorder, gettoken
 
 from flask import Blueprint, request, jsonify, g
+from flask.ext.login import login_required
 from config import baseurl
-from app import auth, db, libraryfunctions, librarydocs
+from app import  db, libraryfunctions, librarydocs, lm
 from app.mod_data.models import UserPyObj
 from config import baseurl, basedataurl
 
@@ -17,7 +18,7 @@ def getfromdict(dataDict, mapList):
     return reduce(lambda d, k: d[k], mapList, dataDict)
 
 @mod_api.route('/', methods=['GET'])
-@auth.login_required
+@login_required
 def get_api():
     """
     The api homepage.
@@ -30,7 +31,7 @@ def get_api():
     return jsonify(response)
 
 @mod_api.route('/<module>/', methods=['GET'])
-@auth.login_required
+@login_required
 def get_modules(module):
     """
     Modules within the
@@ -43,7 +44,7 @@ def get_modules(module):
     return jsonify(response)
 
 @mod_api.route('/<module>/<path:remainder>/docs/', methods=['GET'])
-@auth.login_required
+@login_required
 def getdocs(module, remainder):
     path = [module] + remainder.split('/')
     method = getfromdict(libraryfunctions, path)
@@ -57,7 +58,7 @@ def getdocs(module, remainder):
     return jsonify(response)
 
 @mod_api.route('/<module>/<path:remainder>/', methods=['GET', 'POST'])
-@auth.login_required
+@login_required
 def getmethod(module, remainder):
     path = [module] + remainder.split('/')
     if request.method == 'GET':
