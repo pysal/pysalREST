@@ -47,7 +47,7 @@ dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
 dbhost = '10.0.23.5:5432'
 dbusername = 'pysal'
-dbpass = 'He3fgkL1'
+dbpass = 'g7j4hi72'
 dbname = 'cybergis'
 SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbusername,
