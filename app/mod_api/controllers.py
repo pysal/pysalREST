@@ -63,7 +63,16 @@ def getmethod(module, remainder):
     path = [module] + remainder.split('/')
     if request.method == 'GET':
         response = getfromdict(librarydocs, path)
-        response['doc_href'] = '/api/{}/{}/docs'.format(module, remainder)
+        if 'doc_href' in response.keys():
+            response['doc_href'] = '/api/{}/{}/docs'.format(module, remainder)
+        else:
+            #This is not a terminal node
+            links = []
+            for k in response.keys():
+                href = '{}/{}/{}/{}'.format(baseurl, module, remainder, k)
+                links.append({'id':k,
+                              'href':href})
+            response = {'status':'success', 'links':links}
         return jsonify(response)
 
     elif request.method == 'POST':
