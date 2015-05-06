@@ -107,4 +107,4 @@ def oauth_callback(provider):
         db.session.add(user)
         db.session.commit()
     login_user(user, True)
-    return redirect(url_for('user.index'))
+    return jsonify({'status':'success', 'data':'Successfully logged in'})

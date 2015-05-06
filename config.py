@@ -47,6 +47,7 @@ dbname = ''
 dbtypename = 'PostgreSQL'  #Used by ogr2ogr, must be a valid ogr2ogr db
 dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
+<<<<<<< HEAD
 dbhost = 'localhost:5433'
 dbusername = 'postgres'
 dbpass = 'postgres'
