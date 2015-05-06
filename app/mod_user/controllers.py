@@ -28,7 +28,6 @@ class OAuthSignIn(object):
         pass
 
     def get_callback_url(self):
-        print "GETTING VALLBACK"
         return url_for('user.oauth_callback', provider=self.provider_name,
                        _external=True)
 
@@ -86,7 +85,7 @@ def logout():
     logout_user()
     return
 
-@mod_user.route('authorize/<provider>', methods=['GET'])
+@mod_user.route('/authorize/<provider>', methods=['GET'])
 def oauth_authorize(provider):
     if not current_user.is_anonymous():
         return redirect(url_for('index'))

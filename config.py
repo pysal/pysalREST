@@ -1,3 +1,4 @@
+###GENERAL###
 DEBUG=True
 THREADS_PER_PAGE = 2
 #CSRF_ENABLED = False
@@ -16,7 +17,7 @@ api = 'pysalrest'
 generatemap = True
 loadmap = 'libraryconfig.json'
 
-#SERVER
+###SERVER###
 server = 'cherry'
 port = 8080
 host = '10.0.21.105'
@@ -31,7 +32,7 @@ APPLICATION_ROOT = '/'
 baseurl = 'https://webpool.csf.asu.edu/' + api
 basedataurl = 'https://webpool.csf.asu.edu/pysaldata'
 
-#Database setup
+###Database setup###
 """
 For a local SQLite DB:
 dbtypename = 'Sqlite'
@@ -46,10 +47,10 @@ dbname = ''
 dbtypename = 'PostgreSQL'  #Used by ogr2ogr, must be a valid ogr2ogr db
 dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
-dbhost = '10.0.23.5:5432'
-dbusername = 'pysal'
-dbpass = 'He3fgkL1'
-dbname = 'cybergis'
+dbhost = 'localhost:5433'
+dbusername = 'postgres'
+dbpass = 'postgres'
+dbname = 'pysalrest'
 SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbusername,
                                                  dbpass,
@@ -57,8 +58,16 @@ SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbname)
 geom_column = 'wkb_geometry'
 
-#This section holds PATHs to necessary 3rd party, commandline tools
+###3rd Party###
 ogr2ogr = '/home/apache/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
 
-#Log file location
+###Logs###
 loglocation = 'logging.log'
+
+###OAuth Providers - The admin must be registered with each###
+OAUTH_CREDENTIALS = {
+    'twitter': {
+        'id': 'S5XPbiSLIb1nB1L8zYRU2xiHc',
+        'secret': 'QZXIlHvDy4co9cru0qnUd51IOOXxycvlnqXRDOo9vjpJaigJOc'
+    }
+}
