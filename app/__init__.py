@@ -23,6 +23,7 @@ app.debug = config.DEBUG
 #Create the login manager
 app.config['LOGIN_DISABLED'] = config.LOGIN_DISABLED
 lm = LoginManager(app)
+lm.login_view = "user.login"
 
 #Add a class_references attribute to the application
 with app.app_context():
@@ -143,26 +144,10 @@ def not_found(error):
 def api_root():
     response = {'status':'success'}
     response['links'] = [{'name':'api', 'href': config.baseurl + '/api/', 'description':'Access to the PySAL API'},
-                                 {'name':'user', 'href': config.baseurl + '/user/', 'description':'Login, Registration, and User management'}]
+                         {'name':'user', 'href': config.baseurl + '/user/', 'description':'Login, Registration, and User management'},
+			 {'name':'data', 'href':config.baseurl + '/data/', 'description':'User data and upload functionality'}]
     return jsonify(response)
 
-@app.after_request
-def add_cors(resp):
-    """ Ensure all responses have the CORS headers. This ensures any failures are also accessible
-        by the client. """
-    resp.headers['Access-Control-Allow-Origin'] = flask.request.headers.get('Origin','*')
-    resp.headers['Access-Control-Allow-Credentials'] = 'true'
-    resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET'
-    resp.headers['Access-Control-Allow-Headers'] = flask.request.headers.get(
-        'Access-Control-Request-Headers', 'Authorization')
-    # set low for debugging
-    if app.debug:
-        resp.headers['Access-Control-Max-Age'] = '86400'
-    return resp
-
-@app.before_request
-def before():
-    pass
 ###Import components use a blue_print handler###
 #API
 from app.mod_api.controllers import mod_api as api_module
@@ -173,8 +158,8 @@ from app.mod_user.controllers import mod_user as user_module
 users = app.register_blueprint(user_module, url_prefix='/user')
 
 #Data
-#from app.mod_data.controllers import mod_data as data_module
-#app.register_blueprint(data_module, url_prefix='/mydata')
+from app.mod_data.controllers import mod_data as data_module
+app.register_blueprint(data_module, url_prefix='/data')
 
 #Uploads
 #from app.mod_upload.controllers import mod_upload as upload_module
