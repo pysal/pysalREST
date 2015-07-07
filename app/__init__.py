@@ -8,6 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 
 from app.mod_api.extractapi import recursive_extract, recursive_documentation
+import app.mod_api.aggregate as agg
 
 import config
 from decorators import crossdomain
@@ -31,7 +32,6 @@ seen_classes = set()  # Geom tables already mapped
 #Configure the application from config.py
 app.config.from_object('config')
 
-
 #Define the database to  be used by
 db = SQLAlchemy(app)
 
@@ -48,10 +48,22 @@ The only requirement is that this is a dictionary with
 a most nested level of 'function_name':func_object pairs.
 """
 
-
 def treeZip(t1,t2, path=[]):
+    """
+    Compare two dictionaries, updating t2 with key missing from
+    t1.
+    """
+
+    if isinstance(t1, dict) and isinstance(t2, dict):
+        try:
+            assert(t1.keys() == t2.keys())
+        except AssertionError:
+            current_keys = set(t1.keys())
+            mapped_keys = set(t2.keys())
+            for k in current_keys.difference(mapped_keys):
+                t2[k] = 'True'
     if isinstance(t1,Mapping) and isinstance(t2,Mapping):
-        assert set(t1)==set(t2)
+        #assert set(t1)==set(t2)
         for k,v1 in t1.items():
             v2 = t2[k]
             for tuple in treeZip(v1,v2, path=path+[k]):
@@ -63,13 +75,6 @@ def setInDict(dataDict, mapList, value):
     getFromDict(dataDict, mapList[:-1]).pop(value, None)
 def getFromDict(dataDict, mapList):
     return reduce(lambda d, k: d[k], mapList, dataDict)
-
-def walk_dict(d):
-    for k,v in d.items():
-        if isinstance(v, dict):
-            walk_dict(v)
-        else:
-            d[k] = True
 
 def clean_empty(d):
     for k, v in d.items():
@@ -83,6 +88,7 @@ visited = set([])
 libraryfunctions = {}
 recursive_extract(ps, libraryfunctions, ps.__name__, visited)
 
+
 #ps specific
 import w_from_geojson
 libraryfunctions['weights']['queen_from_geojson'] = w_from_geojson.queen_geojson
@@ -91,23 +97,34 @@ libraryfunctions['weights']['queen_from_geojson'] = w_from_geojson.queen_geojson
 librarydocs = copy.deepcopy(libraryfunctions)
 recursive_documentation(librarydocs)
 
-if config.generatemap:
-    mapping = copy.deepcopy(libraryfunctions)
-    walk_dict(mapping)
-    import json
-    with open('librarymap.json', 'w') as mapfile:
-        mapfile.write(json.dumps(mapping, indent=2))
-
 if config.loadmap:
     import json
     with open(config.loadmap, 'r') as configin:
 	mapping = json.load(configin)
+        
     livekeys = list(treeZip(libraryfunctions, mapping))
+    
+    #livekeys is updated with potential new entries and rewritten, keeping existing settings
+    with open('librarymap.json', 'w') as mapfile:
+	mapfile.write(json.dumps(mapping, indent=2)) 
+
     for k, v in livekeys:
         if v[1] == False:
 	    dataDict = setInDict(libraryfunctions, k, k[-1])
-    clean_empty(libraryfunctions)
-    clean_empty(libraryfunctions)
+	    dataDict = setInDict(librarydocs, k, k[-1])
+
+    #How can I better recursively clean?
+    for x in range(4):
+    	clean_empty(libraryfunctions)
+    	clean_empty(librarydocs)
+
+#Add in the custom aggregator
+libraryfunctions['custom'] = {}
+libraryfunctions['custom']['aggregator'] = agg.aggregator
+librarydocs['custom'] = {}
+librarydocs['custom']['aggregator'] = agg.aggregator_docs
+
+print libraryfunctions.keys()
 
 @lm.user_loader
 def load_user(id):
@@ -115,31 +132,17 @@ def load_user(id):
     from app.mod_user.models import User
     return User.query.get(int(id))
 
-'''
-from app.mod_user.models import User
-auth = HTTPBasicAuth()
-@auth.verify_password
-def verify_password(username_or_token, password):
-    user = User.verify_auth_token(username_or_token)
-    if not user:
-        user = User.query.filter_by(email=username_or_token).first()
-        if not user or not user.verifypwd(password):
-            return False
-    g.user = user
-    return True
-
 #Error handling routed
 @app.errorhandler(404)
 def not_found(error):
     return "Error 404: Unable to find endpoint."
-'''
 
 #Home
 @app.route('/', methods=['GET'])
 def api_root():
     response = {'status':'success'}
-    response['links'] = [{'id':'api', 'href': config.baseurl + '/api/', 'description':'Access to the PySAL API'},
-                                 {'id':'user', 'href': config.baseurl + '/user/', 'description':'Login, Registration, and User management'}]
+    response['links'] = [{'name':'api', 'href': config.baseurl + '/api/', 'description':'Access to the PySAL API'},
+                                 {'name':'user', 'href': config.baseurl + '/user/', 'description':'Login, Registration, and User management'}]
     return jsonify(response)
 
 @app.after_request
@@ -169,8 +172,8 @@ from app.mod_user.controllers import mod_user as user_module
 users = app.register_blueprint(user_module, url_prefix='/user')
 
 #Data
-from app.mod_data.controllers import mod_data as data_module
-app.register_blueprint(data_module, url_prefix='/mydata')
+#from app.mod_data.controllers import mod_data as data_module
+#app.register_blueprint(data_module, url_prefix='/mydata')
 
 #Uploads
 #from app.mod_upload.controllers import mod_upload as upload_module

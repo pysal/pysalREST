@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Github Login</title>
+    </head>
+    <body>
+        {% if current_user.is_authenticated() %}
+            <h2>Hi, {{ current_user.nickname }}!</h2>
+            <p><a href="https://webpool.csf.asu.edu/pysalrest/user/logout">Logout</a></p>
+        {% else %}
+	    <div><a href="https://webpool.csf.asu.edu/pysalrest/user/authorize/github"><img src="https://cdn1.iconfinder.com/data/icons/simple-icons/128/github-128-black.png"/></a></div>
+        {% endif %}
+    </body>
+</html>

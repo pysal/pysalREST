@@ -1,7 +1,6 @@
 from collections import defaultdict, OrderedDict
 import inspect
-import os
-import types
+
 import docutils
 from docutils.core import publish_doctree
 import xml.etree.ElementTree as etree
@@ -27,8 +26,6 @@ def recursive_extract(package, d, packagename, visited):
     functions = inspect.getmembers(package, inspect.isfunction)
     classes = inspect.getmembers(package, inspect.isclass)
 
-    print sub_modules, functions, classes
-
     for classname, classobj in classes:
         modulepath = classobj.__module__.split('.')
         modulepath.append(classobj.__name__)
@@ -46,7 +43,7 @@ def recursive_extract(package, d, packagename, visited):
             setInDict(d, modulepath[1:], funcobj)
 
     for modulename, submodule in sub_modules:
-	modulepath = submodule.__name__.split('.')
+        modulepath = submodule.__name__.split('.')
         if modulepath[0] in packagename and submodule not in visited:
             visited.add(submodule)
             recursive_extract(submodule, d, packagename, visited)

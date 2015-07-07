@@ -19,7 +19,7 @@
       "SpatialTau": true, 
       "Tau": true, 
       "Theta": true, 
-      "pseudop": true
+      "pseudop": false
     }, 
     "util": {
       "get_lower": true, 
@@ -276,7 +276,7 @@
       "min_threshold_distance": true, 
       "shimbel": true, 
       "get_ids": true, 
-      "write_gal": true, 
+      "write_gal": false, 
       "block_weights": true, 
       "regime_weights": true, 
       "higher_order_sp": true, 
@@ -314,9 +314,9 @@
       "kernelW": true
     }, 
     "_contW_binning": {
-      "ContiguityWeightsPolygons": true, 
-      "ContiguityWeights_binning": true, 
-      "bbcommon": true
+      "ContiguityWeightsPolygons": false, 
+      "ContiguityWeights_binning": false, 
+      "bbcommon": false
     }, 
     "Wsets": {
       "w_clip": true, 
@@ -605,10 +605,10 @@
       "Fisher_Jenks": true, 
       "Equal_Interval": true, 
       "quantile": true, 
-      "Map_Classifier": true, 
+      "Map_Classifier": false, 
       "Quantiles": true, 
       "Natural_Breaks": true, 
-      "natural_breaks": true, 
+      "natural_breaks": false, 
       "bin": true, 
       "Jenks_Caspall_Forced": true, 
       "bin1d": true, 
@@ -618,7 +618,7 @@
       "Maximum_Breaks": true, 
       "Box_Plot": true, 
       "Jenks_Caspall_Sampled": true, 
-      "gadf": false, 
+      "gadf": true, 
       "Jenks_Caspall": true, 
       "User_Defined": true, 
       "opt_part": true
@@ -628,23 +628,23 @@
       "G": true
     }, 
     "smoothing": {
-      "Spatial_Filtering": false, 
-      "choynowski": false, 
-      "Empirical_Bayes": false, 
-      "Age_Adjusted_Smoother": false, 
-      "Spatial_Rate": false, 
-      "Kernel_Smoother": false, 
+      "Spatial_Filtering": true, 
+      "choynowski": true, 
+      "Empirical_Bayes": true, 
+      "Age_Adjusted_Smoother": true, 
+      "Spatial_Rate": true, 
+      "Kernel_Smoother": true, 
       "weighted_median": false, 
-      "crude_age_standardization": false, 
+      "crude_age_standardization": true, 
       "standardized_mortality_ratio": false, 
-      "Disk_Smoother": false, 
-      "assuncao_rate": false, 
+      "Disk_Smoother": true, 
+      "assuncao_rate": true, 
       "sum_by_n": false, 
-      "Headbanging_Triples": false, 
-      "Excess_Risk": false, 
-      "Headbanging_Median_Rate": false, 
-      "Spatial_Empirical_Bayes": false, 
-      "Spatial_Median_Rate": false, 
+      "Headbanging_Triples": true, 
+      "Excess_Risk": true, 
+      "Headbanging_Median_Rate": true, 
+      "Spatial_Empirical_Bayes": true, 
+      "Spatial_Median_Rate": true, 
       "direct_age_standardization": false, 
       "indirect_age_standardization": false, 
       "flatten": false

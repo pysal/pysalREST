@@ -2,8 +2,9 @@
 DEBUG=True
 THREADS_PER_PAGE = 2
 #CSRF_ENABLED = False
-SECRET_KEY = '\x97}\x81k\x94Hs\xc9R\\L\x9f\xf3J\x9e\x85nn\xca\xa5_\xc8\xacg'
+SECRET_KEY = ''
 #CSRF_SESSION_KEY = "makeme"
+SESSION_COOKIE_NAME = 'session'
 
 ALLOWED_EXTENSIONS = set(['shp', 'dbf', 'shx', 'prj', 'zip', 'amd', 'pmd'])
 
@@ -14,7 +15,6 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 ###API###
 library = 'pysal'
 api = 'pysalrest'
-generatemap = True
 loadmap = 'libraryconfig.json'
 
 ###SERVER###
@@ -47,11 +47,10 @@ dbname = ''
 dbtypename = 'PostgreSQL'  #Used by ogr2ogr, must be a valid ogr2ogr db
 dbabbrev = 'PG'
 dbtype = 'postgresql+psycopg2://'
-<<<<<<< HEAD
-dbhost = 'localhost:5433'
-dbusername = 'postgres'
-dbpass = 'postgres'
-dbname = 'pysalrest'
+dbhost = ''
+dbusername = ''
+dbpass = ''
+dbname = ''
 SQLALCHEMY_DATABASE_URI = '{}{}:{}@{}/{}'.format(dbtype,
                                                  dbusername,
                                                  dbpass,
@@ -69,6 +68,10 @@ loglocation = 'logging.log'
 OAUTH_CREDENTIALS = {
     'twitter': {
         'id': 'S5XPbiSLIb1nB1L8zYRU2xiHc',
-        'secret': 'QZXIlHvDy4co9cru0qnUd51IOOXxycvlnqXRDOo9vjpJaigJOc'
+        'secret': ''
+    },
+    'github': {
+        'id':'da690d5f5913c04e4f6b',
+	'secret':''
     }
 }

@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Twitter Login</title>
+    </head>
+    <body>
+        {% if current_user.is_authenticated() %}
+            <h2>Hi, {{ current_user.nickname }}!</h2>
+            <p><a href="https://webpool.csf.asu.edu/pysalrest/user/logout">Logout</a></p>
+        {% else %}
+	    <div><a href="https://webpool.csf.asu.edu/pysalrest/user/authorize/twitter"><img src="https://abs.twimg.com/a/1404172626/images/oauth_application.png"/></a></div>
+        {% endif %}
+    </body>
+</html>
