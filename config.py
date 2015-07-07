@@ -13,14 +13,14 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 ###API###
-library = 'pysal'  #The name of the library to be imported
-api = 'pysalrest' #The arbitrary name of the API
+library = 'pysal'
+api = 'pysalrest'
 loadmap = 'libraryconfig.json'
 
 ###SERVER###
-server = 'cherry'  #The server to be used, either flask or cherry
-port = 8080  #The port the server runs on
-host = '10.0.21.105' #The host, e.g. localhost
+server = 'cherry'
+port = 8080
+host = '10.0.21.105'
 
 """
 Base URL is the URL of the API.
@@ -63,9 +63,6 @@ ogr2ogr = '/home/apache/anaconda/bin/ogr2ogr' #'/usr/bin/ogr2ogr'
 
 ###Logs###
 loglocation = 'logging.log'
-
-###AUTHENTICATION###
-LOGIN_DISABLED = False  #Set True to disable authentication
 
 ###OAuth Providers - The admin must be registered with each###
 OAUTH_CREDENTIALS = {
