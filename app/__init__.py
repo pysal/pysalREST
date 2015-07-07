@@ -21,6 +21,7 @@ app = Flask(__name__)
 app.debug = config.DEBUG
 
 #Create the login manager
+app.config['LOGIN_DISABLED'] = config.LOGIN_DISABLED
 lm = LoginManager(app)
 
 #Add a class_references attribute to the application
