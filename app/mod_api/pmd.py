@@ -1,5 +1,5 @@
 import inspect
-import pysal as ps
+#import pysal as ps
 
 def pmdwrapper(ps_obj):
     """
