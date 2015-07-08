@@ -1,0 +1,8 @@
+flask
+flask-sqlalchemy
+flask-login
+cherrypy
+sqlalchemy
+rauth
+psycopg
+docutils
