@@ -10,7 +10,7 @@ import config
 
 
 """
-The idea here is that pysalfunctions could be swapped
+The idea here is that library functions could be swapped
 to be a JSON file or the underlying logic can change.
 
 The only requirement is that this is a dictionary with
@@ -28,8 +28,8 @@ def generate_map(outfile):
     visited = set([])
     libraryfunctions = {}
     
-    ps = __import__(config.library)
-    recursive_extract(ps, libraryfunctions, ps.__name__, visited)
+    library = __import__(config.library)
+    recursive_extract(ps, libraryfunctions, library.__name__, visited)
 
     #Recursive function extraction
     librarydocs = copy.deepcopy(libraryfunctions)
