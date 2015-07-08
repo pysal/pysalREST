@@ -14,7 +14,7 @@ import config
 from decorators import crossdomain
 
 #TODO: Library name from config
-ps = __import__(config.library)
+library = __import__(config.library)
 
 #Create the app
 app = Flask(__name__)
@@ -88,12 +88,7 @@ def clean_empty(d):
 
 visited = set([])
 libraryfunctions = {}
-recursive_extract(ps, libraryfunctions, ps.__name__, visited)
-
-
-#ps specific
-import w_from_geojson
-libraryfunctions['weights']['queen_from_geojson'] = w_from_geojson.queen_geojson
+recursive_extract(library, libraryfunctions, library.__name__, visited)
 
 #Recursive function extraction
 librarydocs = copy.deepcopy(libraryfunctions)
