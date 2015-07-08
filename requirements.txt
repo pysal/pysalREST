@@ -6,3 +6,4 @@ sqlalchemy
 rauth
 psycopg
 docutils
+requests
