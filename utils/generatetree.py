@@ -29,7 +29,7 @@ def generate_map(outfile):
     libraryfunctions = {}
     
     library = __import__(config.library)
-    recursive_extract(ps, libraryfunctions, library.__name__, visited)
+    recursive_extract(library, libraryfunctions, library.__name__, visited)
 
     #Recursive function extraction
     librarydocs = copy.deepcopy(libraryfunctions)
