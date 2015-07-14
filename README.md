@@ -48,18 +48,18 @@ ________
 * library - the name of the module as you would use in an import statement, e.g. pysal
 * api - the name of the api used in URLs
 * generatemap - boolean defining whether a json map of the exposed functionality should be generated
-* localmap - the name of a map to be lodaded to curate functionality
+* localmap - the name of a map to be loaded to curate functionality
 
 Server
 ________
 
 
-* server - the name of the server to use, alter if you do not want to use cherrypy
+* server - the name of the server to use; alter if you do not want to use cherrypy
 * port - the port to run the server on
 * host - the ip to run the server on, e.g. localhost
 
 * APPLICATION\_ROOT - the base URL to be appended to all other URLs
-* baseurl - the baseurl appened when generating hrefs in the API
+* baseurl - the baseurl appended when generating hrefs in the API
 * basedataurl - as above, except a base url to data
 
 Database Setup
@@ -94,4 +94,4 @@ For initial testing, we suggest running a localhost, cherrypy based server.  Thi
 
 To do this, modify config.py, setting the host parameter equal to localhost and the port to some currently unused port.  Finally, execute `python run.py`.
 
-On run, pysalREST will introspect your code base and extraction documentation.  Classes and functions for which documentation extraction fails will print an error message to the terminal.
+On run, pysalREST will introspect your code base and extract documentation.  Classes and functions for which documentation extraction fails will print an error message to the terminal.
